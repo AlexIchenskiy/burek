@@ -11,6 +11,7 @@ import '@fontsource/roboto/700.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './pages/Home/Home';
+import Editor from './pages/Editor/Editor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
     <Routes>
       <Route exact path='/' element={<Navigate replace to='/home' />} />
       <Route exact path="/home" element={<Home />} />
+      <Route exact path="/editor" element={<Editor />} />
     </Routes>
   </Router>
 );

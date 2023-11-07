@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const settings = ['Login', 'Register'];
 
-const Header = () => {
+const Header = ({ isSearchVisible = true }) => {
   // TODO: change menu for authenticated users
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -24,10 +24,10 @@ const Header = () => {
         <Link to="/home">
           <S.HeaderLogo />
         </Link>
-        <S.HeaderSearchBarContainer>
+        {isSearchVisible && <S.HeaderSearchBarContainer>
           <S.HeaderSearch />
           <S.HeaderSearchBar size='small' />
-        </S.HeaderSearchBarContainer>
+        </S.HeaderSearchBarContainer>}
         <S.HeaderUserContainer>
           <S.HeaderNotifications />
           <Tooltip title="Profile settings">
