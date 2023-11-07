@@ -34,7 +34,7 @@ U našem projektu koristimo tri glavna brancha:
 Kako biste započeli rad na novoj korisničkoj priči (User Story), stvorite novi branch s nazivom u sljedećem formatu: `TIP-BROJ-Kratki-opis`, gdje:
 - `TIP` je vrsta priče (npr. BEUS ili FEUS).
 - `PRIČA` je broj korisničke priče.
-- `Kratki-opis` je kratak opis korisničke priče.
+- `Kratki-opis` je kratak opis onoga što ste napravili u sklopu te korisničke priče.
 
 npr. `BEUS-1-Add-login`
 
@@ -53,7 +53,7 @@ Detaljnije o git-u i svim naredbama možete pročitati [ovdje](https://www.freec
 Kada završite rad na svojom branch-u i spremni ste za integraciju u `dev`, slijedite ove korake:
 
 1. Stvorite pull request sa svojeg branch-a u `dev`.
-2. Naziv pull request-a mora biti isti kao naslov User Story-ja. Na primjer: "BEUS 1: Kao anonimni korisnik, želim se prijaviti u aplikaciju".
+2. Naziv pull request-a mora biti sličan nazivu branch-a. Na primjer: "BEUS 1: Add login".
 3. U opisu pull request-a ne morate ništa pisati, ali možete ostaviti dodatne komentare za svoje kolege.
 4. Dodajte sebe (i po potrebi osobu s kojom surađujete) kao `assignee` pull request-a te [mene](https://github.com/AlexIchenskiy) (i druge koji su relevantni) kao `reviewer`-e.
 5. Nema obaveznih oznaka (labels).
