@@ -1,11 +1,13 @@
-import { Tooltip, Menu, MenuItem, IconButton, Typography } from '@mui/material';
+import { Tooltip, Menu, IconButton, Typography } from '@mui/material';
 
 import * as S from './HeaderStyles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const settings = ['Login', 'Register'];
 
 const Header = () => {
+  // TODO: change menu for authenticated users
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -19,7 +21,9 @@ const Header = () => {
   return (
     <S.HeaderAppBar>
       <S.HeaderToolbar>
-        <S.HeaderLogo />
+        <Link to="/home">
+          <S.HeaderLogo />
+        </Link>
         <S.HeaderSearchBarContainer>
           <S.HeaderSearch />
           <S.HeaderSearchBar size='small' />
@@ -28,6 +32,7 @@ const Header = () => {
           <S.HeaderNotifications />
           <Tooltip title="Profile settings">
             <IconButton onClick={handleOpenUserMenu}>
+              {/* TODO: Change first letter for authenticated users */}
               <S.HeaderAvatar>A</S.HeaderAvatar>
             </IconButton>
           </Tooltip>
@@ -48,9 +53,11 @@ const Header = () => {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
+              <S.HeaderMenuItem key={setting} onClick={handleCloseUserMenu}>
+                <S.HeaderLink to={"/" + setting.toLowerCase()}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </S.HeaderLink>
+              </S.HeaderMenuItem>
             ))}
           </Menu>
         </S.HeaderUserContainer>

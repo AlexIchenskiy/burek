@@ -1,7 +1,8 @@
-import { AppBar, Avatar, Box, TextField, Toolbar, styled } from "@mui/material";
+import { AppBar, Avatar, Box, MenuItem, TextField, Toolbar, styled } from "@mui/material";
 import { HistoryEdu, Notifications, Search } from '@mui/icons-material';
 
 import colors from '../../assets/colors';
+import { Link } from "react-router-dom";
 
 export const HeaderAppBar = styled(AppBar)`
   box-shadow: none;
@@ -18,6 +19,15 @@ export const HeaderLogo = styled(HistoryEdu)`
   width: 48px;
   height: 48px;
   color: ${colors.primary};
+  transition: 0.3s transform;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 export const HeaderSearch = styled(Search)`
@@ -66,4 +76,26 @@ export const HeaderAvatar = styled(Avatar)`
   width: 32px;
   height: 32px;
   background-color: ${colors.primary};
+`;
+
+export const HeaderMenuItem = styled(MenuItem)`
+  padding: 0;
+`;
+
+export const HeaderLink = styled(Link)`
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  color: black;
+  text-decoration: none;
+  transition: 0.3s all;
+
+  &:hover {
+    color: ${colors.primary};
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;

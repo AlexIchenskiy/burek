@@ -1,11 +1,17 @@
-import { Container } from '@mui/material';
 import Header from '../../components/Header/Header';
+
+import * as S from './HomeStyles';
 
 const Home = () => {
   return (
-    <Container>
+    <>
       <Header />
-    </Container>
+      <S.HomeDataContainer>
+        <S.HomeDataPosts>
+          {/* TODO: add fetched post blocks */}
+        </S.HomeDataPosts>
+      </S.HomeDataContainer>
+    </>
   )
 }
 
