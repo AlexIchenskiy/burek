@@ -2,6 +2,27 @@
 
 Za brži, lakši i bezbolniji doprinos projektu, molim vas da slijedite ove smjernice.
 
+## Preduvjeti
+
+Prije nego što započnete s doprinosima projektu, osigurajte da imate instaliran [Git](https://git-scm.com/downloads) na vašem računalu.
+
+## 0. Dohvat projekta
+
+1. Otvorite naredbeni redak ili terminal na svom računalu.
+2. Navigirajte do mjesta na kojem želite smjestiti projekt.
+3. Klonirajte projekt iz repozitorija koristeći naredbu `git clone`:
+
+    ```bash
+    git clone https://github.com/AlexIchenskiy/burek.git
+    ```
+4. Smjestite se u radni folder projekta:
+
+    ```bash
+    cd burek
+    ```
+    
+Sada ste spremni za rad na projektu.
+
 ## 1. Grananje (Branching)
 
 U našem projektu koristimo tri glavna brancha:
