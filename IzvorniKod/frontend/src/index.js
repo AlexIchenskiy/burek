@@ -12,6 +12,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './pages/Home/Home';
 import LoginForm from './pages/Login/loginform.js';
+import Editor from './pages/Editor/Editor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
       <Route exact path='/' element={<Navigate replace to='/home' />} />
       <Route exact path="/home" element={<Home />} />
       <Route exact path="/login" element={<LoginForm />} />
+      <Route exact path="/editor" element={<Editor />} />
     </Routes>
   </Router>
 );
