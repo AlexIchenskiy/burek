@@ -30,8 +30,8 @@ const Login = () => {
     return ( 
         <React.Fragment>
         <div className="cover">
-        <form autoComplete="off" onSubmit={handleSubmit}>
-            <h2>InterFER Login</h2>
+            <form method="POST" action="/api/user/login" autoComplete="off" onSubmit={handleSubmit}>
+                <h2>InterFER Login</h2>
                 <TextField 
                     label="Email"
                     onChange={e => setEmail(e.target.value)}
