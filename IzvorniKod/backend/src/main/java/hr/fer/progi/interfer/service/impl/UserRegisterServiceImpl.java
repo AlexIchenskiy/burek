@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
+import hr.fer.progi.interfer.dto.response.AuthTokenDTO;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.jwt.JwtUtil;
@@ -41,8 +42,8 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 			newUser.setRole(UserRole.STUDENT);
 			newUser.setEnabled(true); 						// promjeniti kad se doda potvrada maila
 			userRepository.save(newUser);
-			String token = jwtUtil.generateToken(newUser);
-			return  ResponseEntity.status(HttpStatus.CREATED).header("Authorization", "Bearer " + token).body("User registered successfully");
+
+			return  ResponseEntity.status(HttpStatus.CREATED).body(new AuthTokenDTO(jwtUtil.generateToken(newUser)));
 			
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

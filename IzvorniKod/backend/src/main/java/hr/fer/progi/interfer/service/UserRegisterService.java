@@ -6,6 +6,6 @@ import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
 
 public interface UserRegisterService {
 	
-	ResponseEntity<?> register(UserRegistrationDTO user) throws Exception;
+	ResponseEntity<?> register(UserRegistrationDTO user);
 
 }
