@@ -1,17 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import { BrowserRouter as Router, Navigate, Routes, Route } from "react-router-dom";
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Home from './pages/Home/Home';
+import LoginForm from './pages/Login/loginform.js';
+import Editor from './pages/Editor/Editor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Router>
+    <Routes>
+      <Route exact path='/' element={<Navigate replace to='/home' />} />
+      <Route exact path="/home" element={<Home />} />
+      <Route exact path="/login" element={<LoginForm />} />
+      <Route exact path="/editor" element={<Editor />} />
+    </Routes>
+  </Router>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
