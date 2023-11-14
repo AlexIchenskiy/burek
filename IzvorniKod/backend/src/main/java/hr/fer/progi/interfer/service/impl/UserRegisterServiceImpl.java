@@ -32,7 +32,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 		if (!validator.isValid(userDetails.getEmail()))
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
 		if (userRepository.existsByEmail(userDetails.getEmail()))
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is already registered.");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Email is already registered.");
 		try {
 			User newUser = new User();
 			newUser.setFirstName(userDetails.getFirstname());
