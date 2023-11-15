@@ -1,18 +1,51 @@
 \chapter{Arhitektura i dizajn sustava}
-		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
 	
-		
+		Arhitektura naše aplikacije može se intutivno podijeliti na prezentacijski, aplikacijski te podatkovni sloj. Njima redom odgovaraju idući podsustavi:
+		\begin{itemize}
+			\item 	Web aplikacija
+			\item 	Web poslužitelj
+			\item 	Baza podataka		
+		\end{itemize}
 
-		
+		\begin{figure}[H]
+			\includegraphics[scale=0.6]{slike/ArhitekturniPodsustavi.PNG}
+			\centering
+			\caption{Arhitektura sustava}
+			\label{fig:arhitekturni_podsustavi}
+		\end{figure}
+
+		Kako bih se korisniku omogućilo korištenje naše aplikacije, korisnik na svojem uređaju (osobno računalo, laptop, mobitel ili tablet) mora koristiti \textit{web preglednik}, aplikaciju koja korištenjem stroja za vizualizaciju (u koji je uključen i interpreter JavaScript-a) omogućava
+		pretvaranje koda naše web aplikacije (HTML, CSS i JavaScript) u vizualni multimedijski sadržaj.
+
+		Za osnovnu komunikaciju s korisnikom koristi se \textit{web aplikacija}, program koji se pomoću HTTP (engl. \textit{Hyper Text Transfer Protocol}) protokola na zahtjev vraća korisnikovom web pregledniku. Web aplikacija služi kao sučelje između korisnika i poslovne logike aplikacije
+		na web poslužitelju. Pomoću vizualnih komponenti korisniku se omogućava slanje HTTP zahtjeva na web poslužitelj te obrada i vizualizacija primljenih podataka u JSON (engl. \textit{JavaScript Object Notation}) formatu u ljudski razumljivom obliku.
+
+		Primarni alat za komunikaciju s bazom podataka i za obradu poslovne logike je web poslužitelj kojem je omogućena komunikacija s web aplikacijom putem REST API (engl. \textit{Representational State Transfer Application Programming Interface}) tehnologije koja uvodi standardizirani način
+		komunikacije s klijentom razmjenom JSON poruka. Na taj se način omogućava jasno određena i istovremeno fleksibilna razmjena podataka.
+
+		Za izradu klijentske aplikacije izabrali smo jezik JavaScript zajedno s knjižnicom React koji omogućavaju jednostavnu i nativnu implementaciju arhitekture, zasnovane na događajima u klijentskom dijelu web aplikacije. Ovakav pristup omogućava dinamičko ažuriranje vizualnog prikaza na
+		temelju korisničkih radnji i podataka, unesenih korisnikom. Kako bih se aplikacija mogla prikazati u korisnikovom web pregledniku, koristi se skupljač modula Webpack koji generira sve potrebne HTML, CSS i JavaScript datoteke koje se s poslužitelja šalju korisniku te se konačno prikazuju
+		koristeći ugrađeni stroj za vizualizaciju web preglednika.
+
+		Za opisivanje poslovne logike naše aplikacije odabrali smo programski jezik Java zajedno s radnim okvirom Spring Boot. Ovakav izbor tehnologija obrazložen je nativnom podrškom objektno usmjerenog pristupa programskim jezikom Java te jednostavnom implementacijom MVC 
+		(engl. \textit{Model View Controller}) arhitekturnog modela u radnom okviru Spring Boot.
+
+		MVC obrazac je stilistička varijacija arhitekture zasnovane na događajima koja se u našoj aplikaciji koristi kao alat za pojednostavljenje implementacije, testiranja i korištenja svih arhitekturnih podsustava. MVC obrazac dopušta paralelnu i neovisnu izradu tri komponente sustava
+		na koje se intuitivno može podijeliti naša aplikacija:
+		\begin{itemize}
+			\item 	Model - Poslovna logika aplikacije koja definira i mijenja stanje koje aplikacija treba imati na temelju podataka iz kontrolera. 
+			\item 	View - Vizualno sučelje ili korisnička strana aplikacije koja se koristi za vizualizaciju svih podataka unutar aplikacije, primarno dobivenih s web poslužitelja.
+			\item 	Controller - Upravljački dio aplikacije koji komunikacijom s korisnikom kroz vizualni sloj ažurira stanje modela i/ili vizualnog stanja aplikacije.
+		\end{itemize}
+
+		\begin{figure}[H]
+			\includegraphics[scale=0.2]{slike/MVCObrazac.PNG}
+			\centering
+			\caption{MVC Obrazac}
+			\label{fig:mvc_obrazac}
+		\end{figure}
+
+		\eject
 
 				
 		\section{Baza podataka}
