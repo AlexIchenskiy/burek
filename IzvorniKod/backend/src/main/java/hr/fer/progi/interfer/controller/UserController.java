@@ -32,7 +32,7 @@ public class UserController {
     }
 	
 	@PostMapping("/login")
-    public ResponseEntity<?> loginUser(@ModelAttribute @Valid UserLoginDTO userDetails, BindingResult bindingResult) {
+    public ResponseEntity<?> loginUser(@RequestBody @Valid UserLoginDTO userDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
