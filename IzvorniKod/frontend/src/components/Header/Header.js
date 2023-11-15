@@ -1,14 +1,17 @@
 import { Tooltip, Menu, IconButton, Typography } from '@mui/material';
 
 import * as S from './HeaderStyles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
-const settings = ['Login', 'Register'];
+const DEFAULT_SETTINGS = { login: 'Prijava', register: 'Novi korisnik' };
 
 const Header = ({ isSearchVisible = true }) => {
-  // TODO: change menu for authenticated users
+  const { token } = useAuth();
+
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -17,6 +20,14 @@ const Header = ({ isSearchVisible = true }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    if (token) {
+      setSettings({ home: 'Početna', editor: 'Nova objava' });
+    } else {
+      setSettings(DEFAULT_SETTINGS);
+    }
+  }, [token]);
 
   return (
     <S.HeaderAppBar>
@@ -30,10 +41,9 @@ const Header = ({ isSearchVisible = true }) => {
         </S.HeaderSearchBarContainer>}
         <S.HeaderUserContainer>
           <S.HeaderNotifications />
-          <Tooltip title="Profile settings">
+          <Tooltip title="Postavke">
             <IconButton onClick={handleOpenUserMenu}>
-              {/* TODO: Change first letter for authenticated users */}
-              <S.HeaderAvatar>A</S.HeaderAvatar>
+              <S.HeaderAvatar>{token ? "Vi" : "A"}</S.HeaderAvatar>
             </IconButton>
           </Tooltip>
           <Menu
@@ -52,10 +62,10 @@ const Header = ({ isSearchVisible = true }) => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map((setting) => (
-              <S.HeaderMenuItem key={setting} onClick={handleCloseUserMenu}>
-                <S.HeaderLink to={"/" + setting.toLowerCase()}>
-                  <Typography textAlign="center">{setting}</Typography>
+            {Object.entries(settings).map(([key, value]) => (
+              <S.HeaderMenuItem key={key} onClick={handleCloseUserMenu}>
+                <S.HeaderLink to={"/" + key.toLowerCase()}>
+                  <Typography textAlign="center">{value}</Typography>
                 </S.HeaderLink>
               </S.HeaderMenuItem>
             ))}
