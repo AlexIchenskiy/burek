@@ -29,24 +29,31 @@ const RegisterForm = () => {
             firstname: firstName, lastname: lastName, email: email, password: password
         })
             .then((res) => {
-                setToken(res.token);
+                setToken(res.data.token);
                 navigate("/home", { replace: true });
             })
             .catch((err) => {
-                setSnackbarMessage(err + "");
-                setOpenSnackbar(true)
+                if (err.response) {
+                    if (err.response.status === 409) {
+                        setSnackbarMessage("Navedeni email već postoji u sustavu.");
+                        setOpenSnackbar(true)
+                    } else {
+                        setSnackbarMessage(err + "");
+                        setOpenSnackbar(true);
+                    }
+                }
             });
     }
 
     return (
         <>
             <form method="POST" action="/api/user/register" onSubmit={handleSubmit} >
-                <h2>Register Form</h2>
+                <h2>Kreiranje računa</h2>
                 <TextField
                     type="text"
                     variant='outlined'
                     color='primary'
-                    label="First Name"
+                    label="Ime"
                     onChange={e => setFirstName(e.target.value)}
                     value={firstName}
                     fullWidth
@@ -57,7 +64,7 @@ const RegisterForm = () => {
                     type="text"
                     variant='outlined'
                     color='primary'
-                    label="Last Name"
+                    label="Prezime"
                     onChange={e => setLastName(e.target.value)}
                     value={lastName}
                     fullWidth
@@ -79,15 +86,15 @@ const RegisterForm = () => {
                     type="password"
                     variant='outlined'
                     color='primary'
-                    label="Password"
+                    label="Lozinka"
                     onChange={e => setPassword(e.target.value)}
                     value={password}
                     required
                     fullWidth
                     sx={{ mb: 4 }}
                 />
-                <Button variant="outlined" color="primary" type="submit">Register</Button>
-                <small>Already have an account? <Link to="/login">Login Here</Link></small>
+                <Button variant="outlined" color="primary" type="submit">Kreiraj račun</Button>
+                <small>Već imate račun? <Link to="/login">Prijavite se ovdje</Link></small>
             </form>
             <Snackbar
                 open={openSnackbar}

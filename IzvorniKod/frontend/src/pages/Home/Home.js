@@ -5,7 +5,7 @@ import * as S from './HomeStyles';
 const Home = () => {
   return (
     <>
-      <Header />
+      <Header isSearchVisible={false} />
       <S.HomeDataContainer>
         <S.HomeDataPosts>
           {/* TODO: add fetched post blocks */}

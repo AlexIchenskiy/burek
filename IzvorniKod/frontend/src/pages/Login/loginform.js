@@ -39,12 +39,21 @@ const Login = () => {
 
             axios.post(`${API_URL}/user/login`, { email: email, password: password })
                 .then((res) => {
-                    setToken(res.token);
+                    setToken(res.data.token);
                     navigate("/home", { replace: true });
                 })
                 .catch((err) => {
-                    setSnackbarMessage(err + "");
-                    setOpenSnackbar(true)
+                    if (err.response) {
+                        if (err.response.status === 401) {
+                            setEmailError(true);
+                            setPasswordError(true);
+                            setSnackbarMessage("Pogrešne podatke.");
+                            setOpenSnackbar(true)
+                        } else {
+                            setSnackbarMessage(err + "");
+                            setOpenSnackbar(true);
+                        }
+                    }
                 });
         }
     }
@@ -53,7 +62,7 @@ const Login = () => {
         <>
             <div className="cover">
                 <form method="POST" action="/api/user/login" autoComplete="off" onSubmit={handleSubmit}>
-                    <h2>InterFER Login</h2>
+                    <h2>Prijava</h2>
                     <TextField
                         label="Email"
                         onChange={e => setEmail(e.target.value)}
@@ -66,7 +75,7 @@ const Login = () => {
                         error={emailError}
                     />
                     <TextField
-                        label="Password"
+                        label="Lozinka"
                         onChange={e => setPassword(e.target.value)}
                         required
                         variant="outlined"
@@ -76,8 +85,8 @@ const Login = () => {
                         fullWidth
                         sx={{ mb: 3 }}
                     />
-                    <Button variant="outlined" type="submit">Login</Button>
-                    <small>Need an account? <Link to="/register">Register here</Link></small>
+                    <Button variant="outlined" type="submit">Prijava</Button>
+                    <small>Trebate novi račun? <Link to="/register">Stvorite ga ovdje</Link></small>
                 </form>
             </div>
             <Snackbar

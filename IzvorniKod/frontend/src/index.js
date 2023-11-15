@@ -14,18 +14,25 @@ import Home from './pages/Home/Home';
 import LoginForm from './pages/Login/loginform.js';
 import Register from './pages/Register/register.js';
 import Editor from './pages/Editor/Editor';
+import AuthProvider from './provider/authProvider.js';
+import { ThemeProvider } from '@mui/material';
+import theme from './assets/theme.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Router>
-    <Routes>
-      <Route exact path='/' element={<Navigate replace to='/home' />} />
-      <Route exact path="/home" element={<Home />} />
-      <Route exact path="/login" element={<LoginForm />} />
-      <Route exact path="/register" element={<Register />} />
-      <Route exact path="/editor" element={<Editor />} />
-    </Routes>
-  </Router>
+  <ThemeProvider theme={theme}>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route exact path='/' element={<Navigate replace to='/home' />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/login" element={<LoginForm />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/editor" element={<Editor />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  </ThemeProvider>
 );
 
 reportWebVitals();

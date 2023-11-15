@@ -61,6 +61,8 @@ export const EditorToolbarSave = styled(Save)`
 `;
 
 export const EditorSubmit = styled(Button)`
+  width: 50%;
+  max-width: 240px;
   align-self: flex-start;
   background-color: ${colors.primary};
 
