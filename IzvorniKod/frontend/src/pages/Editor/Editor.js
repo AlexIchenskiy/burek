@@ -45,7 +45,7 @@ const Editor = () => {
         <S.EditorTextContainer>
           <S.EditorTitleInput type="text" disableUnderline={true} placeholder='Upišite naslov ovdje...' />
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder='Počnite pisati ovdje...' />
-          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)}>Submit</S.EditorSubmit>
+          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)}>Objavi</S.EditorSubmit>
         </S.EditorTextContainer>
       </S.EditorContainer>
     </>
