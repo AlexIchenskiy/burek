@@ -4,8 +4,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  margin: -90px auto 0;
+  margin: 0 auto;
 }
 
 h2 {
@@ -20,7 +19,7 @@ h2 {
 
 
 .MuiFormHelperText-root {
-  color: #f44336; 
+  color: #f44336;
 }
 
 
@@ -32,14 +31,14 @@ h2 {
 
 
 .MuiButton-root:hover {
-  background-color: #1976d2; 
+  background-color: #1976d2;
 }
 
 small {
   text-align: center;
   margin-top: 10px;
 }
- 
+
 a {
   color: #2196f3;
   text-decoration: none;
@@ -48,4 +47,3 @@ a {
 a:hover {
   text-decoration: underline;
 }
-
