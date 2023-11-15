@@ -30,7 +30,7 @@ const Login = () => {
     return ( 
         <React.Fragment>
         <div className="cover">
-        <form autoComplete="off" onSubmit={handleSubmit}>
+        <form method="POST" action="/login" autoComplete="off" onSubmit={handleSubmit}>
             <h2>InterFER Login</h2>
                 <TextField 
                     label="Email"
