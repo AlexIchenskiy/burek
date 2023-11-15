@@ -24,7 +24,7 @@ public class UserController {
     private UserLoginServiceImpl userLoginService;
 	
 	@PostMapping("/register")
-    public ResponseEntity<?> registerUser(@ModelAttribute @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
