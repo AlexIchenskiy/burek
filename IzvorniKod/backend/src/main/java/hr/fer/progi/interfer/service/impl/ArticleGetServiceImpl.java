@@ -25,11 +25,11 @@ public class ArticleGetServiceImpl implements ArticleGetService{
         }
         return ResponseEntity.status(HttpStatus.OK).body(article);
     }
-    /*@Override
+    @Override
     public ResponseEntity<?> getAllArticles(){
 
+        List<Article> articles = articleRepository.findAll();
 
-
-        return ResponseEntity.status(HttpStatus.OK).body();
-    }*/
+        return ResponseEntity.status(HttpStatus.OK).body(articles);
+    }
 }

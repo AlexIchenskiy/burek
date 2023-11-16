@@ -8,7 +8,8 @@ import hr.fer.progi.interfer.entity.Article;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 	
-	Article findByID(Long id);
+	Article findByTitle(String title);
 
+	Article findByCategory(String category);
 	
 }

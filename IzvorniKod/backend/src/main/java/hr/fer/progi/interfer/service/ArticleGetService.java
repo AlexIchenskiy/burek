@@ -7,5 +7,5 @@ public interface ArticleGetService {
     
     ResponseEntity<?> getArticle (ArticleGetDTO articleDetails);
 
-    //ResponseEntity<?> getAllArticles ();
+    ResponseEntity<?> getAllArticles ();
 }

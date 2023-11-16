@@ -33,13 +33,15 @@ public class ArticleController {
 
 	@GetMapping("/id")
     public ResponseEntity<?> getArticle(@RequestBody @Valid ArticleGetDTO articleDetails, BindingResult bindingResult) {
-
+		if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
         return articleGetService.getArticle(articleDetails);
     }
 
 	@GetMapping("/getAll")
     public ResponseEntity<?> getAllArticles(@RequestHeader HttpHeaders header) {
-    	return ResponseEntity.ok().body("Article");		//nije implementirano do kraja, za test
+    	return articleGetService.getAllArticles();
     }
 
 
