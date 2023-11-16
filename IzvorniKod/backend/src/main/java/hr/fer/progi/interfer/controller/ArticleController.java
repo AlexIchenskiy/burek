@@ -3,6 +3,7 @@ package hr.fer.progi.interfer.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class ArticleController {
 	@Autowired
     private ArticleGetServiceImpl articleGetService;
 	
+    //@Secured("ROLE_USER")
 	@PostMapping("/add")
     public ResponseEntity<?> publishArticle(@RequestBody @Valid ArticlePostDTO articleDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {

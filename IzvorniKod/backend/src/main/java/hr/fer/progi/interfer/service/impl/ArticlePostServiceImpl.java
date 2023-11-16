@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 
@@ -15,7 +15,7 @@ import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.service.ArticlePostService;
 
 
-
+@Service
 public class ArticlePostServiceImpl implements ArticlePostService{
 
     @Autowired
