@@ -50,8 +50,6 @@
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
 			Za potrebe naseg sustava koristit ćemo sustav za upravljanje relacijskim bazama podataka MySQL.
    			Odlučili smo se koristiti ovaj sustav zbog toga što je softver otvorenog koda, ima izvrsnu potporu zajednice i jer je pouzdano i robusno rješenje.
 			Glavna značajka relacijske baze podataka jest da se podaci organiziraju u tablice definirane svojim imenom i skupom atributa, a u shemi baze podataka se definira kako se 				pospremaju podaci i povezuju tablice.
@@ -198,39 +196,94 @@
 			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
-			
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
+			Slike od 4.4 - 4.9 prikazuju razrede koji pripadaju backend dijelu MVC arhitekture. Slika 4.4 prikazuje controller razrede koji definiraju pristupne točke i ponašanje za svaku. 
+			Osim toga manipuliraju DTO(Data transfer object), koji su definirani u paketu dto prikazan na slici 4.5 koji je podijeljen u request i response podpakete. 
+			Metode implementirane u controller razredima vraćaju JSON u tijelu te odgovarajući HTTP status kod. 
+			Logika ponašanja za svaku pristupnu točku definirana je u service razredima koje implementiraju pripadna service sučelja, a prikazani su na slici 4.6. 
+			Zbog lakše organizacije service razredi su podijeljeni po funkcionalnosti. Oni pomoću repository sučelja koja nasljeđuju JpaRepository (prikazana na slici 4.7) komuniciraju s bazom podataka.  
+			JpaRepository repository parametriziran je odgovarajućom klasom iz paketa enttiy (Slika 4.8) koje opisuju model baze. Za autentifikaciju korisnika koriste se metode implementirane u razredima paketa jwt prikazane na slici 4.9.
 			
 			\eject
-		
-		\section{Dijagram stanja}
-			
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
-			
-			
-			\eject 
-		
-		\section{Dijagram aktivnosti}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
-			
+
+			\begin{figure}[H]
+				\includegraphics[scale=0.4]{slike/DijagramRazreda1.jpg}
+				\centering
+				\caption{Dijagram razreda - dio Controllers}
+				\label{fig:class_diagram_controllers}
+			\end{figure}
+
 			\eject
-		\section{Dijagram komponenti}
+
+			\begin{figure}[H]
+				\includegraphics[scale=0.4]{slike/DijagramRazreda2.jpg}
+				\centering
+				\caption{Dijagram razreda - dio DTO}
+				\label{fig:class_diagram_dto}
+			\end{figure}
+
+			\eject
+
+			\begin{figure}[H]
+				\includegraphics[scale=0.5]{slike/DijagramRazreda3.jpg}
+				\centering
+				\caption{Dijagram razreda - dio Service}
+				\label{fig:class_diagram_service}
+			\end{figure}
+
+			\eject
+
+			\begin{figure}[H]
+				\includegraphics[scale=0.4]{slike/DijagramRazreda4.jpg}
+				\centering
+				\caption{Dijagram razreda - dio Repository}
+				\label{fig:class_diagram_repository}
+			\end{figure}
+
+			\begin{figure}[H]
+				\includegraphics[scale=0.4]{slike/DijagramRazreda5.jpg}
+				\centering
+				\caption{Dijagram razreda - dio Entity}
+				\label{fig:class_diagram_entity}
+			\end{figure}
+
+			\eject
+
+			\begin{figure}[H]
+				\includegraphics[scale=0.4]{slike/DijagramRazreda6.jpg}
+				\centering
+				\caption{Dijagram razreda - dio JWT}
+				\label{fig:class_diagram_jwt}
+			\end{figure}
+
+			\eject
+
+			% \textbf{\textit{dio 2. revizije}}\\			
+			
+			% \textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+			
+			
+			
+			% \eject
 		
-			\textbf{\textit{dio 2. revizije}}\\
+		% \section{Dijagram stanja}
+			
+			
+		% 	\textbf{\textit{dio 2. revizije}}\\
+			
+		% 	\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			
+			
+		% 	\eject 
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+		% \section{Dijagram aktivnosti}
+			
+		% 	\textbf{\textit{dio 2. revizije}}\\
+			
+		% 	 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			
+		% 	\eject
+		% \section{Dijagram komponenti}
+		
+		% 	\textbf{\textit{dio 2. revizije}}\\
+		
+		% 	 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
