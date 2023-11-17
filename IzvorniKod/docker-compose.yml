@@ -10,13 +10,13 @@ services:
       DATABASE_HOST: 127.0.0.1
     ports:
       - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
+    #volumes:
+      #- mysql_data:/var/lib/mysql
 
   adminer:
     image: adminer:latest
     ports:
       - "9000:8080"
 
-volumes:
-  mysql_data:
+#volumes:
+  #mysql_data:
