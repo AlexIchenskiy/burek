@@ -17,6 +17,7 @@ import Editor from './pages/Editor/Editor';
 import AuthProvider from './provider/authProvider.js';
 import { ThemeProvider } from '@mui/material';
 import theme from './assets/theme.js';
+import Post from './pages/Post/Post.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +30,7 @@ root.render(
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/editor" element={<Editor />} />
+          <Route exact path="/post/:id" element={<Post />} />
         </Routes>
       </Router>
     </AuthProvider>
