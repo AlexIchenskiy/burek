@@ -52,12 +52,26 @@
 			
 			\textbf{\textit{dio 1. revizije}}\\
 			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+			Za potrebe naseg sustava koristit ćemo relacijsku bazu podataka MySQL.
+			Gradivna jedinka baze je relacija, odnosno tablica koja je definirana svojim imenom i skupom atributa. 
+			Zadaca baze podataka je brza i jednostavna pohrana, izmjena i dohvat podataka za daljnju obradu.
+			Baza podataka ove aplikacije sastoji se od sljedecih entiteta: 
+			\begin{itemize}
+				\item Korisnik
+				\item Članak
+				\item Komentar
+				\item Ocjena
+				\item Notifikacija
+			  \end{itemize}
 		
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				\textbf{Korisnik} Ovaj entitet sadržava sve važne informacije o korisniku aplikacije.
+				Sadrži atribute: id, ime, prezime, email, uloga, lozinka i potvrđen. Ovaj entitet u vezi je
+				One-to-Many s entitetom Članak preko atributa id korisnika, u vezi One-to-Many s entitetom Komentar preko atributa id korisnika,
+				te u dvostrukoj One-to-Many vezi s entitetom Notifikacija preko atributa id korisnika.
+				
 				
 				
 				\begin{longtblr}[
@@ -68,19 +82,116 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \SetCell[c=3]{c}{\textbf{Korisnik}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & BIGINT	& jedinstveni brojčani identifikator 	\\ \hline
+					Ime	& VARCHAR &  ime korisnika 	\\ \hline 
+					Prezime & VARCHAR & prezime korisnika  \\ \hline 
+					Email & VARCHAR	&  	e-mail adresa korisnika	\\ \hline 
+					Uloga & TINYINT	&  	oznaka razine privilegije korisnika (korisnik, moderator, administrator)	\\ \hline 
+					Lozinka & VARCHAR	&  	hash lozinke	\\ \hline 
+					Potvrđen & BOOL	&  	oznaka da je korisnik potvrdio e-mail adresu	\\ \hline 
+				\end{longtblr}
+
+				
+				\textbf{Članak} Ovaj entitet sadržava sve važne informacije vezane za pospremljene članke.
+				Sadrži atribute: id, autorid, naslov, sadržaj, objavljen, datumobjave, tagovi i moderiran. Ovaj entitet u vezi je
+				Many-to-One s entitetom Korisnik preko atributa autorid, u vezi One-to-Many s entitetom Komentar preko atributa id članka,
+				te u One-to-Many vezi s entitetom Ocjena preko atributa id članka.
+				
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Članak}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & BIGINT	& jedinstveni brojčani identifikator  	\\ \hline
+					\SetCell{LightBlue} autorid	& BIGINT &   jedinstveni brojčani identifikator autora (korisnik.id)	\\ \hline 
+					Naslov & VARCHAR &  naslov članka  \\ \hline 
+					Sadržaj & TEXT	&  	tekst članka	\\ \hline 
+					Objavljen & BOOL	&  	oznaka da je članak javno dostupan	\\ \hline 
+					DatumObjave & DATETIME	&  	datum i vrijeme objave članka	\\ \hline 
+					Tagovi & VARCHAR	&  	popis tagova prema kojima se može pronaći članak	\\ \hline 
+					Moderiran & BOOL	&  	oznaka da je članak pregledao moderator	\\ \hline 
+				\end{longtblr}
+
+				\textbf{Komentar} Ovaj entitet sadržava sve važne informacije vezane za komentare na članke.
+				Sadrži atribute: id, autorid, članakid, sadržaj, vidljivost i datumobjave. Ovaj entitet u vezi je
+				Many-to-One s entitetom Korisnik preko atributa autorid te u vezi Many-to-One s entitetom Članak preko atributa članakid.
+				
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Komentar}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & BIGINT	& jedinstveni brojčani identifikator  	\\ \hline
+					\SetCell{LightBlue} autorid	& BIGINT &   jedinstveni brojčani identifikator autora (korisnik.id)	\\ \hline 
+					\SetCell{LightBlue} članakid	& BIGINT &   jedinstveni brojčani identifikator članka (članak.id)	\\ \hline 
+					Sadržaj & TEXT	&  	tekst komentara	\\ \hline 
+					Vidljivost & BOOL	&  	oznaka da je komentar javno dostupan	\\ \hline 
+					DatumObjave & DATETIME	&  	datum i vrijeme objave komentara	\\ \hline 
+				\end{longtblr}
+				
+				\textbf{Ocjena} Ovaj entitet sadržava sve važne informacije vezane za ocjene članaka.
+				Sadrži atribute: id, članakid, ocjena. Ovaj entitet u vezi u vezi Many-to-One s entitetom Članak preko atributa članakid.
+				
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Ocjena}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & BIGINT	&  jedinstveni brojčani identifikator 	\\ \hline
+					\SetCell{LightBlue} članakid	& BIGINT &   jedinstveni brojčani identifikator članka (članak.id)	\\ \hline 
+					Ocjena & TINYINT	&  	ocjena članka (cijeli broj od 1 do 5)	\\ \hline 
+				\end{longtblr}
+
+				
+				\textbf{Notifikacija} Ovaj entitet sadržava sve važne informacije vezane za komentare na članke.
+				Sadrži atribute: id, idpošiljatelj, idprimatelj, prioritet, naslov i sadržaj. Ovaj entitet je u dvostrukoj vezi
+				Many-to-One s entitetom Korisnik preko atributa idpošiljatelj i idprimatelj.
+				
+
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Notifikacija}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & BIGINT	&  jedinstveni brojčani identifikator 	\\ \hline
+					\SetCell{LightBlue} idpošiljatelj	& BIGINT &   jedinstveni brojčani identifikator pošiljatelja (korisnik.id)	\\ \hline 
+					\SetCell{LightBlue} idprimatelj	& BIGINT &   jedinstveni brojčani identifikator primatelja (korisnik.id)	\\ \hline 
+					Prioritet & TINYINT	&  	oznaka prioriteta poruke	\\ \hline 
+					Naslov & VARCHAR	&  	naslov poruke	\\ \hline 
+					Sadržaj & TEXT	&  	tekst poruke	\\ \hline 
 				\end{longtblr}
 				
 				
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
-			
+					\begin{figure}[H]
+					\includegraphics[scale=0.5]{slike/baza.png}
+					\centering
+					\caption{E-R dijagram baze podataka}
+					\label{fig:baza}
+				\end{figure}
+		
 			\eject
 			
 			
