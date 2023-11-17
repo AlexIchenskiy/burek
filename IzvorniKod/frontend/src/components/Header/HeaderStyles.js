@@ -83,6 +83,10 @@ export const HeaderMenuItem = styled(MenuItem)`
   padding: 0;
 `;
 
+export const HeaderNotificationsMenuItem = styled(MenuItem)`
+  padding: 0 8px;
+`;
+
 export const HeaderLink = styled(Link)`
   width: 100%;
   height: 100%;
