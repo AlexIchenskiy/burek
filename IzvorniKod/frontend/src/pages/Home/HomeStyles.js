@@ -1,5 +1,6 @@
 import { Container, Typography, styled } from "@mui/material";
 import colors from "../../assets/colors";
+import { Link } from "react-router-dom";
 
 export const HomeDataContainer = styled(Container)`
   height: 80%;
@@ -41,6 +42,16 @@ export const HomeDataPostData = styled(Container)`
 export const HomeDataPostTitle = styled(Typography)`
   font-size: 32px;
   font-weight: 600;
+`;
+
+export const HomeDataPostTitleLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  transition: 0.3s all;
+
+  &:hover {
+    color: ${colors.primary};
+  }
 `;
 
 export const HomeDataPostSubtitle = styled(Typography)`

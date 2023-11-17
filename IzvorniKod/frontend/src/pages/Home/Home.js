@@ -29,7 +29,11 @@ const Home = () => {
             posts.map((post) => (
               <S.HomeDataPost key={post.id} id={post.id}>
                 <S.HomeDataPostData>
-                  <S.HomeDataPostTitle>{post.title}</S.HomeDataPostTitle>
+                  <S.HomeDataPostTitle>
+                    <S.HomeDataPostTitleLink to={`/post/${post.id}`}>
+                      {post.title}
+                    </S.HomeDataPostTitleLink>
+                  </S.HomeDataPostTitle>
                   <S.HomeDataPostSubtitle>
                     {new Date(post.datePublished).toUTCString()}
                   </S.HomeDataPostSubtitle>
