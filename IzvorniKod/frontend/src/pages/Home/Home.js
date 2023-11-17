@@ -5,6 +5,7 @@ import * as S from './HomeStyles';
 import axios from 'axios';
 import { API_URL } from '../../assets/constants';
 import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -41,6 +42,11 @@ const Home = () => {
               </S.HomeDataPost>
             ))}
         </S.HomeDataPosts>
+        <Link to="/editor">
+          <S.HomeDataButton variant='outlined'>
+            Nova objava
+          </S.HomeDataButton>
+        </Link>
       </S.HomeDataContainer>
     </>
   )

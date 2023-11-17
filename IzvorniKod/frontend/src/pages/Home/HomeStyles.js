@@ -1,12 +1,18 @@
-import { Container, Typography, styled } from "@mui/material";
+import { Button, Container, Typography, styled } from "@mui/material";
 import colors from "../../assets/colors";
 import { Link } from "react-router-dom";
 
 export const HomeDataContainer = styled(Container)`
-  height: 80%;
+  height: 85%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const HomeDataButton = styled(Button)`
+  width: 160px;
+  margin: 16px;
 `;
 
 export const HomeDataPosts = styled(Container)`
