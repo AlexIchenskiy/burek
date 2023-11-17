@@ -13,13 +13,13 @@ public class UserRegistrationDTO {
     // Must be longer than 2 characters, shorter than 60 characters and contain only letters, "-" and " "
     @Size(max = 60, message = "{Size.max.user.firstname}")
     @Size(min = 2, message = "{Size.min.user.firstname}")
-    @Pattern(regexp = "^[a-zA-Z- ]+$", message = "{Pattern.user.firstname}")
+    @Pattern(regexp = "^[a-zA-Z- ČĆŠĐŽčćšđž]+$", message = "{Pattern.user.firstname}")
     private String firstname;
 
     // Must be longer than 2 characters, shorter than 60 characters and contain only letters, "-" and " "
     @Size(max = 60, message = "{Size.max.user.lastname}")
     @Size(min = 2, message = "{Size.min.user.lastname}")
-    @Pattern(regexp = "^[a-zA-Z- ]+$", message = "{Pattern.user.lastname}")
+    @Pattern(regexp = "^[a-zA-Z- ČĆŠĐŽčćšđž]+$", message = "{Pattern.user.lastname}")
     private String lastname;
 
     // some special chars
