@@ -23,7 +23,7 @@ public class ArticlePostDTO {
 	
     @Column(columnDefinition = "TEXT")
     @Size(min = 3, message = "{Size.min.article.content}")
-    @Size(max = 1000, message = "{Size.min.article.content}")
+    @Size(max = 65000 message = "{Size.min.article.content}")
 	private String content;
   
     
