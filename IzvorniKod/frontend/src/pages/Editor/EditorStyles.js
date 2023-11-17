@@ -8,6 +8,11 @@ export const EditorContainer = styled(Container)`
   height: 80%;
   padding: 16px;
   display: flex;
+
+  @media only screen and (max-width: 568px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 export const EditorTextContainer = styled(Container)`
@@ -35,6 +40,10 @@ export const EditorTitleInput = styled(Input)`
   padding: 16px;
   margin-bottom: 16px;
   font-size: 32px;
+
+  @media only screen and (max-width: 568px) {
+    font-size: 24px;
+  }
 `;
 
 export const EditorToolbarItalic = styled(FormatItalic)`

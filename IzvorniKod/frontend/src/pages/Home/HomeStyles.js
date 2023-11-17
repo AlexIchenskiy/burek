@@ -25,6 +25,11 @@ export const HomeDataPosts = styled(Container)`
   align-items: center;
 `;
 
+export const HomeDataNoPosts = styled(Typography)`
+  margin: auto;
+  text-align: center;
+`;
+
 export const HomeDataPost = styled(Container)`
   width: 65%;
   min-width: 240px;

@@ -11,6 +11,7 @@ const Header = ({ isSearchVisible = true }) => {
   const { token } = useAuth();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElNotifications, setAnchorElNotifications] = useState(null);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
   const handleOpenUserMenu = (event) => {
@@ -19,6 +20,14 @@ const Header = ({ isSearchVisible = true }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleToggleNotificationsMenu = (event) => {
+    if (anchorElNotifications === null) {
+      setAnchorElNotifications(event.currentTarget);
+    } else {
+      setAnchorElNotifications(null);
+    }
   };
 
   useEffect(() => {
@@ -40,7 +49,25 @@ const Header = ({ isSearchVisible = true }) => {
           <S.HeaderSearchBar size='small' />
         </S.HeaderSearchBarContainer>}
         <S.HeaderUserContainer>
-          <S.HeaderNotifications />
+          <S.HeaderNotifications onClick={handleToggleNotificationsMenu} />
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar-notifications"
+            anchorEl={anchorElNotifications}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElNotifications)}
+            onClose={handleToggleNotificationsMenu}
+          >
+            <S.HeaderNotificationsMenuItem>Nema obavijesti!</S.HeaderNotificationsMenuItem>
+          </Menu>
           <Tooltip title="Postavke">
             <IconButton onClick={handleOpenUserMenu}>
               <S.HeaderAvatar>{token ? "Vi" : "A"}</S.HeaderAvatar>
@@ -48,7 +75,7 @@ const Header = ({ isSearchVisible = true }) => {
           </Tooltip>
           <Menu
             sx={{ mt: '45px' }}
-            id="menu-appbar"
+            id="menu-appbar-user"
             anchorEl={anchorElUser}
             anchorOrigin={{
               vertical: 'top',

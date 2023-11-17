@@ -4,18 +4,22 @@ import Header from '../../components/Header/Header';
 import * as S from './HomeStyles';
 import axios from 'axios';
 import { API_URL } from '../../assets/constants';
-import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${API_URL}/posts/getAll`).then((res) => {
-      console.log(res);
+  const { token } = useAuth();
 
-      setPosts(res.data);
-    })
+  useEffect(() => {
+    axios.get(`${API_URL}/posts/getAll`)
+      .then((res) => {
+        console.log(res);
+
+        setPosts(res.data);
+      })
+      .catch((err) => console.log(err))
   }, []);
 
   return (
@@ -24,9 +28,9 @@ const Home = () => {
       <S.HomeDataContainer>
         <S.HomeDataPosts>
           {posts.length === 0 ?
-            <Typography variant='h3'>
+            <S.HomeDataNoPosts variant='h3'>
               Ovdje još nema objava :(
-            </Typography> :
+            </S.HomeDataNoPosts> :
             posts.map((post) => (
               <S.HomeDataPost key={post.id} id={post.id}>
                 <S.HomeDataPostData>
@@ -42,11 +46,13 @@ const Home = () => {
               </S.HomeDataPost>
             ))}
         </S.HomeDataPosts>
-        <Link to="/editor">
-          <S.HomeDataButton variant='outlined'>
-            Nova objava
-          </S.HomeDataButton>
-        </Link>
+        {token &&
+          <Link to="/editor">
+            <S.HomeDataButton variant='outlined'>
+              Nova objava
+            </S.HomeDataButton>
+          </Link>
+        }
       </S.HomeDataContainer>
     </>
   )
