@@ -31,8 +31,7 @@ public class SecurityConfig {
         });
 		http.csrf(t -> t.disable());
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/api/user/login", "/api/user/register").permitAll()
-				.requestMatchers("/api/posts/id", "/api/posts/getAll").permitAll()
+				.requestMatchers("/api/user/login", "/api/user/register", "/api/posts/id", "/api/posts/getAll").permitAll()
 				.anyRequest().authenticated()
 				
 			);
