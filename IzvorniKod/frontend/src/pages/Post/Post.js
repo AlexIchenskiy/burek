@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Editor as TextEditor, EditorState, RichUtils, convertFromRaw, ContentState } from 'draft-js';
+import { Editor as TextEditor, EditorState, convertFromRaw, ContentState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import Header from "../../components/Header/Header";

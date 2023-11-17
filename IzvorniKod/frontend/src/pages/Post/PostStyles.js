@@ -1,4 +1,3 @@
-import { FormatBold, FormatItalic, Save } from "@mui/icons-material";
 import { Button, Container, Input, styled } from "@mui/material";
 
 import colors from '../../assets/colors';
