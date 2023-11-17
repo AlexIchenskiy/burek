@@ -1,0 +1,48 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: my-mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: springdb
+      DATABASE_HOST: 127.0.0.1
+    ports:
+      - "3306:3306"
+    networks:
+      - app
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  #adminer:
+    #image: adminer:latest
+    #ports:
+      #- "9000:8080"
+
+  spring-backend:
+    build: ./backend/
+    ports:
+      - "8080:8080"
+    networks:
+      - app
+    depends_on:
+      - mysql
+
+  react-frontend:
+    build: ./frontend/
+    ports:
+      - "3000:80"
+    networks:
+      - app
+    depends_on:
+      - spring-backend
+
+
+networks:
+  app:
+    driver: bridge
+
+
+volumes:
+  mysql_data:
