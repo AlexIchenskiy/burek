@@ -1064,9 +1064,72 @@
 
 \subsection{Sekvencijski dijagrami}
 
-\textbf{\textit{dio 1. revizije}}\\
+\textbf{Obrazac uporabe UC3 - Pretraga članaka po kategorijama}
 
-\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+Korisnik šalje zahtjev za prikaz članaka određene kategorije. Poslužitelj dohvaća tražene članke i prikazuje ih.
+Ako korisnik zatraži dodavanje određenih filtera, poslužitelj dohvati tražene članke iz prethodno definirane kategorije i prikaže ih.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/SekvencijskiDijagramUC3.jpg}
+	\centering
+	\caption{Sekvencijski dijagram za UC3}
+	\label{fig:sekvencijski_dijagram_uc3}
+\end{figure}
+
+\eject
+
+\textbf{Obrazac uporabe UC9 - Stvaranje članaka}
+
+Korisnik zatraži od aplikacije stvaranje novog članka. Aplikacija prikaže uređivač teksta.
+Tijekom uređivanja teksta, korisnik može zatražiti pohranu promjena koje poslužitelj spremi u bazu podataka.
+Konačno, korisnik zatraži spremanje i objavu članka. Poslužitelj označi članak kao objavljen, spremi ga u bazu te potvrdi spremanje i objavljivanje.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/SekvencijskiDijagramUC9.jpg}
+	\centering
+	\caption{Sekvencijski dijagram za UC9}
+	\label{fig:sekvencijski_dijagram_uc9}
+\end{figure}
+
+\eject
+
+\textbf{Obrazac uporabe UC14 - Komentiranje članaka}
+
+Korisnik zatraži prikaz članka koji želi komentirati. Poslužitelj dohvati članak iz baze podataka te ga prikaže korisniku zajedno s formom za ostavljanje
+komentara. Odabirom forme korisnik zatraži stvaranje komentara za navedeni članak. Poslužitelj prvo dohvati podatke o korisniku kako bih provjerio ima li korisnik
+pravo objavljivanja komentara. Ako ima, korisniku se prikaže forma za uređivanje komentara. Nakon napisanog komentara korisnik zatraži njegovu objavu. Ako je komentar
+uspješno spremljen, poslužitelj ga spremi u bazu podataka te korisniku potvrdi objavu njegovog komentara. Ako je komentar prazan, korisniku se ispiše poruka da komentar
+ne smije biti prazan. Ako se ustanovi da korisnik nema pravo na objavu komentara, odgovarajuća forma se ne prikazuje te se korisniku ispiše odgovarajuća poruka.
+
+\eject
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/SekvencijskiDijagramUC14.jpg}
+	\centering
+	\caption{Sekvencijski dijagram za UC14}
+	\label{fig:sekvencijski_dijagram_uc14}
+\end{figure}
+
+\eject
+
+\textbf{Obrazac uporabe UC26 - Slanje obavijesti}
+
+Moderator zatraži slanje obavijesti (notifikacije) korisniku. Poslužitelj moderatoru prikaže formu za uređivanje obavijesti. Dok nisu uneseni svi primatelji,
+moderator unosi primatelje putem forme. Poslužitelj provjerava postoji li navedeni primatelj. Ako postoji, poslužitelj potvrdi moderatoru unos primatelja. U suprotnom slučaju
+moderatoru se ispiše upozorenje da navedeni primatelj ne postoji.
+Nakon upisivanja primatelja, moderator uređuje sadržaj obavijesti. Nakon što je moderator gotov s uređivanjem, zatraži slanje obavijsti. Poslužitelj provjeri ispravnost unesenih
+podataka. Ako su podaci ispravni, poslužitelj spremi obavijest u bazi te istu pošalje svim navedenim primateljima nakon čega potvrdi moderatoru slanje odgovarajuće obavijesti.
+Ako podaci nisu ispravni, moderatora se upozori da podaci nisu ispravni. 
+
+\eject
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/SekvencijskiDijagramUC26.jpg}
+	\centering
+	\caption{Sekvencijski dijagram za UC26}
+	\label{fig:sekvencijski_dijagram_uc26}
+\end{figure}
+
 \eject
 
 \section{Ostali zahtjevi}
