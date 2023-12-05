@@ -35,6 +35,9 @@ public class Article {
     
     @Column(nullable=false)
     private String tags;
+
+    @Column(nullable=false)
+    private String category;
     
     @Column(nullable=false)
     private boolean moderated = false;
