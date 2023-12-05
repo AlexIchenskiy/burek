@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
+import hr.fer.progi.interfer.service.UserProfileService;
 import hr.fer.progi.interfer.service.impl.UserLoginServiceImpl;
+import hr.fer.progi.interfer.service.impl.UserProfileServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserRegisterServiceImpl;
 import jakarta.validation.Valid;
 
@@ -22,6 +24,9 @@ public class UserController {
 	
 	@Autowired
     private UserLoginServiceImpl userLoginService;
+	
+	@Autowired
+	private UserProfileServiceImpl userProfileService;
 	
 	@PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
@@ -40,8 +45,8 @@ public class UserController {
     }
 	
 	@GetMapping()
-    public ResponseEntity<?> userProfile(@RequestHeader HttpHeaders header) {
-    	return ResponseEntity.ok().body("User");		//nije implementirano do kraja, za test
+    public ResponseEntity<?> userProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+    	return userProfileService.profile(authorizationHeader);
     }
 
 }
