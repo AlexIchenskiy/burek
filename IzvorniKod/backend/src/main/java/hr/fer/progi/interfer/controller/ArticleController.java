@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
+import hr.fer.progi.interfer.dto.request.ArticleCategoryDTO;
+import hr.fer.progi.interfer.dto.request.ArticleTitleDTO;
 import hr.fer.progi.interfer.service.impl.ArticlePostServiceImpl;
 import hr.fer.progi.interfer.service.impl.ArticleGetServiceImpl;
+import hr.fer.progi.interfer.service.impl.ArticleSearchServiceImpl;
 import jakarta.validation.Valid;
 
 
@@ -23,6 +26,9 @@ public class ArticleController {
 	
 	@Autowired
     private ArticleGetServiceImpl articleGetService;
+
+    @Autowired
+    private ArticleSearchServiceImpl articleSearchService;
 	
     //@Secured("ROLE_USER")
 	@PostMapping("/add")
@@ -33,7 +39,7 @@ public class ArticleController {
     	return articlePostService.addArticle(articleDetails);
     }
 
-	@PostMapping("/id") // Zašto PostMapping?
+	@GetMapping("/id")
     public ResponseEntity<?> getArticle(@RequestBody @Valid ArticleGetDTO articleDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
@@ -46,5 +52,18 @@ public class ArticleController {
     	return articleGetService.getAllArticles();
     }
 
-
+    @GetMapping("/getCategory")
+    public ResponseEntity<?> getArticlesByCategory(@RequestBody @Valid ArticleCategoryDTO articleCategory, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articleSearchService.getArticlesByCategory(articleCategory);
+    }
+    @GetMapping("/getTitle")
+    public ResponseEntity<?> getArticlesByTitle(@RequestBody @Valid ArticleTitleDTO articleTitle, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articleSearchService.getArticlesByTitle(articleTitle);
+    }
 }
