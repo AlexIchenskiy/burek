@@ -10,7 +10,8 @@ public class EmailDomainValidator {
 	
 	public boolean isValid(String email) {
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("mailDomains.txt");
-		Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8);
+        assert inputStream != null;
+        Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8);
 
 	    List<String> lines = new ArrayList<>();
 	    	while (scanner.hasNextLine()) 

@@ -41,7 +41,7 @@ public class UserController {
 	
 	@GetMapping()
     public ResponseEntity<?> userProfile(@RequestHeader HttpHeaders header) {
-    	return ResponseEntity.ok().body("User");		//nije implementirano do kraja, za test
+    	return ResponseEntity.ok().body("User");		// TODO: nije implementirano do kraja, za test
     }
 
 }

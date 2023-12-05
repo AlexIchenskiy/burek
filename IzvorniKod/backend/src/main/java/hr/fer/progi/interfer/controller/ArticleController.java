@@ -33,7 +33,7 @@ public class ArticleController {
     	return articlePostService.addArticle(articleDetails);
     }
 
-	@PostMapping("/id")
+	@PostMapping("/id") // Zašto PostMapping?
     public ResponseEntity<?> getArticle(@RequestBody @Valid ArticleGetDTO articleDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
