@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
-import hr.fer.progi.interfer.service.UserProfileService;
 import hr.fer.progi.interfer.service.impl.UserLoginServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserProfileServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserRegisterServiceImpl;
