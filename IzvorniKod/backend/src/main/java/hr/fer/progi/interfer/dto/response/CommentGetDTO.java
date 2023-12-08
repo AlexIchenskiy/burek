@@ -16,6 +16,7 @@ import lombok.Setter;
 public class CommentGetDTO {
 	private Long id;
 	private String author;
+	private Long authorId;
 	private String authorRole;
     private String content;
     private LocalDateTime timestamp;

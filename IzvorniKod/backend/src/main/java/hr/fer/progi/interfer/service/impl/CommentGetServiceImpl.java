@@ -50,6 +50,7 @@ public class CommentGetServiceImpl implements CommentGetService{
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
         commentDTO.setAuthor(comment.getAuthor().getFirstName() + " " + comment.getAuthor().getLastName());
+        commentDTO.setAuthorId(comment.getAuthor().getId());
         commentDTO.setAuthorRole(comment.getAuthor().getRole().toString());
         commentDTO.setTimestamp(comment.getDatePublished().toLocalDateTime());
         return commentDTO;

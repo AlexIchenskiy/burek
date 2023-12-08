@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
 import hr.fer.progi.interfer.service.impl.UserDeleteServiceImpl;
@@ -51,6 +52,11 @@ public class UserController {
     public ResponseEntity<?> userProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
     	return userProfileService.profile(authorizationHeader);
     }
+	
+	@GetMapping("/get")
+    public ResponseEntity<?> getUser(@RequestBody @Valid ArticleGetDTO userDetails, BindingResult bindingResult) {
+    	return userProfileService.getUserById(userDetails);
+	}
 	
 	@DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
