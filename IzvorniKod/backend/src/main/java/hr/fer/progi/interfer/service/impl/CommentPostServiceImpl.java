@@ -54,9 +54,9 @@ public class CommentPostServiceImpl implements CommentPostService {
 			commentRepository.save(newComment);
 		}catch (NoSuchElementException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong article ID");
-		}catch (Exception e) {
+		}/*catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).body("Error ocurred while saving comment");
-		}
+		}*/
 
 		return  ResponseEntity.status(HttpStatus.CREATED).body("Comment posted");
 
