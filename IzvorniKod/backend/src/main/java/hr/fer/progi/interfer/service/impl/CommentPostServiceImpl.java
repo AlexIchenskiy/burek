@@ -17,11 +17,11 @@ import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.repository.CommentRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
-import hr.fer.progi.interfer.service.CommentPostServiceImpl;
+import hr.fer.progi.interfer.service.CommentPostService;
 import jakarta.validation.Valid;
 
 @Service
-public class CommentPostService implements CommentPostServiceImpl {
+public class CommentPostServiceImpl implements CommentPostService {
 
 	@Autowired
 	private JwtUtil jwtUtil;

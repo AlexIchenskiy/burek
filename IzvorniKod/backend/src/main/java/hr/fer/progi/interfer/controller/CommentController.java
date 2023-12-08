@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.CommentPostDTO;
-//import hr.fer.progi.interfer.service.CommentGetServiceImpl;
-import hr.fer.progi.interfer.service.CommentPostServiceImpl;
+import hr.fer.progi.interfer.service.CommentGetService;
+import hr.fer.progi.interfer.service.CommentPostService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -20,10 +21,10 @@ import jakarta.validation.Valid;
 public class CommentController {
 	
 	@Autowired
-    private CommentPostServiceImpl commentPostService;
+    private CommentPostService commentPostService;
 	
-	/*@Autowired
-    private CommentGetServiceImpl commentGetService;*/
+	@Autowired
+    private CommentGetService commentGetService;
 	
 	@PostMapping("/post")
     public ResponseEntity<?> postComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, 
@@ -34,5 +35,12 @@ public class CommentController {
     	return commentPostService.post(authorizationHeader, commentDetails);
     }
 	
+	@PostMapping("/getAll")
+    public ResponseEntity<?> getAllComments(@RequestBody @Valid ArticleGetDTO articleDetails, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+    	return commentGetService.getAll(articleDetails);
+    }
 
 }
