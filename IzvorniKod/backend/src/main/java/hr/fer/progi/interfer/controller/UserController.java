@@ -58,6 +58,12 @@ public class UserController {
     	return userProfileService.getUserById(userDetails);
 	}
 	
+	@PostMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, 
+    		@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
+    	return userProfileService.edit(authorizationHeader, userDetails);
+	}
+	
 	@DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
     	return userDeleteService.delte(authorizationHeader);
