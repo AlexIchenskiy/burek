@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
+import hr.fer.progi.interfer.service.impl.UserDeleteServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserLoginServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserProfileServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserRegisterServiceImpl;
@@ -26,6 +27,9 @@ public class UserController {
 	
 	@Autowired
 	private UserProfileServiceImpl userProfileService;
+	
+	@Autowired
+	private UserDeleteServiceImpl userDeleteService;
 	
 	@PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
@@ -46,6 +50,11 @@ public class UserController {
 	@GetMapping()
     public ResponseEntity<?> userProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
     	return userProfileService.profile(authorizationHeader);
+    }
+	
+	@DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+    	return userDeleteService.delte(authorizationHeader);
     }
 
 }

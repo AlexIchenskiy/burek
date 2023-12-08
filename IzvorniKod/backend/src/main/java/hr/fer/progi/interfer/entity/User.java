@@ -1,5 +1,7 @@
 package hr.fer.progi.interfer.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,5 +36,8 @@ public class User {
     
     @Column(nullable=false)
     private boolean enabled = false;
+    
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
     
 }
