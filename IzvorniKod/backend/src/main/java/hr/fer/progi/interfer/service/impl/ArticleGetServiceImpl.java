@@ -29,10 +29,23 @@ public class ArticleGetServiceImpl implements ArticleGetService{
         return ResponseEntity.status(HttpStatus.OK).body(article);
     }
     @Override
-    public ResponseEntity<?> getAllArticles(){
+    public ResponseEntity<?> getAllArticles(String category, String title){
 
-        List<Article> articles = articleRepository.findAll();
+        List<Article> articles;
 
+        if(title != null && category != null){
+            articles = articleRepository.findByCategoryAndTitle(category, title);
+        }
+        else if(title != null){
+            articles = articleRepository.findByTitle(title); //ako imam samo naslov
+        }
+        else if(category != null){
+            articles = articleRepository.findByCategory(category);//ako imam samo kategoriju
+        }
+        else {
+            articles = articleRepository.findAll(); //vrati sve
+        }
+        
         return ResponseEntity.status(HttpStatus.OK).body(articles);
     }
 }

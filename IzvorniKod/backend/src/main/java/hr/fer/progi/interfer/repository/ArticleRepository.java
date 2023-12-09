@@ -9,13 +9,16 @@ import hr.fer.progi.interfer.entity.Article;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
+
+
+
+	//@Query(value = "SELECT * FROM articles WHERE category = ?1 AND title = ?2", nativeQuery = true)
+	List<Article> findByCategoryAndTitle(String category, String title);
 	
-	//@Query("SELECT f FROM Foo f WHERE LOWER(f.name) = LOWER(:name)")
-	//Foo retrieveByName(@Param("name") String name);
 
 	List<Article> findByTitle(String title);
 
 	List<Article> findByCategory(String category);
-	
+
 	//Article findByAuthor(Long authorid);
 }
