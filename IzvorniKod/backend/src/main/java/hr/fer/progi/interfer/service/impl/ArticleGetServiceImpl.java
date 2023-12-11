@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
+import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
 import hr.fer.progi.interfer.entity.Article;
 
 import hr.fer.progi.interfer.repository.ArticleRepository;
@@ -47,5 +48,27 @@ public class ArticleGetServiceImpl implements ArticleGetService{
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(articles);
+    }
+
+    @Override
+    public ResponseEntity<?> getAllArticles(ArticleSearchDTO articleDetails){
+
+
+    
+        if(articleDetails.getTitle() != null && articleDetails.getCategory() != null){
+            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findByCategoryAndTitle(articleDetails.getCategory(), articleDetails.getTitle())); 
+        }
+        else if(articleDetails.getCategory() != null){
+      
+            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findByCategory(articleDetails.getCategory())); //ako imam samo kategoriju
+        }
+        else if(articleDetails.getTitle() != null){
+            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findByTitle(articleDetails.getTitle()));  //ako imam samo naslov
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findAll()); //vrati sve
+        }
+        
+        
     }
 }
