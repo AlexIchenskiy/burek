@@ -23,7 +23,7 @@ public class ArticleGetServiceImpl implements ArticleGetService{
     public ResponseEntity<?> getArticle (ArticleGetDTO articleDetails)
     {
         Optional<Article> article = articleRepository.findById(articleDetails.getId());
-        if (!article.isPresent()){
+        if (article.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(article);

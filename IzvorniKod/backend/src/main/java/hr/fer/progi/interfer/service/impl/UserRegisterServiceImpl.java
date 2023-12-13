@@ -40,7 +40,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 			newUser.setEmail(userDetails.getEmail());
 			newUser.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 			newUser.setRole(UserRole.STUDENT);
-			newUser.setEnabled(true); 						// promjeniti kad se doda potvrada maila
+			newUser.setEnabled(true); 						// TODO: promijeniti kad se doda potvrda maila
 			userRepository.save(newUser);
 
 			return  ResponseEntity.status(HttpStatus.CREATED).body(new AuthTokenDTO(jwtUtil.generateToken(newUser)));
