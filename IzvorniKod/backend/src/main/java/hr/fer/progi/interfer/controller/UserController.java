@@ -6,9 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
-import hr.fer.progi.interfer.service.UserProfileService;
+import hr.fer.progi.interfer.service.impl.UserDeleteServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserLoginServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserProfileServiceImpl;
 import hr.fer.progi.interfer.service.impl.UserRegisterServiceImpl;
@@ -27,6 +28,9 @@ public class UserController {
 	
 	@Autowired
 	private UserProfileServiceImpl userProfileService;
+	
+	@Autowired
+	private UserDeleteServiceImpl userDeleteService;
 	
 	@PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
@@ -47,6 +51,22 @@ public class UserController {
 	@GetMapping()
     public ResponseEntity<?> userProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
     	return userProfileService.profile(authorizationHeader);
+    }
+	
+	@GetMapping("/get")
+    public ResponseEntity<?> getUser(@RequestBody @Valid ArticleGetDTO userDetails, BindingResult bindingResult) {
+    	return userProfileService.getUserById(userDetails);
+	}
+	
+	@PostMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, 
+    		@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
+    	return userProfileService.edit(authorizationHeader, userDetails);
+	}
+	
+	@DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+    	return userDeleteService.delte(authorizationHeader);
     }
 
 }

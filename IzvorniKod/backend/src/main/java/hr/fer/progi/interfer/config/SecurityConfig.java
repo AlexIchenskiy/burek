@@ -38,7 +38,9 @@ public class SecurityConfig {
                         "/api/user/register",
                         "/api/posts/id",
                         "/api/posts/getAll",
-                        "/api/posts/allRatings"
+                        "/api/posts/allRatings",
+                        "/api/user/get",
+                        "api/comment/getAll"
                 )
                 .permitAll()
                 .anyRequest().

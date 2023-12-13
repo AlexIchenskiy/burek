@@ -2,7 +2,6 @@ package hr.fer.progi.interfer.dto.request;
 
 import hr.fer.progi.interfer.dto.request.enums.Category;
 import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
