@@ -66,7 +66,7 @@ public class UserController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        return userDeleteService.delte(authorizationHeader);
+        return userDeleteService.delete(authorizationHeader);
     }
 
 }

@@ -20,7 +20,7 @@ public class UserDeleteServiceImpl implements UserDeleteService {
     private UserRepository userRepository;
 
     @Override
-    public ResponseEntity<?> delte(String authorizationHeader) {
+    public ResponseEntity<?> delete(String authorizationHeader) {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
 
@@ -28,7 +28,7 @@ public class UserDeleteServiceImpl implements UserDeleteService {
 
         userRepository.delete(user);
 
-        return ResponseEntity.status(HttpStatus.OK).body("User delited");
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted");
     }
 
 }

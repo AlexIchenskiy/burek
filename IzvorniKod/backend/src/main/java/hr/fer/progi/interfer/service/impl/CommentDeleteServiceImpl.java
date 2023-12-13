@@ -44,7 +44,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
 
             commentRepository.delete(comment);
 
-            return ResponseEntity.status(HttpStatus.OK).body("Comment delited");
+            return ResponseEntity.status(HttpStatus.OK).body("Comment deleted");
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong comment ID");
         }
