@@ -20,24 +20,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="comments")
+@Table(name = "comments")
 public class Comment {
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    private User author; 
+    private User author;
 
     @ManyToOne
     @JoinColumn(name = "article_id", referencedColumnName = "id")
-    private Article article;  
+    private Article article;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @Column(nullable = false)
     private Timestamp datePublished;
-    
+
 }

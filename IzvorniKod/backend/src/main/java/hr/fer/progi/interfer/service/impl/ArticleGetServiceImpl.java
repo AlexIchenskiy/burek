@@ -15,24 +15,26 @@ import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.service.ArticleGetService;
 
 @Service
-public class ArticleGetServiceImpl implements ArticleGetService{
+public class ArticleGetServiceImpl implements ArticleGetService {
+
     @Autowired
-	ArticleRepository articleRepository;
+    ArticleRepository articleRepository;
 
     @Override
-    public ResponseEntity<?> getArticle (ArticleGetDTO articleDetails)
-    {
+    public ResponseEntity<?> getArticle(ArticleGetDTO articleDetails) {
         Optional<Article> article = articleRepository.findById(articleDetails.getId());
-        if (article.isEmpty()){
+        if (article.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(article);
     }
+
     @Override
-    public ResponseEntity<?> getAllArticles(){
+    public ResponseEntity<?> getAllArticles() {
 
         List<Article> articles = articleRepository.findAll();
 
         return ResponseEntity.status(HttpStatus.OK).body(articles);
     }
+
 }

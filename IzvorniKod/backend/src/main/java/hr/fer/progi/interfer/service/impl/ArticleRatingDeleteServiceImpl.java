@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleRatingDeleteServiceImpl implements ArticleRatingDeleteService {
+
     @Autowired
     ArticleRatingRepository articleRatingRepository;
 
@@ -44,4 +45,5 @@ public class ArticleRatingDeleteServiceImpl implements ArticleRatingDeleteServic
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
 }

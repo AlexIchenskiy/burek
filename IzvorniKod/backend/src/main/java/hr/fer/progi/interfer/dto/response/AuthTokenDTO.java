@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AuthTokenDTO {
-	
-	private String token;
-	
+
+    private String token;
+
 }

@@ -7,6 +7,6 @@ import jakarta.validation.Valid;
 
 public interface CommentGetService {
 
-	ResponseEntity<?> getAll(@Valid ArticleGetDTO articleDetails);
+    ResponseEntity<?> getAll(@Valid ArticleGetDTO articleDetails);
 
 }

@@ -19,7 +19,7 @@ public class UserDetailsDTO {
     private String lastname;
 
     private String email;
-    
+
     private UserRole role;
 
 }

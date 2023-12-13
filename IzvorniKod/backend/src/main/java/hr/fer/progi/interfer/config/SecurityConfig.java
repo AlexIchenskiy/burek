@@ -40,12 +40,9 @@ public class SecurityConfig {
                         "/api/posts/getAll",
                         "/api/posts/allRatings",
                         "/api/user/get",
-                        "api/comment/getAll"
-                )
+                        "api/comment/getAll")
                 .permitAll()
-                .anyRequest().
-                authenticated()
-        );
+                .anyRequest().authenticated());
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

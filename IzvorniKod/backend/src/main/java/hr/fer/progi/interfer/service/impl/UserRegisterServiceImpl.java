@@ -17,37 +17,38 @@ import hr.fer.progi.interfer.validation.EmailDomainValidator;
 
 @Service
 public class UserRegisterServiceImpl implements UserRegisterService {
-	@Autowired
-	UserRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private JwtUtil jwtUtil;
+    @Autowired
+    UserRepository userRepository;
 
-	public ResponseEntity<?> register(UserRegistrationDTO userDetails) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-		EmailDomainValidator validator = new EmailDomainValidator();
-		if (!validator.isValid(userDetails.getEmail()))
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
-		if (userRepository.existsByEmail(userDetails.getEmail()))
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Email is already registered.");
-		try {
-			User newUser = new User();
-			newUser.setFirstName(userDetails.getFirstname());
-			newUser.setLastName(userDetails.getLastname());
-			newUser.setEmail(userDetails.getEmail());
-			newUser.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-			newUser.setRole(UserRole.STUDENT);
-			newUser.setEnabled(true); 						// TODO: promijeniti kad se doda potvrda maila
-			userRepository.save(newUser);
+    @Autowired
+    private JwtUtil jwtUtil;
 
-			return  ResponseEntity.status(HttpStatus.CREATED).body(new AuthTokenDTO(jwtUtil.generateToken(newUser)));
-			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
+    public ResponseEntity<?> register(UserRegistrationDTO userDetails) {
+
+        EmailDomainValidator validator = new EmailDomainValidator();
+        if (!validator.isValid(userDetails.getEmail()))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
+        if (userRepository.existsByEmail(userDetails.getEmail()))
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email is already registered.");
+        try {
+            User newUser = new User();
+            newUser.setFirstName(userDetails.getFirstname());
+            newUser.setLastName(userDetails.getLastname());
+            newUser.setEmail(userDetails.getEmail());
+            newUser.setPassword(passwordEncoder.encode(userDetails.getPassword()));
+            newUser.setRole(UserRole.STUDENT);
+            newUser.setEnabled(true); // TODO: promijeniti kad se doda potvrda maila
+            userRepository.save(newUser);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(new AuthTokenDTO(jwtUtil.generateToken(newUser)));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 }

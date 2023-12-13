@@ -1,4 +1,5 @@
 package hr.fer.progi.interfer.dto.request;
+
 import lombok.*;
 
 @Getter
@@ -7,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ArticleGetDTO {
-	
-	private Long id;
-	
+
+    private Long id;
+
 }

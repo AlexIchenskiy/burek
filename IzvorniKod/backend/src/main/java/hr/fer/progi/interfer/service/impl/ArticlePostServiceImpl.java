@@ -14,32 +14,30 @@ import hr.fer.progi.interfer.entity.Article;
 import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.service.ArticlePostService;
 
-
 @Service
-public class ArticlePostServiceImpl implements ArticlePostService{
+public class ArticlePostServiceImpl implements ArticlePostService {
 
     @Autowired
-	ArticleRepository articleRepository;
+    ArticleRepository articleRepository;
 
     @Override
-    public ResponseEntity<?> addArticle(ArticlePostDTO articleDetails) 
-    {
-        //validacija tokena
-        try{
-        Article newArticle = new Article();
+    public ResponseEntity<?> addArticle(ArticlePostDTO articleDetails) {
+        // validacija tokena
+        try {
+            Article newArticle = new Article();
 
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setContent(articleDetails.getContent());
             newArticle.setPublished(articleDetails.isPosted());
-            newArticle.setDatePublished(new Timestamp(System.currentTimeMillis())); 
+            newArticle.setDatePublished(new Timestamp(System.currentTimeMillis()));
             newArticle.setTags(articleDetails.getTags());
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 
             return (ResponseEntity<?>) ResponseEntity.ok();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
 }

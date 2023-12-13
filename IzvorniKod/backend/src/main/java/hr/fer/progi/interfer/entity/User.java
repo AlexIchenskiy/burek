@@ -13,31 +13,32 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String firstName;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private UserRole role;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private boolean enabled = false;
-    
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
-    
+
 }

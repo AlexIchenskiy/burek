@@ -10,9 +10,11 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ArticleRatingPostDTO {
+
     private Long articleId;
 
     @Min(value = 1)
     @Max(value = 5)
     private int rating;
+
 }

@@ -20,75 +20,73 @@ import hr.fer.progi.interfer.validation.EmailDomainValidator;
 import jakarta.validation.Valid;
 
 @Service
-public class UserProfileServiceImpl implements UserProfileService{
+public class UserProfileServiceImpl implements UserProfileService {
 
-	@Autowired
-	private JwtUtil jwtUtil;
-	
-	@Autowired 
-	private UserRepository userRepository;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	
-	@Override
-	public ResponseEntity<?> profile(String authorizationHeader) {
-		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-			User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-			
-			UserDetailsDTO userDto = new UserDetailsDTO();
-			userDto.setFirstname(user.getFirstName());
-			userDto.setLastname(user.getLastName());
-			userDto.setEmail(user.getEmail());
-			userDto.setRole(user.getRole());
-			
-			return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Override
+    public ResponseEntity<?> profile(String authorizationHeader) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+            UserDetailsDTO userDto = new UserDetailsDTO();
+            userDto.setFirstname(user.getFirstName());
+            userDto.setLastname(user.getLastName());
+            userDto.setEmail(user.getEmail());
+            userDto.setRole(user.getRole());
+
+            return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
 
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
-	}
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+    }
 
-	@Override
-	public ResponseEntity<?> getUserById(@Valid ArticleGetDTO userDetails) {
-		
-		try {
-			User user = userRepository.findById(userDetails.getId()).get();
-			
-			UserDetailsDTO userDto = new UserDetailsDTO();
-			userDto.setFirstname(user.getFirstName());
-			userDto.setLastname(user.getLastName());
-			userDto.setEmail(user.getEmail());
-			userDto.setRole(user.getRole());
-			
-			return ResponseEntity.status(HttpStatus.OK).body(userDto);
-			
-		}catch (NoSuchElementException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong user ID");
-		}
-		
-	}
+    @Override
+    public ResponseEntity<?> getUserById(@Valid ArticleGetDTO userDetails) {
 
-	@Override
-	public ResponseEntity<?> edit(String authorizationHeader, @Valid UserRegistrationDTO userDetails) {
-		EmailDomainValidator validator = new EmailDomainValidator();
-		if (!validator.isValid(userDetails.getEmail()))
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
+        try {
+            User user = userRepository.findById(userDetails.getId()).get();
 
-		try {
-			User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-			user.setFirstName(userDetails.getFirstname());
-			user.setLastName(userDetails.getLastname());
-			user.setEmail(userDetails.getEmail());
-			user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-			userRepository.save(user);
+            UserDetailsDTO userDto = new UserDetailsDTO();
+            userDto.setFirstname(user.getFirstName());
+            userDto.setLastname(user.getLastName());
+            userDto.setEmail(user.getEmail());
+            userDto.setRole(user.getRole());
 
-			return  ResponseEntity.status(HttpStatus.OK).body("Profile edited successfully");
-			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
+            return ResponseEntity.status(HttpStatus.OK).body(userDto);
 
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong user ID");
+        }
+
+    }
+
+    @Override
+    public ResponseEntity<?> edit(String authorizationHeader, @Valid UserRegistrationDTO userDetails) {
+        EmailDomainValidator validator = new EmailDomainValidator();
+        if (!validator.isValid(userDetails.getEmail()))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
+
+        try {
+            User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+            user.setFirstName(userDetails.getFirstname());
+            user.setLastName(userDetails.getLastname());
+            user.setEmail(userDetails.getEmail());
+            user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
+            userRepository.save(user);
+
+            return ResponseEntity.status(HttpStatus.OK).body("Profile edited successfully");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 }

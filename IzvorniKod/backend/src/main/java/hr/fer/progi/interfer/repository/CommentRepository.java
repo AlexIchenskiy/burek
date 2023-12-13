@@ -8,7 +8,7 @@ import hr.fer.progi.interfer.entity.Article;
 import hr.fer.progi.interfer.entity.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-	
-	List<Comment> findByArticle(Article article);
-	
+
+    List<Comment> findByArticle(Article article);
+
 }

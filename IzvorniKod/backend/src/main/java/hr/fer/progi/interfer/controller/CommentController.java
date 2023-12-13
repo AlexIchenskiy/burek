@@ -22,40 +22,41 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/comment")
 public class CommentController {
-	
-	@Autowired
+
+    @Autowired
     private CommentPostService commentPostService;
-	
-	@Autowired
+
+    @Autowired
     private CommentGetService commentGetService;
 
-	@Autowired
+    @Autowired
     private CommentDeleteService commentDeleteService;
-	
-	@PostMapping("/post")
-    public ResponseEntity<?> postComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, 
-    		@RequestBody @Valid CommentPostDTO commentDetails, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+
+    @PostMapping("/post")
+    public ResponseEntity<?> postComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+            @RequestBody @Valid CommentPostDTO commentDetails, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-    	return commentPostService.post(authorizationHeader, commentDetails);
+        return commentPostService.post(authorizationHeader, commentDetails);
     }
-	
-	@GetMapping("/getAll")
-    public ResponseEntity<?> getAllComments(@RequestBody @Valid ArticleGetDTO articleDetails, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllComments(@RequestBody @Valid ArticleGetDTO articleDetails,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-    	return commentGetService.getAll(articleDetails);
+        return commentGetService.getAll(articleDetails);
     }
-	
-	@DeleteMapping("/delete")
-    public ResponseEntity<?> deleteComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, 
-    		@RequestBody @Valid ArticleGetDTO commentDetails, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+            @RequestBody @Valid ArticleGetDTO commentDetails, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-    	return commentDeleteService.delete(authorizationHeader, commentDetails);
+        return commentDeleteService.delete(authorizationHeader, commentDetails);
     }
 
 }

@@ -7,6 +7,6 @@ import jakarta.validation.Valid;
 
 public interface CommentDeleteService {
 
-	ResponseEntity<?> delete(String authorizationHeader, @Valid ArticleGetDTO commentDetails);
+    ResponseEntity<?> delete(String authorizationHeader, @Valid ArticleGetDTO commentDetails);
 
 }

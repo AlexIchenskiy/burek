@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleRatingPostServiceImpl implements ArticleRatingPostService {
+
     @Autowired
     ArticleRatingRepository articleRatingRepository;
 
@@ -56,4 +57,5 @@ public class ArticleRatingPostServiceImpl implements ArticleRatingPostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
 }

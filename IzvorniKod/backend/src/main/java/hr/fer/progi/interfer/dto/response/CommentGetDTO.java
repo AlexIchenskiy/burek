@@ -14,10 +14,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class CommentGetDTO {
-	private Long id;
-	private String author;
-	private Long authorId;
-	private String authorRole;
+
+    private Long id;
+    private String author;
+    private Long authorId;
+    private String authorRole;
     private String content;
     private LocalDateTime timestamp;
 

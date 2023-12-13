@@ -13,22 +13,22 @@ import hr.fer.progi.interfer.service.UserDeleteService;
 @Service
 public class UserDeleteServiceImpl implements UserDeleteService {
 
-	@Autowired
-	private JwtUtil jwtUtil;
-	
-	@Autowired 
-	private UserRepository userRepository;
-	
-	@Override
-	public ResponseEntity<?> delte(String authorizationHeader) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
-		
-		User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-		
-		userRepository.delete(user);
-		
-		return ResponseEntity.status(HttpStatus.OK).body("User delited");
-	}
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public ResponseEntity<?> delte(String authorizationHeader) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+
+        User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+        userRepository.delete(user);
+
+        return ResponseEntity.status(HttpStatus.OK).body("User delited");
+    }
 
 }

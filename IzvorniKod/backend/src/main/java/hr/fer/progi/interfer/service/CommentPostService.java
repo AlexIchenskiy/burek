@@ -7,6 +7,6 @@ import jakarta.validation.Valid;
 
 public interface CommentPostService {
 
-	ResponseEntity<?> post(String authorizationHeader, @Valid CommentPostDTO commentDetails);
-	
+    ResponseEntity<?> post(String authorizationHeader, @Valid CommentPostDTO commentDetails);
+
 }

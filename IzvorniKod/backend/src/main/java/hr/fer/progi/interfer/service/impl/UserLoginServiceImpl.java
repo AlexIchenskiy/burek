@@ -15,23 +15,23 @@ import hr.fer.progi.interfer.service.UserLoginService;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private JwtUtil jwtUtil;
 
-	@Override
-	public ResponseEntity<?> login(UserLoginDTO userDetails) {
-		User user = userRepository.findByEmail(userDetails.getEmail());
-		if (user==null || !passwordEncoder.matches(userDetails.getPassword(), user.getPassword()))
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
-		
-		return  ResponseEntity.status(HttpStatus.OK).body(new AuthTokenDTO(jwtUtil.generateToken(user)));
-	}
-	
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Override
+    public ResponseEntity<?> login(UserLoginDTO userDetails) {
+        User user = userRepository.findByEmail(userDetails.getEmail());
+        if (user == null || !passwordEncoder.matches(userDetails.getPassword(), user.getPassword()))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
+
+        return ResponseEntity.status(HttpStatus.OK).body(new AuthTokenDTO(jwtUtil.generateToken(user)));
+    }
+
 }

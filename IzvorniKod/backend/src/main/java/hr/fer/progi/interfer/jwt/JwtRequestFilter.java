@@ -17,45 +17,44 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
-	
-	@Autowired
-	private JwtUtil jwtUtil;
-	
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
-		try {
-			String jwt = extractJwtToken(request);
-			if (jwt != null && jwtUtil.validateToken(jwt)) {
-				String email = jwtUtil.getEmailFromToken(jwt);
+    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
 
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						email, null, null);
+    @Autowired
+    private JwtUtil jwtUtil;
 
-				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
+            String jwt = extractJwtToken(request);
+            if (jwt != null && jwtUtil.validateToken(jwt)) {
+                String email = jwtUtil.getEmailFromToken(jwt);
 
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-			}
-		} catch (Exception e) {
-			System.out.println("filt");
-			logger.error("Cannot set user authentication: {}", e);
-		}
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        email, null, null);
 
-		filterChain.doFilter(request, response);
-	}
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-	private String extractJwtToken(HttpServletRequest request) {
-		// Extract JWT token from the Authorization header
-		String bearerToken = request.getHeader("Authorization");
-		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-			return bearerToken.substring(7);
-		}
-		return null;
-	}
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (Exception e) {
+            System.out.println("filt");
+            logger.error("Cannot set user authentication: {}", e);
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private String extractJwtToken(HttpServletRequest request) {
+        // Extract JWT token from the Authorization header
+        String bearerToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
 }

@@ -23,45 +23,46 @@ import jakarta.validation.Valid;
 @Service
 public class CommentPostServiceImpl implements CommentPostService {
 
-	@Autowired
-	private JwtUtil jwtUtil;
-	
-	@Autowired 
-	private UserRepository userRepository;
-	
-	@Autowired 
-	private ArticleRepository articleRepository;
-	
-	@Autowired
-	private CommentRepository commentRepository;
-	
-	@Override
-	public ResponseEntity<?> post(String authorizationHeader, @Valid CommentPostDTO commentDetails) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
-		
-		User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-		
-		try {
-			Article article = articleRepository.findById(commentDetails.getArticle_id()).get();
-			
-			Comment newComment = new Comment();
-			newComment.setArticle(article);
-			newComment.setAuthor(author);
-			newComment.setContent(commentDetails.getContent());
-			newComment.setDatePublished(Timestamp.from(Instant.now()));
-			
-			commentRepository.save(newComment);
-		}catch (NoSuchElementException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong article ID");
-		}/*catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).body("Error ocurred while saving comment");
-		}*/
+    @Autowired
+    private JwtUtil jwtUtil;
 
-		return  ResponseEntity.status(HttpStatus.CREATED).body("Comment posted");
+    @Autowired
+    private UserRepository userRepository;
 
-		
-	}
+    @Autowired
+    private ArticleRepository articleRepository;
 
-	
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Override
+    public ResponseEntity<?> post(String authorizationHeader, @Valid CommentPostDTO commentDetails) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+
+        User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+        try {
+            Article article = articleRepository.findById(commentDetails.getArticle_id()).get();
+
+            Comment newComment = new Comment();
+            newComment.setArticle(article);
+            newComment.setAuthor(author);
+            newComment.setContent(commentDetails.getContent());
+            newComment.setDatePublished(Timestamp.from(Instant.now()));
+
+            commentRepository.save(newComment);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong article ID");
+        } /*
+           * catch (Exception e) {
+           * return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).
+           * body("Error ocurred while saving comment");
+           * }
+           */
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Comment posted");
+
+    }
+
 }

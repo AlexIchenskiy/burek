@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @Service
 public class ArticleRatingGetServiceImpl implements ArticleRatingGetService {
+
     @Autowired
     ArticleRatingRepository articleRatingRepository;
 
@@ -53,18 +54,22 @@ public class ArticleRatingGetServiceImpl implements ArticleRatingGetService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail((String) authentication.getPrincipal());
 
-        // Ovo mi ne izgleda kao da bi trebalo fail-ati, obzirom da bilo tko - tko nije prijavljen - ionako nema
+        // Ovo mi ne izgleda kao da bi trebalo fail-ati, obzirom da bilo tko - tko nije
+        // prijavljen - ionako nema
         // pristup, ali Anton uvijek biva paranoičan
         if (user == null)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
         if (articleRepository.findById(articleDetails.getId()).isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(articleDetails);
 
-        Optional<ArticleRating> articleRating = articleRatingRepository.findByUserIdAndArticleId(user.getId(), articleDetails.getId());
+        Optional<ArticleRating> articleRating = articleRatingRepository.findByUserIdAndArticleId(user.getId(),
+                articleDetails.getId());
 
         if (articleRating.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("{\"articleId\":%d,\"userId\":%d}", articleDetails.getId(), user.getId()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(String.format("{\"articleId\":%d,\"userId\":%d}", articleDetails.getId(), user.getId()));
 
         return ResponseEntity.status(HttpStatus.OK).body(articleRating.get());
     }
+
 }

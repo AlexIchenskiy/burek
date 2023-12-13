@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class CommentPostDTO {
 
-    private Long article_id;  
+    private Long article_id;
 
     @Column(columnDefinition = "TEXT")
     @Size(min = 3, message = "{Size.min.article.content}")

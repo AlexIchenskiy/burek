@@ -19,34 +19,34 @@ import hr.fer.progi.interfer.service.CommentGetService;
 import jakarta.validation.Valid;
 
 @Service
-public class CommentGetServiceImpl implements CommentGetService{
+public class CommentGetServiceImpl implements CommentGetService {
 
-	@Autowired
-	private CommentRepository commentRepository;
-	
-	@Autowired 
-	private ArticleRepository articleRepository;
-	
-	@Override
-	public ResponseEntity<?> getAll(@Valid ArticleGetDTO articleDetails) {
-		
-		try {
-			Article article = articleRepository.findById(articleDetails.getId()).get();
+    @Autowired
+    private CommentRepository commentRepository;
 
-			List<CommentGetDTO> allComments = commentRepository.findByArticle(article)
+    @Autowired
+    private ArticleRepository articleRepository;
+
+    @Override
+    public ResponseEntity<?> getAll(@Valid ArticleGetDTO articleDetails) {
+
+        try {
+            Article article = articleRepository.findById(articleDetails.getId()).get();
+
+            List<CommentGetDTO> allComments = commentRepository.findByArticle(article)
                     .stream()
                     .map(this::convertToDTO).sorted((o1, o2) -> o1.getTimestamp().compareTo(o2.getTimestamp()))
                     .collect(Collectors.toList());
-			
-			return ResponseEntity.status(HttpStatus.OK).body(allComments);
-		}catch (NoSuchElementException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong article ID");
-		}
-		
-	}
-	
-	private CommentGetDTO convertToDTO(Comment comment) {
-		CommentGetDTO commentDTO = new CommentGetDTO();
+
+            return ResponseEntity.status(HttpStatus.OK).body(allComments);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong article ID");
+        }
+
+    }
+
+    private CommentGetDTO convertToDTO(Comment comment) {
+        CommentGetDTO commentDTO = new CommentGetDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
         commentDTO.setAuthor(comment.getAuthor().getFirstName() + " " + comment.getAuthor().getLastName());
