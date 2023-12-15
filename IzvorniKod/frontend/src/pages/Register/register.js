@@ -5,6 +5,7 @@ import "./register.css";
 import axios from 'axios';
 import { API_URL } from '../../assets/constants';
 import useAuth from '../../hooks/useAuth';
+import Header from '../../components/Header/Header';
 
 const RegisterForm = () => {
     const { setToken } = useAuth();
@@ -47,6 +48,7 @@ const RegisterForm = () => {
 
     return (
         <>
+          <Header isSearchVisible={false} />
             <form method="POST" action="/api/user/register" onSubmit={handleSubmit} >
                 <h2>Kreiranje računa</h2>
                 <TextField

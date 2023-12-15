@@ -32,7 +32,7 @@ const Header = ({ isSearchVisible = true }) => {
 
   useEffect(() => {
     if (token) {
-      setSettings({ home: 'Početna', editor: 'Nova objava' });
+      setSettings({ home: 'Početna', editor: 'Nova objava', profile: 'Profil' });
     } else {
       setSettings(DEFAULT_SETTINGS);
     }

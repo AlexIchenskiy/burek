@@ -5,6 +5,7 @@ import "./loginform.css";
 import axios from "axios";
 import { API_URL } from "../../assets/constants";
 import useAuth from "../../hooks/useAuth";
+import Header from '../../components/Header/Header';
 
 const Login = () => {
     const { setToken } = useAuth();
@@ -60,6 +61,7 @@ const Login = () => {
 
     return (
         <>
+          <Header isSearchVisible={false} />
             <div className="cover">
                 <form method="POST" action="/api/user/login" autoComplete="off" onSubmit={handleSubmit}>
                     <h2>Prijava</h2>
