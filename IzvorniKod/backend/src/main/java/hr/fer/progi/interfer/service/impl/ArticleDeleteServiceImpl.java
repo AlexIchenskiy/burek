@@ -28,8 +28,6 @@ public class ArticleDeleteServiceImpl implements ArticleDeleteService {
 
     @Override
     public ResponseEntity<?> deleteArticle(ArticleDeleteDTO articleDetails) {
-        // FIXME 403 UNAUTHORIZED for MODERATOR role
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail((String) authentication.getPrincipal());
 
