@@ -55,8 +55,7 @@ public class ArticleRatingGetServiceImpl implements ArticleRatingGetService {
         User user = userRepository.findByEmail((String) authentication.getPrincipal());
 
         // Ovo mi ne izgleda kao da bi trebalo fail-ati, obzirom da bilo tko - tko nije
-        // prijavljen - ionako nema
-        // pristup, ali Anton uvijek biva paranoičan
+        // prijavljen - ionako nema pristup, ali Anton uvijek biva paranoičan
         if (user == null)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
         if (articleRepository.findById(articleDetails.getId()).isEmpty())

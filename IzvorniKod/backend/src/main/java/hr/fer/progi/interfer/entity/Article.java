@@ -1,6 +1,8 @@
 package hr.fer.progi.interfer.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,5 +39,8 @@ public class Article {
 
     @Column(nullable = false)
     private boolean moderated = false;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> children = new ArrayList<>();
 
 }
