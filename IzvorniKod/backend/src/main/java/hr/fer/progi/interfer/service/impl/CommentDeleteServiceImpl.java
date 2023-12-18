@@ -37,7 +37,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
         User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
         // Obzirom da repozitorij vraća Optional<Comment> vrijednost, mislim da je poželjnije odmah provjeravati njeno
-        // postojanje nego oslanjati se ne Exception
+        // postojanje nego oslanjati se na Exception
         Optional<Comment> comment = commentRepository.findById(commentDetails.getId());
         if (comment.isEmpty())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong comment ID");
@@ -45,7 +45,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
         User author = comment.get().getAuthor();
 
         if (!author.getId().equals(user.getId()) && user.getRole() == UserRole.STUDENT)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Only creator of comment can delete it");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The user is not authorized to delete the comment");
 
         commentRepository.delete(comment.get());
 
