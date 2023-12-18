@@ -1,7 +1,8 @@
 package hr.fer.progi.interfer.service.impl;
 
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import hr.fer.progi.interfer.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,19 +36,20 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
 
         User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
-        try {
-            Comment comment = commentRepository.findById(commentDetails.getId()).get();
-            User author = comment.getAuthor();
-
-            if (!author.getId().equals(user.getId()))
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Only creator of comment can delete it");
-
-            commentRepository.delete(comment);
-
-            return ResponseEntity.status(HttpStatus.OK).body("Comment deleted");
-        } catch (NoSuchElementException e) {
+        // Obzirom da repozitorij vraća Optional<Comment> vrijednost, mislim da je poželjnije odmah provjeravati njeno
+        // postojanje nego oslanjati se ne Exception
+        Optional<Comment> comment = commentRepository.findById(commentDetails.getId());
+        if (comment.isEmpty())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong comment ID");
-        }
+
+        User author = comment.get().getAuthor();
+
+        if (!author.getId().equals(user.getId()) && user.getRole() == UserRole.STUDENT)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Only creator of comment can delete it");
+
+        commentRepository.delete(comment.get());
+
+        return ResponseEntity.status(HttpStatus.OK).body("Comment deleted");
     }
 
 }
