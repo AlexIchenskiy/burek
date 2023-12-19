@@ -25,6 +25,8 @@ public class UserPromotionServiceImpl implements UserPromotionService {
     public ResponseEntity<?> promote(UserPromotionDTO userDetails) {
         // Može ili promotati korisnika, ili istog demotati
         UserRole newRole;
+        if (userDetails.getRole() == null)
+            return ResponseEntity.badRequest().body("\"role\" key cannot be empty");
         if (userDetails.getRole().equalsIgnoreCase("admin"))
             newRole = UserRole.ADMIN;
         else if (userDetails.getRole().equalsIgnoreCase("moderator"))
@@ -51,7 +53,11 @@ public class UserPromotionServiceImpl implements UserPromotionService {
         if (promotedUser.get().getRole() == UserRole.ADMIN && !requestingUser.equals(promotedUser.get()))
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Cannot update role for an administrator");
 
+        // TODO možda dodati provjeru ako je ostao jedan administrator, da se ne bi uklonio
+
         promotedUser.get().setRole(newRole);
+        userRepository.save(promotedUser.get());
+
         return ResponseEntity.noContent().build();
     }
 
