@@ -1,4 +1,6 @@
 package hr.fer.progi.interfer.dto.request;
+import java.security.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
@@ -13,5 +15,7 @@ public class ArticleSearchDTO {
 	
 	private String category;
 	private String title;
-	
+	private String author;
+	private String content; //pazi da ne pukne kad pretrazujemo s vise od 20 znakova (varchar limit), onemogući predugačke upite
+	private String tags;
 }

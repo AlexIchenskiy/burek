@@ -5,11 +5,12 @@ import java.sql.Timestamp;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,6 +27,9 @@ public class Article {
     
     @Column(nullable=false, columnDefinition = "TEXT")
     private String content;
+
+    @Column(nullable=false)
+    private String author;
 
     @Column(nullable=false)
     private Boolean published;

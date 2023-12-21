@@ -40,20 +40,13 @@ public class ArticleController {
         }
         return articleGetService.getArticle(articleDetails);
     }
-/* 
-	@GetMapping("/getAll")
-    public ResponseEntity<?> getAllArticles(@RequestParam(value = "category", required = false) String category, @RequestParam(value = "title", required = false) String title) {
-  
-    	return articleGetService.getAllArticles(category, title);
-    }
-*/
+
 	@GetMapping("/getAll")
     public ResponseEntity<?> getAllArticles(@RequestBody @Valid ArticleSearchDTO articleDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
 
-        
     	return articleGetService.getAllArticles(articleDetails);
     }
 }

@@ -1,9 +1,9 @@
 package hr.fer.progi.interfer.service.impl;
-
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,46 +29,32 @@ public class ArticleGetServiceImpl implements ArticleGetService{
         }
         return ResponseEntity.status(HttpStatus.OK).body(article);
     }
-    @Override
-    public ResponseEntity<?> getAllArticles(String category, String title){
-
-        List<Article> articles;
-
-        if(title != null && category != null){
-            articles = articleRepository.findByCategoryAndTitle(category, title);
-        }
-        else if(title != null){
-            articles = articleRepository.findByTitle(title); //ako imam samo naslov
-        }
-        else if(category != null){
-            articles = articleRepository.findByCategory(category);//ako imam samo kategoriju
-        }
-        else {
-            articles = articleRepository.findAll(); //vrati sve
-        }
-        
-        return ResponseEntity.status(HttpStatus.OK).body(articles);
-    }
 
     @Override
     public ResponseEntity<?> getAllArticles(ArticleSearchDTO articleDetails){
 
-
-    
-        if(articleDetails.getTitle() != null && articleDetails.getCategory() != null){
-            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findByCategoryAndTitle(articleDetails.getCategory(), articleDetails.getTitle())); 
-        }
-        else if(articleDetails.getCategory() != null){
       
-            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findByCategory(articleDetails.getCategory())); //ako imam samo kategoriju
-        }
-        else if(articleDetails.getTitle() != null){
-            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findByTitle(articleDetails.getTitle()));  //ako imam samo naslov
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findAll()); //vrati sve
-        }
-        
+
+        Article article = new Article();
+        article.setTitle(articleDetails.getTitle());
+        article.setContent(articleDetails.getContent());
+        article.setAuthor(articleDetails.getAuthor());
+        article.setCategory(articleDetails.getCategory());
+        article.setTags(articleDetails.getTags());
+        article.setModerated(false);
+        article.setPublished(true);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()                                         
+                                                .withIgnoreNullValues()
+                                                .withIgnoreCase()
+                                                .withIgnorePaths("moderated", "published", "datePublished");
+                                               
+                                                //.withMatcher("content", match -> match.contains())
+                                                //.withMatcher("tags", match -> match.contains());
+    
+        Example<Article> example = Example.of(article, matcher);
+
+        return ResponseEntity.status(HttpStatus.OK).body(articleRepository.findAll(example));
         
     }
 }

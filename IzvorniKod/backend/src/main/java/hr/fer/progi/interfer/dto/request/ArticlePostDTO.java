@@ -16,7 +16,11 @@ public class ArticlePostDTO {
 	@Size(max = 100, message = "{Size.max.article.title}")
     @Size(min = 3, message = "{Size.min.article.title}")
 	private String title;
-	
+
+    @Size(max = 100, message = "{Size.max.article.title}")
+    @Size(min = 3, message = "{Size.min.article.title}")
+	private String author;
+
 	@Size(max = 100, message = "{Size.max.article.tags}")
     @Size(min = 3, message = "{Size.min.article.tags}")
 	private String tags;
@@ -26,9 +30,8 @@ public class ArticlePostDTO {
     @Size(max = 65000, message = "{Size.min.article.content}")
 	private String content;
   
-    
     private boolean isPosted;
     
-    private Category category;
+    private String category;
 
 }
