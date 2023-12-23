@@ -63,14 +63,15 @@ public class ArticleGetServiceImpl implements ArticleGetService{
         if(!(page >= 1)){
             page = 1;
         }
+        page--;
 
         Pageable pageRequest = PageRequest.of(page, 5, Sort.by("datePublished").descending()); //TODO1 dodat opciju za promjenu br elemenata na stranici (10, 15, ...)
                                                                                                                         //TODO2 proširi sortiranje
-        Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO provjeri da ne poziva dodatni count query (overhead)
+        Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
 
         List <Article> results = pageResult.toList();
 
-        return ResponseEntity.status(HttpStatus.OK).body(results);
+        return ResponseEntity.status(HttpStatus.OK).body(pageResult.getContent());
         
     }
 }

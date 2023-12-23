@@ -1,5 +1,4 @@
 package hr.fer.progi.interfer.dto.request;
-import java.security.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,4 +18,5 @@ public class ArticleSearchDTO {
 	private String content; //pazi da ne pukne kad pretrazujemo s vise od 20 znakova (varchar limit), onemogući predugačke upite
 	private String tags;
 	private int page;
+	//private String sortAttribute;
 }
