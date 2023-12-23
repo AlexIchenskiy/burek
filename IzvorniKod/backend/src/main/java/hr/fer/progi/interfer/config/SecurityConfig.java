@@ -32,7 +32,7 @@ public class SecurityConfig {
         });
 		http.csrf(AbstractHttpConfigurer::disable);
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/api/user/login", "/api/user/register", "/api/posts/id", "/api/posts/getAll", "/api/posts/add").permitAll()
+				.requestMatchers("/api/user/login", "/api/user/register", "/api/posts/id", "/api/posts/getAll").permitAll()
 				.anyRequest().authenticated()
 				
 			);
