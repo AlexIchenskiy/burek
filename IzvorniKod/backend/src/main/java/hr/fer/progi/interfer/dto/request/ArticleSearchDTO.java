@@ -18,4 +18,5 @@ public class ArticleSearchDTO {
 	private String author;
 	private String content; //pazi da ne pukne kad pretrazujemo s vise od 20 znakova (varchar limit), onemogući predugačke upite
 	private String tags;
+	private int page;
 }
