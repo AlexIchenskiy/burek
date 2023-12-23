@@ -38,24 +38,29 @@ public class ArticleGetServiceImpl implements ArticleGetService{
     @Override
     public ResponseEntity<?> getAllArticles(ArticleSearchDTO articleDetails){
 
-      
+        //TODO dodaj ograničenja na minimalnu duljinu sadržaja pretraživanja (content na barem 3 znaka i sl.), pretraga po 1 slovu nema baš smisla
 
         Article article = new Article();
         article.setTitle(articleDetails.getTitle());
-        article.setContent(articleDetails.getContent());
+        article.setContent(articleDetails.getContent());       
         article.setAuthor(articleDetails.getAuthor());
         article.setCategory(articleDetails.getCategory());
         article.setTags(articleDetails.getTags());
         article.setModerated(false);
         article.setPublished(true);
 
+
+        /*
+            category, autor, published: exact match
+            title, content, tags: contains
+         */
         ExampleMatcher matcher = ExampleMatcher.matching()                                         
                                                 .withIgnoreNullValues()
                                                 .withIgnoreCase()
-                                                .withIgnorePaths("moderated", "published", "datePublished");
-                                               
-                                                //.withMatcher("content", match -> match.contains())
-                                                //.withMatcher("tags", match -> match.contains());
+                                                .withIgnorePaths("moderated", "published", "datePublished")//TODO maknut published, ignorira se zbog testiranja, ne želimo moći gledati neobjavljene članke 
+                                                .withMatcher("title", match -> match.contains())
+                                                .withMatcher("content", match -> match.contains())
+                                                .withMatcher("tags", match -> match.contains());
     
         Example<Article> example = Example.of(article, matcher);
 
@@ -68,8 +73,6 @@ public class ArticleGetServiceImpl implements ArticleGetService{
         Pageable pageRequest = PageRequest.of(page, 5, Sort.by("datePublished").descending()); //TODO1 dodat opciju za promjenu br elemenata na stranici (10, 15, ...)
                                                                                                                         //TODO2 proširi sortiranje
         Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
-
-        List <Article> results = pageResult.toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(pageResult.getContent());
         
