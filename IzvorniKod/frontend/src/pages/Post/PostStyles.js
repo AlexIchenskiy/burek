@@ -1,15 +1,16 @@
-import { Button, Container, Input, styled } from "@mui/material";
-
-import colors from '../../assets/colors';
+import { ContentCopy } from "@mui/icons-material";
+import { Container, Input, styled } from "@mui/material";
 
 export const PostContainer = styled(Container)`
   width: 80%;
   height: 80%;
   padding: 16px;
   display: flex;
+  flex-direction: column;
 `;
 
 export const PostTextContainer = styled(Container)`
+  margin-bottom: 32px;
   padding: 0!important;
   display: flex;
   flex-direction: column;
@@ -26,13 +27,32 @@ export const PostTitleInput = styled(Input)`
   cursor: default;
 `;
 
-export const PostSubmit = styled(Button)`
-  width: 50%;
-  max-width: 240px;
-  align-self: flex-start;
-  background-color: ${colors.primary};
+export const PostShareContainer = styled(Container)`
+  width: 100%;
+  height: 32px;
+  display: flex;
+  justify-content: center;
 
-  &:hover {
-    background-color: ${colors.primary};
+  & > * {
+    margin: 8px;
   }
+`;
+
+export const CopyShareButton = styled(Container)`
+  width: 32px;
+  height: 32px;
+  padding: 0!important;
+  margin: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background-color: #7f7f7f;
+  cursor: pointer;
+`;
+
+export const CopyShareIcon = styled(ContentCopy)`
+  width: 18px;
+  height: 18px;
+  color: white;
 `;
