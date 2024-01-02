@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const DEFAULT_SETTINGS = { login: 'Prijava', register: 'Novi korisnik' };
+const USER_SETTINGS = { home: 'Početna', editor: 'Nova objava', logout: 'Odjava' };
 
 const Header = ({ isSearchVisible = true }) => {
   const { token } = useAuth();
@@ -32,7 +33,7 @@ const Header = ({ isSearchVisible = true }) => {
 
   useEffect(() => {
     if (token) {
-      setSettings({ home: 'Početna', editor: 'Nova objava' });
+      setSettings(USER_SETTINGS);
     } else {
       setSettings(DEFAULT_SETTINGS);
     }

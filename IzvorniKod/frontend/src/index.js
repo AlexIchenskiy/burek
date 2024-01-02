@@ -18,6 +18,7 @@ import AuthProvider from './provider/authProvider.js';
 import { ThemeProvider } from '@mui/material';
 import theme from './assets/theme.js';
 import Post from './pages/Post/Post.js';
+import Logout from './components/Logout/Logout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -31,6 +32,7 @@ root.render(
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/editor" element={<Editor />} />
           <Route exact path="/post/:id" element={<Post />} />
+          <Route exact path="/logout" element={<Logout />} />
         </Routes>
       </Router>
     </AuthProvider>
