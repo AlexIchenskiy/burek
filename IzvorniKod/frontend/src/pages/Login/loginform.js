@@ -63,7 +63,7 @@ const Login = () => {
                         if (err.response.status === 401) {
                             setEmailError(true);
                             setPasswordError(true);
-                            setSnackbarMessage("Pogrešne podatke.");
+                            setSnackbarMessage("Pogrešni podatci.");
                             setOpenSnackbar(true)
                         } else {
                             handleSnackbarOpen("U sustavu se dogodila neočekivana greška. Probajte ponovo ili kontaktirajte razvojni tim.");

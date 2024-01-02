@@ -32,7 +32,7 @@ public class UserRegistrationDTO {
     // least one number and one letter
     @Size(max = 60, message = "{Size.max.user.password}")
     @Size(min = 7, message = "{Size.min.user.password}")
-    @Pattern(regexp = "^.*[a-zA-Z].*[0-9].*$", message = "{Pattern.user.password}")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).+$", message = "{Pattern.user.password}")
     private String password;
 
 }
