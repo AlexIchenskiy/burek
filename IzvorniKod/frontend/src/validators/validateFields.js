@@ -4,7 +4,7 @@ export const validateFields = (fields, handleSnackbarOpen) => {
     const error = validator(value);
 
     if (error) {
-      setError(error);
+      if (setError) setError(error);
       handleSnackbarOpen(error);
       return false;
     }
