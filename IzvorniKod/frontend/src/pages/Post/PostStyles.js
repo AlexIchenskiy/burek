@@ -1,5 +1,5 @@
 import { ContentCopy } from "@mui/icons-material";
-import { Container, Input, styled } from "@mui/material";
+import { Chip, Container, Input, styled } from "@mui/material";
 import { EmailShareButton, FacebookShareButton, LinkedinShareButton, WhatsappShareButton } from "react-share";
 
 export const PostContainer = styled(Container)`
@@ -37,8 +37,27 @@ export const PostTitleInput = styled(Input)`
   cursor: default;
 `;
 
-export const PostShareContainer = styled(Container)`
+export const PostInfoContainer = styled(Container)`
   width: 100%;
+  height: auto;
+  padding: 0!important;
+  margin: 0!important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > * {
+      margin: 8px;
+    }
+  }
+`;
+
+export const PostShareContainer = styled(Container)`
   height: 32px;
   display: flex;
   padding-left: 8px!important;
@@ -99,4 +118,14 @@ export const CopyShareIcon = styled(ContentCopy)`
   width: 18px;
   height: 18px;
   color: white;
+`;
+
+export const PostRatingContainer = styled(Container)`
+  width: auto;
+  display: flex;
+  align-items: center;
+`;
+
+export const PostRatingChip = styled(Chip)`
+  margin-left: 12px;
 `;

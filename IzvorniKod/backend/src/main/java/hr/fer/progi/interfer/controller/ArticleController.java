@@ -67,7 +67,7 @@ public class ArticleController {
     }
 
     // Korisnik želi vidjeti sve ocjene na nekoj objavi
-    @GetMapping("/allRatings")
+    @PostMapping("/allRatings")
     public ResponseEntity<?> getArticleRatings(@RequestBody @Valid ArticleGetDTO articleDetails,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
@@ -77,7 +77,7 @@ public class ArticleController {
     }
 
     // Korisnik želi vidjeti ocjenu koju je ostavio
-    @GetMapping("/rating")
+    @PostMapping("/getRating")
     public ResponseEntity<?> getArticleRating(@RequestBody @Valid ArticleGetDTO articleDetails,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
