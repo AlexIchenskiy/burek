@@ -17,7 +17,7 @@ const Home = () => {
       .then((res) => {
         console.log(res);
 
-        setPosts(res.data);
+        setPosts(res.data.reverse());
       })
       .catch((err) => console.log(err))
   }, []);

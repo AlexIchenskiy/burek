@@ -67,8 +67,11 @@ const Editor = () => {
       }
     })
       .then(() => navigate("/home", { replace: true }))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        console.log(err);
+        handleSnackbarOpen('Dogodila se pogreška prilikom objavljivanja članka.');
+        setLoading(false)
+      });
   }
 
   const handleTitleChange = (event) => {
