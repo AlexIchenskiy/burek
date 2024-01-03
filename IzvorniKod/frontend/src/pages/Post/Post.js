@@ -10,8 +10,11 @@ import "./DraftStyles.css";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL, PAGE_URL } from '../../assets/constants';
-import { Alert, Rating, Snackbar, Tooltip } from '@mui/material';
+import { Alert, IconButton, InputAdornment, InputLabel, OutlinedInput, Rating, Snackbar, Tooltip } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
+import { HourglassBottom, Send } from '@mui/icons-material';
+import { validateFields } from '../../validators/validateFields';
+import { validateComment } from '../../validators/validateComment';
 
 const COPY_DEFAULT_TOOLTIP = 'Kopiraj';
 
@@ -23,6 +26,10 @@ const Post = () => {
 
   const [rating, setRating] = useState(0.0);
   const [userRating, setUserRating] = useState(null);
+  const [setting, setSetting] = useState(false);
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
+  const [sending, setSending] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
@@ -53,30 +60,86 @@ const Post = () => {
   }
 
   const handleSetRating = (val) => {
-    if (val === null) {
-      setUserRating(null);
+    if (token) {
+      setSetting(true);
 
-      axios.delete(`${API_URL}/posts/rating`, { id: id })
-        .catch((err) => {
-          console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom poništavanja ocjene.');
-        });
+      if (val === null) {
+        axios.delete(`${API_URL}/posts/rating`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }, data: {
+            id: id
+          }
+        }
+        )
+          .then(() => setUserRating(null))
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom poništavanja ocjene.');
+          });
+      } else {
+        axios.post(`${API_URL}/posts/rating`, { articleId: id, rating: val }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(() => setUserRating(val))
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom spremanja ocjene.');
+          });
+      }
 
-      axios.post(`${API_URL}/posts/allRatings`, { id: id })
-        .then((res) => setRating((res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5) / 5))
-        .catch((err) => {
-          console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom učitavanja novog stanja ocjena.')
-        });
-    } else {
-      setUserRating(val);
-
-      axios.post(`${API_URL}/posts/rating`, { articleId: id, rating: val })
-        .catch((err) => {
-          console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom spremanja ocjene.');
-        });
+      setTimeout(() => {
+        axios.post(`${API_URL}/posts/allRatings`, { id: id }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then((res) => {
+            setRating((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
+              (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5));
+          })
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom učitavanja novog stanja ocjena.')
+          })
+          .finally(() => setSetting(false));
+      }, 1000);
     }
+  }
+
+  const handleSend = () => {
+    if (!validateCommentInput()) return;
+
+    if (token) {
+      setSending(true);
+
+      axios.post(`${API_URL}/comment/post`, { article_id: id, content: comment }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(() => setComment(''))
+        .catch((err) => {
+          console.log(err);
+          handleSnackbarOpen('Dogodila se greška tijekom spremanja komentara.')
+        });
+
+      setTimeout(() => {
+        axios.post(`${API_URL}/comment/getAll`, { id: id })
+          .then((res) => { setComments(res.data); console.log(res) })
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom učitavanja komentara.')
+          })
+          .finally(() => setSending(false));
+      }, 1000);
+    }
+  }
+
+  const validateCommentInput = () => {
+    return validateFields([{ value: comment.trim(), validator: validateComment }], handleSnackbarOpen);
   }
 
   useEffect(() => {
@@ -108,13 +171,29 @@ const Post = () => {
         handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
       });
 
-    axios.post(`${API_URL}/posts/getRating`, { id: id })
-      .then((res) => setUserRating(res.data.rating))
+    if (token) {
+      axios.post(`${API_URL}/posts/getRating`, { id: id }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then((res) => setUserRating(res.data.rating))
+        .catch((err) => {
+          if (err.response.status === 404) {
+            return;
+          }
+          console.log(err);
+          handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
+        });
+    }
+
+    axios.post(`${API_URL}/comment/getAll`, { id: id })
+      .then((res) => { setComments(res.data); console.log(res.data) })
       .catch((err) => {
         console.log(err);
-        handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
+        handleSnackbarOpen('Dogodila se greška tijekom učitavanja komentara.')
       });
-  }, [id]);
+  }, [id, token]);
 
   return (
     <>
@@ -155,10 +234,47 @@ const Post = () => {
           <S.PostRatingContainer>
             <Rating value={token ? userRating : rating} onChange={(e, val) => {
               handleSetRating(val);
-            }} readOnly={!token} />
+            }} readOnly={!token || setting} />
             <S.PostRatingChip label={rating || 0} variant='outlined' size='small' />
           </S.PostRatingContainer>
         </S.PostInfoContainer>
+        <S.PostCommentsContainer>
+          <S.PostComments>
+            {comments.length > 0 ?
+              comments.map((comment) => (
+                <S.PostComment key={comment.id}>
+                  <S.PostCommentAvatar>
+                    {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
+                  </S.PostCommentAvatar>
+                  <S.PostCommentContent variant='body2'>{comment.content}</S.PostCommentContent>
+                </S.PostComment>)) :
+              <S.PostNoComments variant='h4'>Ovdje još nema komentara. Ostavite prvi!</S.PostNoComments>
+            }
+          </S.PostComments>
+          <S.PostCommentsForm variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">Komentar</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type='text'
+              value={comment}
+              disabled={!token || sending}
+              onChange={(e) => { setComment(e.target.value) }}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    disabled={!token || sending}
+                    onClick={handleSend}
+                    edge="end"
+                  >
+                    {sending ? <HourglassBottom /> : <Send />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </S.PostCommentsForm>
+        </S.PostCommentsContainer>
       </S.PostContainer>
       <Snackbar
         open={openSnackbar}
