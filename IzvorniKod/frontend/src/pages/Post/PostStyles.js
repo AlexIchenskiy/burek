@@ -140,10 +140,10 @@ export const PostCommentsContainer = styled(Container)`
 
 export const PostComments = styled(Container)`
   width: 100%;
-  height: 240px;
+  height: auto;
+  min-height: 240px;
   margin-bottom: 8px;
   padding: 8px!important;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -166,7 +166,17 @@ export const PostCommentAvatar = styled(Avatar)`
   background-color: ${colors.primary};
 `;
 
-export const PostCommentContent = styled(Typography)`
+export const PostCommentContent = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const PostCommentText = styled(Typography)``;
+
+export const PostCommentSubtext = styled(Typography)`
+  margin-top: 8px;
+  color: ${colors["secondary-dark"]};
 `;
 
 export const PostNoComments = styled(Typography)`

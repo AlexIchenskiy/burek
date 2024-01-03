@@ -15,6 +15,7 @@ import useAuth from '../../hooks/useAuth';
 import { HourglassBottom, Send } from '@mui/icons-material';
 import { validateFields } from '../../validators/validateFields';
 import { validateComment } from '../../validators/validateComment';
+import { roundToTwo } from '../../util/roundToTwo';
 
 const COPY_DEFAULT_TOOLTIP = 'Kopiraj';
 
@@ -23,6 +24,8 @@ const Post = () => {
   const [title, setTitle] = useState('');
   const { id } = useParams();
   const [shareText, setShareText] = useState(`Pročitajte članak na ovom linku:\n${PAGE_URL}/post/${id}`);
+  const [contentLoading, setContentLoading] = useState(true);
+  const [commentsLoading, setCommentsLoading] = useState(true);
 
   const [rating, setRating] = useState(0.0);
   const [userRating, setUserRating] = useState(null);
@@ -97,8 +100,8 @@ const Post = () => {
           }
         })
           .then((res) => {
-            setRating((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
-              (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5));
+            setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
+              (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5)));
           })
           .catch((err) => {
             console.log(err);
@@ -128,7 +131,7 @@ const Post = () => {
 
       setTimeout(() => {
         axios.post(`${API_URL}/comment/getAll`, { id: id })
-          .then((res) => { setComments(res.data); console.log(res) })
+          .then((res) => setComments([...res.data].reverse()))
           .catch((err) => {
             console.log(err);
             handleSnackbarOpen('Dogodila se greška tijekom učitavanja komentara.')
@@ -143,6 +146,9 @@ const Post = () => {
   }
 
   useEffect(() => {
+    setContentLoading(true);
+    setCommentsLoading(true);
+
     axios.post(`${API_URL}/posts/id`, { id: id })
       .then((res) => {
         console.log(res);
@@ -161,11 +167,12 @@ const Post = () => {
       .catch((err) => {
         console.log(err);
         handleSnackbarOpen('Dogodila se greška tijekom učitavanja članka.');
-      });
+      })
+      .finally(() => setContentLoading(false));
 
     axios.post(`${API_URL}/posts/allRatings`, { id: id })
-      .then((res) => setRating((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
-        (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5)))
+      .then((res) => setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
+        (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5))))
       .catch((err) => {
         console.log(err);
         handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
@@ -188,11 +195,12 @@ const Post = () => {
     }
 
     axios.post(`${API_URL}/comment/getAll`, { id: id })
-      .then((res) => { setComments(res.data); console.log(res.data) })
+      .then((res) => setComments([...res.data].reverse()))
       .catch((err) => {
         console.log(err);
         handleSnackbarOpen('Dogodila se greška tijekom učitavanja komentara.')
-      });
+      })
+      .finally(() => setCommentsLoading(false));
   }, [id, token]);
 
   return (
@@ -200,8 +208,8 @@ const Post = () => {
       <Header isSearchVisible={false} />
       <S.PostContainer>
         <S.PostTextContainer>
-          <S.PostTitleInput value={title} type="text" disableUnderline={true} placeholder='Ovdje još nema naslova :(' readOnly={true} />
-          <TextEditor editorState={editorState} onChange={setEditorState} placeholder='Ovjde još nema ništa :(' readOnly={true} />
+          <S.PostTitleInput value={title} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Ovdje još nema naslova :('} readOnly={true} />
+          <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'Učitavam članak...' : 'Ovjde još nema ništa :('} readOnly={true} />
         </S.PostTextContainer>
         <S.PostInfoContainer>
           <S.PostShareContainer>
@@ -239,18 +247,6 @@ const Post = () => {
           </S.PostRatingContainer>
         </S.PostInfoContainer>
         <S.PostCommentsContainer>
-          <S.PostComments>
-            {comments.length > 0 ?
-              comments.map((comment) => (
-                <S.PostComment key={comment.id}>
-                  <S.PostCommentAvatar>
-                    {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
-                  </S.PostCommentAvatar>
-                  <S.PostCommentContent variant='body2'>{comment.content}</S.PostCommentContent>
-                </S.PostComment>)) :
-              <S.PostNoComments variant='h4'>Ovdje još nema komentara. Ostavite prvi!</S.PostNoComments>
-            }
-          </S.PostComments>
           <S.PostCommentsForm variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">Komentar</InputLabel>
             <OutlinedInput
@@ -274,6 +270,25 @@ const Post = () => {
               label="Password"
             />
           </S.PostCommentsForm>
+          <S.PostComments>
+            {comments.length > 0 ?
+              comments.map((comment) => (
+                <S.PostComment key={comment.id}>
+                  <S.PostCommentAvatar>
+                    {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
+                  </S.PostCommentAvatar>
+                  <S.PostCommentContent>
+                    <S.PostCommentText variant='body1'>
+                      {comment.content}
+                    </S.PostCommentText>
+                    <S.PostCommentSubtext variant='subtitle2'>
+                      {new Date(comment.timestamp).toLocaleString('en-UK')}
+                    </S.PostCommentSubtext>
+                  </S.PostCommentContent>
+                </S.PostComment>)) :
+              <S.PostNoComments variant='h4'>{commentsLoading ? "Učitavam komentare..." : "Ovdje još nema komentara. Ostavite prvi!"}</S.PostNoComments>
+            }
+          </S.PostComments>
         </S.PostCommentsContainer>
       </S.PostContainer>
       <Snackbar
