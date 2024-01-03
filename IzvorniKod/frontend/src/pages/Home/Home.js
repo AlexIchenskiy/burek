@@ -59,7 +59,7 @@ const Home = () => {
                     </S.HomeDataPostTitleLink>
                   </S.HomeDataPostTitle>
                   <S.HomeDataPostSubtitle>
-                    {new Date(post.datePublished).toUTCString()}
+                    {new Date(post.datePublished).toLocaleString('en-UK')}
                   </S.HomeDataPostSubtitle>
                 </S.HomeDataPostData>
               </S.HomeDataPost>

@@ -274,9 +274,11 @@ const Post = () => {
             {comments.length > 0 ?
               comments.map((comment) => (
                 <S.PostComment key={comment.id}>
-                  <S.PostCommentAvatar>
-                    {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
-                  </S.PostCommentAvatar>
+                  <Tooltip title={comment.author}>
+                    <S.PostCommentAvatar>
+                      {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
+                    </S.PostCommentAvatar>
+                  </Tooltip>
                   <S.PostCommentContent>
                     <S.PostCommentText variant='body1'>
                       {comment.content}

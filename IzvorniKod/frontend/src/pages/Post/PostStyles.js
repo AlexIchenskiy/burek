@@ -131,6 +131,7 @@ export const PostRatingChip = styled(Chip)`
 export const PostCommentsContainer = styled(Container)`
   width: 100%;
   height: auto;
+  margin-top: 12px;
   padding: 24px 8px!important;
   display: flex;
   flex-direction: column;
@@ -186,5 +187,5 @@ export const PostNoComments = styled(Typography)`
 
 export const PostCommentsForm = styled(FormControl)`
   min-width: 240px;
-  width: 50%;
+  width: 100%;
 `;
