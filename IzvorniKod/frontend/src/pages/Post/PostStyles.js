@@ -41,14 +41,14 @@ export const PostTitleInput = styled(Input)`
 
 export const PostInfoContainer = styled(Container)`
   width: 100%;
-  height: auto;
+  height: 32px;
   padding: 0!important;
   margin: 0!important;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 576px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -66,14 +66,14 @@ export const PostShareContainer = styled(Container)`
   justify-content: flex-start;
 
   & > * {
-    margin: 8px;
+    margin: 0 8px!important;
 
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 576px) {
       justify-content: center;
     }
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 576px) {
     justify-content: center;
   }
 `;
@@ -81,25 +81,21 @@ export const PostShareContainer = styled(Container)`
 export const FacebookShareContainer = styled(FacebookShareButton)`
   width: 32px;
   height: 32px;
-  margin: 8px;
 `;
 
 export const LinkedinShareContainer = styled(LinkedinShareButton)`
   width: 32px;
   height: 32px;
-  margin: 8px;
 `;
 
 export const WhatsappShareContainer = styled(WhatsappShareButton)`
   width: 32px;
   height: 32px;
-  margin: 8px;
 `;
 
 export const EmailShareContainer = styled(EmailShareButton)`
   width: 32px;
   height: 32px;
-  margin: 8px;
 `;
 
 export const CopyShareButton = styled(Container)`
@@ -107,7 +103,7 @@ export const CopyShareButton = styled(Container)`
   width: 32px;
   height: 32px;
   padding: 0!important;
-  margin: 8px;
+  margin: 0 8px;
   display: flex;
   justify-content: center;
   align-items: center;

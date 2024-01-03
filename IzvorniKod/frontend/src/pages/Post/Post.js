@@ -26,6 +26,7 @@ const Post = () => {
 
   const [rating, setRating] = useState(0.0);
   const [userRating, setUserRating] = useState(null);
+  const [setting, setSetting] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [sending, setSending] = useState(false);
@@ -59,29 +60,52 @@ const Post = () => {
   }
 
   const handleSetRating = (val) => {
-    if (val === null) {
-      setUserRating(null);
+    if (token) {
+      setSetting(true);
 
-      axios.delete(`${API_URL}/posts/rating`, { id: id })
-        .catch((err) => {
-          console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom poništavanja ocjene.');
-        });
+      if (val === null) {
+        axios.delete(`${API_URL}/posts/rating`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }, data: {
+            id: id
+          }
+        }
+        )
+          .then(() => setUserRating(null))
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom poništavanja ocjene.');
+          });
+      } else {
+        axios.post(`${API_URL}/posts/rating`, { articleId: id, rating: val }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(() => setUserRating(val))
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom spremanja ocjene.');
+          });
+      }
 
-      axios.post(`${API_URL}/posts/allRatings`, { id: id })
-        .then((res) => setRating((res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5) / 5))
-        .catch((err) => {
-          console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom učitavanja novog stanja ocjena.')
-        });
-    } else {
-      setUserRating(val);
-
-      axios.post(`${API_URL}/posts/rating`, { articleId: id, rating: val })
-        .catch((err) => {
-          console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom spremanja ocjene.');
-        });
+      setTimeout(() => {
+        axios.post(`${API_URL}/posts/allRatings`, { id: id }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then((res) => {
+            setRating((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
+              (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5));
+          })
+          .catch((err) => {
+            console.log(err);
+            handleSnackbarOpen('Dogodila se greška tijekom učitavanja novog stanja ocjena.')
+          })
+          .finally(() => setSetting(false));
+      }, 1000);
     }
   }
 
@@ -147,12 +171,21 @@ const Post = () => {
         handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
       });
 
-    axios.post(`${API_URL}/posts/getRating`, { id: id })
-      .then((res) => setUserRating(res.data.rating))
-      .catch((err) => {
-        console.log(err);
-        handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
-      });
+    if (token) {
+      axios.post(`${API_URL}/posts/getRating`, { id: id }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then((res) => setUserRating(res.data.rating))
+        .catch((err) => {
+          if (err.response.status === 404) {
+            return;
+          }
+          console.log(err);
+          handleSnackbarOpen('Dogodila se greška tijekom učitavanja ocjena.')
+        });
+    }
 
     axios.post(`${API_URL}/comment/getAll`, { id: id })
       .then((res) => { setComments(res.data); console.log(res.data) })
@@ -160,7 +193,7 @@ const Post = () => {
         console.log(err);
         handleSnackbarOpen('Dogodila se greška tijekom učitavanja komentara.')
       });
-  }, [id]);
+  }, [id, token]);
 
   return (
     <>
@@ -201,7 +234,7 @@ const Post = () => {
           <S.PostRatingContainer>
             <Rating value={token ? userRating : rating} onChange={(e, val) => {
               handleSetRating(val);
-            }} readOnly={!token} />
+            }} readOnly={!token || setting} />
             <S.PostRatingChip label={rating || 0} variant='outlined' size='small' />
           </S.PostRatingContainer>
         </S.PostInfoContainer>
