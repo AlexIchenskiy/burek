@@ -1,6 +1,8 @@
 import { ContentCopy } from "@mui/icons-material";
-import { Chip, Container, Input, styled } from "@mui/material";
+import { Avatar, Chip, Container, FormControl, Input, Typography, styled } from "@mui/material";
 import { EmailShareButton, FacebookShareButton, LinkedinShareButton, WhatsappShareButton } from "react-share";
+
+import colors from '../../assets/colors';
 
 export const PostContainer = styled(Container)`
   width: 80%;
@@ -128,4 +130,55 @@ export const PostRatingContainer = styled(Container)`
 
 export const PostRatingChip = styled(Chip)`
   margin-left: 12px;
+`;
+
+export const PostCommentsContainer = styled(Container)`
+  width: 100%;
+  height: auto;
+  padding: 24px 8px!important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const PostComments = styled(Container)`
+  width: 100%;
+  height: 240px;
+  margin-bottom: 8px;
+  padding: 8px!important;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const PostComment = styled(Container)`
+  width: 80%;
+  height: auto;
+  margin: 16px 0;
+  padding: 0!important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const PostCommentAvatar = styled(Avatar)`
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-color: ${colors.primary};
+`;
+
+export const PostCommentContent = styled(Typography)`
+`;
+
+export const PostNoComments = styled(Typography)`
+  margin: auto;
+  text-align: center;
+`;
+
+export const PostCommentsForm = styled(FormControl)`
+  min-width: 240px;
+  width: 50%;
 `;

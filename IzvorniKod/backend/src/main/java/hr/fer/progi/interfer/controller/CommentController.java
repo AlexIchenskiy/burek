@@ -41,7 +41,7 @@ public class CommentController {
         return commentPostService.post(authorizationHeader, commentDetails);
     }
 
-    @GetMapping("/getAll")
+    @PostMapping("/getAll")
     public ResponseEntity<?> getAllComments(@RequestBody @Valid ArticleGetDTO articleDetails,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
