@@ -1,14 +1,20 @@
 package hr.fer.progi.interfer.service.impl;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
+import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
 import hr.fer.progi.interfer.entity.Article;
 
 import hr.fer.progi.interfer.repository.ArticleRepository;
@@ -30,11 +36,46 @@ public class ArticleGetServiceImpl implements ArticleGetService {
     }
 
     @Override
-    public ResponseEntity<?> getAllArticles() {
+    public ResponseEntity<?> getAllArticles(ArticleSearchDTO articleDetails){
 
-        List<Article> articles = articleRepository.findAll();
+        //TODO dodaj ograničenja na minimalnu duljinu sadržaja pretraživanja (content na barem 3 znaka i sl.), pretraga po 1 slovu nema baš smisla
 
-        return ResponseEntity.status(HttpStatus.OK).body(articles);
+        Article article = new Article();
+        article.setTitle(articleDetails.getTitle());
+        article.setContent(articleDetails.getContent());       
+        article.setAuthor(articleDetails.getAuthor());
+        article.setCategory(articleDetails.getCategory());
+        article.setTags(articleDetails.getTags());
+        article.setModerated(false);
+        article.setPublished(true);
+
+
+        /*
+            category, autor, published: exact match
+            title, content, tags: contains
+         */
+        ExampleMatcher matcher = ExampleMatcher.matching()                                         
+                                                .withIgnoreNullValues()
+                                                .withIgnoreCase()
+                                                .withIgnorePaths("moderated", "published", "datePublished")//TODO maknut published, ignorira se zbog testiranja, ne želimo moći gledati neobjavljene članke 
+                                                .withMatcher("title", match -> match.contains())
+                                                .withMatcher("content", match -> match.contains())
+                                                .withMatcher("tags", match -> match.contains());
+    
+        Example<Article> example = Example.of(article, matcher);
+
+        int page = articleDetails.getPage();
+        if(!(page >= 1)){
+            page = 1;
+        }
+        page--;
+
+        Pageable pageRequest = PageRequest.of(page, 5, Sort.by("datePublished").descending()); //TODO1 dodat opciju za promjenu br elemenata na stranici (10, 15, ...)
+                                                                                                                        //TODO2 proširi sortiranje
+        Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
+
+        return ResponseEntity.status(HttpStatus.OK).body(pageResult.getContent());
+        
     }
 
 }

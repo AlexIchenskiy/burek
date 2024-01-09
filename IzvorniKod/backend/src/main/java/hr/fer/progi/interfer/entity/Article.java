@@ -6,10 +6,12 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,7 +30,10 @@ public class Article {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable=false)
+    private String author;
+
+    @Column(nullable=false)
     private Boolean published;
 
     @Column(nullable = false)
@@ -37,7 +42,10 @@ public class Article {
     @Column(nullable = false)
     private String tags;
 
-    @Column(nullable = false)
+    @Column(nullable=false)
+    private String category;
+    
+    @Column(nullable=false)
     private boolean moderated = false;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
