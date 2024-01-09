@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.controller;
 
+import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -9,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
-import hr.fer.progi.interfer.service.impl.UserDeleteServiceImpl;
-import hr.fer.progi.interfer.service.impl.UserLoginServiceImpl;
-import hr.fer.progi.interfer.service.impl.UserProfileServiceImpl;
-import hr.fer.progi.interfer.service.impl.UserRegisterServiceImpl;
+import hr.fer.progi.interfer.dto.request.UserPromotionDTO;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserDeleteServiceImpl userDeleteService;
+
+    @Autowired
+    private UserPromotionServiceImpl userPromotionService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails,
@@ -67,6 +68,14 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
         return userDeleteService.delete(authorizationHeader);
+    }
+
+    @PostMapping("/promote")
+    public ResponseEntity<?> promoteUser(@RequestBody @Valid UserPromotionDTO userDetails, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return ResponseEntity.badRequest().body("{ \"id\": number, \"rank\": string }");
+
+        return userPromotionService.promote(userDetails);
     }
 
 }
