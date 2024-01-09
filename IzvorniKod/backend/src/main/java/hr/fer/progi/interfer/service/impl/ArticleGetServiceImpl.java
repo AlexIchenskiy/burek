@@ -1,6 +1,7 @@
 package hr.fer.progi.interfer.service.impl;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +44,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         Article article = new Article();
         article.setTitle(articleDetails.getTitle());
         article.setContent(articleDetails.getContent());       
-        article.setAuthor(articleDetails.getAuthor());
+        //article.setAuthor(articleDetails.getAuthor());
         article.setCategory(articleDetails.getCategory());
         article.setTags(articleDetails.getTags());
         article.setModerated(false);

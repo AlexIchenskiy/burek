@@ -1,6 +1,5 @@
 package hr.fer.progi.interfer.dto.request;
 
-import hr.fer.progi.interfer.dto.request.enums.Category;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -15,14 +14,6 @@ public class ArticlePostDTO {
     @Size(max = 100, message = "{Size.max.article.title}")
     @Size(min = 3, message = "{Size.min.article.title}")
 	  private String title;
-
-    @Size(max = 100, message = "{Size.max.article.title}")
-    @Size(min = 3, message = "{Size.min.article.title}")
-    //promjeniti
-	  private String author;
-
-	  @Size(max = 100, message = "{Size.max.article.tags}")
-    private String title;
 
     @Size(max = 100, message = "{Size.max.article.tags}")
 

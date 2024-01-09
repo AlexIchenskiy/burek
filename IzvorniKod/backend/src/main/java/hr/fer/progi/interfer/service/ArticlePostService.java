@@ -5,6 +5,6 @@ import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 
 public interface ArticlePostService {
 
-    ResponseEntity<?> addArticle(ArticlePostDTO articleDetails);
+    ResponseEntity<?> addArticle(String authorizationHeader, ArticlePostDTO articleDetails);
 
 }

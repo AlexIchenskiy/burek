@@ -30,8 +30,9 @@ public class Article {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(nullable=false)
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private User author;
 
     @Column(nullable=false)
     private Boolean published;
