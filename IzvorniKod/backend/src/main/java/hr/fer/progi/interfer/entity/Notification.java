@@ -1,6 +1,5 @@
 package hr.fer.progi.interfer.entity;
 
-import java.sql.Timestamp;
 import java.util.Set;
 
 import jakarta.persistence.Column;
