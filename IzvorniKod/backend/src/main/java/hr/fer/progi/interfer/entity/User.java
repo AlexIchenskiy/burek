@@ -40,5 +40,11 @@ public class User {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
+    
+    @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> sentNotifications;
+  
+    @ManyToMany(mappedBy = "to")
+    private List<Notification> receivedNotifications;
 
 }
