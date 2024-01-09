@@ -15,45 +15,44 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtil {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
-	@Value("${jwt.secret}")
-	private String jwtSecret;
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
-	@Value("${jwt.expirationInMs}")
-	private int jwtExpirationMs;
-	
-	@Autowired
-	private UserRepository userRepository;
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
-	public String getEmailFromToken(String token) {
-		return Jwts.parser().setSigningKey(key()).parseClaimsJws(token).getBody().getSubject();
-	}
+    @Value("${jwt.expirationInMs}")
+    private int jwtExpirationMs;
 
-	private byte[] key() {
-		return jwtSecret.getBytes();
-	}
+    @Autowired
+    private UserRepository userRepository;
 
-	public boolean validateToken(String token) {
-		try {
-			Jwts.parser().setSigningKey(key()).parse(token);
-			return userRepository.existsByEmail(getEmailFromToken(token));
-			
-		} catch (MalformedJwtException e) {
-			logger.error("Invalid JWT token: {}", e.getMessage());
-		} catch (ExpiredJwtException e) {
-			logger.error("JWT token is expired: {}", e.getMessage());
-		} catch (UnsupportedJwtException e) {
-			logger.error("JWT token is unsupported: {}", e.getMessage());
-		} catch (IllegalArgumentException e) {
-			logger.error("JWT claims string is empty: {}", e.getMessage());
-		}
+    public String getEmailFromToken(String token) {
+        return Jwts.parser().setSigningKey(key()).parseClaimsJws(token).getBody().getSubject();
+    }
 
-		return false;
-	}
+    private byte[] key() {
+        return jwtSecret.getBytes();
+    }
 
-	
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(key()).parse(token);
+            return userRepository.existsByEmail(getEmailFromToken(token));
+
+        } catch (MalformedJwtException e) {
+            logger.error("Invalid JWT token: {}", e.getMessage());
+        } catch (ExpiredJwtException e) {
+            logger.error("JWT token is expired: {}", e.getMessage());
+        } catch (UnsupportedJwtException e) {
+            logger.error("JWT token is unsupported: {}", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            logger.error("JWT claims string is empty: {}", e.getMessage());
+        }
+
+        return false;
+    }
+
     public String generateToken(User user) {
         return Jwts.builder()
                 .setSubject(user.getEmail())
@@ -61,4 +60,5 @@ public class JwtUtil {
                 .setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, key()).compact();
     }
+
 }

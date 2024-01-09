@@ -1,52 +1,81 @@
 package hr.fer.progi.interfer.controller;
 
+import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.UserLoginDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
-import hr.fer.progi.interfer.service.UserProfileService;
-import hr.fer.progi.interfer.service.impl.UserLoginServiceImpl;
-import hr.fer.progi.interfer.service.impl.UserProfileServiceImpl;
-import hr.fer.progi.interfer.service.impl.UserRegisterServiceImpl;
+import hr.fer.progi.interfer.dto.request.UserPromotionDTO;
 import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-	
-	@Autowired
+
+    @Autowired
     private UserRegisterServiceImpl userRegisterService;
-	
-	@Autowired
+
+    @Autowired
     private UserLoginServiceImpl userLoginService;
-	
-	@Autowired
-	private UserProfileServiceImpl userProfileService;
-	
-	@PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+
+    @Autowired
+    private UserProfileServiceImpl userProfileService;
+
+    @Autowired
+    private UserDeleteServiceImpl userDeleteService;
+
+    @Autowired
+    private UserPromotionServiceImpl userPromotionService;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-    	return userRegisterService.register(userDetails);
+        return userRegisterService.register(userDetails);
     }
-	
-	@PostMapping("/login")
+
+    @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody @Valid UserLoginDTO userDetails, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-    	return userLoginService.login(userDetails);
+        return userLoginService.login(userDetails);
     }
-	
-	@GetMapping()
+
+    @GetMapping()
     public ResponseEntity<?> userProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-    	return userProfileService.profile(authorizationHeader);
+        return userProfileService.profile(authorizationHeader);
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<?> getUser(@RequestBody @Valid ArticleGetDTO userDetails, BindingResult bindingResult) {
+        return userProfileService.getUserById(userDetails);
+    }
+
+    @PostMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+            @RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
+        return userProfileService.edit(authorizationHeader, userDetails);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        return userDeleteService.delete(authorizationHeader);
+    }
+
+    @PostMapping("/promote")
+    public ResponseEntity<?> promoteUser(@RequestBody @Valid UserPromotionDTO userDetails, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return ResponseEntity.badRequest().body("{ \"id\": number, \"rank\": string }");
+
+        return userPromotionService.promote(userDetails);
     }
 
 }

@@ -10,6 +10,11 @@ const AuthProvider = ({ children }) => {
     setToken_(newToken);
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken_(null);
+  }
+
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
@@ -24,6 +29,7 @@ const AuthProvider = ({ children }) => {
     () => ({
       token,
       setToken,
+      logout,
     }),
     [token]
   );

@@ -6,20 +6,39 @@ import axios from 'axios';
 import { API_URL } from '../../assets/constants';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { Alert, Snackbar } from '@mui/material';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(true);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const { token } = useAuth();
 
+  const handleSnackbarClose = () => {
+    setOpenSnackbar(false);
+  };
+
+  const handleSnackbarOpen = (message) => {
+    setSnackbarMessage(message)
+    setOpenSnackbar(true);
+  };
+
   useEffect(() => {
+    setPostsLoading(true);
+
     axios.get(`${API_URL}/posts/getAll`)
       .then((res) => {
         console.log(res);
 
-        setPosts(res.data);
+        setPosts(res.data.reverse());
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        handleSnackbarOpen("Dogodila se greške tijekom učitavanja članaka.");
+        console.log(err)
+      })
+      .finally(() => setPostsLoading(false));
   }, []);
 
   return (
@@ -29,7 +48,7 @@ const Home = () => {
         <S.HomeDataPosts>
           {posts.length === 0 ?
             <S.HomeDataNoPosts variant='h3'>
-              Ovdje još nema objava :(
+              {postsLoading ? "Učitavam članke..." : "Ovdje još nema članaka :("}
             </S.HomeDataNoPosts> :
             posts.map((post) => (
               <S.HomeDataPost key={post.id} id={post.id}>
@@ -40,7 +59,7 @@ const Home = () => {
                     </S.HomeDataPostTitleLink>
                   </S.HomeDataPostTitle>
                   <S.HomeDataPostSubtitle>
-                    {new Date(post.datePublished).toUTCString()}
+                    {new Date(post.datePublished).toLocaleString('en-UK')}
                   </S.HomeDataPostSubtitle>
                 </S.HomeDataPostData>
               </S.HomeDataPost>
@@ -53,6 +72,15 @@ const Home = () => {
             </S.HomeDataButton>
           </Link>
         }
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleSnackbarClose}
+        >
+          <Alert onClose={handleSnackbarClose} severity="error">
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
       </S.HomeDataContainer>
     </>
   )

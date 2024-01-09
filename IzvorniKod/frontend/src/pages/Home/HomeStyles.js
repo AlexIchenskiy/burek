@@ -23,6 +23,7 @@ export const HomeDataPosts = styled(Container)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 export const HomeDataNoPosts = styled(Typography)`

@@ -71,6 +71,7 @@ export const HeaderNotifications = styled(Notifications)`
   height: 32px;
   margin-right: 8px;
   color: ${colors.primary};
+  cursor: pointer;
 `;
 
 export const HeaderAvatar = styled(Avatar)`

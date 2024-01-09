@@ -5,6 +5,9 @@ import "./loginform.css";
 import axios from "axios";
 import { API_URL } from "../../assets/constants";
 import useAuth from "../../hooks/useAuth";
+import { validateEmail } from "../../validators/validateEmail";
+import { validatePassword } from "../../validators/validatePassword";
+import { validateFields } from "../../validators/validateFields";
 
 const Login = () => {
     const { setToken } = useAuth();
@@ -16,9 +19,24 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSnackbarClose = () => {
         setOpenSnackbar(false);
+    };
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message)
+        setOpenSnackbar(true);
+    };
+
+    const validate = () => {
+        const fields = [
+            { value: email.trim(), validator: validateEmail, setError: setEmailError },
+            { value: password, validator: validatePassword, setError: setPasswordError },
+        ];
+
+        return validateFields(fields, handleSnackbarOpen);
     };
 
     const handleSubmit = (event) => {
@@ -27,15 +45,12 @@ const Login = () => {
         setEmailError(false);
         setPasswordError(false);
 
-        if (email === '') {
-            setEmailError(true);
-        }
-        if (password === '') {
-            setPasswordError(true);
-        }
-
         if (email && password) {
             console.log(email, password);
+
+            if (!validate()) return;
+
+            setLoading(true);
 
             axios.post(`${API_URL}/user/login`, { email: email, password: password })
                 .then((res) => {
@@ -43,17 +58,23 @@ const Login = () => {
                     navigate("/home", { replace: true });
                 })
                 .catch((err) => {
+                    console.log(err)
                     if (err.response) {
                         if (err.response.status === 401) {
                             setEmailError(true);
                             setPasswordError(true);
-                            setSnackbarMessage("Pogrešne podatke.");
+                            setSnackbarMessage("Pogrešni podatci.");
                             setOpenSnackbar(true)
                         } else {
-                            setSnackbarMessage(err + "");
-                            setOpenSnackbar(true);
+                            handleSnackbarOpen("U sustavu se dogodila neočekivana greška. Probajte ponovo ili kontaktirajte razvojni tim.");
                         }
+                    } else {
+                        console.log(err);
+                        handleSnackbarOpen("U sustavu se dogodila neočekivana greška. Probajte ponovo ili kontaktirajte razvojni tim.");
                     }
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     }
@@ -85,7 +106,7 @@ const Login = () => {
                         fullWidth
                         sx={{ mb: 3 }}
                     />
-                    <Button variant="outlined" type="submit">Prijava</Button>
+                    <Button variant="outlined" type="submit" disabled={loading}>{loading ? "Prijavljivanje..." : "Prijava"}</Button>
                     <small>Trebate novi račun? <Link to="/register">Stvorite ga ovdje</Link></small>
                 </form>
             </div>
