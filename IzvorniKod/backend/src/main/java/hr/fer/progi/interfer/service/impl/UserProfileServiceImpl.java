@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
-import hr.fer.progi.interfer.dto.response.AuthTokenDTO;
 import hr.fer.progi.interfer.dto.response.UserDetailsDTO;
+import hr.fer.progi.interfer.dto.response.UserProfileDTO;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.UserRepository;
@@ -36,11 +35,21 @@ public class UserProfileServiceImpl implements UserProfileService {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
-            UserDetailsDTO userDto = new UserDetailsDTO();
+            UserProfileDTO userDto = new UserProfileDTO();
             userDto.setFirstname(user.getFirstName());
             userDto.setLastname(user.getLastName());
             userDto.setEmail(user.getEmail());
             userDto.setRole(user.getRole());
+            userDto.setSavedArticles(user.getArticles().stream()
+            		.filter(a -> !a.getPublished())
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.toList());
+            userDto.setPublishedArticles(user.getArticles().stream()
+            		.filter(a -> a.getPublished())
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.toList());
+            userDto.setSentNotifications(user.getSentNotifications());
+            userDto.setReceivedNotifications(user.getReceivedNotifications());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
@@ -49,16 +58,20 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public ResponseEntity<?> getUserById(@Valid ArticleGetDTO userDetails) {
+    public ResponseEntity<?> getUserById(Long id) {
 
         try {
-            User user = userRepository.findById(userDetails.getId()).get();
-
+            User user = userRepository.findById(id).get();
+            
             UserDetailsDTO userDto = new UserDetailsDTO();
             userDto.setFirstname(user.getFirstName());
             userDto.setLastname(user.getLastName());
             userDto.setEmail(user.getEmail());
             userDto.setRole(user.getRole());
+            userDto.setArticles(user.getArticles().stream()
+            		.filter(a -> a.getPublished())
+            		.map(a -> new UserDetailsDTO.ArticleDTO(a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.toList());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
 

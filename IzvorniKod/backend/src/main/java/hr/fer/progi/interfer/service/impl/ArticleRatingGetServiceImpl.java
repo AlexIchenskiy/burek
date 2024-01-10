@@ -1,6 +1,5 @@
 package hr.fer.progi.interfer.service.impl;
 
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.response.AllRatingsDTO;
 import hr.fer.progi.interfer.entity.ArticleRating;
 import hr.fer.progi.interfer.entity.User;
@@ -30,13 +29,13 @@ public class ArticleRatingGetServiceImpl implements ArticleRatingGetService {
     UserRepository userRepository;
 
     @Override
-    public ResponseEntity<?> getArticleRatings(ArticleGetDTO articleDetails) {
-        if (articleRepository.findById(articleDetails.getId()).isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(articleDetails);
+    public ResponseEntity<?> getArticleRatings(Long id) {
+        if (articleRepository.findById(id).isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id);
 
         AllRatingsDTO allRatings = new AllRatingsDTO();
 
-        for (ArticleRating articleRating : articleRatingRepository.findByArticleId(articleDetails.getId())) {
+        for (ArticleRating articleRating : articleRatingRepository.findByArticleId(id)) {
             switch (articleRating.getRating()) {
                 case 1 -> allRatings.setRating1(allRatings.getRating1() + 1);
                 case 2 -> allRatings.setRating2(allRatings.getRating2() + 1);
@@ -50,7 +49,7 @@ public class ArticleRatingGetServiceImpl implements ArticleRatingGetService {
     }
 
     @Override
-    public ResponseEntity<?> getArticleRating(ArticleGetDTO articleDetails) {
+    public ResponseEntity<?> getArticleRating(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail((String) authentication.getPrincipal());
 
@@ -58,15 +57,14 @@ public class ArticleRatingGetServiceImpl implements ArticleRatingGetService {
         // prijavljen - ionako nema pristup, ali Anton uvijek biva paranoičan
         if (user == null)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
-        if (articleRepository.findById(articleDetails.getId()).isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(articleDetails);
+        if (articleRepository.findById(id).isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id);
 
-        Optional<ArticleRating> articleRating = articleRatingRepository.findByUserIdAndArticleId(user.getId(),
-                articleDetails.getId());
+        Optional<ArticleRating> articleRating = articleRatingRepository.findByUserIdAndArticleId(user.getId(), id);
 
         if (articleRating.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(String.format("{\"articleId\":%d,\"userId\":%d}", articleDetails.getId(), user.getId()));
+                    .body(String.format("{\"articleId\":%d,\"userId\":%d}", id, user.getId()));
 
         return ResponseEntity.status(HttpStatus.OK).body(articleRating.get());
     }

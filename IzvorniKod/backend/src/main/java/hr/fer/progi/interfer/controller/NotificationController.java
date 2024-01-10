@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -29,12 +30,17 @@ public class NotificationController {
 	
 	@GetMapping("/get")
     public ResponseEntity<?> getNotifications(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        return notificationGetService.get(authorizationHeader);
+        return notificationGetService.getAll(authorizationHeader);
     }
 	
 	@GetMapping("/get/sent")
     public ResponseEntity<?> getSentNotifications(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        return notificationGetService.get(authorizationHeader);
+        return notificationGetService.getAllSent(authorizationHeader);
+    }
+	
+	@GetMapping("/get/{id}")
+    public ResponseEntity<?> getNotification(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @PathVariable Long id) {
+        return notificationGetService.get(authorizationHeader, id);
     }
 	
 	@PostMapping("/send")

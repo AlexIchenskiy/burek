@@ -38,6 +38,9 @@ public class User {
     private boolean enabled = false;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articles;
+    
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
     
     @OneToMany(mappedBy = "from", cascade = CascadeType.ALL, orphanRemoval = true)

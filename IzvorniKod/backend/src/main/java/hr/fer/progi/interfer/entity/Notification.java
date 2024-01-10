@@ -46,5 +46,8 @@ public class Notification {
 	 
 	@Column(nullable = false, columnDefinition = "TEXT")
 	private String content;
+	
+	@Column(nullable = false)
+	private Boolean seen;
 
 }

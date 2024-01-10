@@ -2,6 +2,7 @@ package hr.fer.progi.interfer.dto.response;
 
 import java.util.List;
 
+import hr.fer.progi.interfer.entity.Notification;
 import hr.fer.progi.interfer.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDetailsDTO {
+public class UserProfileDTO {
 	
 	@Getter
 	@Setter
@@ -34,6 +35,13 @@ public class UserDetailsDTO {
 
     private UserRole role;
     
-    private List<ArticleDTO> articles;
+    private List<ArticleDTO> savedArticles;
     
+    private List<ArticleDTO> publishedArticles;
+    
+    private List<Notification> sentNotifications;
+    
+    private List<Notification> receivedNotifications;
+
 }
+

@@ -1,6 +1,5 @@
 package hr.fer.progi.interfer.service.impl;
 
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.repository.ArticleRatingRepository;
 import hr.fer.progi.interfer.repository.ArticleRepository;
@@ -26,18 +25,18 @@ public class ArticleRatingDeleteServiceImpl implements ArticleRatingDeleteServic
     ArticleRepository articleRepository;
 
     @Override
-    public ResponseEntity<?> deleteArticleRating(ArticleGetDTO articleDetails) {
+    public ResponseEntity<?> deleteArticleRating(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail((String) authentication.getPrincipal());
 
         if (user == null)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
-        if (articleRepository.findById(articleDetails.getId()).isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(articleDetails);
+        if (articleRepository.findById(id).isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id);
 
         try {
             articleRatingRepository
-                    .findByUserIdAndArticleId(user.getId(), articleDetails.getId())
+                    .findByUserIdAndArticleId(user.getId(), id)
                     .ifPresent(articleRating -> articleRatingRepository.delete(articleRating));
 
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");

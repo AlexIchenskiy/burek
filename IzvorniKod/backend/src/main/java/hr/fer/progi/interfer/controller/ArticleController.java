@@ -8,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
 import hr.fer.progi.interfer.service.impl.ArticlePostServiceImpl;
@@ -48,12 +47,12 @@ public class ArticleController {
         return articlePostService.addArticle(authorizationHeader, articleDetails);
     }
   
-	@GetMapping("/id")
-    public ResponseEntity<?> getArticle(@RequestBody @Valid ArticleGetDTO articleDetails, BindingResult bindingResult) {
+	@GetMapping("/{id}")
+    public ResponseEntity<?> getArticle(@PathVariable Long id, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-        return articleGetService.getArticle(articleDetails);
+        return articleGetService.getArticle(id);
     }
 
 	@GetMapping("/getAll")
@@ -75,23 +74,17 @@ public class ArticleController {
     }
 
     // Korisnik želi vidjeti sve ocjene na nekoj objavi
-    @PostMapping("/allRatings")
-    public ResponseEntity<?> getArticleRatings(@RequestBody @Valid ArticleGetDTO articleDetails,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return ResponseEntity.badRequest().body(bindingResult.toString());
+    @GetMapping("/allRatings/{id}")
+    public ResponseEntity<?> getArticleRatings(@PathVariable Long id) {
 
-        return articleRatingGetService.getArticleRatings(articleDetails);
+        return articleRatingGetService.getArticleRatings(id);
     }
 
     // Korisnik želi vidjeti ocjenu koju je ostavio
-    @PostMapping("/getRating")
-    public ResponseEntity<?> getArticleRating(@RequestBody @Valid ArticleGetDTO articleDetails,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return ResponseEntity.badRequest().body(bindingResult.toString());
-
-        return articleRatingGetService.getArticleRating(articleDetails);
+    @GetMapping("/getRating/{id}")
+    public ResponseEntity<?> getArticleRating(@PathVariable Long id) {
+    	
+        return articleRatingGetService.getArticleRating(id);
     }
 
     // Korisnik želi ostaviti svoju ocjenu na članak
@@ -105,13 +98,10 @@ public class ArticleController {
     }
 
     // Korisnik želi ukloniti svoju ocjenu sa članka
-    @DeleteMapping("/rating")
-    public ResponseEntity<?> deleteArticleRating(@RequestBody @Valid ArticleGetDTO articleDetails,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return ResponseEntity.badRequest().body(bindingResult.toString());
+    @DeleteMapping("/rating/{id}")
+    public ResponseEntity<?> deleteArticleRating(@PathVariable Long id) {
 
-        return articleRatingDeleteService.deleteArticleRating(articleDetails);
+        return articleRatingDeleteService.deleteArticleRating(id);
     }
 
 }

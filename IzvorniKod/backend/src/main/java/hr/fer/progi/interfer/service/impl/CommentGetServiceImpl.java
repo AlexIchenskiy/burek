@@ -9,14 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.response.CommentGetDTO;
 import hr.fer.progi.interfer.entity.Article;
 import hr.fer.progi.interfer.entity.Comment;
 import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.repository.CommentRepository;
 import hr.fer.progi.interfer.service.CommentGetService;
-import jakarta.validation.Valid;
 
 @Service
 public class CommentGetServiceImpl implements CommentGetService {
@@ -28,10 +26,10 @@ public class CommentGetServiceImpl implements CommentGetService {
     private ArticleRepository articleRepository;
 
     @Override
-    public ResponseEntity<?> getAll(@Valid ArticleGetDTO articleDetails) {
+    public ResponseEntity<?> getAll(Long id) {
 
         try {
-            Article article = articleRepository.findById(articleDetails.getId()).get();
+            Article article = articleRepository.findById(id).get();
 
             List<CommentGetDTO> allComments = commentRepository.findByArticle(article)
                     .stream()

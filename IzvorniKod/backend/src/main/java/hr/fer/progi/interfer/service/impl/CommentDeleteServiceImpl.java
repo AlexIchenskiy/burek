@@ -8,14 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.entity.Comment;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.CommentRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.CommentDeleteService;
-import jakarta.validation.Valid;
 
 @Service
 public class CommentDeleteServiceImpl implements CommentDeleteService {
@@ -30,7 +28,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
     private CommentRepository commentRepository;
 
     @Override
-    public ResponseEntity<?> delete(String authorizationHeader, @Valid ArticleGetDTO commentDetails) {
+    public ResponseEntity<?> delete(String authorizationHeader, Long id) {
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
 
@@ -38,7 +36,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
 
         // Obzirom da repozitorij vraća Optional<Comment> vrijednost, mislim da je poželjnije odmah provjeravati njeno
         // postojanje nego oslanjati se na Exception
-        Optional<Comment> comment = commentRepository.findById(commentDetails.getId());
+        Optional<Comment> comment = commentRepository.findById(id);
         if (comment.isEmpty())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong comment ID");
 

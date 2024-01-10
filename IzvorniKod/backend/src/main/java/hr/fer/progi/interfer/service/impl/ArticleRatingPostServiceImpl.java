@@ -1,6 +1,5 @@
 package hr.fer.progi.interfer.service.impl;
 
-import hr.fer.progi.interfer.dto.request.ArticleGetDTO;
 import hr.fer.progi.interfer.dto.request.ArticleRatingPostDTO;
 import hr.fer.progi.interfer.entity.ArticleRating;
 import hr.fer.progi.interfer.entity.User;
@@ -35,7 +34,7 @@ public class ArticleRatingPostServiceImpl implements ArticleRatingPostService {
         if (user == null)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
         if (articleRepository.findById(ratingDetails.getArticleId()).isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArticleGetDTO(ratingDetails.getArticleId()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ratingDetails.getArticleId());
 
         try {
             articleRatingRepository

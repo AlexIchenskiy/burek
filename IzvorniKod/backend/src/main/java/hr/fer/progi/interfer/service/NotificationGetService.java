@@ -4,6 +4,10 @@ import org.springframework.http.ResponseEntity;
 
 public interface NotificationGetService {
 	
-	ResponseEntity<?> get(String authorizationHeader);
+	ResponseEntity<?> getAll(String authorizationHeader);
+
+	ResponseEntity<?> getAllSent(String authorizationHeader);
+
+	ResponseEntity<?> get(String authorizationHeader, Long id);
 
 }
