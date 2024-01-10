@@ -47,7 +47,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             newArticle.setCategory(articleDetails.getCategory());
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
-            System.out.println("Saved Article");
+
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Added article");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

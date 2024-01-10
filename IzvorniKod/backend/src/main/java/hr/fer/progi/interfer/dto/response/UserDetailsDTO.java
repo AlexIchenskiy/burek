@@ -20,6 +20,7 @@ public class UserDetailsDTO {
 	@Setter
 	@AllArgsConstructor
 	public static class ArticleDTO {
+		private Long id;
 		private String title;
 	    private String tags;
 		private String content;

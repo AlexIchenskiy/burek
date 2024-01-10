@@ -42,11 +42,11 @@ public class UserProfileServiceImpl implements UserProfileService {
             userDto.setRole(user.getRole());
             userDto.setSavedArticles(user.getArticles().stream()
             		.filter(a -> !a.getPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
             		.toList());
             userDto.setPublishedArticles(user.getArticles().stream()
             		.filter(a -> a.getPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
             		.toList());
             userDto.setSentNotifications(user.getSentNotifications());
             userDto.setReceivedNotifications(user.getReceivedNotifications());
@@ -70,7 +70,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             userDto.setRole(user.getRole());
             userDto.setArticles(user.getArticles().stream()
             		.filter(a -> a.getPublished())
-            		.map(a -> new UserDetailsDTO.ArticleDTO(a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserDetailsDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
             		.toList());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
