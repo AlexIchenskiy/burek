@@ -31,6 +31,8 @@ public class UserController {
     @Autowired
     private UserPromotionServiceImpl userPromotionService;
 
+    @Autowired UserBanServiceImpl userBanService;
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails,
             BindingResult bindingResult) {
@@ -75,6 +77,16 @@ public class UserController {
             return ResponseEntity.badRequest().body("{ \"id\": number, \"rank\": string }");
 
         return userPromotionService.promote(userDetails);
+    }
+
+    @PostMapping("/ban/{id}")
+    public ResponseEntity<?> banUser(@PathVariable long id) {
+        return userBanService.ban(id);
+    }
+
+    @PostMapping("/unban/{id}")
+    public ResponseEntity<?> unbanUser(@PathVariable long id) {
+        return userBanService.unban(id);
     }
 
 }
