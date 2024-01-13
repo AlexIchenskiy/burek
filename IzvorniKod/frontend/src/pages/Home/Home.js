@@ -28,15 +28,15 @@ const Home = () => {
   useEffect(() => {
     setPostsLoading(true);
 
-    axios.get(`${API_URL}/posts/getAll`)
+    axios.post(`${API_URL}/posts/getAll`, {})
       .then((res) => {
         console.log(res);
 
-        setPosts(res.data.reverse());
+        setPosts(res.data);
       })
       .catch((err) => {
-        handleSnackbarOpen("Dogodila se greške tijekom učitavanja članaka.");
-        console.log(err)
+        handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
+        console.log(err);
       })
       .finally(() => setPostsLoading(false));
   }, []);
@@ -49,7 +49,8 @@ const Home = () => {
           {posts.length === 0 ?
             <S.HomeDataNoPosts variant='h3'>
               {postsLoading ? "Učitavam članke..." : "Ovdje još nema članaka :("}
-            </S.HomeDataNoPosts> :
+            </S.HomeDataNoPosts>
+            :
             posts.map((post) => (
               <S.HomeDataPost key={post.id} id={post.id}>
                 <S.HomeDataPostData>

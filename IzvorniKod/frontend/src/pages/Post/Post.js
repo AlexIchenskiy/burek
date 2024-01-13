@@ -94,11 +94,7 @@ const Post = () => {
       }
 
       setTimeout(() => {
-        axios.post(`${API_URL}/posts/allRatings`, { id: id }, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        axios.get(`${API_URL}/posts/allRatings/${id}`)
           .then((res) => {
             setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
               (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5)));
@@ -130,7 +126,7 @@ const Post = () => {
         });
 
       setTimeout(() => {
-        axios.post(`${API_URL}/comment/getAll`, { id: id })
+        axios.get(`${API_URL}/comment/getAll/${id}`,)
           .then((res) => setComments([...res.data].reverse()))
           .catch((err) => {
             console.log(err);
@@ -149,7 +145,7 @@ const Post = () => {
     setContentLoading(true);
     setCommentsLoading(true);
 
-    axios.post(`${API_URL}/posts/id`, { id: id })
+    axios.get(`${API_URL}/posts/${id}`)
       .then((res) => {
         console.log(res);
 
@@ -170,7 +166,7 @@ const Post = () => {
       })
       .finally(() => setContentLoading(false));
 
-    axios.post(`${API_URL}/posts/allRatings`, { id: id })
+    axios.get(`${API_URL}/posts/allRatings/${id}`)
       .then((res) => setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
         (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5))))
       .catch((err) => {
@@ -179,7 +175,7 @@ const Post = () => {
       });
 
     if (token) {
-      axios.post(`${API_URL}/posts/getRating`, { id: id }, {
+      axios.get(`${API_URL}/posts/getRating/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -194,7 +190,7 @@ const Post = () => {
         });
     }
 
-    axios.post(`${API_URL}/comment/getAll`, { id: id })
+    axios.get(`${API_URL}/comment/getAll/${id}`)
       .then((res) => setComments([...res.data].reverse()))
       .catch((err) => {
         console.log(err);

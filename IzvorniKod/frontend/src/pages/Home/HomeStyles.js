@@ -34,7 +34,7 @@ export const HomeDataNoPosts = styled(Typography)`
 export const HomeDataPost = styled(Container)`
   width: 65%;
   min-width: 240px;
-  height: 96px;
+  min-height: 96px;
   margin: 16px;
   padding: 16px;
   display: flex;
