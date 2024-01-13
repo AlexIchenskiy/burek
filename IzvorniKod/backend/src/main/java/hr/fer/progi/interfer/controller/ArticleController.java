@@ -48,14 +48,11 @@ public class ArticleController {
     }
   
 	@GetMapping("/{id}")
-    public ResponseEntity<?> getArticle(@PathVariable Long id, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(bindingResult.toString());
-        }
+    public ResponseEntity<?> getArticle(@PathVariable Long id) {
         return articleGetService.getArticle(id);
     }
 
-	@GetMapping("/getAll")
+	@PostMapping("/getAll")
     public ResponseEntity<?> getAllArticles(@RequestBody @Valid ArticleSearchDTO articleDetails, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());

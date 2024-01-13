@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.entity;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -46,6 +47,9 @@ public class Notification {
 	 
 	@Column(nullable = false, columnDefinition = "TEXT")
 	private String content;
+	
+	@Column(nullable = false)
+    private Timestamp dateSent;
 	
 	@Column(nullable = false)
 	private Boolean seen;

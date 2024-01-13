@@ -2,7 +2,6 @@ package hr.fer.progi.interfer.dto.response;
 
 import java.util.List;
 
-import hr.fer.progi.interfer.entity.Notification;
 import hr.fer.progi.interfer.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,10 +38,6 @@ public class UserProfileDTO {
     private List<ArticleDTO> savedArticles;
     
     private List<ArticleDTO> publishedArticles;
-    
-    private List<Notification> sentNotifications;
-    
-    private List<Notification> receivedNotifications;
 
 }
 

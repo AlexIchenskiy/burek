@@ -12,5 +12,7 @@ public interface UserProfileService {
     ResponseEntity<?> getUserById(Long id);
 
     ResponseEntity<?> edit(String authorizationHeader, @Valid UserRegistrationDTO userDetails);
+    
+    ResponseEntity<?> chackUser(String mail);
 
 }
