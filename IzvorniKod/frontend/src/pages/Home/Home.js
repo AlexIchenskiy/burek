@@ -25,6 +25,22 @@ const Home = () => {
     setOpenSnackbar(true);
   };
 
+  const handleSearch = (searchText) => {
+    axios.post(`${API_URL}/posts/getAll`, {
+      title: searchText
+    })
+      .then((res) => {
+        console.log(res);
+
+        setPosts(res.data);
+      })
+      .catch((err) => {
+        handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
+        console.log(err);
+      })
+      .finally(() => setPostsLoading(false));
+  }
+
   useEffect(() => {
     setPostsLoading(true);
 
@@ -43,7 +59,7 @@ const Home = () => {
 
   return (
     <>
-      <Header isSearchVisible={false} />
+      <Header isSearchVisible={true} onSearch={handleSearch} />
       <S.HomeDataContainer>
         <S.HomeDataPosts>
           {posts.length === 0 ?

@@ -36,6 +36,7 @@ export const HeaderSearch = styled(Search)`
   height: 32px;
   margin-right: 8px;
   color: ${colors.primary};
+  cursor: pointer;
 `;
 
 export const HeaderSearchBarContainer = styled(Box)`
