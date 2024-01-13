@@ -8,12 +8,13 @@ import useAuth from '../../hooks/useAuth';
 const DEFAULT_SETTINGS = { login: 'Prijava', register: 'Novi korisnik' };
 const USER_SETTINGS = { home: 'Početna', editor: 'Nova objava', logout: 'Odjava' };
 
-const Header = ({ isSearchVisible = true }) => {
+const Header = ({ isSearchVisible = true, onSearch }) => {
   const { token } = useAuth();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [searchText, setSearchText] = useState('');
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -46,8 +47,8 @@ const Header = ({ isSearchVisible = true }) => {
           <S.HeaderLogo />
         </Link>
         {isSearchVisible && <S.HeaderSearchBarContainer>
-          <S.HeaderSearch />
-          <S.HeaderSearchBar size='small' />
+          <S.HeaderSearch onClick={() => onSearch(searchText)} />
+          <S.HeaderSearchBar size='small' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
         </S.HeaderSearchBarContainer>}
         <S.HeaderUserContainer>
           <S.HeaderNotifications onClick={handleToggleNotificationsMenu} />
