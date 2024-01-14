@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.controller;
 
+import hr.fer.progi.interfer.dto.request.UserEditDTO;
 import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -60,7 +61,7 @@ public class UserController {
 
     @PostMapping("/edit")
     public ResponseEntity<?> editUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
-            @RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
+            @RequestBody @Valid UserEditDTO userDetails, BindingResult bindingResult) {
         return userProfileService.edit(authorizationHeader, userDetails);
     }
 

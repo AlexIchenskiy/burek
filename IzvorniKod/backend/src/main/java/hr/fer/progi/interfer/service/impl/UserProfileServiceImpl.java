@@ -2,6 +2,7 @@ package hr.fer.progi.interfer.service.impl;
 
 import java.util.NoSuchElementException;
 
+import hr.fer.progi.interfer.dto.request.UserEditDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,7 +83,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public ResponseEntity<?> edit(String authorizationHeader, @Valid UserRegistrationDTO userDetails) {
+    public ResponseEntity<?> edit(String authorizationHeader, @Valid UserEditDTO userDetails) {
         EmailDomainValidator validator = new EmailDomainValidator();
         if (!validator.isValid(userDetails.getEmail()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
@@ -92,7 +93,6 @@ public class UserProfileServiceImpl implements UserProfileService {
             user.setFirstName(userDetails.getFirstname());
             user.setLastName(userDetails.getLastname());
             user.setEmail(userDetails.getEmail());
-            user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
             userRepository.save(user);
 
             return ResponseEntity.status(HttpStatus.OK).body("Profile edited successfully");
