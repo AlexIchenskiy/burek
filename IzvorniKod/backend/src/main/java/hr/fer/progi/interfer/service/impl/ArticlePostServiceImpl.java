@@ -45,7 +45,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             newArticle.setPublished(articleDetails.isPosted());
             newArticle.setDatePublished(new Timestamp(System.currentTimeMillis()));
             newArticle.setTags(articleDetails.getTags());
-            newArticle.setCategory(category);// FIX kod spajanja frontenda: vratiti articleDetails.getCategory() za spremanje kategorije 
+            newArticle.setCategory(articleDetails.getCategory());// FIX kod spajanja frontenda: vratiti articleDetails.getCategory() za spremanje kategorije 
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 

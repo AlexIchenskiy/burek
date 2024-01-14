@@ -34,7 +34,14 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         }
         Article a = article.get();
         ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
-        	a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()
+        	a.getId(), 
+            a.getTitle(), 
+            a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), 
+            a.getTags(), 
+            a.getContent(), 
+            a.getPublished(), 
+            a.getDatePublished(), 
+            a.getCategory()
         );
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
