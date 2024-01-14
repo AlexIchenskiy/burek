@@ -46,7 +46,7 @@ public class CommentController {
         return commentGetService.getAll(id);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @PathVariable Long id) {
 
         return commentDeleteService.delete(authorizationHeader, id);

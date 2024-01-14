@@ -68,11 +68,9 @@ const Post = () => {
       setSetting(true);
 
       if (val === null) {
-        axios.delete(`${API_URL}/posts/rating`, {
+        axios.delete(`${API_URL}/posts/rating/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }, data: {
-            id: id
           }
         }
         )
