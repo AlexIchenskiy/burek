@@ -280,7 +280,8 @@ const Post = () => {
                       }}
                       onClick={() => navigate(`/profile/${comment.authorId}`)}
                     >
-                      {comment.author.trim().includes(" ") ? comment.author.trim().split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '') : comment.author.trim()[0]}
+                      {console.log(comment.author)}
+                      {comment.author.trim().includes(" ") ? comment.author.trim().split('\\s+').reduce((acc, name) => acc + name[0].toUpperCase(), '') : comment.author.trim()[0]}
                     </S.PostCommentAvatar>
                   </Tooltip>
                   <S.PostCommentContent>

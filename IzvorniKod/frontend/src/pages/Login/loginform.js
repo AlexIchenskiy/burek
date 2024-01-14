@@ -52,7 +52,7 @@ const Login = () => {
 
             setLoading(true);
 
-            axios.post(`${API_URL}/user/login`, { email: email, password: password })
+            axios.post(`${API_URL}/user/login`, { email: email.trim(), password: password })
                 .then((res) => {
                     setToken(res.data.token);
                     navigate("/home", { replace: true });
