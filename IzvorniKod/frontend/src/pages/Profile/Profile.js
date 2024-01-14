@@ -22,8 +22,6 @@ const Profile = () => {
     email: 'I email...',
   });
 
-  const [authUser, setAuthUser] = useState(null);
-
   const [posts, setPosts] = useState(null);
   const [editedUser, setEditedUser] = useState({ ...user });
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -57,15 +55,17 @@ const Profile = () => {
 
           setUser(res.data);
           setEditedUser({ ...res.data });
-        })
-        .catch((err) => console.log(err));
+          setisCurrentUserOwner(false);
 
-      axios
-        .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
-        .then((res) => {
-          console.log(res);
+          axios
+            .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+            .then((res1) => {
+              console.log(res1);
 
-          setAuthUser(res.data);
+              setisCurrentUserOwner(token && res1.data && res.data.email === res1.data.email);
+              setPosts(res1.data.savedArticles);
+            })
+            .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
     } else if (token) {
@@ -151,11 +151,6 @@ const Profile = () => {
         .catch((err) => handleSnackbarOpen('Dogodila se greška tijekom brisanja profila.'));
     }
   }
-
-  useEffect(() => {
-    setisCurrentUserOwner(!id || (token && authUser && user.email === authUser.email));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, authUser]);
 
   return (
     <>
@@ -243,9 +238,9 @@ const Profile = () => {
           </S.ProfileCard>
         </S.ProfileContainer>
       )}
-      <S.ProfileContainer>
-        {
-          posts && !isEditing && <S.ProfileCard>
+      {
+        posts && !isEditing && isCurrentUserOwner && <S.ProfileContainer>
+          <S.ProfileCard>
             {token && isCurrentUserOwner && (
               <>
                 <S.ProfilePostTitle>
@@ -272,8 +267,8 @@ const Profile = () => {
               </>
             )}
           </S.ProfileCard>
-        }
-      </S.ProfileContainer>
+        </S.ProfileContainer>
+      }
       <S.ProfileSnackbar
         open={openSnackbar}
         autoHideDuration={6000}
