@@ -61,6 +61,14 @@ public class ArticleController {
 	 	return articleGetService.getAllArticles(articleDetails);
 	}
 
+    @PostMapping("/update")
+    public ResponseEntity<?> updateArticle(@RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
+                if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articlePostService.updateArticle(articleDetails);
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteArticle(@RequestBody @Valid ArticleDeleteDTO articleDetails,
             BindingResult bindingResult) {
