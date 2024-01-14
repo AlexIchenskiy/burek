@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
 import hr.fer.progi.interfer.dto.response.UserDetailsDTO;
 import hr.fer.progi.interfer.dto.response.UserProfileDTO;
 import hr.fer.progi.interfer.entity.User;
