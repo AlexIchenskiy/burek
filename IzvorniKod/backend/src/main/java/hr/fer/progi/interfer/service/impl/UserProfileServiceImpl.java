@@ -3,6 +3,7 @@ package hr.fer.progi.interfer.service.impl;
 import java.util.NoSuchElementException;
 
 import hr.fer.progi.interfer.dto.request.UserEditDTO;
+import hr.fer.progi.interfer.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,11 +43,11 @@ public class UserProfileServiceImpl implements UserProfileService {
             userDto.setRole(user.getRole());
             userDto.setSavedArticles(user.getArticles().stream()
             		.filter(a -> !a.getPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory(), a.getDatePublished()))
             		.toList());
             userDto.setPublishedArticles(user.getArticles().stream()
             		.filter(a -> a.getPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory(), a.getDatePublished()))
             		.toList());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
