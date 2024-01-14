@@ -32,7 +32,11 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         if (article.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(article);
+        Article a = article.get();
+        ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
+        	a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @Override

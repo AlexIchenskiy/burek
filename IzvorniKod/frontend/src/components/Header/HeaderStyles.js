@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export const HeaderAppBar = styled(AppBar)`
   box-shadow: none;
+  background-color: white;
   position: relative;
 `;
 

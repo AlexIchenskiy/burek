@@ -16,6 +16,7 @@ import { HourglassBottom, Send } from '@mui/icons-material';
 import { validateFields } from '../../validators/validateFields';
 import { validateComment } from '../../validators/validateComment';
 import { roundToTwo } from '../../util/roundToTwo';
+import generateUniqueGradient from '../../util/colorUtil';
 
 const COPY_DEFAULT_TOOLTIP = 'Kopiraj';
 
@@ -149,7 +150,7 @@ const Post = () => {
       .then((res) => {
         console.log(res);
 
-        setTitle(res.data.title);
+        setTitle(res.data.title || '');
         setShareText(`Pročitajte ${res.data.title} na ovom linku:\n${PAGE_URL}/post/${id}`);
 
         if (res.data.content) {
@@ -250,7 +251,7 @@ const Post = () => {
               type='text'
               value={comment}
               disabled={!token || sending}
-              onChange={(e) => { setComment(e.target.value) }}
+              onChange={(e) => { setComment(e.target.value || '') }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -271,7 +272,13 @@ const Post = () => {
               comments.map((comment) => (
                 <S.PostComment key={comment.id}>
                   <Tooltip title={comment.author}>
-                    <S.PostCommentAvatar>
+                    <S.PostCommentAvatar
+                      sx={{
+                        backgroundImage: `url('https://source.boringavatars.com/marble/120/colors=${generateUniqueGradient(comment.author)}')`,
+                        backgroundSize: 'cover',
+                        color: '#fff',
+                      }}
+                    >
                       {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
                     </S.PostCommentAvatar>
                   </Tooltip>

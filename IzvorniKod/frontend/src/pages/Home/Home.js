@@ -26,13 +26,15 @@ const Home = () => {
   };
 
   const handleSearch = (searchText) => {
+    setPostsLoading(true);
+
     axios.post(`${API_URL}/posts/getAll`, {
       title: searchText
     })
       .then((res) => {
         console.log(res);
 
-        setPosts(res.data);
+        setPosts(res.data.articlePage);
       })
       .catch((err) => {
         handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
@@ -48,7 +50,7 @@ const Home = () => {
       .then((res) => {
         console.log(res);
 
-        setPosts(res.data);
+        setPosts(res.data.articlePage);
       })
       .catch((err) => {
         handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
@@ -76,7 +78,8 @@ const Home = () => {
                     </S.HomeDataPostTitleLink>
                   </S.HomeDataPostTitle>
                   <S.HomeDataPostSubtitle>
-                    {new Date(post.datePublished).toLocaleString('en-UK')}
+                    <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
+                    <div>{`by ${post.author}`}</div>
                   </S.HomeDataPostSubtitle>
                 </S.HomeDataPostData>
               </S.HomeDataPost>
