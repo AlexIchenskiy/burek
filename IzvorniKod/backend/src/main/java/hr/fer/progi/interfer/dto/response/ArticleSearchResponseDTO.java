@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.dto.response;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -20,11 +21,13 @@ public class ArticleSearchResponseDTO {
 	@AllArgsConstructor
     public static class ArticleDTO {
 
+    	private long id;
         private String title;
         private String author;
         private String tags;
         private String content;
         private boolean posted;
+        private Timestamp datePublished;
 	    private String category;
 	}
 

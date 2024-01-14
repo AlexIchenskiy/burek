@@ -89,7 +89,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
         
         response.setArticlePage(articlePage.stream()
-                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getCategory()))
+                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()))
                                 .toList());
 
 
