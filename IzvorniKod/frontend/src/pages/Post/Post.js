@@ -279,7 +279,7 @@ const Post = () => {
                         color: '#fff',
                       }}
                     >
-                      {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
+                      {comment.author.trim().includes(" ") ? comment.author.trim().split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '') : comment.author.trim()[0]}
                     </S.PostCommentAvatar>
                   </Tooltip>
                   <S.PostCommentContent>
