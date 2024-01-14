@@ -1,4 +1,5 @@
 package hr.fer.progi.interfer.service.impl;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
+import hr.fer.progi.interfer.dto.response.ArticleSearchResponseDTO;
 import hr.fer.progi.interfer.entity.Article;
 
 import hr.fer.progi.interfer.repository.ArticleRepository;
@@ -30,7 +32,11 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         if (article.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(article);
+        Article a = article.get();
+        ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
+        	a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @Override
@@ -72,8 +78,26 @@ public class ArticleGetServiceImpl implements ArticleGetService {
                                                                                                                         //TODO2 proširi sortiranje
         Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
 
-        return ResponseEntity.status(HttpStatus.OK).body(pageResult.getContent());
+
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
         
+    }
+
+    private ArticleSearchResponseDTO pageToDto(Page<Article> pageResult){
+
+        List<Article> articlePage = pageResult.getContent();
+
+        ArticleSearchResponseDTO response = new ArticleSearchResponseDTO(); 
+
+        
+        response.setArticlePage(articlePage.stream()
+                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()))
+                                .toList());
+
+
+        return response;
     }
 
 }

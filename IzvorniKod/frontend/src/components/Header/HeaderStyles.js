@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export const HeaderAppBar = styled(AppBar)`
   box-shadow: none;
+  background-color: white;
   position: relative;
 `;
 
@@ -36,6 +37,7 @@ export const HeaderSearch = styled(Search)`
   height: 32px;
   margin-right: 8px;
   color: ${colors.primary};
+  cursor: pointer;
 `;
 
 export const HeaderSearchBarContainer = styled(Box)`

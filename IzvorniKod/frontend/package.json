@@ -13,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
+    "boring-avatars": "^1.10.1",
     "draft-js": "^0.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

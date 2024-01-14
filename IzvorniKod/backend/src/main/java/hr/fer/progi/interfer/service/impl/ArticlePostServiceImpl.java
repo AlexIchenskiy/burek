@@ -37,6 +37,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
         
         try {
             Article newArticle = new Article();
+            String category = "trending";
 
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setAuthor(author);
@@ -44,7 +45,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             newArticle.setPublished(articleDetails.isPosted());
             newArticle.setDatePublished(new Timestamp(System.currentTimeMillis()));
             newArticle.setTags(articleDetails.getTags());
-            newArticle.setCategory(articleDetails.getCategory());
+            newArticle.setCategory(category);// FIX kod spajanja frontenda: vratiti articleDetails.getCategory() za spremanje kategorije 
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 

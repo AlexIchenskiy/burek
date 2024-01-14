@@ -16,6 +16,7 @@ import { HourglassBottom, Send } from '@mui/icons-material';
 import { validateFields } from '../../validators/validateFields';
 import { validateComment } from '../../validators/validateComment';
 import { roundToTwo } from '../../util/roundToTwo';
+import generateUniqueGradient from '../../util/colorUtil';
 
 const COPY_DEFAULT_TOOLTIP = 'Kopiraj';
 
@@ -67,11 +68,9 @@ const Post = () => {
       setSetting(true);
 
       if (val === null) {
-        axios.delete(`${API_URL}/posts/rating`, {
+        axios.delete(`${API_URL}/posts/rating/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }, data: {
-            id: id
           }
         }
         )
@@ -94,11 +93,7 @@ const Post = () => {
       }
 
       setTimeout(() => {
-        axios.post(`${API_URL}/posts/allRatings`, { id: id }, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        axios.get(`${API_URL}/posts/allRatings/${id}`)
           .then((res) => {
             setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
               (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5)));
@@ -130,7 +125,7 @@ const Post = () => {
         });
 
       setTimeout(() => {
-        axios.post(`${API_URL}/comment/getAll`, { id: id })
+        axios.get(`${API_URL}/comment/getAll/${id}`,)
           .then((res) => setComments([...res.data].reverse()))
           .catch((err) => {
             console.log(err);
@@ -149,11 +144,11 @@ const Post = () => {
     setContentLoading(true);
     setCommentsLoading(true);
 
-    axios.post(`${API_URL}/posts/id`, { id: id })
+    axios.get(`${API_URL}/posts/${id}`)
       .then((res) => {
         console.log(res);
 
-        setTitle(res.data.title);
+        setTitle(res.data.title || '');
         setShareText(`Pročitajte ${res.data.title} na ovom linku:\n${PAGE_URL}/post/${id}`);
 
         if (res.data.content) {
@@ -170,7 +165,7 @@ const Post = () => {
       })
       .finally(() => setContentLoading(false));
 
-    axios.post(`${API_URL}/posts/allRatings`, { id: id })
+    axios.get(`${API_URL}/posts/allRatings/${id}`)
       .then((res) => setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
         (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5))))
       .catch((err) => {
@@ -179,7 +174,7 @@ const Post = () => {
       });
 
     if (token) {
-      axios.post(`${API_URL}/posts/getRating`, { id: id }, {
+      axios.get(`${API_URL}/posts/getRating/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -194,7 +189,7 @@ const Post = () => {
         });
     }
 
-    axios.post(`${API_URL}/comment/getAll`, { id: id })
+    axios.get(`${API_URL}/comment/getAll/${id}`)
       .then((res) => setComments([...res.data].reverse()))
       .catch((err) => {
         console.log(err);
@@ -254,7 +249,7 @@ const Post = () => {
               type='text'
               value={comment}
               disabled={!token || sending}
-              onChange={(e) => { setComment(e.target.value) }}
+              onChange={(e) => { setComment(e.target.value || '') }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -275,8 +270,14 @@ const Post = () => {
               comments.map((comment) => (
                 <S.PostComment key={comment.id}>
                   <Tooltip title={comment.author}>
-                    <S.PostCommentAvatar>
-                      {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
+                    <S.PostCommentAvatar
+                      sx={{
+                        backgroundImage: `url('https://source.boringavatars.com/marble/120/colors=${generateUniqueGradient(comment.author)}')`,
+                        backgroundSize: 'cover',
+                        color: '#fff',
+                      }}
+                    >
+                      {comment.author.trim().includes(" ") ? comment.author.trim().split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '') : comment.author.trim()[0]}
                     </S.PostCommentAvatar>
                   </Tooltip>
                   <S.PostCommentContent>

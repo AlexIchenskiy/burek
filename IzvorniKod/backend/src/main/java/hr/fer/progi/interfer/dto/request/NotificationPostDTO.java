@@ -1,5 +1,7 @@
 package hr.fer.progi.interfer.dto.request;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Builder
 public class NotificationPostDTO {
 	
-	
+	private List<String> to;
 	
     @Size(max = 100, message = "{Size.max.article.title}")
     @Size(min = 3, message = "{Size.min.article.title}")

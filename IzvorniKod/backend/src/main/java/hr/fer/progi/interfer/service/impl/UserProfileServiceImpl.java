@@ -49,8 +49,6 @@ public class UserProfileServiceImpl implements UserProfileService {
             		.filter(a -> a.getPublished())
             		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
             		.toList());
-            userDto.setSentNotifications(user.getSentNotifications());
-            userDto.setReceivedNotifications(user.getReceivedNotifications());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
@@ -101,5 +99,12 @@ public class UserProfileServiceImpl implements UserProfileService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+	public ResponseEntity<?> chackUser(String mail) {
+		if (userRepository.existsByEmail(mail))
+			return ResponseEntity.status(HttpStatus.OK).body(true);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(false);
+	}
 
 }

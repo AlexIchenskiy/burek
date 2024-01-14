@@ -77,5 +77,10 @@ public class UserController {
 
         return userPromotionService.promote(userDetails);
     }
+    
+    @GetMapping("/check/{mail}")
+    public ResponseEntity<?> checkUser(@PathVariable String mail) {
+        return userProfileService.chackUser(mail);
+    }
 
 }
