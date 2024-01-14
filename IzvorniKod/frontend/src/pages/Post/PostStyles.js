@@ -165,6 +165,7 @@ export const PostCommentAvatar = styled(Avatar)`
   height: 32px;
   margin-right: 12px;
   background-color: ${colors.primary};
+  cursor: pointer;
 `;
 
 export const PostCommentContent = styled(Container)`

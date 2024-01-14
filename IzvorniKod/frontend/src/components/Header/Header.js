@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const DEFAULT_SETTINGS = { login: 'Prijava', register: 'Novi korisnik' };
-const USER_SETTINGS = { home: 'Početna', editor: 'Nova objava', logout: 'Odjava' };
+const USER_SETTINGS = { home: 'Početna', profile: 'Profil', editor: 'Nova objava', logout: 'Odjava' };
 
 const Header = ({ isSearchVisible = true, onSearch }) => {
   const { token } = useAuth();

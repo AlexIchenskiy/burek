@@ -7,7 +7,7 @@ import Header from "../../components/Header/Header";
 
 import * as S from "./PostStyles";
 import "./DraftStyles.css";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL, PAGE_URL } from '../../assets/constants';
 import { Alert, IconButton, InputAdornment, InputLabel, OutlinedInput, Rating, Snackbar, Tooltip } from '@mui/material';
@@ -21,6 +21,8 @@ import generateUniqueGradient from '../../util/colorUtil';
 const COPY_DEFAULT_TOOLTIP = 'Kopiraj';
 
 const Post = () => {
+  const navigate = useNavigate();
+
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState('');
   const { id } = useParams();
@@ -276,6 +278,7 @@ const Post = () => {
                         backgroundSize: 'cover',
                         color: '#fff',
                       }}
+                      onClick={() => navigate(`/profile/${comment.authorId}`)}
                     >
                       {comment.author.trim().includes(" ") ? comment.author.trim().split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '') : comment.author.trim()[0]}
                     </S.PostCommentAvatar>
