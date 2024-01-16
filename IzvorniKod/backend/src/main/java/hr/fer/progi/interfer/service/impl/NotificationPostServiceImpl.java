@@ -162,10 +162,10 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 			   "Hvala na vašem angažmanu i brzoj reakciji.\n\n" +
 			   "S poštovanjem,\nSustav za prijavu sadržaja",
 			    sender.getFirstName() + " " + sender.getLastName(), 
-			    article.getAuthor().getFirstName() + " " + comment.getAuthor().getLastName(), 
+			    comment.getAuthor().getFirstName() + " " + comment.getAuthor().getLastName(), 
 			    comment.getContent(), 
 			    notificationDetails.getReason(),
-			    article.getAuthor().getEmail()
+			    comment.getAuthor().getEmail()
 			));
 		newNotification.setDateSent(Timestamp.from(Instant.now()));
 		newNotification.setSeen(false);
