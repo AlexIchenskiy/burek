@@ -120,7 +120,7 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 			    article.getCategory(), 
 			    article.getTags(),
 			    notificationDetails.getReason(),
-			    sender.getEmail()
+			    article.getAuthor().getEmail()
 			));
 		newNotification.setDateSent(Timestamp.from(Instant.now()));
 		newNotification.setSeen(false);
@@ -162,10 +162,10 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 			   "Hvala na vašem angažmanu i brzoj reakciji.\n\n" +
 			   "S poštovanjem,\nSustav za prijavu sadržaja",
 			    sender.getFirstName() + " " + sender.getLastName(), 
-			    comment.getAuthor().getFirstName() + " " + comment.getAuthor().getLastName(), 
+			    article.getAuthor().getFirstName() + " " + comment.getAuthor().getLastName(), 
 			    comment.getContent(), 
 			    notificationDetails.getReason(),
-			    sender.getEmail()
+			    article.getAuthor().getEmail()
 			));
 		newNotification.setDateSent(Timestamp.from(Instant.now()));
 		newNotification.setSeen(false);
