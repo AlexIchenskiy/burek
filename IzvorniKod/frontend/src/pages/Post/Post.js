@@ -10,7 +10,7 @@ import "./DraftStyles.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL, PAGE_URL } from '../../assets/constants';
-import { Alert, IconButton, InputAdornment, InputLabel, OutlinedInput, Rating, Snackbar, Tooltip } from '@mui/material';
+import { Alert, IconButton, InputAdornment, InputLabel, Menu, MenuItem, OutlinedInput, Rating, Snackbar, Tooltip, Typography } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 import { HourglassBottom, Send } from '@mui/icons-material';
 import { validateFields } from '../../validators/validateFields';
@@ -30,6 +30,7 @@ const Post = () => {
   const [contentLoading, setContentLoading] = useState(true);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
+  const [user, setUser] = useState(null);
   const [rating, setRating] = useState(0.0);
   const [userRating, setUserRating] = useState(null);
   const [setting, setSetting] = useState(false);
@@ -41,6 +42,8 @@ const Post = () => {
 
   const [copyTooltip, setCopyTooltip] = useState(COPY_DEFAULT_TOOLTIP);
 
+  const [anchorElComment, setAnchorElComment] = useState(null);
+
   const { token } = useAuth();
 
   const handleSnackbarClose = () => {
@@ -50,6 +53,14 @@ const Post = () => {
   const handleSnackbarOpen = (message) => {
     setSnackbarMessage(message)
     setOpenSnackbar(true);
+  };
+
+  const handleOpenCommentMenu = (event) => {
+    setAnchorElComment(event.currentTarget);
+  };
+
+  const handleCloseCommentMenu = () => {
+    setAnchorElComment(null);
   };
 
   const handleCopy = () => {
@@ -138,6 +149,29 @@ const Post = () => {
     }
   }
 
+  const handleCommentDelete = (id) => {
+    axios.delete(`${API_URL}/comment/delete/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        const tempComments = comments.filter((comment) => comment.id !== id);
+        setComments(tempComments);
+        handleCloseCommentMenu();
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response && err.response.status === 401) {
+          handleSnackbarOpen('Nemate ovlasti za brisanje ovog komentara.');
+        } else {
+          handleSnackbarOpen('Dogodila se greška tijekom brisanja komentara.');
+        }
+
+        handleCloseCommentMenu();
+      });
+  }
+
   const validateCommentInput = () => {
     return validateFields([{ value: comment.trim(), validator: validateComment }], handleSnackbarOpen);
   }
@@ -200,6 +234,17 @@ const Post = () => {
       .finally(() => setCommentsLoading(false));
   }, [id, token]);
 
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => {
+        console.log(res);
+
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [token]);
+
   return (
     <>
       <Header isSearchVisible={false} />
@@ -245,13 +290,18 @@ const Post = () => {
         </S.PostInfoContainer>
         <S.PostCommentsContainer>
           <S.PostCommentsForm variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Komentar</InputLabel>
+            <InputLabel htmlFor="comment-input-post-form">Komentar</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="comment-input-post-form"
               type='text'
               value={comment}
               disabled={!token || sending}
               onChange={(e) => { setComment(e.target.value || '') }}
+              multiline={true}
+              onKeyDown={(event) => {
+                event.stopPropagation();
+                if (event.key === 'Enter') handleSend()
+              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -280,11 +330,11 @@ const Post = () => {
                       }}
                       onClick={() => navigate(`/profile/${comment.authorId}`)}
                     >
-                      {console.log(comment.author)}
-                      {comment.author.trim().includes(" ") ? comment.author.trim().split('\\s+').reduce((acc, name) => acc + name[0].toUpperCase(), '') : comment.author.trim()[0]}
+                      {comment.author.trim().includes(" ") ? comment.author.trim().split(/(\s+)/).reduce((acc, name) => acc.trim() + name[0].toUpperCase(), '') : comment.author.trim()[0]}
                     </S.PostCommentAvatar>
                   </Tooltip>
                   <S.PostCommentContent>
+                    <Typography variant='h6'>{comment.author}</Typography>
                     <S.PostCommentText variant='body1'>
                       {comment.content}
                     </S.PostCommentText>
@@ -292,7 +342,30 @@ const Post = () => {
                       {new Date(comment.timestamp).toLocaleString('en-UK')}
                     </S.PostCommentSubtext>
                   </S.PostCommentContent>
-                </S.PostComment>)) :
+                  {user !== null &&
+                    <>
+                      <S.PostCommentMenu onClick={handleOpenCommentMenu} />
+                      <Menu
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar-user"
+                        anchorEl={anchorElComment}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElComment)}
+                        onClose={handleCloseCommentMenu}
+                      >
+                        <MenuItem onClick={() => handleCommentDelete(comment.id)}>Obriši komentar</MenuItem>
+                      </Menu>
+                    </>}
+                </S.PostComment>))
+              :
               <S.PostNoComments variant='h4'>{commentsLoading ? "Učitavam komentare..." : "Ovdje još nema komentara. Ostavite prvi!"}</S.PostNoComments>
             }
           </S.PostComments>
