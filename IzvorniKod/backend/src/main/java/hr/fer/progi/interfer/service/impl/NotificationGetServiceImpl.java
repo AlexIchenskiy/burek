@@ -44,7 +44,8 @@ public class NotificationGetServiceImpl implements NotificationGetService{
 					n.getSubject(), 
 					n.getContent(), 
 					n.getDateSent().toLocalDateTime(), 
-					n.getSeen()))
+					n.getSeen(),
+					n.getReportId()))
 			.toList();
 		
 		return ResponseEntity.status(HttpStatus.OK).body(notifications);
@@ -66,7 +67,8 @@ public class NotificationGetServiceImpl implements NotificationGetService{
 					n.getSubject(), 
 					n.getContent(), 
 					n.getDateSent().toLocalDateTime(), 
-					n.getSeen()))
+					n.getSeen(),
+					n.getReportId()))
 			.toList();
 		
 		return ResponseEntity.status(HttpStatus.OK).body(notifications);
@@ -96,7 +98,8 @@ public class NotificationGetServiceImpl implements NotificationGetService{
 					notification.getSubject(), 
 					notification.getContent(), 
 					notification.getDateSent().toLocalDateTime(), 
-					notification.getSeen());
+					notification.getSeen(),
+					notification.getReportId());
 			
 			return ResponseEntity.status(HttpStatus.OK).body(dto);
 

@@ -30,4 +30,6 @@ public class NotificationDTO {
     private LocalDateTime timestamp;
 	
     private boolean seen;
+    
+    private Long reportid;
 }

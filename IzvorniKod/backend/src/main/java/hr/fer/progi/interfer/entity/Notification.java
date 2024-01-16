@@ -53,5 +53,7 @@ public class Notification {
 	
 	@Column(nullable = false)
 	private Boolean seen;
+	
+	private Long reportId;
 
 }
