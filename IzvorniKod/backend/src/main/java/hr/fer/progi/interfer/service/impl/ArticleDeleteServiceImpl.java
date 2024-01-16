@@ -36,12 +36,13 @@ public class ArticleDeleteServiceImpl implements ArticleDeleteService {
 
         if (user == null)
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
-        if (user.getRole() == UserRole.STUDENT)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authorized to delete articles");
         Optional<Article> article = articleRepository.findById(id);
         if (article.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id);
-
+        
+        if (user.getRole() == UserRole.STUDENT && user.getId() != article.get().getAuthor().getId())
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authorized to delete articles");
+        
         articleRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
     }
