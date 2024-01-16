@@ -40,13 +40,16 @@ const Post = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isCommentModalOpened, setIsCommentModalOpened] = useState(false);
+  const [isArticleModalOpened, setIsArticleModalOpened] = useState(false);
   const [reportedCommentId, setReportedCommentId] = useState(null);
   const [reportCommentValue, setReportCommentValue] = useState('');
+  const [reportArticleValue, setReportArticleValue] = useState('');
   const [reportLoading, setReportLoading] = useState(false);
 
   const [copyTooltip, setCopyTooltip] = useState(COPY_DEFAULT_TOOLTIP);
 
   const [anchorElComment, setAnchorElComment] = useState(null);
+  const [anchorElArticle, setAnchorElArticle] = useState(null);
 
   const { token } = useAuth();
 
@@ -78,6 +81,23 @@ const Post = () => {
     setIsCommentModalOpened(false);
   };
 
+  const handleOpenArticleMenu = (event) => {
+    setAnchorElArticle(event.currentTarget);
+  };
+
+  const handleCloseArticleMenu = () => {
+    setAnchorElArticle(null);
+  };
+
+  const handleArticleModalOpen = () => {
+    setIsArticleModalOpened(true);
+  };
+
+  const handleArticleModalClose = () => {
+    setReportArticleValue('');
+    setIsArticleModalOpened(false);
+  };
+
   const handleCommentReport = () => {
     if (reportCommentValue.length < 3) {
       handleSnackbarOpen('Razlog mora sadržavati više od tri znaka!');
@@ -95,6 +115,27 @@ const Post = () => {
       .catch((err) => {
         console.log(err);
         handleSnackbarOpen('Dogodila se greška tijekom prijavljivanja komentara.');
+      })
+      .finally(() => setReportLoading(false));
+  }
+
+  const handleArticleReport = () => {
+    if (reportArticleValue.length < 3) {
+      handleSnackbarOpen('Razlog mora sadržavati više od tri znaka!');
+      return;
+    }
+
+    setReportLoading(true);
+
+    axios.post(`${API_URL}/notification/report/article`, { id: id, reason: reportArticleValue }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => handleArticleModalClose())
+      .catch((err) => {
+        console.log(err);
+        handleSnackbarOpen('Dogodila se greška tijekom prijavljivanja članka.');
       })
       .finally(() => setReportLoading(false));
   }
@@ -208,6 +249,27 @@ const Post = () => {
       });
   }
 
+  const handleArticleDelete = () => {
+    axios.delete(`${API_URL}/posts/delete/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        navigate('/home');
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response && err.response.status === 401) {
+          handleSnackbarOpen('Nemate ovlasti za brisanje ovog članka.');
+        } else {
+          handleSnackbarOpen('Dogodila se greška tijekom brisanja članka.');
+        }
+
+        handleCloseArticleMenu();
+      });
+  }
+
   const validateCommentInput = () => {
     return validateFields([{ value: comment.trim(), validator: validateComment }], handleSnackbarOpen);
   }
@@ -286,7 +348,29 @@ const Post = () => {
       <Header isSearchVisible={false} />
       <S.PostContainer>
         <S.PostTextContainer>
-          <S.PostTitleInput value={title} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Ovdje još nema naslova :('} readOnly={true} />
+          <S.PostTitleContainer>
+            <S.PostTitleInput value={title} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Ovdje još nema naslova :('} readOnly={true} />
+            <S.PostCommentMenu onClick={handleOpenArticleMenu} />
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar-user-article"
+              anchorEl={anchorElArticle}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElArticle)}
+              onClose={handleCloseArticleMenu}
+            >
+              <MenuItem onClick={() => handleArticleDelete()}>Obriši članak</MenuItem>
+              <MenuItem onClick={() => handleArticleModalOpen()}>Prijavi članak</MenuItem>
+            </Menu>
+          </S.PostTitleContainer>
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'Učitavam članak...' : 'Ovjde još nema ništa :('} readOnly={true} />
         </S.PostTextContainer>
         <S.PostInfoContainer>
@@ -431,6 +515,31 @@ const Post = () => {
         <DialogActions>
           <Button onClick={handleCommentModalClose}>Odustani</Button>
           <Button color='error' onClick={handleCommentReport} disabled={reportLoading}>Prijavi</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={isArticleModalOpened} onClose={handleCommentModalClose}>
+        <DialogTitle>Prijavljivanje članka</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Kako bi prijavili članak, molimo Vas da navedete valjani razlog prijavljivanja.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="article-report-reason"
+            name="article-report-reason"
+            label="Razlog"
+            value={reportArticleValue}
+            onChange={(event) => setReportArticleValue(event.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleArticleModalClose}>Odustani</Button>
+          <Button color='error' onClick={handleArticleReport} disabled={reportLoading}>Prijavi</Button>
         </DialogActions>
       </Dialog>
       <Snackbar

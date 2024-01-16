@@ -30,6 +30,13 @@ export const PostTextContainer = styled(Container)`
   align-items: center;
 `;
 
+export const PostTitleContainer = styled(Container)`
+  padding: 0!important;
+  margin: 0!important;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const PostTitleInput = styled(Input)`
   width: 100%;
   height: 32px;
