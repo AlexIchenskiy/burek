@@ -1,4 +1,4 @@
-import { Tooltip, Menu, IconButton, Typography, MenuList, Badge, Button } from '@mui/material';
+import { Tooltip, Menu, IconButton, Typography, MenuList, Badge } from '@mui/material';
 
 import * as S from './HeaderStyles';
 import { useEffect, useState } from 'react';
@@ -35,20 +35,6 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
     }
   };
 
-  const handleSeenNotification = (id) => {
-    axios.get(`${API_URL}/notification/get/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    const tempNotifications = notifications.filter((n) => n.id !== id);
-    setNotifications(tempNotifications);
-  }
-
   const handleGetNotifications = () => {
     axios.get(`${API_URL}/notification/get`, {
       headers: {
@@ -58,7 +44,8 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
       .then((res) => {
         console.log(res);
 
-        setNotifications(res.data);
+        const filteredNotifications = res.data.filter(notification => !notification.seen);
+        setNotifications(filteredNotifications);
 
         // Notifications for testing purposes if no actual notifications are present
         // setNotifications([{
@@ -104,7 +91,12 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
         </Link>
         {isSearchVisible && <S.HeaderSearchBarContainer>
           <S.HeaderSearch onClick={() => onSearch(searchText)} />
-          <S.HeaderSearchBar size='small' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+          <S.HeaderSearchBar size='small' value={searchText} onChange={(e) => setSearchText(e.target.value)}
+            onKeyDown={(event) => {
+              event.stopPropagation();
+              if (event.key === 'Enter') onSearch(searchText)
+            }}
+          />
         </S.HeaderSearchBarContainer>}
         <S.HeaderUserContainer>
           {
@@ -154,9 +146,6 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
                         <Typography variant="body2" color="textSecondary" sx={{ marginBottom: "4px" }}>
                           {n.content}
                         </Typography>
-                        <Button variant='outlined' sx={{ width: "50%" }} onClick={() => handleSeenNotification(n.id)}>
-                          Sakrij obavijest
-                        </Button>
                       </S.HeaderNotificationContainer>
                     ))}
                   </MenuList>
