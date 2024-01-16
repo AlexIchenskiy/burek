@@ -1,10 +1,11 @@
-import { AppBar, Avatar, Box, MenuItem, TextField, Toolbar, styled } from "@mui/material";
+import { AppBar, Avatar, Box, Container, MenuItem, TextField, Toolbar, styled } from "@mui/material";
 import { HistoryEdu, Notifications, Search } from '@mui/icons-material';
 
 import colors from '../../assets/colors';
 import { Link } from "react-router-dom";
 
 export const HeaderAppBar = styled(AppBar)`
+  padding: 0!important;
   box-shadow: none;
   background-color: white;
   position: relative;
@@ -88,6 +89,14 @@ export const HeaderMenuItem = styled(MenuItem)`
 
 export const HeaderNotificationsMenuItem = styled(MenuItem)`
   padding: 0 8px;
+`;
+
+export const HeaderNotificationContainer = styled(Container)`
+  margin: 16px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 export const HeaderLink = styled(Link)`
