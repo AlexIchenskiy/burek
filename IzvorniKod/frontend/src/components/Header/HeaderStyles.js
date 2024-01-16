@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Box, Container, MenuItem, TextField, Toolbar, styled } from "@mui/material";
+import { AppBar, Avatar, Box, Container, MenuItem, TextField, Toolbar, Typography, styled } from "@mui/material";
 import { HistoryEdu, Notifications, Search } from '@mui/icons-material';
 
 import colors from '../../assets/colors';
@@ -97,6 +97,19 @@ export const HeaderNotificationContainer = styled(Container)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+`;
+
+export const HeaderNotificationTitle = styled(Typography)`
+  transition: 0.2s transform;
+  cursor: ${(props) => props.seen ? "default" : "pointer"};;
+
+  &:hover {
+    transform: ${(props) => props.seen ? "" : "scale(1.02)"};
+  }
+
+  &:active {
+    transform: ${(props) => props.seen ? "" : "scale(0.98)"};;
+  }
 `;
 
 export const HeaderLink = styled(Link)`

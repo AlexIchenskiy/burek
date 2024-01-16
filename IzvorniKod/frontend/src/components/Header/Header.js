@@ -1,4 +1,4 @@
-import { Tooltip, Menu, IconButton, Typography, MenuList, Badge } from '@mui/material';
+import { Tooltip, Menu, IconButton, Typography, MenuList, Badge, Button } from '@mui/material';
 
 import * as S from './HeaderStyles';
 import { useEffect, useState } from 'react';
@@ -44,8 +44,7 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
       .then((res) => {
         console.log(res);
 
-        const filteredNotifications = res.data.filter(notification => !notification.seen);
-        setNotifications(filteredNotifications);
+        setNotifications(res.data);
 
         // Notifications for testing purposes if no actual notifications are present
         // setNotifications([{
@@ -65,12 +64,43 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
         //   subject: 'Ugodni blagdani!',
         //   content: 'Razvojni tim platforme InterFER želi vam ugodne praznike.',
         //   timestamp: '2019-01-21T05:47:08.644',
-        //   seen: false
+        //   seen: true
         // }]);
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  const handleSeenNotification = (id) => {
+    axios.get(`${API_URL}/notification/get/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setNotifications((prevNotifications) =>
+      prevNotifications.map((notification) =>
+        notification.id === id ? { ...notification, seen: true } : notification
+      )
+    );
+  }
+
+  const handleDeleteNotification = (id) => {
+    axios.delete(`${API_URL}/notification/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    const tempNotifications = notifications.filter((notification) => notification.id !== id);
+    setNotifications(tempNotifications);
   }
 
   useEffect(() => {
@@ -135,10 +165,13 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
                 {notifications.length === 0 ?
                   <S.HeaderNotificationsMenuItem disabled={true}>Nema obavijesti!</S.HeaderNotificationsMenuItem>
                   :
-                  <MenuList>
+                  <MenuList sx={{ outline: "none", "border": "none" }}>
                     {notifications.map((n) => (
                       <S.HeaderNotificationContainer key={n.id}>
-                        <Typography variant="h5">{n.subject}</Typography>
+                        <S.HeaderNotificationTitle variant="h5" color={n.seen ? 'black' : '#00819C'} fontWeight={n.seen ? 400 : 700}
+                          onClick={() => n.seen ? {} : handleSeenNotification(n.id)} seen={n.seen}>
+                          {n.subject}
+                        </S.HeaderNotificationTitle>
                         <Typography variant="body2" color="textSecondary" sx={{ marginBottom: "4px" }}>
                           <span style={{ fontWeight: 'bold', marginRight: '4px' }}>{n.from}</span>
                           {new Date(n.timestamp).toLocaleString()}
@@ -146,6 +179,9 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
                         <Typography variant="body2" color="textSecondary" sx={{ marginBottom: "4px" }}>
                           {n.content}
                         </Typography>
+                        <Button variant='outlined' color='error' sx={{ width: "50%", marginTop: '8px' }} onClick={() => handleDeleteNotification(n.id)}>
+                          Izbriši obavijest
+                        </Button>
                       </S.HeaderNotificationContainer>
                     ))}
                   </MenuList>
