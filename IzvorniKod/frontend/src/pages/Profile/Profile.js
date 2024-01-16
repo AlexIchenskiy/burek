@@ -77,6 +77,7 @@ const Profile = () => {
           setUser(res.data);
           setEditedUser({ ...res.data });
           setPosts(res.data.savedArticles);
+          setisCurrentUserOwner(true);
         })
         .catch((err) => console.log(err));
     };
