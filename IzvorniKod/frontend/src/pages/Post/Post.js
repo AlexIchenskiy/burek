@@ -10,7 +10,7 @@ import "./DraftStyles.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL, PAGE_URL } from '../../assets/constants';
-import { Alert, IconButton, InputAdornment, InputLabel, Menu, MenuItem, OutlinedInput, Rating, Snackbar, Tooltip, Typography } from '@mui/material';
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputAdornment, InputLabel, Menu, MenuItem, OutlinedInput, Rating, Snackbar, TextField, Tooltip, Typography } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 import { HourglassBottom, Send } from '@mui/icons-material';
 import { validateFields } from '../../validators/validateFields';
@@ -39,6 +39,10 @@ const Post = () => {
   const [sending, setSending] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [isCommentModalOpened, setIsCommentModalOpened] = useState(false);
+  const [reportedCommentId, setReportedCommentId] = useState(null);
+  const [reportCommentValue, setReportCommentValue] = useState('');
+  const [reportLoading, setReportLoading] = useState(false);
 
   const [copyTooltip, setCopyTooltip] = useState(COPY_DEFAULT_TOOLTIP);
 
@@ -62,6 +66,38 @@ const Post = () => {
   const handleCloseCommentMenu = () => {
     setAnchorElComment(null);
   };
+
+  const handleCommentModalOpen = (commentId) => {
+    setReportedCommentId(commentId);
+    setIsCommentModalOpened(true);
+  };
+
+  const handleCommentModalClose = () => {
+    setReportedCommentId(null);
+    setReportCommentValue('');
+    setIsCommentModalOpened(false);
+  };
+
+  const handleCommentReport = () => {
+    if (reportCommentValue.length < 3) {
+      handleSnackbarOpen('Razlog mora sadržavati više od tri znaka!');
+      return;
+    }
+
+    setReportLoading(true);
+
+    axios.post(`${API_URL}/notification/report/comment`, { id: reportedCommentId, reason: reportCommentValue }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => handleCommentModalClose())
+      .catch((err) => {
+        console.log(err);
+        handleSnackbarOpen('Dogodila se greška tijekom prijavljivanja komentara.');
+      })
+      .finally(() => setReportLoading(false));
+  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${PAGE_URL}/post/${id}`)
@@ -362,6 +398,7 @@ const Post = () => {
                         onClose={handleCloseCommentMenu}
                       >
                         <MenuItem onClick={() => handleCommentDelete(comment.id)}>Obriši komentar</MenuItem>
+                        <MenuItem onClick={() => handleCommentModalOpen(comment.id)}>Prijavi komentar</MenuItem>
                       </Menu>
                     </>}
                 </S.PostComment>))
@@ -371,6 +408,31 @@ const Post = () => {
           </S.PostComments>
         </S.PostCommentsContainer>
       </S.PostContainer>
+      <Dialog open={isCommentModalOpened} onClose={handleCommentModalClose}>
+        <DialogTitle>Prijavljivanje komentara</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Kako bi prijavili komentar, molimo Vas da navedete valjani razlog prijavljivanja.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="comment-report-reason"
+            name="comment-report-reason"
+            label="Razlog"
+            value={reportCommentValue}
+            onChange={(event) => setReportCommentValue(event.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCommentModalClose}>Odustani</Button>
+          <Button color='error' onClick={handleCommentReport} disabled={reportLoading}>Prijavi</Button>
+        </DialogActions>
+      </Dialog>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
