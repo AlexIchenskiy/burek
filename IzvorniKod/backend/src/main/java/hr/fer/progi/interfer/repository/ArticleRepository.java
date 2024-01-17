@@ -13,7 +13,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("update Article a set a.title = ?2, a.content = ?3, a.category = ?4, a.tags = ?5, a.published = ?6 where a.id = ?1" )
-    void updateArticle(Long id, String title, String content, String category, String tags, boolean published);
+    @Query("update Article a set a.title = ?2, a.content = ?3, a.tags = ?4, a.published = ?5 where a.id = ?1" )
+    void updateArticle(Long id, String title, String content, String tags, boolean published);
 
 }
