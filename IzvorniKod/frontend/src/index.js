@@ -19,6 +19,7 @@ import { ThemeProvider } from '@mui/material';
 import theme from './assets/theme.js';
 import Post from './pages/Post/Post.js';
 import Logout from './components/Logout/Logout.js';
+import Profile from './pages/Profile/Profile.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -33,6 +34,8 @@ root.render(
           <Route exact path="/editor" element={<Editor />} />
           <Route exact path="/post/:id" element={<Post />} />
           <Route exact path="/logout" element={<Logout />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile/:id" element={<Profile />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.controller;
 
+import hr.fer.progi.interfer.dto.request.UserEditDTO;
 import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +32,8 @@ public class UserController {
     @Autowired
     private UserPromotionServiceImpl userPromotionService;
 
+    @Autowired UserBanServiceImpl userBanService;
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegistrationDTO userDetails,
             BindingResult bindingResult) {
@@ -60,7 +63,7 @@ public class UserController {
 
     @PostMapping("/edit")
     public ResponseEntity<?> editUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
-            @RequestBody @Valid UserRegistrationDTO userDetails, BindingResult bindingResult) {
+            @RequestBody @Valid UserEditDTO userDetails, BindingResult bindingResult) {
         return userProfileService.edit(authorizationHeader, userDetails);
     }
 
@@ -80,6 +83,16 @@ public class UserController {
     @GetMapping("/check/{mail}")
     public ResponseEntity<?> checkUser(@PathVariable String mail) {
         return userProfileService.chackUser(mail);
+    }
+
+    @PostMapping("/ban/{id}")
+    public ResponseEntity<?> banUser(@PathVariable long id) {
+        return userBanService.ban(id);
+    }
+
+    @PostMapping("/unban/{id}")
+    public ResponseEntity<?> unbanUser(@PathVariable long id) {
+        return userBanService.unban(id);
     }
 
 }

@@ -1,7 +1,6 @@
 package hr.fer.progi.interfer.controller;
 
 import hr.fer.progi.interfer.dto.request.ArticleRatingPostDTO;
-import hr.fer.progi.interfer.dto.request.ArticleDeleteDTO;
 import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
+import hr.fer.progi.interfer.dto.request.ArticleEditDTO;
 import hr.fer.progi.interfer.service.impl.ArticlePostServiceImpl;
 import hr.fer.progi.interfer.service.impl.ArticleGetServiceImpl;
 import jakarta.validation.Valid;
@@ -61,6 +61,15 @@ public class ArticleController {
 	 	return articleGetService.getAllArticles(articleDetails);
 	}
 
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateArticle(@RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
+                if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articlePostService.updateArticle(articleDetails);
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteArticle(@RequestBody @Valid ArticleDeleteDTO articleDetails,
             BindingResult bindingResult) {
@@ -68,6 +77,7 @@ public class ArticleController {
             return ResponseEntity.badRequest().body(bindingResult.toString());
 
         return articleDeleteService.deleteArticle(articleDetails);
+
     }
 
     // Korisnik želi vidjeti sve ocjene na nekoj objavi

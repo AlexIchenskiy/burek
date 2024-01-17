@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.dto.response;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import hr.fer.progi.interfer.entity.UserRole;
@@ -25,6 +26,7 @@ public class UserProfileDTO {
 	    private String tags;
 		private String content;
 	    private String category;
+		private Timestamp datePublished;
 	}
 
     private String firstname;
