@@ -1,6 +1,9 @@
 package hr.fer.progi.interfer.controller;
 
 import hr.fer.progi.interfer.dto.request.ArticleRatingPostDTO;
+
+import hr.fer.progi.interfer.dto.request.ArticleCategoryPostDTO;
+
 import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +16,9 @@ import hr.fer.progi.interfer.dto.request.ArticleEditDTO;
 import hr.fer.progi.interfer.service.impl.ArticlePostServiceImpl;
 import hr.fer.progi.interfer.service.impl.ArticleGetServiceImpl;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/posts")
@@ -35,6 +41,15 @@ public class ArticleController {
 
     @Autowired
     private ArticleRatingDeleteServiceImpl articleRatingDeleteService;
+
+    @Autowired
+    private ArticleCategoryGetServiceImpl articleCategoryGetService;
+
+    @Autowired
+    private ArticleCategoryPostServiceImpl articleCategoryPostService;
+
+    @Autowired
+    private ArticleCategoryDeleteServiceImpl articleCategoryDeleteService;
 
     // @Secured("ROLE_USER")
     @PostMapping("/add")
@@ -62,12 +77,35 @@ public class ArticleController {
 	}
 
 
+    @GetMapping("/categories/getAll")
+    public ResponseEntity<?> getCategories() {
+        return articleCategoryGetService.getAll();
+    }
+    @PostMapping("/categories/add")
+    public ResponseEntity<?> addCategory(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+    		@RequestBody @Valid ArticleCategoryPostDTO categoryDetails,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articleCategoryPostService.addCategory(authorizationHeader, categoryDetails);
+    }
+    @DeleteMapping("/categories/delete")
+    public ResponseEntity<?> deleteCategory(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+    		@RequestBody @Valid ArticleCategoryPostDTO categoryDetails,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articleCategoryDeleteService.deleteCategory(authorizationHeader, categoryDetails);
+    }
+
     @PostMapping("/update")
-    public ResponseEntity<?> updateArticle(@RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
+    public ResponseEntity<?> updateArticle(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
                 if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-        return articlePostService.updateArticle(articleDetails);
+        return articlePostService.updateArticle(authorizationHeader, articleDetails);
     }
 
     @DeleteMapping("/delete/{id}")

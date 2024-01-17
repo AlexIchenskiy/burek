@@ -5,17 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -35,7 +32,7 @@ public class Article {
     private User author;
 
     @Column(nullable=false)
-    private Boolean published;
+    private boolean published;
 
     @Column(nullable = false)
     private Timestamp datePublished;
@@ -43,8 +40,9 @@ public class Article {
     @Column(nullable = false)
     private String tags;
 
-    @Column(nullable=false)
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
     
     @Column(nullable=false)
     private boolean moderated = false;

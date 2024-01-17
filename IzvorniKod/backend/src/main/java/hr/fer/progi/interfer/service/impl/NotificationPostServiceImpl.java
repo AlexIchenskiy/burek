@@ -26,8 +26,6 @@ import hr.fer.progi.interfer.entity.Notification;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.jwt.JwtUtil;
-import hr.fer.progi.interfer.repository.ArticleRepository;
-import hr.fer.progi.interfer.repository.CommentRepository;
 import hr.fer.progi.interfer.repository.NotificationRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.NotificationPostService;
@@ -134,7 +132,7 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 		if (article.isEmpty())
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
 
-		if (articleDetails.getTitle() == null && articleDetails.getContent() == null && articleDetails.getTags() == null && articleDetails.getCategory() == null)
+		if (articleDetails.getTitle() == null && articleDetails.getContent() == null && articleDetails.getTags() == null && articleDetails.getCategoryName() == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please specify at least one modification");
 
 		var requestedChanges = new StringBuilder();
@@ -144,8 +142,8 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 			requestedChanges.append(String.format("\nContent: %s", articleDetails.getContent()));
 		if (articleDetails.getTags() != null)
 			requestedChanges.append(String.format("\nTags: %s", articleDetails.getTags()));
-		if (articleDetails.getCategory() != null)
-			requestedChanges.append(String.format("\nTags: %s", articleDetails.getCategory()));
+		if (articleDetails.getCategoryName() != null)
+			requestedChanges.append(String.format("\nTags: %s", articleDetails.getCategoryName()));
 
 		var notification = Notification
 				.builder()

@@ -12,9 +12,12 @@ import hr.fer.progi.interfer.dto.request.ArticleEditDTO;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import hr.fer.progi.interfer.dto.response.ArticlePostResponseDTO;
 import hr.fer.progi.interfer.entity.Article;
+import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.entity.User;
+import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.ArticleRepository;
+import hr.fer.progi.interfer.repository.CategoryRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.ArticlePostService;
 
@@ -30,6 +33,9 @@ public class ArticlePostServiceImpl implements ArticlePostService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public ResponseEntity<?> addArticle(String authorizationHeader, ArticlePostDTO articleDetails) {
     	if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
@@ -42,15 +48,16 @@ public class ArticlePostServiceImpl implements ArticlePostService {
         
         try {
             Article newArticle = new Article();
-            String category = "trending";
+
+            Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
 
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setAuthor(author);
             newArticle.setContent(articleDetails.getContent());
-            newArticle.setPublished(articleDetails.getPosted());
+            newArticle.setPublished(articleDetails.isPosted());
             newArticle.setDatePublished(new Timestamp(System.currentTimeMillis()));
             newArticle.setTags(articleDetails.getTags());
-            newArticle.setCategory(category);// FIX kod spajanja frontenda: vratiti articleDetails.getCategory() za spremanje kategorije 
+            newArticle.setCategory(articleCategory);
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 
@@ -61,15 +68,29 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-    public ResponseEntity<?> updateArticle (ArticleEditDTO articleDetails)
+    public ResponseEntity<?> updateArticle (String authorizationHeader, ArticleEditDTO articleDetails)
     {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+
+        User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+        if (author.isBanned())
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
+
         try{
             Optional<Article> optArticle = articleRepository.findById(articleDetails.getId());
 
             if(optArticle.isEmpty()){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
-            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.getPosted()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
+
+            if(author.getId().equals(optArticle.get().getAuthor().getId()) && author.getRole() != UserRole.MODERATOR || author.getRole() != UserRole.ADMIN)
+            {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+            }
+
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
         }

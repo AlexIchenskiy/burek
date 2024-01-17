@@ -26,8 +26,8 @@ public class ArticleEditDTO {
     @Size(max = 65000, message = "{Size.min.article.content}")
 	private String content;
   
-    private Boolean posted;
+    private boolean posted;
     
-    private String category;
+    private String categoryName;
 
 }
