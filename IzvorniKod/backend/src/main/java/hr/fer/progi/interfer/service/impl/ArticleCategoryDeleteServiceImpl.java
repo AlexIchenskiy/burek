@@ -7,20 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticleCategoryPostDTO;
 import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.entity.UserRole;
-import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.service.ArticleCategoryDeleteService;
 import hr.fer.progi.interfer.repository.CategoryRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 
-
+@Service
 public class ArticleCategoryDeleteServiceImpl implements ArticleCategoryDeleteService{
-    @Autowired
-    private JwtUtil jwtUtil;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -40,7 +38,8 @@ public class ArticleCategoryDeleteServiceImpl implements ArticleCategoryDeleteSe
         }
 
         try {
-            categoryRepository.deleteByName(articleDetails.getName());
+            Category category = categoryRepository.findByName(articleDetails.getName());
+            categoryRepository.deleteById(category.getId()); 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
