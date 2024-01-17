@@ -6,6 +6,6 @@ import hr.fer.progi.interfer.dto.request.ArticleDeleteDTO;
 
 public interface ArticleDeleteService {
 
-    ResponseEntity<?> deleteArticle(ArticleDeleteDTO articleDetails);
+    ResponseEntity<?> deleteArticle(long id);
 
 }
