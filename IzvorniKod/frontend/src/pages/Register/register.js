@@ -60,7 +60,7 @@ const RegisterForm = () => {
         setLoading(true);
 
         axios.post(`${API_URL}/user/register`, {
-            firstname: firstName, lastname: lastName, email: email, password: password
+            firstname: firstName.trim(), lastname: lastName.trim(), email: email.trim(), password: password
         })
             .then((res) => {
                 setToken(res.data.token);

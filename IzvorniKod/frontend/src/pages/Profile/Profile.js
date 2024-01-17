@@ -9,7 +9,7 @@ import { validateFirstname } from '../../validators/validateFirstname';
 import { validateLastname } from '../../validators/validateLastname';
 import { validateEmail } from '../../validators/validateEmail';
 import { validateFields } from '../../validators/validateFields';
-import { Dialog, DialogTitle } from '@mui/material';
+import { Dialog, DialogTitle, Typography } from '@mui/material';
 
 const Profile = () => {
   const { token } = useAuth();
@@ -77,6 +77,7 @@ const Profile = () => {
           setUser(res.data);
           setEditedUser({ ...res.data });
           setPosts(res.data.savedArticles);
+          setisCurrentUserOwner(true);
         })
         .catch((err) => console.log(err));
     };
@@ -213,6 +214,23 @@ const Profile = () => {
             </S.ProfileName>
             <S.ProfileSubtitle>
               {user.email}
+            </S.ProfileSubtitle>
+            <S.ProfileSubtitle>
+              {(() => {
+                switch (user.role) {
+                  case "ADMIN":
+                    return <Typography variant='body1' color="red" fontWeight={900}>Administrator</Typography>;
+
+                  case "MODERATOR":
+                    return <Typography variant='body1' color="green" fontWeight={700}>Moderator</Typography>;
+
+                  case "STUDENT":
+                    return <Typography variant='body1' color="orange" fontWeight={500}>Student</Typography>;
+
+                  default:
+                    return <Typography variant='body1' color="orange">Učitavam...</Typography>;
+                }
+              })()}
             </S.ProfileSubtitle>
             {isCurrentUserOwner && (
               <>
