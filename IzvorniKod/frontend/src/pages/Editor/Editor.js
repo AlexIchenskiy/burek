@@ -68,7 +68,7 @@ const Editor = () => {
       tags: '#defaultTag',
       content: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
       posted: true,
-      category: category
+      categoryName: category
     };
 
     console.log(data);
@@ -123,7 +123,7 @@ const Editor = () => {
         tags: '#defaultTag',
         content: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
         posted: false,
-        category: category
+        categoryName: category
       };
     }
 

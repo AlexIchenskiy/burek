@@ -38,7 +38,7 @@ const Home = () => {
     axios.post(`${API_URL}/posts/getAll`, {
       title: searchText,
       page: page,
-      category: category
+      categoryName: category
     })
       .then((res) => {
         console.log(res);
