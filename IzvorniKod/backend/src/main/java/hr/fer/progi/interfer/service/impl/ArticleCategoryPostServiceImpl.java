@@ -10,12 +10,15 @@ import hr.fer.progi.interfer.dto.request.ArticleCategoryPostDTO;
 import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.entity.UserRole;
+import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.service.ArticleCategoryPostService;
 import hr.fer.progi.interfer.repository.CategoryRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 
 
 public class ArticleCategoryPostServiceImpl implements ArticleCategoryPostService{
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Autowired
     private UserRepository userRepository;
@@ -31,7 +34,7 @@ public class ArticleCategoryPostServiceImpl implements ArticleCategoryPostServic
 
         if (requestingUser == null)
             return ResponseEntity.internalServerError().body("Error getting user information");
-        if ((requestingUser.getRole() != UserRole.ADMIN) && (requestingUser.getRole() != UserRole.MODERATOR)){
+        if (!((requestingUser.getRole() == UserRole.ADMIN) || (requestingUser.getRole() == UserRole.MODERATOR))){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Only moderators can perform this action");
         }
 
