@@ -38,6 +38,11 @@ public class ArticleCategoryPostServiceImpl implements ArticleCategoryPostServic
         }
 
         try {
+            if (categoryRepository.findByName(articleDetails.getName()) != null)
+            {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Category already exists");
+            }
+
             Category category = new Category();
             category.setName(articleDetails.getName());
             category.setArticleCount(0);

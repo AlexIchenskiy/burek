@@ -101,11 +101,11 @@ public class ArticleController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateArticle(@RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
+    public ResponseEntity<?> updateArticle(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
                 if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.toString());
         }
-        return articlePostService.updateArticle(articleDetails);
+        return articlePostService.updateArticle(authorizationHeader, articleDetails);
     }
 
     @DeleteMapping("/delete/{id}")

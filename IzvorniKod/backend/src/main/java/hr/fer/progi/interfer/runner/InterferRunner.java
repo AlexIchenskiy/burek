@@ -7,8 +7,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.entity.UserRole;
+import hr.fer.progi.interfer.repository.CategoryRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 
 @Component
@@ -16,6 +18,9 @@ public class InterferRunner implements ApplicationRunner {
 	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
@@ -38,7 +43,13 @@ public class InterferRunner implements ApplicationRunner {
 		admin.setPassword(passwordEncoder.encode(pass));
 		admin.setEnabled(true);
 		admin.setRole(UserRole.ADMIN);
-		
 		userRepository.save(admin);
+
+		Category trending = new Category();
+		trending.setName("trending");
+		trending.setArticleCount(0);
+		categoryRepository.save(trending);
+		
+
     }
 }
