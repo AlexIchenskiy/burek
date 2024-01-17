@@ -14,6 +14,8 @@ import { validateTitle } from '../../validators/validateTitle';
 import { validateContent } from '../../validators/validateContent';
 import { validateFields } from '../../validators/validateFields';
 import { Alert, Snackbar } from '@mui/material';
+import { getHueRotatedColor } from '../../util/colorUtil';
+import colors from '../../assets/colors';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -26,6 +28,8 @@ const Editor = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [contentLoading, setContentLoading] = useState(false);
   const [article, setArticle] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(null);
 
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -60,15 +64,21 @@ const Editor = () => {
 
   const handleSubmit = (e) => {
     let data = {
-      "title": title,
-      "tags": '#defaultTag',
-      "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
-      "posted": true
+      title: title,
+      tags: '#defaultTag',
+      content: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+      posted: true,
+      categoryName: category
     };
 
     console.log(data);
 
     if (!validate()) return;
+
+    if (category === null) {
+      handleSnackbarOpen("Morate odabrati najmanje jednu kategoriju!");
+      return;
+    }
 
     setLoading(true);
 
@@ -108,11 +118,12 @@ const Editor = () => {
       data = { ...article, title: title, content: JSON.stringify(convertToRaw(editorState.getCurrentContent())) }
     } else {
       data = {
-        "id": id,
-        "title": title,
-        "tags": '#defaultTag',
-        "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
-        "posted": false
+        id: id,
+        title: title,
+        tags: '#defaultTag',
+        content: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+        posted: false,
+        categoryName: category
       };
     }
 
@@ -163,7 +174,7 @@ const Editor = () => {
           console.log(res);
 
           setArticle(res.data);
-
+          setCategory(res.data.category.name);
           setTitle(res.data.title || '');
 
           if (res.data.content) {
@@ -181,6 +192,21 @@ const Editor = () => {
         .finally(() => setContentLoading(false));
     }
   }, [id, token]);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/posts/categories/getAll`)
+      .then((res) => {
+        console.log(res);
+
+        setCategories(res.data.categories);
+        // setCategories(["Popularno", "Aktualno", "Znanost"])
+        setCategory(res.data.categories[0].name)
+      })
+      .catch((err) => {
+        console.log(err);
+        handleSnackbarOpen('Dogodila se greška tijekom učitavanja kategorija.');
+      });
+  }, [token]);
 
   return (
     <>
@@ -203,6 +229,20 @@ const Editor = () => {
         <S.EditorTextContainer>
           <S.EditorTitleInput value={title} onChange={handleTitleChange} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Upišite naslov ovdje...'} disabled={contentLoading} />
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'I članak...' : 'Počnite pisati ovdje...'} disabled={contentLoading} />
+          <S.EditorCategoriesContainer>
+            {categories.map((cat, index) => {
+              return (
+                <S.EditorCategory
+                  variant='h6'
+                  color={getHueRotatedColor(colors['hue-start'], index * 30)}
+                  sx={category === cat.name ? { border: `1px solid ${getHueRotatedColor(colors['hue-start'], index * 30)}` } : {}}
+                  onClick={() => setCategory(cat.name)}
+                >
+                  {cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}
+                </S.EditorCategory>
+              )
+            })}
+          </S.EditorCategoriesContainer>
           <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading || contentLoading || isSaving}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
         </S.EditorTextContainer>
       </S.EditorContainer>
