@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.controller;
 
+import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,14 @@ public class NotificationController {
         }
         return notificationPostService.send(authorizationHeader, notificationDetails);
     }
+
+    @PostMapping("/requestChange/article/{id}")
+    public ResponseEntity<?> requestModifyArticle(@PathVariable long id, @RequestBody @Valid ArticlePostDTO articleDetails, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return  ResponseEntity.badRequest().body("Failed data validation");
+
+        return notificationPostService.requestModifyArticle(id, articleDetails);
+    }
 	
 	@PostMapping("/report/article")
     public ResponseEntity<?> reportArticle(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, 
@@ -81,5 +90,4 @@ public class NotificationController {
         return notificationDeleteService.delete(authorizationHeader, id);
     }
 	
-
 }
