@@ -64,12 +64,11 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             if(optArticle.isEmpty()){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
-            articleRepository.updateArticle(articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getCategory(), articleDetails.getTags(), articleDetails.isPublished(), articleDetails.getId()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getCategory(), articleDetails.getTags(), articleDetails.isPublished()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
         }
         catch (Exception e) {
-            System.out.println("Error");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
 

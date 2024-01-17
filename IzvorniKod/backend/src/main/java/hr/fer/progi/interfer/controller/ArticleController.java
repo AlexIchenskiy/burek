@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
+import hr.fer.progi.interfer.dto.request.ArticleEditDTO;
 import hr.fer.progi.interfer.service.impl.ArticlePostServiceImpl;
 import hr.fer.progi.interfer.service.impl.ArticleGetServiceImpl;
 import jakarta.validation.Valid;
