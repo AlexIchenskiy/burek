@@ -2,13 +2,12 @@ package hr.fer.progi.interfer.service.impl;
 
 import java.util.NoSuchElementException;
 
+import hr.fer.progi.interfer.dto.request.UserEditDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import hr.fer.progi.interfer.dto.request.UserRegistrationDTO;
 import hr.fer.progi.interfer.dto.response.UserDetailsDTO;
 import hr.fer.progi.interfer.dto.response.UserProfileDTO;
 import hr.fer.progi.interfer.entity.User;
@@ -27,9 +26,6 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public ResponseEntity<?> profile(String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -42,14 +38,12 @@ public class UserProfileServiceImpl implements UserProfileService {
             userDto.setRole(user.getRole());
             userDto.setSavedArticles(user.getArticles().stream()
             		.filter(a -> !a.getPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory(), a.getDatePublished()))
             		.toList());
             userDto.setPublishedArticles(user.getArticles().stream()
             		.filter(a -> a.getPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory()))
+            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory(), a.getDatePublished()))
             		.toList());
-            userDto.setSentNotifications(user.getSentNotifications());
-            userDto.setReceivedNotifications(user.getReceivedNotifications());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
@@ -82,7 +76,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public ResponseEntity<?> edit(String authorizationHeader, @Valid UserRegistrationDTO userDetails) {
+    public ResponseEntity<?> edit(String authorizationHeader, @Valid UserEditDTO userDetails) {
         EmailDomainValidator validator = new EmailDomainValidator();
         if (!validator.isValid(userDetails.getEmail()))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong email domain");
@@ -92,7 +86,6 @@ public class UserProfileServiceImpl implements UserProfileService {
             user.setFirstName(userDetails.getFirstname());
             user.setLastName(userDetails.getLastname());
             user.setEmail(userDetails.getEmail());
-            user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
             userRepository.save(user);
 
             return ResponseEntity.status(HttpStatus.OK).body("Profile edited successfully");
@@ -101,5 +94,12 @@ public class UserProfileServiceImpl implements UserProfileService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+	public ResponseEntity<?> chackUser(String mail) {
+		if (userRepository.existsByEmail(mail))
+			return ResponseEntity.status(HttpStatus.OK).body(true);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(false);
+	}
 
 }

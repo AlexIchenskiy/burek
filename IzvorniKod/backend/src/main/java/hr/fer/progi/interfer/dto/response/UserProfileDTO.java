@@ -1,8 +1,8 @@
 package hr.fer.progi.interfer.dto.response;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-import hr.fer.progi.interfer.entity.Notification;
 import hr.fer.progi.interfer.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +26,7 @@ public class UserProfileDTO {
 	    private String tags;
 		private String content;
 	    private String category;
+		private Timestamp datePublished;
 	}
 
     private String firstname;
@@ -39,10 +40,6 @@ public class UserProfileDTO {
     private List<ArticleDTO> savedArticles;
     
     private List<ArticleDTO> publishedArticles;
-    
-    private List<Notification> sentNotifications;
-    
-    private List<Notification> receivedNotifications;
 
 }
 

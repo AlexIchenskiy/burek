@@ -36,11 +36,11 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/api/user/login",
                         "/api/user/register",
-                        "/api/posts/{id}",
-                        "/api/posts/getAll",
-                        "/api/posts/allRatings/{id}",
-                        "/api/user/get/{id}",
-                        "api/comment/getAll/{id}")
+                        "/api/posts/*",
+                        "/api/posts/getAll/*",
+                        "/api/posts/allRatings/*",
+                        "/api/user/get/*",
+                        "api/comment/getAll/*")
                 .permitAll()
                 .anyRequest().authenticated());
 

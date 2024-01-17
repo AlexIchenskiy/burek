@@ -7,19 +7,22 @@ import Header from "../../components/Header/Header";
 
 import * as S from "./PostStyles";
 import "./DraftStyles.css";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL, PAGE_URL } from '../../assets/constants';
-import { Alert, IconButton, InputAdornment, InputLabel, OutlinedInput, Rating, Snackbar, Tooltip } from '@mui/material';
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputAdornment, InputLabel, Menu, MenuItem, OutlinedInput, Rating, Snackbar, TextField, Tooltip, Typography } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 import { HourglassBottom, Send } from '@mui/icons-material';
 import { validateFields } from '../../validators/validateFields';
 import { validateComment } from '../../validators/validateComment';
 import { roundToTwo } from '../../util/roundToTwo';
+import generateUniqueGradient from '../../util/colorUtil';
 
 const COPY_DEFAULT_TOOLTIP = 'Kopiraj';
 
 const Post = () => {
+  const navigate = useNavigate();
+
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState('');
   const { id } = useParams();
@@ -27,6 +30,7 @@ const Post = () => {
   const [contentLoading, setContentLoading] = useState(true);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
+  const [user, setUser] = useState(null);
   const [rating, setRating] = useState(0.0);
   const [userRating, setUserRating] = useState(null);
   const [setting, setSetting] = useState(false);
@@ -35,8 +39,17 @@ const Post = () => {
   const [sending, setSending] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [isCommentModalOpened, setIsCommentModalOpened] = useState(false);
+  const [isArticleModalOpened, setIsArticleModalOpened] = useState(false);
+  const [reportedCommentId, setReportedCommentId] = useState(null);
+  const [reportCommentValue, setReportCommentValue] = useState('');
+  const [reportArticleValue, setReportArticleValue] = useState('');
+  const [reportLoading, setReportLoading] = useState(false);
 
   const [copyTooltip, setCopyTooltip] = useState(COPY_DEFAULT_TOOLTIP);
+
+  const [anchorElComment, setAnchorElComment] = useState(null);
+  const [anchorElArticle, setAnchorElArticle] = useState(null);
 
   const { token } = useAuth();
 
@@ -48,6 +61,84 @@ const Post = () => {
     setSnackbarMessage(message)
     setOpenSnackbar(true);
   };
+
+  const handleOpenCommentMenu = (event) => {
+    setAnchorElComment(event.currentTarget);
+  };
+
+  const handleCloseCommentMenu = () => {
+    setAnchorElComment(null);
+  };
+
+  const handleCommentModalOpen = (commentId) => {
+    setReportedCommentId(commentId);
+    setIsCommentModalOpened(true);
+  };
+
+  const handleCommentModalClose = () => {
+    setReportedCommentId(null);
+    setReportCommentValue('');
+    setIsCommentModalOpened(false);
+  };
+
+  const handleOpenArticleMenu = (event) => {
+    setAnchorElArticle(event.currentTarget);
+  };
+
+  const handleCloseArticleMenu = () => {
+    setAnchorElArticle(null);
+  };
+
+  const handleArticleModalOpen = () => {
+    setIsArticleModalOpened(true);
+  };
+
+  const handleArticleModalClose = () => {
+    setReportArticleValue('');
+    setIsArticleModalOpened(false);
+  };
+
+  const handleCommentReport = () => {
+    if (reportCommentValue.length < 3) {
+      handleSnackbarOpen('Razlog mora sadržavati više od tri znaka!');
+      return;
+    }
+
+    setReportLoading(true);
+
+    axios.post(`${API_URL}/notification/report/comment`, { id: reportedCommentId, reason: reportCommentValue }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => handleCommentModalClose())
+      .catch((err) => {
+        console.log(err);
+        handleSnackbarOpen('Dogodila se greška tijekom prijavljivanja komentara.');
+      })
+      .finally(() => setReportLoading(false));
+  }
+
+  const handleArticleReport = () => {
+    if (reportArticleValue.length < 3) {
+      handleSnackbarOpen('Razlog mora sadržavati više od tri znaka!');
+      return;
+    }
+
+    setReportLoading(true);
+
+    axios.post(`${API_URL}/notification/report/article`, { id: id, reason: reportArticleValue }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => handleArticleModalClose())
+      .catch((err) => {
+        console.log(err);
+        handleSnackbarOpen('Dogodila se greška tijekom prijavljivanja članka.');
+      })
+      .finally(() => setReportLoading(false));
+  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${PAGE_URL}/post/${id}`)
@@ -67,11 +158,9 @@ const Post = () => {
       setSetting(true);
 
       if (val === null) {
-        axios.delete(`${API_URL}/posts/rating`, {
+        axios.delete(`${API_URL}/posts/rating/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
-          }, data: {
-            id: id
           }
         }
         )
@@ -94,11 +183,7 @@ const Post = () => {
       }
 
       setTimeout(() => {
-        axios.post(`${API_URL}/posts/allRatings`, { id: id }, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        axios.get(`${API_URL}/posts/allRatings/${id}`)
           .then((res) => {
             setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
               (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5)));
@@ -130,7 +215,7 @@ const Post = () => {
         });
 
       setTimeout(() => {
-        axios.post(`${API_URL}/comment/getAll`, { id: id })
+        axios.get(`${API_URL}/comment/getAll/${id}`,)
           .then((res) => setComments([...res.data].reverse()))
           .catch((err) => {
             console.log(err);
@@ -141,6 +226,50 @@ const Post = () => {
     }
   }
 
+  const handleCommentDelete = (id) => {
+    axios.delete(`${API_URL}/comment/delete/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        const tempComments = comments.filter((comment) => comment.id !== id);
+        setComments(tempComments);
+        handleCloseCommentMenu();
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response && err.response.status === 401) {
+          handleSnackbarOpen('Nemate ovlasti za brisanje ovog komentara.');
+        } else {
+          handleSnackbarOpen('Dogodila se greška tijekom brisanja komentara.');
+        }
+
+        handleCloseCommentMenu();
+      });
+  }
+
+  const handleArticleDelete = () => {
+    axios.delete(`${API_URL}/posts/delete/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        navigate('/home');
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response && err.response.status === 401) {
+          handleSnackbarOpen('Nemate ovlasti za brisanje ovog članka.');
+        } else {
+          handleSnackbarOpen('Dogodila se greška tijekom brisanja članka.');
+        }
+
+        handleCloseArticleMenu();
+      });
+  }
+
   const validateCommentInput = () => {
     return validateFields([{ value: comment.trim(), validator: validateComment }], handleSnackbarOpen);
   }
@@ -149,11 +278,11 @@ const Post = () => {
     setContentLoading(true);
     setCommentsLoading(true);
 
-    axios.post(`${API_URL}/posts/id`, { id: id })
+    axios.get(`${API_URL}/posts/${id}`)
       .then((res) => {
         console.log(res);
 
-        setTitle(res.data.title);
+        setTitle(res.data.title || '');
         setShareText(`Pročitajte ${res.data.title} na ovom linku:\n${PAGE_URL}/post/${id}`);
 
         if (res.data.content) {
@@ -170,7 +299,7 @@ const Post = () => {
       })
       .finally(() => setContentLoading(false));
 
-    axios.post(`${API_URL}/posts/allRatings`, { id: id })
+    axios.get(`${API_URL}/posts/allRatings/${id}`)
       .then((res) => setRating(roundToTwo((res.data.rating1 + res.data.rating2 * 2 + res.data.rating3 * 3 + res.data.rating4 * 4 + res.data.rating5 * 5) /
         (res.data.rating1 + res.data.rating2 + res.data.rating3 + res.data.rating4 + res.data.rating5))))
       .catch((err) => {
@@ -179,7 +308,7 @@ const Post = () => {
       });
 
     if (token) {
-      axios.post(`${API_URL}/posts/getRating`, { id: id }, {
+      axios.get(`${API_URL}/posts/getRating/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -194,7 +323,7 @@ const Post = () => {
         });
     }
 
-    axios.post(`${API_URL}/comment/getAll`, { id: id })
+    axios.get(`${API_URL}/comment/getAll/${id}`)
       .then((res) => setComments([...res.data].reverse()))
       .catch((err) => {
         console.log(err);
@@ -203,12 +332,45 @@ const Post = () => {
       .finally(() => setCommentsLoading(false));
   }, [id, token]);
 
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => {
+        console.log(res);
+
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [token]);
+
   return (
     <>
       <Header isSearchVisible={false} />
       <S.PostContainer>
         <S.PostTextContainer>
-          <S.PostTitleInput value={title} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Ovdje još nema naslova :('} readOnly={true} />
+          <S.PostTitleContainer>
+            <S.PostTitleInput value={title} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Ovdje još nema naslova :('} readOnly={true} />
+            <S.PostCommentMenu onClick={handleOpenArticleMenu} />
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar-user-article"
+              anchorEl={anchorElArticle}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElArticle)}
+              onClose={handleCloseArticleMenu}
+            >
+              <MenuItem onClick={() => handleArticleDelete()}>Obriši članak</MenuItem>
+              <MenuItem onClick={() => handleArticleModalOpen()}>Prijavi članak</MenuItem>
+            </Menu>
+          </S.PostTitleContainer>
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'Učitavam članak...' : 'Ovjde još nema ništa :('} readOnly={true} />
         </S.PostTextContainer>
         <S.PostInfoContainer>
@@ -248,13 +410,18 @@ const Post = () => {
         </S.PostInfoContainer>
         <S.PostCommentsContainer>
           <S.PostCommentsForm variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Komentar</InputLabel>
+            <InputLabel htmlFor="comment-input-post-form">Komentar</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="comment-input-post-form"
               type='text'
               value={comment}
               disabled={!token || sending}
-              onChange={(e) => { setComment(e.target.value) }}
+              onChange={(e) => { setComment(e.target.value || '') }}
+              multiline={true}
+              onKeyDown={(event) => {
+                event.stopPropagation();
+                if (event.key === 'Enter') handleSend()
+              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -275,11 +442,19 @@ const Post = () => {
               comments.map((comment) => (
                 <S.PostComment key={comment.id}>
                   <Tooltip title={comment.author}>
-                    <S.PostCommentAvatar>
-                      {comment.author.split(' ').reduce((acc, name) => acc + name[0].toUpperCase(), '')}
+                    <S.PostCommentAvatar
+                      sx={{
+                        backgroundImage: `url('https://source.boringavatars.com/marble/120/colors=${generateUniqueGradient(comment.author)}')`,
+                        backgroundSize: 'cover',
+                        color: '#fff',
+                      }}
+                      onClick={() => navigate(`/profile/${comment.authorId}`)}
+                    >
+                      {comment.author.trim().includes(" ") ? comment.author.trim().split(/(\s+)/).reduce((acc, name) => acc.trim() + name[0].toUpperCase(), '') : comment.author.trim()[0]}
                     </S.PostCommentAvatar>
                   </Tooltip>
                   <S.PostCommentContent>
+                    <Typography variant='h6'>{comment.author}</Typography>
                     <S.PostCommentText variant='body1'>
                       {comment.content}
                     </S.PostCommentText>
@@ -287,12 +462,86 @@ const Post = () => {
                       {new Date(comment.timestamp).toLocaleString('en-UK')}
                     </S.PostCommentSubtext>
                   </S.PostCommentContent>
-                </S.PostComment>)) :
+                  {user !== null &&
+                    <>
+                      <S.PostCommentMenu onClick={handleOpenCommentMenu} />
+                      <Menu
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar-user"
+                        anchorEl={anchorElComment}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElComment)}
+                        onClose={handleCloseCommentMenu}
+                      >
+                        <MenuItem onClick={() => handleCommentDelete(comment.id)}>Obriši komentar</MenuItem>
+                        <MenuItem onClick={() => handleCommentModalOpen(comment.id)}>Prijavi komentar</MenuItem>
+                      </Menu>
+                    </>}
+                </S.PostComment>))
+              :
               <S.PostNoComments variant='h4'>{commentsLoading ? "Učitavam komentare..." : "Ovdje još nema komentara. Ostavite prvi!"}</S.PostNoComments>
             }
           </S.PostComments>
         </S.PostCommentsContainer>
       </S.PostContainer>
+      <Dialog open={isCommentModalOpened} onClose={handleCommentModalClose}>
+        <DialogTitle>Prijavljivanje komentara</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Kako bi prijavili komentar, molimo Vas da navedete valjani razlog prijavljivanja.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="comment-report-reason"
+            name="comment-report-reason"
+            label="Razlog"
+            value={reportCommentValue}
+            onChange={(event) => setReportCommentValue(event.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCommentModalClose}>Odustani</Button>
+          <Button color='error' onClick={handleCommentReport} disabled={reportLoading}>Prijavi</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={isArticleModalOpened} onClose={handleCommentModalClose}>
+        <DialogTitle>Prijavljivanje članka</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Kako bi prijavili članak, molimo Vas da navedete valjani razlog prijavljivanja.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="article-report-reason"
+            name="article-report-reason"
+            label="Razlog"
+            value={reportArticleValue}
+            onChange={(event) => setReportArticleValue(event.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleArticleModalClose}>Odustani</Button>
+          <Button color='error' onClick={handleArticleReport} disabled={reportLoading}>Prijavi</Button>
+        </DialogActions>
+      </Dialog>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}

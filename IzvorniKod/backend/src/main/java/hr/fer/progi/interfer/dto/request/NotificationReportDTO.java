@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class NotificationReportDTO {
 	
-	private Long article_id;
+	private Long id;
 
     @Column(columnDefinition = "TEXT")
     @Size(min = 3, message = "{Size.min.article.content}")

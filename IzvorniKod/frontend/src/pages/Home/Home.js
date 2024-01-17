@@ -25,31 +25,50 @@ const Home = () => {
     setOpenSnackbar(true);
   };
 
-  useEffect(() => {
+  const handleSearch = (searchText) => {
     setPostsLoading(true);
 
-    axios.get(`${API_URL}/posts/getAll`)
+    axios.post(`${API_URL}/posts/getAll`, {
+      title: searchText
+    })
       .then((res) => {
         console.log(res);
 
-        setPosts(res.data.reverse());
+        setPosts(res.data.articlePage);
       })
       .catch((err) => {
-        handleSnackbarOpen("Dogodila se greške tijekom učitavanja članaka.");
-        console.log(err)
+        handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
+        console.log(err);
+      })
+      .finally(() => setPostsLoading(false));
+  }
+
+  useEffect(() => {
+    setPostsLoading(true);
+
+    axios.post(`${API_URL}/posts/getAll`, {})
+      .then((res) => {
+        console.log(res);
+
+        setPosts(res.data.articlePage);
+      })
+      .catch((err) => {
+        handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
+        console.log(err);
       })
       .finally(() => setPostsLoading(false));
   }, []);
 
   return (
     <>
-      <Header isSearchVisible={false} />
+      <Header isSearchVisible={true} onSearch={handleSearch} />
       <S.HomeDataContainer>
         <S.HomeDataPosts>
           {posts.length === 0 ?
             <S.HomeDataNoPosts variant='h3'>
               {postsLoading ? "Učitavam članke..." : "Ovdje još nema članaka :("}
-            </S.HomeDataNoPosts> :
+            </S.HomeDataNoPosts>
+            :
             posts.map((post) => (
               <S.HomeDataPost key={post.id} id={post.id}>
                 <S.HomeDataPostData>
@@ -59,7 +78,8 @@ const Home = () => {
                     </S.HomeDataPostTitleLink>
                   </S.HomeDataPostTitle>
                   <S.HomeDataPostSubtitle>
-                    {new Date(post.datePublished).toLocaleString('en-UK')}
+                    <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
+                    <div>{`by `}<Link to={`/profile/${post.authorid}`}>{post.author}</Link></div>
                   </S.HomeDataPostSubtitle>
                 </S.HomeDataPostData>
               </S.HomeDataPost>

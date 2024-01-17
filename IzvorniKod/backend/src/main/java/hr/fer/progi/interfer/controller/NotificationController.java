@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hr.fer.progi.interfer.dto.request.NotificationPostDTO;
 import hr.fer.progi.interfer.dto.request.NotificationReportDTO;
+import hr.fer.progi.interfer.service.NotificationDeleteService;
 import hr.fer.progi.interfer.service.NotificationGetService;
 import hr.fer.progi.interfer.service.NotificationPostService;
 import jakarta.validation.Valid;
@@ -27,6 +29,9 @@ public class NotificationController {
 	
 	@Autowired
 	private NotificationPostService notificationPostService;
+	
+	@Autowired
+	private NotificationDeleteService notificationDeleteService;
 	
 	@GetMapping("/get")
     public ResponseEntity<?> getNotifications(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
@@ -70,7 +75,11 @@ public class NotificationController {
         return notificationPostService.reportComment(authorizationHeader, notificationDetails);
     }
 	
-	
+	@DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteComment(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @PathVariable Long id) {
+
+        return notificationDeleteService.delete(authorizationHeader, id);
+    }
 	
 
 }
