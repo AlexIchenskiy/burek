@@ -1,5 +1,5 @@
 package hr.fer.progi.interfer;
-/*
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,4 +11,3 @@ class InterferApplicationTests {
 	}
 
 }
-*/
