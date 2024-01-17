@@ -1,4 +1,4 @@
-import { ContentCopy } from "@mui/icons-material";
+import { ContentCopy, MoreVert } from "@mui/icons-material";
 import { Avatar, Chip, Container, FormControl, Input, Typography, styled } from "@mui/material";
 import { EmailShareButton, FacebookShareButton, LinkedinShareButton, WhatsappShareButton } from "react-share";
 
@@ -28,6 +28,13 @@ export const PostTextContainer = styled(Container)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const PostTitleContainer = styled(Container)`
+  padding: 0!important;
+  margin: 0!important;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const PostTitleInput = styled(Input)`
@@ -151,7 +158,7 @@ export const PostComments = styled(Container)`
 `;
 
 export const PostComment = styled(Container)`
-  width: 80%;
+  width: 100%;
   height: auto;
   margin: 16px 0;
   padding: 0!important;
@@ -164,11 +171,13 @@ export const PostCommentAvatar = styled(Avatar)`
   width: 32px;
   height: 32px;
   margin-right: 12px;
+  margin-top: 8px;
   background-color: ${colors.primary};
   cursor: pointer;
 `;
 
 export const PostCommentContent = styled(Container)`
+  padding-left: 4px!important;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -189,4 +198,8 @@ export const PostNoComments = styled(Typography)`
 export const PostCommentsForm = styled(FormControl)`
   min-width: 240px;
   width: 100%;
+`;
+
+export const PostCommentMenu = styled(MoreVert)`
+  cursor: pointer;
 `;

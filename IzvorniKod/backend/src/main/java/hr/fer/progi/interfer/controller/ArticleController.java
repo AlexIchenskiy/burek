@@ -1,7 +1,6 @@
 package hr.fer.progi.interfer.controller;
 
 import hr.fer.progi.interfer.dto.request.ArticleRatingPostDTO;
-import hr.fer.progi.interfer.dto.request.ArticleDeleteDTO;
 import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

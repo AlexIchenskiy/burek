@@ -3,11 +3,9 @@ package hr.fer.progi.interfer.service.impl;
 import java.util.NoSuchElementException;
 
 import hr.fer.progi.interfer.dto.request.UserEditDTO;
-import hr.fer.progi.interfer.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.response.UserDetailsDTO;
@@ -27,9 +25,6 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public ResponseEntity<?> profile(String authorizationHeader) {
