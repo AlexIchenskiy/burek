@@ -3,6 +3,8 @@ package hr.fer.progi.interfer.service.impl;
 import org.springframework.http.ResponseEntity;
 
 import hr.fer.progi.interfer.service.ArticleCategoryGetService;
+import hr.fer.progi.interfer.repository.CategoryRepository;
+
 
 public class ArticleCategoryGetServiceImpl implements ArticleCategoryGetService{
 
