@@ -14,6 +14,7 @@ import { validateTitle } from '../../validators/validateTitle';
 import { validateContent } from '../../validators/validateContent';
 import { validateFields } from '../../validators/validateFields';
 import { Alert, Snackbar } from '@mui/material';
+import { pointer } from 'd3';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -196,13 +197,14 @@ const Editor = () => {
             className={currentStyle.has('ITALIC') ? 'active' : ''}
           />
           <S.EditorToolbarSave
-            onMouseDown={(e) => { if (!isSaving) handleSave(e) }}
+            sx={contentLoading || isSaving ? { cursor: 'initial', color: 'gray' } : { cursor: 'pointer' }}
+            onMouseDown={(e) => { if (!isSaving && !contentLoading) handleSave(e) }}
           />
         </S.EditorToolbarContainer>
         <S.EditorTextContainer>
           <S.EditorTitleInput value={title} onChange={handleTitleChange} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Upišite naslov ovdje...'} disabled={contentLoading} />
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'I članak...' : 'Počnite pisati ovdje...'} disabled={contentLoading} />
-          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
+          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading || contentLoading || isSaving}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
         </S.EditorTextContainer>
       </S.EditorContainer>
       <Snackbar
