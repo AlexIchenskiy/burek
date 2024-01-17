@@ -44,10 +44,12 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             Article newArticle = new Article();
             String category = "trending";
 
+            System.out.println(articleDetails.isPosted());
+
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setAuthor(author);
             newArticle.setContent(articleDetails.getContent());
-            newArticle.setPublished(articleDetails.getPosted());
+            newArticle.setPublished(articleDetails.isPosted());
             newArticle.setDatePublished(new Timestamp(System.currentTimeMillis()));
             newArticle.setTags(articleDetails.getTags());
             newArticle.setCategory(category);// FIX kod spajanja frontenda: vratiti articleDetails.getCategory() za spremanje kategorije 
@@ -69,7 +71,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             if(optArticle.isEmpty()){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
-            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.getPosted()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
         }

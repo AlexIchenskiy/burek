@@ -35,7 +35,7 @@ public class Article {
     private User author;
 
     @Column(nullable=false)
-    private Boolean published;
+    private boolean published;
 
     @Column(nullable = false)
     private Timestamp datePublished;

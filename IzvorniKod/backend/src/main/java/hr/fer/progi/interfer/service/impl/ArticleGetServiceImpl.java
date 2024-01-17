@@ -35,7 +35,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         }
         Article a = article.get();
         ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
-        	a.getId(), a.getTitle(), a.getAuthor().getId(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()
+        	a.getId(), a.getTitle(), a.getAuthor().getId(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.isPublished(), a.getDatePublished(), a.getCategory()
         );
         return ResponseEntity.status(HttpStatus.OK).body(response);
         }
@@ -107,7 +107,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         
         response.setArticlePage(articlePage.stream()
                                 .map(a -> new ArticleSearchResponseDTO.ArticleDTO(
-                                    	a.getId(), a.getTitle(), a.getAuthor().getId(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()))
+                                    	a.getId(), a.getTitle(), a.getAuthor().getId(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.isPublished(), a.getDatePublished(), a.getCategory()))
                                 .toList());
 
 
