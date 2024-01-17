@@ -14,6 +14,7 @@ import hr.fer.progi.interfer.dto.response.ArticlePostResponseDTO;
 import hr.fer.progi.interfer.entity.Article;
 import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.entity.User;
+import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.repository.CategoryRepository;
@@ -67,15 +68,28 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-    public ResponseEntity<?> updateArticle (ArticleEditDTO articleDetails)
+    public ResponseEntity<?> updateArticle (String authorizationHeader, ArticleEditDTO articleDetails)
     {
-        //Auth
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+
+        User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+        if (author.isBanned())
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
+
         try{
             Optional<Article> optArticle = articleRepository.findById(articleDetails.getId());
 
             if(optArticle.isEmpty()){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
+
+            if(author.getId().equals(optArticle.get().getAuthor().getId()) && author.getRole() != UserRole.MODERATOR || author.getRole() != UserRole.ADMIN)
+            {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+            }
+
             articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
