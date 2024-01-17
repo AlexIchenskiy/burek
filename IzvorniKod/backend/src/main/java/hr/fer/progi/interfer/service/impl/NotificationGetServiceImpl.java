@@ -68,59 +68,62 @@ public class NotificationGetServiceImpl implements NotificationGetService {
                 body(notifications);
     }
 
-    @Override
-    public ResponseEntity<?> getAllSent(String authorizationHeader) {
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+	@Override
+	public ResponseEntity<?> getAllSent(String authorizationHeader) {
+		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+		
+		User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+		
+		List<NotificationDTO> notifications = user.getSentNotifications().stream()
+			.map(n -> new NotificationDTO(
+					n.getId(), 
+					n.getFrom().getFirstName() + " " + n.getFrom().getLastName(),
+					n.getFrom().getId(),
+					n.getFrom().getRole().toString(), 
+					n.getSubject(), 
+					n.getContent(), 
+					n.getDateSent().toLocalDateTime(), 
+					n.getSeen(),
+					n.getReportId()))
+			.toList();
+		
+		return ResponseEntity.status(HttpStatus.OK).body(notifications);
+	}
 
-        User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-
-        List<NotificationDTO> notifications = user.getSentNotifications().stream()
-                .map(n -> new NotificationDTO(
-                        n.getId(),
-                        n.getFrom().getFirstName() + " " + n.getFrom().getLastName(),
-                        n.getFrom().getId(),
-                        n.getFrom().getRole().toString(),
-                        n.getSubject(),
-                        n.getContent(),
-                        n.getDateSent().toLocalDateTime(),
-                        n.getSeen()))
-                .toList();
-
-        return ResponseEntity.status(HttpStatus.OK).body(notifications);
-    }
-
-    @Override
-    public ResponseEntity<?> get(String authorizationHeader, Long id) {
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+	@Override
+	public ResponseEntity<?> get(String authorizationHeader, Long id) {
+		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+		
+		User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+		
+		try {
+			Notification notification = notificationRepository.findById(id).get();
+			
+			if (!notification.getTo().contains(user) && !notification.getFrom().getId().equals(user.getId()))
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied, not owner");
+			
+			if (notification.getTo().contains(user))
+				notification.setSeen(true);
+				
+			NotificationDTO dto = new NotificationDTO(
+					notification.getId(), 
+					notification.getFrom().getFirstName() + " " + notification.getFrom().getLastName(),
+					notification.getFrom().getId(),
+					notification.getFrom().getRole().toString(), 
+					notification.getSubject(), 
+					notification.getContent(), 
+					notification.getDateSent().toLocalDateTime(), 
+					notification.getSeen(),
+					notification.getReportId());
+			
+			return ResponseEntity.status(HttpStatus.OK).body(dto);
 
-        User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-
-        try {
-            Notification notification = notificationRepository.findById(id).get();
-
-            if (!notification.getTo().contains(user) && !notification.getFrom().getId().equals(user.getId()))
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied, not owner");
-
-            if (notification.getTo().contains(user))
-                notification.setSeen(true);
-
-            NotificationDTO dto = new NotificationDTO(
-                    notification.getId(),
-                    notification.getFrom().getFirstName() + " " + notification.getFrom().getLastName(),
-                    notification.getFrom().getId(),
-                    notification.getFrom().getRole().toString(),
-                    notification.getSubject(),
-                    notification.getContent(),
-                    notification.getDateSent().toLocalDateTime(),
-                    notification.getSeen());
-
-            return ResponseEntity.status(HttpStatus.OK).body(dto);
-
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong notification id");
-        }
-    }
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong notification id");
+		}
+	}
+>>>>>>> dev
 
 }

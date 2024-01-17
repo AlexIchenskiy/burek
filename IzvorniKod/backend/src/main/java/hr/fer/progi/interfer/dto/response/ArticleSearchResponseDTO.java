@@ -21,8 +21,9 @@ public class ArticleSearchResponseDTO {
 	@AllArgsConstructor
     public static class ArticleDTO {
 
-    	private long id;
+    	private Long id;
         private String title;
+        private Long authorid;
         private String author;
         private String tags;
         private String content;
