@@ -21,8 +21,9 @@ public class ArticleSearchResponseDTO {
 	@AllArgsConstructor
     public static class ArticleDTO {
 
-    	private long id;
+    	private Long id;
         private String title;
+        private Long authorid;
         private String author;
         private String tags;
         private String content;
@@ -30,7 +31,7 @@ public class ArticleSearchResponseDTO {
         private Timestamp datePublished;
 	    private String categoryName;
 	}
-
+    private int totalPages;
 	private List<ArticleDTO> articlePage;
     
 }

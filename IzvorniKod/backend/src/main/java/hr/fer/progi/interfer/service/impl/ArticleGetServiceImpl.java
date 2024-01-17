@@ -33,6 +33,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
     @Override
     public ResponseEntity<?> getArticle(Long id) {
         try{
+
             Optional<Article> article = articleRepository.findById(id);
             if (article.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
@@ -55,6 +56,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         }
     }
 
+
     @Override
     public ResponseEntity<?> getAllArticles(ArticleSearchDTO articleDetails){
 
@@ -63,8 +65,6 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         try {
             Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
  
-
-
         Article article = new Article();
         article.setTitle(articleDetails.getTitle());
         article.setContent(articleDetails.getContent());       
@@ -82,10 +82,11 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         ExampleMatcher matcher = ExampleMatcher.matching()                                         
                                                 .withIgnoreNullValues()
                                                 .withIgnoreCase()
-                                                .withIgnorePaths("moderated", "published", "datePublished")//TODO maknut published, ignorira se zbog testiranja, ne želimo moći gledati neobjavljene članke 
+                                                .withIgnorePaths("moderated", "datePublished")//TODO maknut published, ignorira se zbog testiranja, ne želimo moći gledati neobjavljene članke 
                                                 .withMatcher("title", match -> match.contains())
                                                 .withMatcher("content", match -> match.contains())
                                                 .withMatcher("tags", match -> match.contains());
+                                                
     
         Example<Article> example = Example.of(article, matcher);
 
@@ -95,10 +96,16 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         }
         page--;
 
-        Pageable pageRequest = PageRequest.of(page, 5, Sort.by("datePublished").descending()); //TODO1 dodat opciju za promjenu br elemenata na stranici (10, 15, ...)
-                                                                                                                        //TODO2 proširi sortiranje
+        Pageable pageRequest = PageRequest.of(page, 5, Sort.by("datePublished").descending()); 
+                                                                                                                        
+        try{                                                                                                
         Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
 
+        return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
 
 
 
@@ -106,6 +113,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
     } catch (Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
+
     }
 
     private ArticleSearchResponseDTO pageToDto(Page<Article> pageResult){
@@ -114,8 +122,10 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
         ArticleSearchResponseDTO response = new ArticleSearchResponseDTO(); 
 
+        response.setTotalPages(pageResult.getTotalPages());
         
         response.setArticlePage(articlePage.stream()
+
                                 .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory().getName()))
                                 .toList());
 

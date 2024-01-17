@@ -42,6 +42,9 @@ public class CommentPostServiceImpl implements CommentPostService {
 
         User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
+        if (author.isBanned())
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
+
         try {
             Article article = articleRepository.findById(commentDetails.getArticle_id()).get();
 

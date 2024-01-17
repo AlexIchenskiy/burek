@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Editor as TextEditor, EditorState, RichUtils, convertToRaw } from 'draft-js';
+import { useEffect, useState } from 'react';
+import { Editor as TextEditor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import Header from "../../components/Header/Header";
@@ -8,7 +8,7 @@ import * as S from "./EditorStyles";
 import "./DraftStyles.css";
 import axios from 'axios';
 import { API_URL } from '../../assets/constants';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { validateTitle } from '../../validators/validateTitle';
 import { validateContent } from '../../validators/validateContent';
@@ -19,15 +19,17 @@ const Editor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openSnackbarInfo, setOpenSnackbarInfo] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarInfoMessage, setSnackbarInfoMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [contentLoading, setContentLoading] = useState(false);
+  const [article, setArticle] = useState(null);
 
   const navigate = useNavigate();
   const { token } = useAuth();
-
-  // const handleSave = (e) => {
-  //   // TODO: handle save with backend call
-  // }
+  const { id } = useParams();
 
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
@@ -36,6 +38,15 @@ const Editor = () => {
   const handleSnackbarOpen = (message) => {
     setSnackbarMessage(message)
     setOpenSnackbar(true);
+  };
+
+  const handleSnackbarInfoClose = () => {
+    setOpenSnackbarInfo(false);
+  };
+
+  const handleSnackbarInfoOpen = (message) => {
+    setSnackbarInfoMessage(message)
+    setOpenSnackbarInfo(true);
   };
 
   const validate = () => {
@@ -52,7 +63,7 @@ const Editor = () => {
       "title": title,
       "tags": '#defaultTag',
       "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
-      "isposted": true
+      "posted": true
     };
 
     console.log(data);
@@ -61,17 +72,75 @@ const Editor = () => {
 
     setLoading(true);
 
-    axios.post(`${API_URL}/posts/add`, data, {
+    if (!id) {
+      axios.post(`${API_URL}/posts/add`, data, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(() => navigate("/home", { replace: true }))
+        .catch((err) => {
+          console.log(err);
+          handleSnackbarOpen('Dogodila se pogreška prilikom objavljivanja članka.');
+          setLoading(false)
+        });
+    } else {
+      data.id = id;
+
+      axios.post(`${API_URL}/posts/update`, data, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(() => {
+          navigate('/home');
+        })
+        .catch((err) => {
+          console.log(err);
+          handleSnackbarOpen('Dogodila se pogreška prilikom objavljivanja članka.');
+        });
+    }
+  }
+
+  const handleSave = (e) => {
+    let data;
+    if (article !== null) {
+      data = { ...article, title: title, content: JSON.stringify(convertToRaw(editorState.getCurrentContent())) }
+    } else {
+      data = {
+        "id": id,
+        "title": title,
+        "tags": '#defaultTag',
+        "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+        "posted": false
+      };
+    }
+
+    console.log(article);
+
+    let url = `${API_URL}` + (id ? '/posts/update' : '/posts/add');
+
+    if (!validate()) return;
+
+    setIsSaving(true);
+
+    axios.post(url, data, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
-      .then(() => navigate("/home", { replace: true }))
+      .then((res) => {
+        if (id) {
+          handleSnackbarInfoOpen('Vaš članak je uspješno spremljen! Sada ga možete vidjeti u svojem profilu.')
+        } else {
+          navigate(`/editor/${res.data.id}`);
+        }
+      })
       .catch((err) => {
         console.log(err);
-        handleSnackbarOpen('Dogodila se pogreška prilikom objavljivanja članka.');
-        setLoading(false)
-      });
+        handleSnackbarOpen('Dogodila se pogreška prilikom spremanja članka.');
+      })
+      .finally(() => setIsSaving(false));
   }
 
   const handleTitleChange = (event) => {
@@ -84,6 +153,34 @@ const Editor = () => {
   };
 
   const currentStyle = editorState.getCurrentInlineStyle();
+
+  useEffect(() => {
+    if (id) {
+      setContentLoading(true);
+
+      axios.get(`${API_URL}/posts/${id}`)
+        .then((res) => {
+          console.log(res);
+
+          setArticle(res.data);
+
+          setTitle(res.data.title || '');
+
+          if (res.data.content) {
+            try {
+              setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.content))));
+            } catch (error) {
+              setEditorState(EditorState.createWithContent(ContentState.createFromText(res.data.content)));
+            }
+          };
+        })
+        .catch((err) => {
+          console.log(err);
+          handleSnackbarOpen('Dogodila se greška tijekom učitavanja članka.');
+        })
+        .finally(() => setContentLoading(false));
+    }
+  }, [id, token]);
 
   return (
     <>
@@ -98,14 +195,15 @@ const Editor = () => {
             onMouseDown={(e) => handleInlineStyle(e, 'ITALIC')}
             className={currentStyle.has('ITALIC') ? 'active' : ''}
           />
-          {/* <S.EditorToolbarSave
-            onMouseDown={(e) => handleSave(e)}
-          /> */}
+          <S.EditorToolbarSave
+            sx={contentLoading || isSaving ? { cursor: 'initial', color: 'gray' } : { cursor: 'pointer' }}
+            onMouseDown={(e) => { if (!isSaving && !contentLoading) handleSave(e) }}
+          />
         </S.EditorToolbarContainer>
         <S.EditorTextContainer>
-          <S.EditorTitleInput value={title} onChange={handleTitleChange} type="text" disableUnderline={true} placeholder='Upišite naslov ovdje...' />
-          <TextEditor editorState={editorState} onChange={setEditorState} placeholder='Počnite pisati ovdje...' />
-          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
+          <S.EditorTitleInput value={title} onChange={handleTitleChange} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Upišite naslov ovdje...'} disabled={contentLoading} />
+          <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'I članak...' : 'Počnite pisati ovdje...'} disabled={contentLoading} />
+          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading || contentLoading || isSaving}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
         </S.EditorTextContainer>
       </S.EditorContainer>
       <Snackbar
@@ -115,6 +213,15 @@ const Editor = () => {
       >
         <Alert onClose={handleSnackbarClose} severity="error">
           {snackbarMessage}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openSnackbarInfo}
+        autoHideDuration={6000}
+        onClose={handleSnackbarInfoClose}
+      >
+        <Alert onClose={handleSnackbarInfoClose} severity="success">
+          {snackbarInfoMessage}
         </Alert>
       </Snackbar>
     </>

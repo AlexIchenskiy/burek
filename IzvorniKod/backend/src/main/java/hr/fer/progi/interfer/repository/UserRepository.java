@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import hr.fer.progi.interfer.entity.User;
+import hr.fer.progi.interfer.entity.UserRole;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -14,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
     
-    List<User> findByRole(String role);
+    List<User> findByRole(UserRole role);
 
 }
