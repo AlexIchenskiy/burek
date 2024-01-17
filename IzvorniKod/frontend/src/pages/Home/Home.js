@@ -79,7 +79,7 @@ const Home = () => {
                   </S.HomeDataPostTitle>
                   <S.HomeDataPostSubtitle>
                     <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
-                    <div>{`by ${post.author}`}</div>
+                    <div>{`by `}<Link to={`/profile/${post.authorid}`}>{post.author}</Link></div>
                   </S.HomeDataPostSubtitle>
                 </S.HomeDataPostData>
               </S.HomeDataPost>

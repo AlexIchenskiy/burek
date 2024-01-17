@@ -36,6 +36,9 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
 
         User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+        if (author.isBanned())
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
         
         try {
             Article newArticle = new Article();
