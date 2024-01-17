@@ -61,6 +61,8 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 
+           // categoryRepository.updateCount(articleCategory.getId(), articleCategory.getArticleCount());
+
             ArticlePostResponseDTO response = new ArticlePostResponseDTO();
             response.setId(newArticle.getId());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);

@@ -46,7 +46,7 @@ public class InterferRunner implements ApplicationRunner {
 		userRepository.save(admin);
 
 		Category trending = new Category();
-		trending.setName("trending");
+		trending.setName("news");
 		trending.setArticleCount(0);
 		categoryRepository.save(trending);
 		
