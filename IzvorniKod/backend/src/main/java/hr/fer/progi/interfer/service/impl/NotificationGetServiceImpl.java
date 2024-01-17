@@ -3,6 +3,7 @@ package hr.fer.progi.interfer.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import hr.fer.progi.interfer.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,39 +18,58 @@ import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.NotificationGetService;
 
 @Service
-public class NotificationGetServiceImpl implements NotificationGetService{
-	
-	@Autowired
+public class NotificationGetServiceImpl implements NotificationGetService {
+
+    @Autowired
     private JwtUtil jwtUtil;
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private NotificationRepository notificationRepository;
 
-	@Override
-	public ResponseEntity<?> getAll(String authorizationHeader) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+    @Override
+    public ResponseEntity<?> getAll(String authorizationHeader) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
-		
-		User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-		
-		List<NotificationDTO> notifications = user.getReceivedNotifications().stream()
-			.map(n -> new NotificationDTO(
-					n.getId(), 
-					n.getFrom().getFirstName() + " " + n.getFrom().getLastName(),
-					n.getFrom().getId(),
-					n.getFrom().getRole().toString(), 
-					n.getSubject(), 
-					n.getContent(), 
-					n.getDateSent().toLocalDateTime(), 
-					n.getSeen(),
-					n.getReportId()))
-			.toList();
-		
-		return ResponseEntity.status(HttpStatus.OK).body(notifications);
-	}
+
+        User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+
+        List<NotificationDTO> notifications = user.getReceivedNotifications().stream()
+                .map(n -> {
+                    // TODO: privremeni fix za null, promijeniti ili DTO ili nešto drugo za ljepši kod
+                    if (n.getFrom() != null) {
+						return new NotificationDTO(
+								n.getId(),
+								n.getFrom().getFirstName() + " " + n.getFrom().getLastName(),
+								n.getFrom().getId(),
+								n.getFrom().getRole().toString(),
+								n.getSubject(),
+								n.getContent(),
+								n.getDateSent().toLocalDateTime(),
+								n.getSeen(),
+								n.getReportId()
+						);
+                    } else {
+                        return new NotificationDTO(
+                                n.getId(),
+                                "System",
+                                0L,
+                                UserRole.ADMIN.toString(),
+                                n.getSubject(),
+                                n.getContent(),
+                                n.getDateSent().toLocalDateTime(),
+                                n.getSeen(),
+								n.getReportId());
+                    }
+                })
+                .toList();
+
+        return ResponseEntity.status(HttpStatus.OK).
+
+                body(notifications);
+    }
 
 	@Override
 	public ResponseEntity<?> getAllSent(String authorizationHeader) {

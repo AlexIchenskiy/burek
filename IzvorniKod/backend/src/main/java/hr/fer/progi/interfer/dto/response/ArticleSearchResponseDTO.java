@@ -31,7 +31,7 @@ public class ArticleSearchResponseDTO {
         private Timestamp datePublished;
 	    private String category;
 	}
-
+    private int totalPages;
 	private List<ArticleDTO> articlePage;
     
 }

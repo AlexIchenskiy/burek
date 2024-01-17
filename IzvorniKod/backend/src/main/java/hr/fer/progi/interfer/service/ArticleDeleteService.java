@@ -4,6 +4,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface ArticleDeleteService {
 
-	public ResponseEntity<?> deleteArticle(String authorizationHeader, Long id);
+    ResponseEntity<?> deleteArticle(long id);
 
 }
