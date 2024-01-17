@@ -47,7 +47,7 @@ public class ArticleCategoryPostServiceImpl implements ArticleCategoryPostServic
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Added article");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Added category");
     }
 
 

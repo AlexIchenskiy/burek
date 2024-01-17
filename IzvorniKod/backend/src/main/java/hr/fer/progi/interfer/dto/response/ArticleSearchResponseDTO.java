@@ -28,7 +28,7 @@ public class ArticleSearchResponseDTO {
         private String content;
         private boolean posted;
         private Timestamp datePublished;
-	    private String category;
+	    private String categoryName;
 	}
 
 	private List<ArticleDTO> articlePage;

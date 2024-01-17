@@ -34,6 +34,6 @@ public class Category {
     @Column(nullable = false)
     private int articleCount;
 
- /*    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Article> articles;*/
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articles;
 }

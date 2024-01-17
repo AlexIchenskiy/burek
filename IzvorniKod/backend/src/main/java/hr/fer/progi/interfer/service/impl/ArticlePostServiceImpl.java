@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 
 import hr.fer.progi.interfer.entity.Article;
+import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.ArticleRepository;
+import hr.fer.progi.interfer.repository.CategoryRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.ArticlePostService;
 
@@ -28,6 +30,9 @@ public class ArticlePostServiceImpl implements ArticlePostService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public ResponseEntity<?> addArticle(String authorizationHeader, ArticlePostDTO articleDetails) {
     	if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
@@ -37,21 +42,22 @@ public class ArticlePostServiceImpl implements ArticlePostService {
         
         try {
             Article newArticle = new Article();
-            String category = "trending";
 
+            Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
+            System.out.println(articleCategory.getName());
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setAuthor(author);
             newArticle.setContent(articleDetails.getContent());
             newArticle.setPublished(articleDetails.isPosted());
             newArticle.setDatePublished(new Timestamp(System.currentTimeMillis()));
             newArticle.setTags(articleDetails.getTags());
-            newArticle.setCategory(articleDetails.getCategory());// FIX kod spajanja frontenda: vratiti articleDetails.getCategory() za spremanje kategorije 
+            newArticle.setCategory(articleCategory);
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Added article");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Category not found");
         }
     }
 

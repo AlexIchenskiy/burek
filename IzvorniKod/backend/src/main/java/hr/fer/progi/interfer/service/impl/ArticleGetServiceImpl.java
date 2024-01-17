@@ -16,8 +16,9 @@ import org.springframework.stereotype.Service;
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
 import hr.fer.progi.interfer.dto.response.ArticleSearchResponseDTO;
 import hr.fer.progi.interfer.entity.Article;
-
+import hr.fer.progi.interfer.entity.Category;
 import hr.fer.progi.interfer.repository.ArticleRepository;
+import hr.fer.progi.interfer.repository.CategoryRepository;
 import hr.fer.progi.interfer.service.ArticleGetService;
 
 @Service
@@ -26,24 +27,32 @@ public class ArticleGetServiceImpl implements ArticleGetService {
     @Autowired
     ArticleRepository articleRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @Override
     public ResponseEntity<?> getArticle(Long id) {
-        Optional<Article> article = articleRepository.findById(id);
-        if (article.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
+        try{
+            Optional<Article> article = articleRepository.findById(id);
+            if (article.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found.");
+            }
+            Article a = article.get();
+            ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
+        	    a.getId(), 
+                a.getTitle(), 
+                a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), 
+                a.getTags(), 
+                a.getContent(), 
+                a.getPublished(), 
+                a.getDatePublished(), 
+                a.getCategory().getName()
+            );
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        Article a = article.get();
-        ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
-        	a.getId(), 
-            a.getTitle(), 
-            a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), 
-            a.getTags(), 
-            a.getContent(), 
-            a.getPublished(), 
-            a.getDatePublished(), 
-            a.getCategory()
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Override
@@ -51,15 +60,20 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
         //TODO dodaj ograničenja na minimalnu duljinu sadržaja pretraživanja (content na barem 3 znaka i sl.), pretraga po 1 slovu nema baš smisla
 
+        try {
+            Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
+ 
+
+
         Article article = new Article();
         article.setTitle(articleDetails.getTitle());
         article.setContent(articleDetails.getContent());       
         //article.setAuthor(articleDetails.getAuthor());
-        article.setCategory(articleDetails.getCategory());
+        article.setCategory(articleCategory);
         article.setTags(articleDetails.getTags());
         article.setModerated(false);
         article.setPublished(true);
-
+   
 
         /*
             category, autor, published: exact match
@@ -89,7 +103,9 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
 
         return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
-        
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
     }
 
     private ArticleSearchResponseDTO pageToDto(Page<Article> pageResult){
@@ -100,7 +116,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
         
         response.setArticlePage(articlePage.stream()
-                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory()))
+                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory().getName()))
                                 .toList());
 
 
