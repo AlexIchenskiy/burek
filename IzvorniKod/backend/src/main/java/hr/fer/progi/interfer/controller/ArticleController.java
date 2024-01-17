@@ -3,7 +3,6 @@ package hr.fer.progi.interfer.controller;
 import hr.fer.progi.interfer.dto.request.ArticleRatingPostDTO;
 
 import hr.fer.progi.interfer.dto.request.ArticleCategoryPostDTO;
-import hr.fer.progi.interfer.dto.request.ArticleDeleteDTO;
 
 import hr.fer.progi.interfer.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,15 +99,6 @@ public class ArticleController {
         }
         return articleCategoryDeleteService.deleteCategory(authorizationHeader, categoryDetails);
     }
-  
-
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteArticle(@RequestBody @Valid ArticleDeleteDTO articleDetails,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return ResponseEntity.badRequest().body(bindingResult.toString());
-
 
     @PostMapping("/update")
     public ResponseEntity<?> updateArticle(@RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {

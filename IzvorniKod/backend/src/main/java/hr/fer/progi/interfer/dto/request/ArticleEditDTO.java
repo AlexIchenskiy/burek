@@ -28,6 +28,6 @@ public class ArticleEditDTO {
   
     private boolean posted;
     
-    private String category;
+    private String categoryName;
 
 }

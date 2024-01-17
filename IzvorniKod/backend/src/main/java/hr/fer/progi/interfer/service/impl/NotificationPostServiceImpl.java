@@ -26,8 +26,6 @@ import hr.fer.progi.interfer.entity.Notification;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.jwt.JwtUtil;
-import hr.fer.progi.interfer.repository.ArticleRepository;
-import hr.fer.progi.interfer.repository.CommentRepository;
 import hr.fer.progi.interfer.repository.NotificationRepository;
 import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.NotificationPostService;

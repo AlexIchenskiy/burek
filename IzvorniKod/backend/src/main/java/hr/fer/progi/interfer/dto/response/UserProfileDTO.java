@@ -25,7 +25,7 @@ public class UserProfileDTO {
 		private String title;
 	    private String tags;
 		private String content;
-	    private String category;
+	    private String categoryName;
 		private Timestamp datePublished;
 	}
 

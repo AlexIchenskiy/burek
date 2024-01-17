@@ -48,13 +48,8 @@ public class ArticlePostServiceImpl implements ArticlePostService {
         try {
             Article newArticle = new Article();
 
-<<<<<<< HEAD
-            System.out.println(articleDetails.isPosted());
-
-=======
             Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
-            System.out.println(articleCategory.getName());
->>>>>>> a964f89f140fcf646c85fa75416b6cf8583ff6e1
+
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setAuthor(author);
             newArticle.setContent(articleDetails.getContent());
@@ -69,11 +64,12 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             response.setId(newArticle.getId());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Category not found");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
     public ResponseEntity<?> updateArticle (ArticleEditDTO articleDetails)
     {
+        //Auth
         try{
             Optional<Article> optArticle = articleRepository.findById(articleDetails.getId());
 

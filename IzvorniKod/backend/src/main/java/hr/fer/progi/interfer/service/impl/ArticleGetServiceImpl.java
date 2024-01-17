@@ -42,6 +42,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
             ArticleSearchResponseDTO.ArticleDTO response = new ArticleSearchResponseDTO.ArticleDTO(
         	    a.getId(), 
                 a.getTitle(), 
+                a.getAuthor().getId(),
                 a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), 
                 a.getTags(), 
                 a.getContent(), 
@@ -79,7 +80,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
             category, autor, published: exact match
             title, content, tags: contains
          */
-        ExampleMatcher matcher = ExampleMatcher.matching()                                         
+        final ExampleMatcher matcher = ExampleMatcher.matching()                                         
                                                 .withIgnoreNullValues()
                                                 .withIgnoreCase()
                                                 .withIgnorePaths("moderated", "datePublished")//TODO maknut published, ignorira se zbog testiranja, ne želimo moći gledati neobjavljene članke 
@@ -91,30 +92,26 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         Example<Article> example = Example.of(article, matcher);
 
         int page = articleDetails.getPage();
-        if(!(page >= 1)){
+        if(page < 1){
             page = 1;
         }
         page--;
 
         Pageable pageRequest = PageRequest.of(page, 5, Sort.by("datePublished").descending()); 
-                                                                                                                        
-        try{                                                                                                
-        Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
+                   
+     
+        
+            Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
 
-        return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
-        }
-        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
 
-
-
-        return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
-    }
+
+    
 
     private ArticleSearchResponseDTO pageToDto(Page<Article> pageResult){
 
@@ -125,13 +122,8 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         response.setTotalPages(pageResult.getTotalPages());
         
         response.setArticlePage(articlePage.stream()
-<<<<<<< HEAD
-                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(
-                                    	a.getId(), a.getTitle(), a.getAuthor().getId(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.isPublished(), a.getDatePublished(), a.getCategory()))
-=======
 
-                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.getPublished(), a.getDatePublished(), a.getCategory().getName()))
->>>>>>> a964f89f140fcf646c85fa75416b6cf8583ff6e1
+                                .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getId(),a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.isPublished(), a.getDatePublished(), a.getCategory().getName()))
                                 .toList());
 
 
