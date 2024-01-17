@@ -9,5 +9,5 @@ import hr.fer.progi.interfer.entity.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    Category findByName(String name);
+    Category deleteByName(String name);
 }
