@@ -25,6 +25,7 @@ const Editor = () => {
   const [loading, setLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [contentLoading, setContentLoading] = useState(false);
+  const [article, setArticle] = useState(null);
 
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -102,12 +103,20 @@ const Editor = () => {
   }
 
   const handleSave = (e) => {
-    let data = {
-      "id": id,
-      "title": title,
-      "tags": '#defaultTag',
-      "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
-    };
+    let data;
+    if (article !== null) {
+      data = { ...article, title: title, content: JSON.stringify(convertToRaw(editorState.getCurrentContent())) }
+    } else {
+      data = {
+        "id": id,
+        "title": title,
+        "tags": '#defaultTag',
+        "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+        "posted": false
+      };
+    }
+
+    console.log(article);
 
     let url = `${API_URL}` + (id ? '/posts/update' : '/posts/add');
 
@@ -152,6 +161,8 @@ const Editor = () => {
       axios.get(`${API_URL}/posts/${id}`)
         .then((res) => {
           console.log(res);
+
+          setArticle(res.data);
 
           setTitle(res.data.title || '');
 
