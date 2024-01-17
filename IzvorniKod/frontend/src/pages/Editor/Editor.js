@@ -25,6 +25,7 @@ const Editor = () => {
   const [loading, setLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [contentLoading, setContentLoading] = useState(false);
+  const [article, setArticle] = useState(null);
 
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -102,12 +103,20 @@ const Editor = () => {
   }
 
   const handleSave = (e) => {
-    let data = {
-      "id": id,
-      "title": title,
-      "tags": '#defaultTag',
-      "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
-    };
+    let data;
+    if (article !== null) {
+      data = { ...article, title: title, content: JSON.stringify(convertToRaw(editorState.getCurrentContent())) }
+    } else {
+      data = {
+        "id": id,
+        "title": title,
+        "tags": '#defaultTag',
+        "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+        "posted": false
+      };
+    }
+
+    console.log(article);
 
     let url = `${API_URL}` + (id ? '/posts/update' : '/posts/add');
 
@@ -153,6 +162,8 @@ const Editor = () => {
         .then((res) => {
           console.log(res);
 
+          setArticle(res.data);
+
           setTitle(res.data.title || '');
 
           if (res.data.content) {
@@ -185,13 +196,14 @@ const Editor = () => {
             className={currentStyle.has('ITALIC') ? 'active' : ''}
           />
           <S.EditorToolbarSave
-            onMouseDown={(e) => { if (!isSaving) handleSave(e) }}
+            sx={contentLoading || isSaving ? { cursor: 'initial', color: 'gray' } : { cursor: 'pointer' }}
+            onMouseDown={(e) => { if (!isSaving && !contentLoading) handleSave(e) }}
           />
         </S.EditorToolbarContainer>
         <S.EditorTextContainer>
           <S.EditorTitleInput value={title} onChange={handleTitleChange} type="text" disableUnderline={true} placeholder={contentLoading ? 'Učitavam naslov...' : 'Upišite naslov ovdje...'} disabled={contentLoading} />
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'I članak...' : 'Počnite pisati ovdje...'} disabled={contentLoading} />
-          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
+          <S.EditorSubmit variant="contained" onClick={(e) => handleSubmit(e)} disabled={loading || contentLoading || isSaving}>{loading ? "Objavljivanje..." : "Objavi"}</S.EditorSubmit>
         </S.EditorTextContainer>
       </S.EditorContainer>
       <Snackbar
