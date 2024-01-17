@@ -50,6 +50,9 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             Article newArticle = new Article();
 
             Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
+            if(articleCategory == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Category not defined");
+            }
 
             newArticle.setTitle(articleDetails.getTitle());
             newArticle.setAuthor(author);
