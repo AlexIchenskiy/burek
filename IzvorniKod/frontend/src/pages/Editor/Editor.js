@@ -107,10 +107,7 @@ const Editor = () => {
       "title": title,
       "tags": '#defaultTag',
       "content": JSON.stringify(convertToRaw(editorState.getCurrentContent())),
-      "posted": true
     };
-
-    if (!id) data.posted = false;
 
     let url = `${API_URL}` + (id ? '/posts/update' : '/posts/add');
 
