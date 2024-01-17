@@ -1,12 +1,14 @@
 package hr.fer.progi.interfer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
-import hr.fer.progi.interfer.entity.Notification;
+import hr.fer.progi.interfer.entity.Category;
 
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification, Long>{
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+    Category findByName(String name);
 }

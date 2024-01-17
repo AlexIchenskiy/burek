@@ -43,8 +43,9 @@ public class Article {
     @Column(nullable = false)
     private String tags;
 
-    @Column(nullable=false)
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
     
     @Column(nullable=false)
     private boolean moderated = false;

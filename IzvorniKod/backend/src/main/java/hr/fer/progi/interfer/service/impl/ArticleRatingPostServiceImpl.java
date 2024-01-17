@@ -35,6 +35,7 @@ public class ArticleRatingPostServiceImpl implements ArticleRatingPostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
         if (articleRepository.findById(ratingDetails.getArticleId()).isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ratingDetails.getArticleId());
+        //if (user.getArticles().)
 
         try {
             articleRatingRepository

@@ -26,7 +26,7 @@ public class ArticlePostDTO {
   
     private Boolean posted;
     
-    //promjeniti
-    private String category;
+
+    private String categoryName;
 
 }
