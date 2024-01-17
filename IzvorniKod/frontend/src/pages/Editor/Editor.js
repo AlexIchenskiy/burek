@@ -14,7 +14,6 @@ import { validateTitle } from '../../validators/validateTitle';
 import { validateContent } from '../../validators/validateContent';
 import { validateFields } from '../../validators/validateFields';
 import { Alert, Snackbar } from '@mui/material';
-import { pointer } from 'd3';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
