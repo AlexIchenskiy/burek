@@ -35,11 +35,14 @@ const Home = () => {
   const handleSearch = (page, searchText) => {
     setPostsLoading(true);
 
-    axios.post(`${API_URL}/posts/getAll`, {
+    let data = {
       title: searchText,
-      page: page,
-      categoryName: category
-    })
+      page: page
+    };
+
+    if (category !== null) data.categoryName = category;
+
+    axios.post(`${API_URL}/posts/getAll`, data)
       .then((res) => {
         console.log(res);
 
