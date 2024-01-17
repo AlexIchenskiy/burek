@@ -70,16 +70,11 @@ public class ArticleController {
         return articlePostService.updateArticle(articleDetails);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteArticle(@RequestBody @Valid ArticleDeleteDTO articleDetails,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return ResponseEntity.badRequest().body(bindingResult.toString());
-
-        return articleDeleteService.deleteArticle(articleDetails);
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteArticle(@PathVariable long id) {
+        return articleDeleteService.deleteArticle(id);
     }
-
+    
     // Korisnik želi vidjeti sve ocjene na nekoj objavi
     @GetMapping("/allRatings/{id}")
     public ResponseEntity<?> getArticleRatings(@PathVariable Long id) {
