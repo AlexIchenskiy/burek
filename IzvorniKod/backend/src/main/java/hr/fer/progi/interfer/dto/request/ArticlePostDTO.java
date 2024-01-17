@@ -24,7 +24,7 @@ public class ArticlePostDTO {
     @Size(max = 65000, message = "{Size.max.article.content}")
 	private String content;
   
-    private boolean posted;
+    private Boolean posted;
     
     //promjeniti
     private String category;
