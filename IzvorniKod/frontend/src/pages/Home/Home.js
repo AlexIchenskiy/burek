@@ -81,12 +81,12 @@ const Home = () => {
               <S.HomeDataCategory
                 variant='h6'
                 color={getHueRotatedColor(colors['hue-start'], index * 30)}
-                sx={category === cat ? { border: `1px solid ${getHueRotatedColor(colors['hue-start'], index * 30)}` } : {}}
+                sx={category === cat.name ? { border: `1px solid ${getHueRotatedColor(colors['hue-start'], index * 30)}` } : {}}
                 onClick={() => {
-                  setPage(1); category === cat ? setCategory(null) : setCategory(cat)
+                  setPage(1); category === cat.name ? setCategory(null) : setCategory(cat.name)
                 }}
               >
-                {cat}
+                {cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}
               </S.HomeDataCategory>
             )
           })}

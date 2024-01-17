@@ -174,7 +174,7 @@ const Editor = () => {
           console.log(res);
 
           setArticle(res.data);
-          setCategory(res.data.category);
+          setCategory(res.data.category.name);
           setTitle(res.data.title || '');
 
           if (res.data.content) {
@@ -200,7 +200,7 @@ const Editor = () => {
 
         setCategories(res.data.categories);
         // setCategories(["Popularno", "Aktualno", "Znanost"])
-        setCategory(res.data.categories[0])
+        setCategory(res.data.categories[0].name)
       })
       .catch((err) => {
         console.log(err);
@@ -235,10 +235,10 @@ const Editor = () => {
                 <S.EditorCategory
                   variant='h6'
                   color={getHueRotatedColor(colors['hue-start'], index * 30)}
-                  sx={category === cat ? { border: `1px solid ${getHueRotatedColor(colors['hue-start'], index * 30)}` } : {}}
-                  onClick={() => setCategory(cat)}
+                  sx={category === cat.name ? { border: `1px solid ${getHueRotatedColor(colors['hue-start'], index * 30)}` } : {}}
+                  onClick={() => setCategory(cat.name)}
                 >
-                  {cat}
+                  {cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}
                 </S.EditorCategory>
               )
             })}
