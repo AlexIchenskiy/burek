@@ -65,6 +65,7 @@ public class NotificationController {
             return ResponseEntity.badRequest().body("Failed data validation");
 
         return notificationPostService.requestModifyComment(id, commentDetails);
+    }
 
     @PostMapping("/requestChange/article/{id}")
     public ResponseEntity<?> requestModifyArticle(@PathVariable long id, @RequestBody @Valid ArticlePostDTO articleDetails, BindingResult bindingResult) {

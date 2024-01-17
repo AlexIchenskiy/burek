@@ -47,15 +47,9 @@ public class NotificationPostServiceImpl implements NotificationPostService{
     
     @Autowired
     private ArticleRepository articleRepository;
-    
-    @Autowired
-    private CommentRepository commentRepository;
-    
+
     @Value("${admin.mail}")
     private String mail;
-
-	@Autowired
-	private ArticleRepository articleRepository;
 
 	@Autowired
 	private CommentRepository commentRepository;

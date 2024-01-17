@@ -40,15 +40,17 @@ public class NotificationGetServiceImpl implements NotificationGetService {
                 .map(n -> {
                     // TODO: privremeni fix za null, promijeniti ili DTO ili nešto drugo za ljepši kod
                     if (n.getFrom() != null) {
-                        return new NotificationDTO(
-                                n.getId(),
-                                n.getFrom().getFirstName() + " " + n.getFrom().getLastName(),
-                                n.getFrom().getId(),
-                                n.getFrom().getRole().toString(),
-                                n.getSubject(),
-                                n.getContent(),
-                                n.getDateSent().toLocalDateTime(),
-                                n.getSeen());
+						return new NotificationDTO(
+								n.getId(),
+								n.getFrom().getFirstName() + " " + n.getFrom().getLastName(),
+								n.getFrom().getId(),
+								n.getFrom().getRole().toString(),
+								n.getSubject(),
+								n.getContent(),
+								n.getDateSent().toLocalDateTime(),
+								n.getSeen(),
+								n.getReportId()
+						);
                     } else {
                         return new NotificationDTO(
                                 n.getId(),
@@ -58,7 +60,8 @@ public class NotificationGetServiceImpl implements NotificationGetService {
                                 n.getSubject(),
                                 n.getContent(),
                                 n.getDateSent().toLocalDateTime(),
-                                n.getSeen());
+                                n.getSeen(),
+								n.getReportId());
                     }
                 })
                 .toList();
@@ -124,6 +127,5 @@ public class NotificationGetServiceImpl implements NotificationGetService {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong notification id");
 		}
 	}
->>>>>>> dev
 
 }
