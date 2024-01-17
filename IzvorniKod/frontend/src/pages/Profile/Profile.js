@@ -22,7 +22,8 @@ const Profile = () => {
     email: 'I email...',
   });
 
-  const [posts, setPosts] = useState(null);
+  const [savedPosts, setSavedPosts] = useState(null);
+  const [postedPosts, setPostedPosts] = useState(null);
   const [editedUser, setEditedUser] = useState({ ...user });
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -33,6 +34,7 @@ const Profile = () => {
   const [lastnameError, setLastnameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [otherUserArticles, setOtherUserArticles] = useState(null);
 
   const handleModalOpen = () => {
     setModalOpen(true);
@@ -56,6 +58,7 @@ const Profile = () => {
           setUser(res.data);
           setEditedUser({ ...res.data });
           setisCurrentUserOwner(false);
+          setOtherUserArticles(res.data.articles);
 
           axios
             .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
@@ -63,7 +66,8 @@ const Profile = () => {
               console.log(res1);
 
               setisCurrentUserOwner(token && res1.data && res.data.email === res1.data.email);
-              setPosts(res1.data.savedArticles);
+              setSavedPosts(res1.data.savedArticles);
+              setPostedPosts(res1.data.publishedArticles);
             })
             .catch((err) => console.log(err));
         })
@@ -76,7 +80,8 @@ const Profile = () => {
 
           setUser(res.data);
           setEditedUser({ ...res.data });
-          setPosts(res.data.savedArticles);
+          setSavedPosts(res.data.savedArticles);
+          setPostedPosts(res.data.publishedArticles);
           setisCurrentUserOwner(true);
         })
         .catch((err) => console.log(err));
@@ -228,7 +233,7 @@ const Profile = () => {
                     return <Typography variant='body1' color="orange" fontWeight={500}>Student</Typography>;
 
                   default:
-                    return <Typography variant='body1' color="orange">Učitavam...</Typography>;
+                    return <Typography variant='body1' color="orange">A i ulogu...</Typography>;
                 }
               })()}
             </S.ProfileSubtitle>
@@ -257,16 +262,76 @@ const Profile = () => {
         </S.ProfileContainer>
       )}
       {
-        posts && !isEditing && isCurrentUserOwner && <S.ProfileContainer>
+        otherUserArticles && !isEditing && !isCurrentUserOwner && <S.ProfileContainer>
+          <S.ProfileCard>
+            <>
+              <S.ProfilePostTitleInfo>
+                Korisnički članci:
+              </S.ProfilePostTitleInfo>
+              {otherUserArticles.length > 0 ?
+                otherUserArticles.map((post) => (
+                  <S.ProfilePost key={"saved" + post.id} id={"saved" + post.id}>
+                    <S.ProfilePostData>
+                      <S.ProfilePostTitle>
+                        <S.ProfilePostTitleLink to={`/post/${post.id}`}>
+                          {post.title}
+                        </S.ProfilePostTitleLink>
+                      </S.ProfilePostTitle>
+                      <S.ProfilePostSubtitle>
+                        {/*<div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>*/}
+                        <div>{`by ${user.firstname + " " + user.lastname}`}</div>
+                      </S.ProfilePostSubtitle>
+                    </S.ProfilePostData>
+                  </S.ProfilePost>
+                ))
+                :
+                <S.ProfileNoPosts />}
+            </>
+          </S.ProfileCard>
+        </S.ProfileContainer>
+      }
+      {
+        savedPosts && !isEditing && isCurrentUserOwner && <S.ProfileContainer>
           <S.ProfileCard>
             {token && isCurrentUserOwner && (
               <>
-                <S.ProfilePostTitle>
-                  Vaše objave:
-                </S.ProfilePostTitle>
-                {posts.length > 0 ?
-                  posts.map((post) => (
-                    <S.ProfilePost key={post.id} id={post.id}>
+                <S.ProfilePostTitleInfo>
+                  Vaše spremljene članke:
+                </S.ProfilePostTitleInfo>
+                {savedPosts.length > 0 ?
+                  savedPosts.map((post) => (
+                    <S.ProfilePost key={"saved" + post.id} id={"saved" + post.id}>
+                      <S.ProfilePostData>
+                        <S.ProfilePostTitle>
+                          <S.ProfilePostTitleLink to={`/editor/${post.id}`}>
+                            {post.title}
+                          </S.ProfilePostTitleLink>
+                        </S.ProfilePostTitle>
+                        <S.ProfilePostSubtitle>
+                          <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
+                          <div>{`by ${user.firstname + " " + user.lastname}`}</div>
+                        </S.ProfilePostSubtitle>
+                      </S.ProfilePostData>
+                    </S.ProfilePost>
+                  ))
+                  :
+                  <S.ProfileNoPosts />}
+              </>
+            )}
+          </S.ProfileCard>
+        </S.ProfileContainer>
+      }
+      {
+        postedPosts && !isEditing && isCurrentUserOwner && <S.ProfileContainer>
+          <S.ProfileCard>
+            {token && isCurrentUserOwner && (
+              <>
+                <S.ProfilePostTitleInfo>
+                  Vaše objavljene članke:
+                </S.ProfilePostTitleInfo>
+                {postedPosts.length > 0 ?
+                  postedPosts.map((post) => (
+                    <S.ProfilePost key={"posted" + post.id} id={"posted" + post.id}>
                       <S.ProfilePostData>
                         <S.ProfilePostTitle>
                           <S.ProfilePostTitleLink to={`/post/${post.id}`}>

@@ -70,3 +70,22 @@ export const HomeDataPostSubtitle = styled(Typography)`
   font-weight: 600;
   color: ${colors["secondary-dark"]};
 `;
+
+export const HomeDataPaginationContainer = styled(Container)`
+  padding: 0!important;
+  margin: 0!important;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const HomeDataPaginationButton = styled(Button)`
+  width: 30%;
+  min-width: 90px;
+`;
+
+export const HomeDataPaginationText = styled(Typography)`
+  text-align: center;
+  min-width: 30px;
+`;

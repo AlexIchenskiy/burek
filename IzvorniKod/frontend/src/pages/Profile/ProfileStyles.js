@@ -97,6 +97,12 @@ export const ProfilePostTitle = styled(Typography)`
   font-weight: 600;
 `;
 
+export const ProfilePostTitleInfo = styled(Typography)`
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+`;
+
 export const ProfilePostTitleLink = styled(Link)`
   text-decoration: none;
   color: black;

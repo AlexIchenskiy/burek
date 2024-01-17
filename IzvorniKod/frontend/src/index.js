@@ -32,6 +32,7 @@ root.render(
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/editor" element={<Editor />} />
+          <Route exact path="/editor/:id" element={<Editor />} />
           <Route exact path="/post/:id" element={<Post />} />
           <Route exact path="/logout" element={<Logout />} />
           <Route exact path="/profile" element={<Profile />} />

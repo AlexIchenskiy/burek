@@ -9,10 +9,13 @@ import useAuth from '../../hooks/useAuth';
 import { Alert, Snackbar } from '@mui/material';
 
 const Home = () => {
+  const [page, setPage] = useState(1);
   const [posts, setPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [total, setTotal] = useState(1);
+  const [searchText, setSearchText] = useState('');
 
   const { token } = useAuth();
 
@@ -25,16 +28,18 @@ const Home = () => {
     setOpenSnackbar(true);
   };
 
-  const handleSearch = (searchText) => {
+  const handleSearch = (page, searchText) => {
     setPostsLoading(true);
 
     axios.post(`${API_URL}/posts/getAll`, {
-      title: searchText
+      title: searchText,
+      page: page
     })
       .then((res) => {
         console.log(res);
 
         setPosts(res.data.articlePage);
+        setTotal(res.data.totalPages);
       })
       .catch((err) => {
         handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
@@ -44,24 +49,13 @@ const Home = () => {
   }
 
   useEffect(() => {
-    setPostsLoading(true);
-
-    axios.post(`${API_URL}/posts/getAll`, {})
-      .then((res) => {
-        console.log(res);
-
-        setPosts(res.data.articlePage);
-      })
-      .catch((err) => {
-        handleSnackbarOpen("Dogodila se greška tijekom učitavanja članaka.");
-        console.log(err);
-      })
-      .finally(() => setPostsLoading(false));
-  }, []);
+    handleSearch(page, searchText);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, searchText]);
 
   return (
     <>
-      <Header isSearchVisible={true} onSearch={handleSearch} />
+      <Header isSearchVisible={true} onSearch={(searchText) => { setPage(1); setSearchText(searchText) }} />
       <S.HomeDataContainer>
         <S.HomeDataPosts>
           {posts.length === 0 ?
@@ -85,6 +79,15 @@ const Home = () => {
               </S.HomeDataPost>
             ))}
         </S.HomeDataPosts>
+        <S.HomeDataPaginationContainer>
+          <S.HomeDataPaginationButton disabled={page === 1} variant='outlined' onClick={() => setPage(page - 1)}>
+            Prethodna stranica
+          </S.HomeDataPaginationButton>
+          <S.HomeDataPaginationText>{`${posts.length === 0 ? 0 : page} / ${total}`}</S.HomeDataPaginationText>
+          <S.HomeDataPaginationButton disabled={page >= total} variant='outlined' onClick={() => setPage(page + 1)}>
+            Iduća stranica
+          </S.HomeDataPaginationButton>
+        </S.HomeDataPaginationContainer>
         {token &&
           <Link to="/editor">
             <S.HomeDataButton variant='outlined'>

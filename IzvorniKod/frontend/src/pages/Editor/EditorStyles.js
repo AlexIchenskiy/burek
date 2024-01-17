@@ -16,6 +16,7 @@ export const EditorContainer = styled(Container)`
 `;
 
 export const EditorTextContainer = styled(Container)`
+  min-height: 360px;
   padding: 0!important;
   display: flex;
   flex-direction: column;
