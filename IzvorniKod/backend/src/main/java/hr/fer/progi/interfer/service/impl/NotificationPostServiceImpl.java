@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import hr.fer.progi.interfer.dto.request.CommentContentDTO;
+import hr.fer.progi.interfer.repository.CommentRepository;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import hr.fer.progi.interfer.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,9 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 	@Autowired
 	private ArticleRepository articleRepository;
 
+	@Autowired
+	private CommentRepository commentRepository;
+
 	@Override
 	public ResponseEntity<?> send(String authorizationHeader, @Valid NotificationPostDTO notificationDetails) {
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
@@ -88,6 +93,39 @@ public class NotificationPostServiceImpl implements NotificationPostService{
         return ResponseEntity.status(HttpStatus.OK).body("Notification sent");
 	}
 
+	public ResponseEntity<?> requestModifyComment(long id, CommentContentDTO commentDetails) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail((String) authentication.getPrincipal());
+
+		if (user == null)
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
+		if (user.getRole() == UserRole.STUDENT)
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authorized to delete articles");
+    
+		var comment = commentRepository.findById(id);
+		if (comment.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+
+		if (commentDetails.getContent() == null)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please specify the modification");
+
+		var requestedChanges = new StringBuilder();
+		requestedChanges.append(String.format("\nContent: %s", commentDetails.getContent()));
+
+		var notification = Notification
+				.builder()
+				.to(Set.of(comment.get().getAuthor()))
+				.subject("A moderator has requested a modification for your comment") // FIX: dodati nekakav indikator koji je komentar u pitanju
+				.content(String.format("Requested changes: %s", requestedChanges))
+				.dateSent(Timestamp.from(Instant.now()))
+				.seen(false)
+				.build();
+
+		notificationRepository.save(notification);
+
+		return ResponseEntity.status(HttpStatus.OK).body("Request for modifying article successfully sent");
+  }
+  
 	@Override
 	public ResponseEntity<?> requestModifyArticle(long id, ArticlePostDTO articleDetails) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
