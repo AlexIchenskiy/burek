@@ -6,8 +6,6 @@ export const HomeDataContainer = styled(Container)`
   height: 85%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const HomeDataButton = styled(Button)`
@@ -15,8 +13,18 @@ export const HomeDataButton = styled(Button)`
   margin: 16px;
 `;
 
+export const HomeDataPostsContainer = styled(Container)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+`;
+
 export const HomeDataPosts = styled(Container)`
   height: 100%;
+  min-height: 320px;
   padding: 16px;
   overflow-y: auto;
   display: flex;
@@ -88,4 +96,30 @@ export const HomeDataPaginationButton = styled(Button)`
 export const HomeDataPaginationText = styled(Typography)`
   text-align: center;
   min-width: 30px;
+`;
+
+export const HomeDataCategories = styled(Container)`
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 0!important;
+  margin: 0!important;
+`;
+
+export const HomeDataCategory = styled(Typography)`
+  padding: 4px 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s transform;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;

@@ -1,5 +1,5 @@
 import { FormatBold, FormatItalic, Save } from "@mui/icons-material";
-import { Button, Container, Input, styled } from "@mui/material";
+import { Button, Container, Input, Typography, styled } from "@mui/material";
 
 import colors from '../../assets/colors';
 
@@ -78,5 +78,29 @@ export const EditorSubmit = styled(Button)`
 
   &:hover {
     background-color: ${colors.primary};
+  }
+`;
+
+export const EditorCategoriesContainer = styled(Container)`
+  width: 100%;
+  margin: 16px 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`;
+
+export const EditorCategory = styled(Typography)`
+  padding: 4px 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s transform;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 `;
