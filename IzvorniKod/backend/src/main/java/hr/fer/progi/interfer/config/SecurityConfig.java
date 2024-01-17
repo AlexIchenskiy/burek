@@ -40,7 +40,7 @@ public class SecurityConfig {
                         "/api/posts/getAll/*",
                         "/api/posts/allRatings/*",
                         "/api/user/get/*",
-                        "/api/posts/categories/getAll/",
+                        "/api/posts/categories/getAll",
                         "api/comment/getAll/*")
                 .permitAll()
                 .anyRequest().authenticated());
