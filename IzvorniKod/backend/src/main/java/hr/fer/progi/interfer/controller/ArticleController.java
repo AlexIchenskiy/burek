@@ -61,9 +61,8 @@ public class ArticleController {
 	}
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteArticle(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @PathVariable Long id) {
-
-        return articleDeleteService.deleteArticle(authorizationHeader, id);
+    public ResponseEntity<?> deleteArticle(@PathVariable long id) {
+        return articleDeleteService.deleteArticle(id);
     }
 
     // Korisnik želi vidjeti sve ocjene na nekoj objavi
