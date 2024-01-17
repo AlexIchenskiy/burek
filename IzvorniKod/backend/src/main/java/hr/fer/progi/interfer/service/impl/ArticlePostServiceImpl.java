@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
-
+import hr.fer.progi.interfer.dto.response.ArticlePostResponseDTO;
 import hr.fer.progi.interfer.entity.Article;
 import hr.fer.progi.interfer.entity.User;
 import hr.fer.progi.interfer.jwt.JwtUtil;
@@ -49,7 +49,9 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Added article");
+            ArticlePostResponseDTO response = new ArticlePostResponseDTO();
+            response.setId(newArticle.getId());
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
