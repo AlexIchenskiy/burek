@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
+import hr.fer.progi.interfer.dto.request.ArticleEditDTO;
 import hr.fer.progi.interfer.service.impl.ArticlePostServiceImpl;
 import hr.fer.progi.interfer.service.impl.ArticleGetServiceImpl;
 import jakarta.validation.Valid;
@@ -60,9 +61,23 @@ public class ArticleController {
 	 	return articleGetService.getAllArticles(articleDetails);
 	}
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteArticle(@PathVariable long id) {
-        return articleDeleteService.deleteArticle(id);
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateArticle(@RequestBody @Valid ArticleEditDTO articleDetails, BindingResult bindingResult) {
+                if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+        }
+        return articlePostService.updateArticle(articleDetails);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteArticle(@RequestBody @Valid ArticleDeleteDTO articleDetails,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return ResponseEntity.badRequest().body(bindingResult.toString());
+
+        return articleDeleteService.deleteArticle(articleDetails);
+
     }
 
     // Korisnik želi vidjeti sve ocjene na nekoj objavi

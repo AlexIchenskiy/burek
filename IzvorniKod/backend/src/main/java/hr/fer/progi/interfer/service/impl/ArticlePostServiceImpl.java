@@ -1,12 +1,14 @@
 package hr.fer.progi.interfer.service.impl;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import hr.fer.progi.interfer.dto.request.ArticleEditDTO;
 import hr.fer.progi.interfer.dto.request.ArticlePostDTO;
 
 import hr.fer.progi.interfer.entity.Article;
@@ -57,5 +59,21 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+    public ResponseEntity<?> updateArticle (ArticleEditDTO articleDetails)
+    {
+        try{
+            Optional<Article> optArticle = articleRepository.findById(articleDetails.getId());
 
+            if(optArticle.isEmpty()){
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
+            }
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getCategory(), articleDetails.getTags(), articleDetails.isPublished()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+
+    }
 }

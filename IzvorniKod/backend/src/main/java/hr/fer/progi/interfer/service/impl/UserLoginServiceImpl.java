@@ -30,7 +30,7 @@ public class UserLoginServiceImpl implements UserLoginService {
         User user = userRepository.findByEmail(userDetails.getEmail());
         if (user == null || !passwordEncoder.matches(userDetails.getPassword(), user.getPassword()))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
-
+        
         return ResponseEntity.status(HttpStatus.OK).body(new AuthTokenDTO(jwtUtil.generateToken(user)));
     }
 
