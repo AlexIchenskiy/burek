@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 
 import hr.fer.progi.interfer.dto.request.ArticleCategoryPostDTO;
 import hr.fer.progi.interfer.service.ArticleCategoryDeleteService;
+import hr.fer.progi.interfer.repository.CategoryRepository;
+
 
 public class ArticleCategoryDeleteServiceImpl implements ArticleCategoryDeleteService{
 

@@ -2,9 +2,9 @@ package hr.fer.progi.interfer.service.impl;
 
 import org.springframework.http.ResponseEntity;
 
-import hr.fer.progi.interfer.service.CategoryGetService;
+import hr.fer.progi.interfer.service.ArticleCategoryGetService;
 
-public class CategoryGetServiceImpl implements CategoryGetService{
+public class ArticleCategoryGetServiceImpl implements ArticleCategoryGetService{
 
     @Override
     public ResponseEntity<?> getAll() {
