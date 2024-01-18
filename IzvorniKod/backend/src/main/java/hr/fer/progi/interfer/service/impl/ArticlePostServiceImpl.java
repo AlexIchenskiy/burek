@@ -88,7 +88,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
 
-            if(author.getId().equals(optArticle.get().getAuthor().getId()) && author.getRole() != UserRole.MODERATOR || author.getRole() != UserRole.ADMIN)
+            if(!(author.getId().equals(optArticle.get().getAuthor().getId()) || author.getRole() != UserRole.MODERATOR || author.getRole() != UserRole.ADMIN))
             {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
             }
