@@ -26,7 +26,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
 
     @Autowired
     ArticleRepository articleRepository;
-    
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -38,19 +38,22 @@ public class ArticlePostServiceImpl implements ArticlePostService {
 
     @Override
     public ResponseEntity<?> addArticle(String authorizationHeader, ArticlePostDTO articleDetails) {
-    	if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
 
         User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
         if (author.isBanned())
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
-        
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("User is banned");
+        // NOTE: status i am a teapot je za razlikovanje od forbidden, jer frontend na
+        // osnovu statusa odlučuje o svojoj poruci greške, a ovo je previše dobra šala
+        // da ju propustim
+
         try {
             Article newArticle = new Article();
 
             Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
-            if(articleCategory == null){
+            if (articleCategory == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Category not defined");
             }
 
@@ -71,8 +74,8 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-    public ResponseEntity<?> updateArticle (String authorizationHeader, ArticleEditDTO articleDetails)
-    {
+
+    public ResponseEntity<?> updateArticle(String authorizationHeader, ArticleEditDTO articleDetails) {
         boolean moderated = false;
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
@@ -82,38 +85,32 @@ public class ArticlePostServiceImpl implements ArticlePostService {
         if (author.isBanned())
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
 
-        try{
+        try {
             Optional<Article> optArticle = articleRepository.findById(articleDetails.getId());
 
-            if(optArticle.isEmpty()){
+            if (optArticle.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
 
-            if(author.getId().equals(optArticle.get().getAuthor().getId()))
-            {
+            if (author.getId().equals(optArticle.get().getAuthor().getId())) {
                 moderated = false;
-            }
-            else if (author.getRole() == UserRole.MODERATOR || author.getRole() == UserRole.ADMIN)
-            {
+            } else if (author.getRole() == UserRole.MODERATOR || author.getRole() == UserRole.ADMIN) {
                 moderated = true;
-            }
-            else 
-            {
+            } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
             }
-        
-
 
             Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
-            if(articleCategory == null){
+            if (articleCategory == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Category not defined");
             }
 
-            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted(), articleCategory, moderated);
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(),
+                    articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted(), articleCategory,
+                    moderated);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
 

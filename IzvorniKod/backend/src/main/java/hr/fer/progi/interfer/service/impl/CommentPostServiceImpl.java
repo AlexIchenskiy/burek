@@ -43,7 +43,10 @@ public class CommentPostServiceImpl implements CommentPostService {
         User author = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
         if (author.isBanned())
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is banned");
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("User is banned");
+        // NOTE: status i am a teapot je za razlikovanje od forbidden, jer frontend na
+        // osnovu statusa odlučuje o svojoj poruci greške, a ovo je previše dobra šala
+        // da ju propustim
 
         try {
             Article article = articleRepository.findById(commentDetails.getArticle_id()).get();
