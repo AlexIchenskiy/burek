@@ -73,6 +73,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
     }
     public ResponseEntity<?> updateArticle (String authorizationHeader, ArticleEditDTO articleDetails)
     {
+        boolean moderated = false;
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
 
@@ -88,17 +89,27 @@ public class ArticlePostServiceImpl implements ArticlePostService {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Article not found");
             }
 
-            if(!(author.getId().equals(optArticle.get().getAuthor().getId()) || author.getRole() != UserRole.MODERATOR || author.getRole() != UserRole.ADMIN))
+            if(author.getId().equals(optArticle.get().getAuthor().getId()))
+            {
+                moderated = false;
+            }
+            else if (author.getRole() == UserRole.MODERATOR || author.getRole() == UserRole.ADMIN)
+            {
+                moderated = true;
+            }
+            else 
             {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
             }
+        
+
 
             Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
             if(articleCategory == null){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Category not defined");
             }
 
-            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted(), articleCategory); //TODO dodat kategoriju
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted(), articleCategory, moderated);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
         }
