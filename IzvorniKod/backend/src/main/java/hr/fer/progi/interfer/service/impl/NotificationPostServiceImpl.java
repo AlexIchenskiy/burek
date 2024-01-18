@@ -195,7 +195,7 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 			    sender.getFirstName() + " " + sender.getLastName(), 
 			    article.getTitle(),
 			    article.getAuthor().getFirstName() + " " + article.getAuthor().getLastName(), 
-			    article.getCategory(), 
+			    article.getCategory().getName(), 
 			    article.getTags(),
 			    notificationDetails.getReason(),
 			    article.getAuthor().getEmail()
