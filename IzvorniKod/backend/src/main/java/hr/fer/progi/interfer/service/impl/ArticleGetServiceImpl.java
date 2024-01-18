@@ -64,16 +64,24 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         //TODO dodaj ograničenja na minimalnu duljinu sadržaja pretraživanja (content na barem 3 znaka i sl.), pretraga po 1 slovu nema baš smisla
 
         try {
-            Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
- 
-        Article article = new Article();
-        article.setTitle(articleDetails.getTitle());
-        article.setContent(articleDetails.getContent());       
-        //article.setAuthor(articleDetails.getAuthor());
-        article.setCategory(articleCategory);
-        article.setTags(articleDetails.getTags());
-        article.setModerated(false);
-        article.setPublished(true);
+
+            Category articleCategory; 
+
+            Article article = new Article();
+            article.setTitle(articleDetails.getTitle());
+            article.setContent(articleDetails.getContent());       
+            //article.setAuthor(articleDetails.getAuthor());
+            if(articleDetails.getCategoryName() != null)
+            {
+                articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
+                if(articleCategory == null)
+                {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Category not found");
+                }
+                article.setCategory(articleCategory);
+            }
+            article.setTags(articleDetails.getTags());
+            article.setPublished(true);
    
 
         /*
@@ -83,7 +91,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         final ExampleMatcher matcher = ExampleMatcher.matching()                                         
                                                 .withIgnoreNullValues()
                                                 .withIgnoreCase()
-                                                .withIgnorePaths("moderated", "datePublished")//TODO maknut published, ignorira se zbog testiranja, ne želimo moći gledati neobjavljene članke 
+                                                .withIgnorePaths("moderated", "datePublished")
                                                 .withMatcher("title", match -> match.contains())
                                                 .withMatcher("content", match -> match.contains())
                                                 .withMatcher("tags", match -> match.contains());
@@ -101,7 +109,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
                    
      
         
-            Page<Article> pageResult = articleRepository.findAll(example, pageRequest); //TODO izmijeni da se ne poziva dodatni count query (overhead)
+            Page<Article> pageResult = articleRepository.findAll(example, pageRequest); 
 
             return ResponseEntity.status(HttpStatus.OK).body(pageToDto(pageResult));
         } catch (Exception e) {
@@ -122,7 +130,6 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         response.setTotalPages(pageResult.getTotalPages());
         
         response.setArticlePage(articlePage.stream()
-
                                 .map(a -> new ArticleSearchResponseDTO.ArticleDTO(a.getId(), a.getTitle(), a.getAuthor().getId(),a.getAuthor().getFirstName() + " " + a.getAuthor().getLastName(), a.getTags(), a.getContent(), a.isPublished(), a.getDatePublished(), a.getCategory().getName()))
                                 .toList());
 

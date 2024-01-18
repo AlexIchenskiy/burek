@@ -64,8 +64,6 @@ public class ArticlePostServiceImpl implements ArticlePostService {
             newArticle.setModerated(false);
             articleRepository.save(newArticle);
 
-           // categoryRepository.updateCount(articleCategory.getId(), articleCategory.getArticleCount());
-
             ArticlePostResponseDTO response = new ArticlePostResponseDTO();
             response.setId(newArticle.getId());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
@@ -95,7 +93,7 @@ public class ArticlePostServiceImpl implements ArticlePostService {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
             }
 
-            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted()); //TODO dodat provjeru korisnika (samo smije uređivati vlastite članke)
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted()); //TODO dodat kategoriju
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
         }
