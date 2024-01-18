@@ -20,6 +20,7 @@ import theme from './assets/theme.js';
 import Post from './pages/Post/Post.js';
 import Logout from './components/Logout/Logout.js';
 import Profile from './pages/Profile/Profile.js';
+import AdminPanel from './pages/AdminPanel/AdminPanel.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -37,6 +38,7 @@ root.render(
           <Route exact path="/logout" element={<Logout />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/profile/:id" element={<Profile />} />
+          <Route exact path="/adminpanel" element={<AdminPanel />} />
         </Routes>
       </Router>
     </AuthProvider>
