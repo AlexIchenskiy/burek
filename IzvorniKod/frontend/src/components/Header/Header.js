@@ -137,7 +137,7 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
                   vertical: 'top',
                   horizontal: 'left',
                 }}
-                badgeContent={notifications.length}
+                badgeContent={notifications.filter((n) => !n.seen).length}
               >
                 <S.HeaderNotifications onClick={handleToggleNotificationsMenu} />
               </Badge>
