@@ -181,14 +181,14 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 		newNotification.setSubject("Obavijest moderatorima: Prijavljeni članak na pregledu");
 		newNotification.setContent(String.format(
 			    "Primljena je prijava od strane korisnika %s u vezi članka s sljedećim detaljima:\n\n" +
-			    "- **Naslov članka:** %s\n" +
-			    "- **Autor članka:** %s\n" +
-			    "- **Kategorija članka:** %s\n\n" +
-			    "- **Tagovi:** %s\n\n" +
+			    "- Naslov članka: %s\n" +
+			    "- Autor članka: %s\n" +
+			    "- Kategorija članka: %s\n\n" +
+			    "- Tagovi: %s\n\n" +
 			    "Razlog prijave: %s\n\n" +
 			    "Molimo vas da pregledate navedeni članak i poduzmete odgovarajuće korake:\n\n" +
-			    "1. **Ukloniti članak:** Ako primijetite kršenje pravila zajednice ili prisutnost neprikladnih informacija.\n\n" +
-			    "2. **Zanemariti prijavu:** Ukoliko utvrdite da članak ne krši pravila ili ako je prijava neosnovana.\n\n" +
+			    "1. Ukloniti članak: Ako primijetite kršenje pravila zajednice ili prisutnost neprikladnih informacija.\n\n" +
+			    "2. Zanemariti prijavu: Ukoliko utvrdite da članak ne krši pravila ili ako je prijava neosnovana.\n\n" +
 			    "U slučaju potrebe, kontaktirajte korisnika na %s za dodatne informacije.\n\n" +
 			    "Hvala na vašem angažmanu i brzoj reakciji.\n\n" +
 			    "S poštovanjem,\nSustav za prijavu sadržaja",
@@ -230,12 +230,12 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 		newNotification.setSubject("Obavijest moderatorima: Prijavljeni članak na pregledu");
 		newNotification.setContent(String.format(
 			   "Primljena je prijava od strane korisnika %s u vezi komentara s sljedećim detaljima:\n\n" +
-			   "- **Autor komentara:** %s\n" +
-			   "- **Tekst komentara:** %s\n\n" +
+			   "- Autor komentara: %s\n" +
+			   "- Tekst komentara: %s\n\n" +
 			   "Razlog prijave: %s\n\n" +
 			   "Molimo vas da pregledate navedeni komentar i poduzmete odgovarajuće korake:\n\n" +
-			   "1. **Ukloniti komentar:** Ako primijetite kršenje pravila zajednice ili prisutnost neprikladnih informacija.\n\n" +
-			   "2. **Zanemariti prijavu:** Ukoliko utvrdite da komentar ne krši pravila ili ako je prijava neosnovana.\n\n" +
+			   "1. Ukloniti komentar: Ako primijetite kršenje pravila zajednice ili prisutnost neprikladnih informacija.\n\n" +
+			   "2. Zanemariti prijavu: Ukoliko utvrdite da komentar ne krši pravila ili ako je prijava neosnovana.\n\n" +
 			   "U slučaju potrebe, kontaktirajte korisnika %s za dodatne informacije.\n\n" +
 			   "Hvala na vašem angažmanu i brzoj reakciji.\n\n" +
 			   "S poštovanjem,\nSustav za prijavu sadržaja",
