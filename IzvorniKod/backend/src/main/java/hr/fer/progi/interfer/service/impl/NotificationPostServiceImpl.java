@@ -98,15 +98,22 @@ public class NotificationPostServiceImpl implements NotificationPostService {
         if (comment.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
 
+        var article = comment.get().getArticle();
+
         if (commentDetails.getContent() == null)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please specify the modification");
+
+        var message = new StringBuilder()
+                .append(String.format("Article: %s", article.getTitle()))
+                .append(String.format("By: %s", article.getAuthor()))
+                .append(String.format("Requested changes: %s", commentDetails.getContent()))
+                .toString();
 
         var notification = Notification
                 .builder()
                 .to(Set.of(comment.get().getAuthor()))
-                .subject("A moderator has requested a modification for your comment") // FIX: dodati nekakav indikator
-                                                                                      // koji je komentar u pitanju
-                .content(String.format("Requested changes: %s", commentDetails.getContent()))
+                .subject("A moderator has requested a modification for your comment")
+                .content(message)
                 .dateSent(Timestamp.from(Instant.now()))
                 .seen(false)
                 .build();
