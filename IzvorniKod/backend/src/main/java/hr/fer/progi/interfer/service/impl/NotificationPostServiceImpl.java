@@ -106,6 +106,7 @@ public class NotificationPostServiceImpl implements NotificationPostService {
         var message = new StringBuilder()
                 .append(String.format("Article: %s", article.getTitle()))
                 .append(String.format("By: %s", article.getAuthor()))
+                .append(String.format("Comment: %s", comment.get().getContent()))
                 .append(String.format("Requested changes: %s", commentDetails.getContent()))
                 .toString();
 
