@@ -1,4 +1,5 @@
 package hr.fer.progi.interfer.service.impl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,14 +12,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import hr.fer.progi.interfer.dto.request.ArticleSearchDTO;
 import hr.fer.progi.interfer.dto.response.ArticleSearchResponseDTO;
+import hr.fer.progi.interfer.dto.response.ArticleStatsDTO;
 import hr.fer.progi.interfer.entity.Article;
 import hr.fer.progi.interfer.entity.Category;
+import hr.fer.progi.interfer.entity.User;
+import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.repository.ArticleRepository;
 import hr.fer.progi.interfer.repository.CategoryRepository;
+import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.ArticleGetService;
 
 @Service
@@ -29,6 +36,9 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public ResponseEntity<?> getArticle(Long id) {
@@ -65,7 +75,7 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
         try {
 
-            Category articleCategory; 
+            Category articleCategory = null; 
 
             Article article = new Article();
             article.setTitle(articleDetails.getTitle());
@@ -135,6 +145,37 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
 
         return response;
+    }
+
+
+    @Override
+    public ResponseEntity<?> getStats(String authorizationHeader) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail((String) authentication.getPrincipal());
+
+        if (user == null)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error getting user information");
+
+        if (!(user.getRole() == UserRole.ADMIN || user.getRole() == UserRole.MODERATOR) )
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authorized to delete this article");
+
+
+        ArticleStatsDTO response = new ArticleStatsDTO();
+        response.setTotalArticles(articleRepository.countByPublished(true));
+
+        response.setModeratedArticles(articleRepository.countByModeratedAndPublished(true, true));
+
+        List<Category> categories = categoryRepository.findAll();
+        List<ArticleStatsDTO.CategoryDTO> byCategory = new ArrayList<ArticleStatsDTO.CategoryDTO>();
+      
+        for(Category c : categories)
+        {
+            byCategory.add(new ArticleStatsDTO.CategoryDTO(c.getName(), articleRepository.countByCategoryAndPublished(c, true))) ; 
+        }
+  
+        response.setByCategory(byCategory);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

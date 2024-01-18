@@ -10,4 +10,5 @@ public interface ArticleGetService {
     
     ResponseEntity<?> getAllArticles (ArticleSearchDTO articleDetails);
 
+    ResponseEntity<?> getStats (String authorizationHeader);
 }
