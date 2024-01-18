@@ -108,6 +108,7 @@ const Editor = () => {
         .catch((err) => {
           console.log(err);
           handleSnackbarOpen('Dogodila se pogreška prilikom objavljivanja članka.');
+          setLoading(false);
         });
     }
   }
@@ -174,7 +175,7 @@ const Editor = () => {
           console.log(res);
 
           setArticle(res.data);
-          setCategory(res.data.category.name);
+          setCategory(res.data.categoryName);
           setTitle(res.data.title || '');
 
           if (res.data.content) {
