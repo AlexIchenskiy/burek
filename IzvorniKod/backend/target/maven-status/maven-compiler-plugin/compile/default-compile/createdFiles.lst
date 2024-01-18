@@ -1,0 +1,7 @@
+hr\fer\progi\interfer\dto\request\UserRegistrationDTO.class
+hr\fer\progi\interfer\InterferApplication.class
+hr\fer\progi\interfer\entity\User.class
+hr\fer\progi\interfer\controller\UserController.class
+hr\fer\progi\interfer\entity\UserRole.class
+hr\fer\progi\interfer\dto\request\UserRegistrationDTO$UserRegistrationDTOBuilder.class
+hr\fer\progi\interfer\repository\UserRepository.class
