@@ -1,5 +1,6 @@
 package hr.fer.progi.interfer.service.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import hr.fer.progi.interfer.dto.request.UserEditDTO;
@@ -8,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import hr.fer.progi.interfer.dto.response.UserDTO;
 import hr.fer.progi.interfer.dto.response.UserDetailsDTO;
 import hr.fer.progi.interfer.dto.response.UserProfileDTO;
 import hr.fer.progi.interfer.entity.User;
+import hr.fer.progi.interfer.entity.UserRole;
 import hr.fer.progi.interfer.jwt.JwtUtil;
 import hr.fer.progi.interfer.repository.UserRepository;
 import hr.fer.progi.interfer.service.UserProfileService;
@@ -100,6 +103,22 @@ public class UserProfileServiceImpl implements UserProfileService {
 			return ResponseEntity.status(HttpStatus.OK).body(true);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(false);
+	}
+
+	public ResponseEntity<?> getAll(String authorizationHeader) {
+		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) 
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+			
+        User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
+            
+        if (user.getRole() != UserRole.ADMIN)
+        	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied, not admin");
+        
+        List<UserDTO> list = userRepository.findAll().stream().map(u -> new UserDTO(
+        		u.getId(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getRole()))
+        		.toList();
+        
+        return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 
 }

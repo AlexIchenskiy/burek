@@ -94,5 +94,10 @@ public class UserController {
     public ResponseEntity<?> unbanUser(@PathVariable long id) {
         return userBanService.unban(id);
     }
+    
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllUsers (@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+    	return userProfileService.getAll(authorizationHeader);
+    }
 
 }
