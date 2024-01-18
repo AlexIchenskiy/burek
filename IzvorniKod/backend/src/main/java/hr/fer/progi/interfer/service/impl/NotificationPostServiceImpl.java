@@ -178,7 +178,7 @@ public class NotificationPostServiceImpl implements NotificationPostService{
 		newNotification.setFrom(userRepository.findByEmail(mail));
 		newNotification.setTo(Set.copyOf(receivers));
 		
-		newNotification.setSubject("Obavijest moderatorima: Prijavljeni članak na pregledu");
+		newNotification.setSubject("Obavijest moderatorima: Prijavljen članak na pregled");
 		newNotification.setContent(String.format(
 			    "Primljena je prijava od strane korisnika %s u vezi članka s sljedećim detaljima:\n\n" +
 			    "- Naslov članka: %s\n" +

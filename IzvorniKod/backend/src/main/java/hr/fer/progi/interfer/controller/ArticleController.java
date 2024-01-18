@@ -147,6 +147,12 @@ public class ArticleController {
         return articleRatingDeleteService.deleteArticleRating(id);
     }
 
+    @GetMapping("/stats")
+    public ResponseEntity<?> getMethodName(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        return articleGetService.getStats(authorizationHeader);
+    }
+    
+
 
 
 }
