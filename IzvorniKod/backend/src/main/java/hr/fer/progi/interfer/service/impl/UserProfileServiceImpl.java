@@ -68,6 +68,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             userDto.setLastname(user.getLastName());
             userDto.setEmail(user.getEmail());
             userDto.setRole(user.getRole());
+            userDto.setBanned(user.isBanned());
             userDto.setArticles(user.getArticles().stream()
                     .filter(a -> a.isPublished())
                     .map(a -> new UserDetailsDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(),
