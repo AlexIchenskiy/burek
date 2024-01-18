@@ -65,7 +65,7 @@ export const HomeDataPostTitle = styled(Typography)`
 `;
 
 export const HomeDataPostTitleLink = styled(Link)`
-  word-break: break-all;
+  word-break: break-word;
   text-decoration: none;
   color: black;
   transition: 0.3s all;

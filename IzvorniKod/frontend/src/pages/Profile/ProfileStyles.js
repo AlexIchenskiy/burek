@@ -134,7 +134,7 @@ export const ProfilePostTitleInfo = styled(Typography)`
 `;
 
 export const ProfilePostTitleLink = styled(Link)`
-  word-break: break-all;
+  word-break: break-word;
   text-decoration: none;
   color: black;
   transition: 0.3s all;
