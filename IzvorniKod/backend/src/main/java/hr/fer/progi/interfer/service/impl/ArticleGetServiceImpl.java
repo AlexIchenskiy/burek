@@ -11,6 +11,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -150,7 +151,9 @@ public class ArticleGetServiceImpl implements ArticleGetService {
 
     @Override
     public ResponseEntity<?> getStats(String authorizationHeader) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail((String) authentication.getPrincipal());
 
         if (user == null)
@@ -176,6 +179,10 @@ public class ArticleGetServiceImpl implements ArticleGetService {
         response.setByCategory(byCategory);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+        
     }
 
 }

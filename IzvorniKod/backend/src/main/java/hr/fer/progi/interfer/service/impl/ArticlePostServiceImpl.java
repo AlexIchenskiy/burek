@@ -93,7 +93,12 @@ public class ArticlePostServiceImpl implements ArticlePostService {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
             }
 
-            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted()); //TODO dodat kategoriju
+            Category articleCategory = categoryRepository.findByName(articleDetails.getCategoryName());
+            if(articleCategory == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Category not defined");
+            }
+
+            articleRepository.updateArticle(articleDetails.getId(), articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getTags(), articleDetails.isPosted(), articleCategory); //TODO dodat kategoriju
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated article");
         }
