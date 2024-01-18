@@ -35,18 +35,21 @@ public class UserProfileServiceImpl implements UserProfileService {
             User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
             UserProfileDTO userDto = new UserProfileDTO();
+            userDto.setId(user.getId());
             userDto.setFirstname(user.getFirstName());
             userDto.setLastname(user.getLastName());
             userDto.setEmail(user.getEmail());
             userDto.setRole(user.getRole());
             userDto.setSavedArticles(user.getArticles().stream()
-            		.filter(a -> !a.isPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory().getName(), a.getDatePublished()))
-            		.toList());
+                    .filter(a -> !a.isPublished())
+                    .map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(),
+                            a.getCategory().getName(), a.getDatePublished()))
+                    .toList());
             userDto.setPublishedArticles(user.getArticles().stream()
-            		.filter(a -> a.isPublished())
-            		.map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory().getName(), a.getDatePublished()))
-            		.toList());
+                    .filter(a -> a.isPublished())
+                    .map(a -> new UserProfileDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(),
+                            a.getCategory().getName(), a.getDatePublished()))
+                    .toList());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
         }
@@ -59,16 +62,17 @@ public class UserProfileServiceImpl implements UserProfileService {
 
         try {
             User user = userRepository.findById(id).get();
-            
+
             UserDetailsDTO userDto = new UserDetailsDTO();
             userDto.setFirstname(user.getFirstName());
             userDto.setLastname(user.getLastName());
             userDto.setEmail(user.getEmail());
             userDto.setRole(user.getRole());
             userDto.setArticles(user.getArticles().stream()
-            		.filter(a -> a.isPublished())
-            		.map(a -> new UserDetailsDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(), a.getCategory().getName()))
-            		.toList());
+                    .filter(a -> a.isPublished())
+                    .map(a -> new UserDetailsDTO.ArticleDTO(a.getId(), a.getTitle(), a.getTags(), a.getContent(),
+                            a.getCategory().getName()))
+                    .toList());
 
             return ResponseEntity.status(HttpStatus.OK).body(userDto);
 
@@ -98,27 +102,27 @@ public class UserProfileServiceImpl implements UserProfileService {
         }
     }
 
-	public ResponseEntity<?> chackUser(String mail) {
-		if (userRepository.existsByEmail(mail))
-			return ResponseEntity.status(HttpStatus.OK).body(true);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(false);
-	}
+    public ResponseEntity<?> chackUser(String mail) {
+        if (userRepository.existsByEmail(mail))
+            return ResponseEntity.status(HttpStatus.OK).body(true);
 
-	public ResponseEntity<?> getAll(String authorizationHeader) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) 
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
-			
+        return ResponseEntity.status(HttpStatus.OK).body(false);
+    }
+
+    public ResponseEntity<?> getAll(String authorizationHeader) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer "))
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied");
+
         User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
-            
+
         if (user.getRole() != UserRole.ADMIN)
-        	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied, not admin");
-        
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied, not admin");
+
         List<UserDTO> list = userRepository.findAll().stream().map(u -> new UserDTO(
-        		u.getId(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getRole()))
-        		.toList();
-        
+                u.getId(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getRole()))
+                .toList();
+
         return ResponseEntity.status(HttpStatus.OK).body(list);
-	}
+    }
 
 }
