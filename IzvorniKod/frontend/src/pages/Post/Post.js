@@ -38,13 +38,21 @@ const Post = () => {
   const [comments, setComments] = useState([]);
   const [sending, setSending] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openSnackbarInfo, setOpenSnackbarInfo] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarInfoMessage, setSnackbarInfoMessage] = useState("");
   const [isCommentModalOpened, setIsCommentModalOpened] = useState(false);
   const [isArticleModalOpened, setIsArticleModalOpened] = useState(false);
   const [reportedCommentId, setReportedCommentId] = useState(null);
   const [reportCommentValue, setReportCommentValue] = useState('');
   const [reportArticleValue, setReportArticleValue] = useState('');
   const [reportLoading, setReportLoading] = useState(false);
+  const [suggestLoading, setSuggestLoading] = useState(false);
+  const [suggestedCommentId, setSuggestedCommentId] = useState(null);
+  const [suggestCommentValue, setSuggestCommentValue] = useState('');
+  const [suggestArticleValue, setSuggestArticleValue] = useState('');
+  const [isCommentSuggestModalOpened, setIsCommentSuggestModalOpened] = useState(false);
+  const [isArticleSuggestModalOpened, setIsArticleSuggestModalOpened] = useState(false);
 
   const [copyTooltip, setCopyTooltip] = useState(COPY_DEFAULT_TOOLTIP);
 
@@ -60,6 +68,15 @@ const Post = () => {
   const handleSnackbarOpen = (message) => {
     setSnackbarMessage(message)
     setOpenSnackbar(true);
+  };
+
+  const handleSnackbarInfoClose = () => {
+    setOpenSnackbarInfo(false);
+  };
+
+  const handleSnackbarInfoOpen = (message) => {
+    setSnackbarInfoMessage(message)
+    setOpenSnackbarInfo(true);
   };
 
   const handleOpenCommentMenu = (event) => {
@@ -89,6 +106,17 @@ const Post = () => {
     setAnchorElArticle(null);
   };
 
+  const handleCommentSuggestModalOpen = (commentId) => {
+    setSuggestedCommentId(commentId);
+    setIsCommentSuggestModalOpened(true);
+  };
+
+  const handleCommentSuggestModalClose = () => {
+    setSuggestedCommentId(null);
+    setSuggestCommentValue('');
+    setIsCommentSuggestModalOpened(false);
+  };
+
   const handleArticleModalOpen = () => {
     setIsArticleModalOpened(true);
   };
@@ -96,6 +124,15 @@ const Post = () => {
   const handleArticleModalClose = () => {
     setReportArticleValue('');
     setIsArticleModalOpened(false);
+  };
+
+  const handleArticleSuggestModalOpen = () => {
+    setIsArticleSuggestModalOpened(true);
+  };
+
+  const handleArticleSuggestModalClose = () => {
+    setSuggestArticleValue('');
+    setIsArticleSuggestModalOpened(false);
   };
 
   const handleCommentReport = () => {
@@ -270,6 +307,64 @@ const Post = () => {
       });
   }
 
+  const handleArticleRequestChange = () => {
+    let data = {
+      content: suggestArticleValue
+    };
+
+    if (suggestArticleValue.length < 3) {
+      handleSnackbarOpen('Prijedlog mora sadržavati više od tri znaka!');
+      return;
+    }
+
+    setSuggestLoading(true);
+
+    axios.post(`${API_URL}/notification/requestChange/article/${id}`, data, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        setIsArticleSuggestModalOpened(false);
+        handleSnackbarInfoOpen('Promjene su zatražene te je autoru ovog članka poslana odgovarajuća obavijest. Hvala!');
+      })
+      .catch((err) => {
+        console.log(err);
+
+        handleSnackbarOpen('Dogodila se greška tijekom predlaganja izmjena za članak.');
+      })
+      .finally(() => setSuggestLoading(false));
+  }
+
+  const handleCommentRequestChange = () => {
+    let data = {
+      content: suggestCommentValue
+    };
+
+    if (suggestCommentValue.length < 3) {
+      handleSnackbarOpen('Prijedlog mora sadržavati više od tri znaka!');
+      return;
+    }
+
+    setSuggestLoading(true);
+
+    axios.post(`${API_URL}/notification/requestChange/comment/${suggestedCommentId}`, data, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        setIsCommentSuggestModalOpened(false);
+        handleSnackbarInfoOpen('Promjene su zatražene te je autoru ovog komentara poslana odgovarajuća obavijest. Hvala!');
+      })
+      .catch((err) => {
+        console.log(err);
+
+        handleSnackbarOpen('Dogodila se greška tijekom predlaganja izmjena za komentar.');
+      })
+      .finally(() => setSuggestLoading(false));
+  }
+
   const validateCommentInput = () => {
     return validateFields([{ value: comment.trim(), validator: validateComment }], handleSnackbarOpen);
   }
@@ -369,6 +464,9 @@ const Post = () => {
             >
               <MenuItem onClick={() => handleArticleDelete()}>Obriši članak</MenuItem>
               <MenuItem onClick={() => handleArticleModalOpen()}>Prijavi članak</MenuItem>
+              {(user && (user.role === "MODERATOR" || user.role === "ADMIN")) &&
+                <MenuItem onClick={() => handleArticleSuggestModalOpen()}>Predloži izmjene</MenuItem>
+              }
             </Menu>
           </S.PostTitleContainer>
           <TextEditor editorState={editorState} onChange={setEditorState} placeholder={contentLoading ? 'Učitavam članak...' : 'Ovjde još nema ništa :('} readOnly={true} />
@@ -483,6 +581,9 @@ const Post = () => {
                       >
                         <MenuItem onClick={() => handleCommentDelete(comment.id)}>Obriši komentar</MenuItem>
                         <MenuItem onClick={() => handleCommentModalOpen(comment.id)}>Prijavi komentar</MenuItem>
+                        {(user && (user.role === "MODERATOR" || user.role === "ADMIN")) &&
+                          <MenuItem onClick={() => handleCommentSuggestModalOpen(comment.id)}>Predloži izmjene</MenuItem>
+                        }
                       </Menu>
                     </>}
                 </S.PostComment>))
@@ -542,6 +643,56 @@ const Post = () => {
           <Button color='error' onClick={handleArticleReport} disabled={reportLoading}>Prijavi</Button>
         </DialogActions>
       </Dialog>
+      <Dialog open={isCommentSuggestModalOpened} onClose={handleCommentSuggestModalClose}>
+        <DialogTitle>Predlaganje izmjena komentaru</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Navedite izmjene koje želite predložiti za navedeni komentar.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="comment-suggestion"
+            name="comment-suggestion"
+            label="Razlog"
+            value={suggestCommentValue}
+            onChange={(event) => setSuggestCommentValue(event.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCommentSuggestModalClose}>Odustani</Button>
+          <Button color='success' onClick={handleCommentRequestChange} disabled={suggestLoading}>Pošalji</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={isArticleSuggestModalOpened} onClose={handleArticleSuggestModalClose}>
+        <DialogTitle>Predlaganje izmjena članku</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Navedite izmjene koje želite predložiti za navedeni članak.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="article-suggestion"
+            name="article-suggestion"
+            label="Razlog"
+            value={suggestArticleValue}
+            onChange={(event) => setSuggestArticleValue(event.target.value)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleArticleSuggestModalClose}>Odustani</Button>
+          <Button color='success' onClick={handleArticleRequestChange} disabled={suggestLoading}>Pošalji</Button>
+        </DialogActions>
+      </Dialog>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
@@ -549,6 +700,15 @@ const Post = () => {
       >
         <Alert onClose={handleSnackbarClose} severity="error">
           {snackbarMessage}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openSnackbarInfo}
+        autoHideDuration={6000}
+        onClose={handleSnackbarInfoClose}
+      >
+        <Alert onClose={handleSnackbarInfoClose} severity="success">
+          {snackbarInfoMessage}
         </Alert>
       </Snackbar>
     </>
