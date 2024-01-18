@@ -9,11 +9,38 @@ export const ProfileContainer = styled(Container)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  order: 2;
+`;
+
+export const ProfileContainerSaved = styled(ProfileContainer)`
+  @media only screen and (min-width: 812px) {
+    order: 1;
+    margin-top: 32px!important;
+  }
+`;
+
+export const ProfileContainerPosted = styled(ProfileContainer)`
+  @media only screen and (min-width: 812px) {
+    order: 3;
+    margin-top: 32px!important;
+  }
+`;
+
+export const ProfileLayoutContainer = styled(Container)`
+  max-width: initial!important;
+  margin: 0!important;
+  padding: 0!important;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: 812px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 `;
 
 export const ProfileCard = styled(Container)`
-  width: fit-content;
-  min-width: 240px;
+  min-width: 260px;
   padding: 16px;
   margin: 16px;
   display: flex;
@@ -64,8 +91,11 @@ export const ProfileDialog = styled(Container)`
 `;
 
 export const ProfileNoPosts = styled(Typography)`
+  padding: 24px;
+  font-weight: 500;
   margin: auto;
   text-align: center;
+  color: lightgray;
 `;
 
 export const ProfilePostsTitle = styled(Typography)`

@@ -161,177 +161,120 @@ const Profile = () => {
   return (
     <>
       <Header isSearchVisible={false} />
-      {isEditing ? (
-        <S.ProfileContainer>
-          <h2>Uređivanje profila</h2>
-          <S.ProfileTextField
-            type="text"
-            variant='outlined'
-            color='primary'
-            label="Ime"
-            onChange={e => setEditedUser((prevUser) => ({ ...prevUser, firstname: e.target.value }))}
-            value={editedUser.firstname}
-            error={firstnameError}
-            fullWidth
-            sx={{ mb: 4 }}
-          />
-          <S.ProfileTextField
-            type="text"
-            variant='outlined'
-            color='primary'
-            label="Prezime"
-            onChange={e => setEditedUser((prevUser) => ({ ...prevUser, lastname: e.target.value }))}
-            value={editedUser.lastname}
-            error={lastnameError}
-            fullWidth
-            sx={{ mb: 4 }}
-          />
-          <S.ProfileTextField
-            type="email"
-            variant='outlined'
-            color='primary'
-            label="Email"
-            onChange={e => { setEditedUser((prevUser) => ({ ...prevUser, email: e.target.value })) }}
-            value={editedUser.email}
-            error={emailError}
-            fullWidth
-            sx={{ mb: 4 }}
-          />
-          <S.ProfileButton variant="outlined" color="primary" type="submit" onClick={handleSaveClick} disabled={isSaving}>
-            {isSaving ? "Spremam promjene..." : "Spremi promjene"}
-          </S.ProfileButton>
-          <S.ProfileButton variant='outlined' color='error' onClick={() => {
-            setFirstnameError('');
-            setLastnameError('');
-            setEmailError('');
-            setOpenSnackbar(false);
-            setIsEditing(false);
-            setEditedUser({ ...user });
-          }}>
-            Odustani
-          </S.ProfileButton>
-        </S.ProfileContainer>
-      ) : (
-        <S.ProfileContainer>
-          <S.ProfileCard>
-            <S.ProfileName>
-              {user.firstname} {user.lastname}
-            </S.ProfileName>
-            <S.ProfileSubtitle>
-              {user.email}
-            </S.ProfileSubtitle>
-            <S.ProfileSubtitle>
-              {(() => {
-                switch (user.role) {
-                  case "ADMIN":
-                    return <Typography variant='body1' color="red" fontWeight={900}>Administrator</Typography>;
+      <S.ProfileLayoutContainer>
+        {isEditing ? (
+          <S.ProfileContainer>
+            <h2>Uređivanje profila</h2>
+            <S.ProfileTextField
+              type="text"
+              variant='outlined'
+              color='primary'
+              label="Ime"
+              onChange={e => setEditedUser((prevUser) => ({ ...prevUser, firstname: e.target.value }))}
+              value={editedUser.firstname}
+              error={firstnameError}
+              fullWidth
+              sx={{ mb: 4 }}
+            />
+            <S.ProfileTextField
+              type="text"
+              variant='outlined'
+              color='primary'
+              label="Prezime"
+              onChange={e => setEditedUser((prevUser) => ({ ...prevUser, lastname: e.target.value }))}
+              value={editedUser.lastname}
+              error={lastnameError}
+              fullWidth
+              sx={{ mb: 4 }}
+            />
+            <S.ProfileTextField
+              type="email"
+              variant='outlined'
+              color='primary'
+              label="Email"
+              onChange={e => { setEditedUser((prevUser) => ({ ...prevUser, email: e.target.value })) }}
+              value={editedUser.email}
+              error={emailError}
+              fullWidth
+              sx={{ mb: 4 }}
+            />
+            <S.ProfileButton variant="outlined" color="primary" type="submit" onClick={handleSaveClick} disabled={isSaving}>
+              {isSaving ? "Spremam promjene..." : "Spremi promjene"}
+            </S.ProfileButton>
+            <S.ProfileButton variant='outlined' color='error' onClick={() => {
+              setFirstnameError('');
+              setLastnameError('');
+              setEmailError('');
+              setOpenSnackbar(false);
+              setIsEditing(false);
+              setEditedUser({ ...user });
+            }}>
+              Odustani
+            </S.ProfileButton>
+          </S.ProfileContainer>
+        ) : (
+          <S.ProfileContainer>
+            <S.ProfileCard>
+              <S.ProfileName>
+                <span style={{ textAlign: "center", width: "100%" }}>
+                  {user.firstname + " " + user.lastname}
+                </span>
+              </S.ProfileName>
+              <S.ProfileSubtitle>
+                {user.email}
+              </S.ProfileSubtitle>
+              <S.ProfileSubtitle>
+                {(() => {
+                  switch (user.role) {
+                    case "ADMIN":
+                      return <Typography variant='body1' color="red" fontWeight={900}>Administrator</Typography>;
 
-                  case "MODERATOR":
-                    return <Typography variant='body1' color="green" fontWeight={700}>Moderator</Typography>;
+                    case "MODERATOR":
+                      return <Typography variant='body1' color="green" fontWeight={700}>Moderator</Typography>;
 
-                  case "STUDENT":
-                    return <Typography variant='body1' color="orange" fontWeight={500}>Student</Typography>;
+                    case "STUDENT":
+                      return <Typography variant='body1' color="orange" fontWeight={500}>Student</Typography>;
 
-                  default:
-                    return <Typography variant='body1' color="orange">A i ulogu...</Typography>;
-                }
-              })()}
-            </S.ProfileSubtitle>
-            {isCurrentUserOwner && (
-              <>
-                <S.ProfileButton variant='outlined' color='primary' onClick={handleEditClick}>
-                  Uredi profil
-                </S.ProfileButton>
-                <S.ProfileButton variant='outlined' color='error' onClick={handleModalOpen}>
-                  Izbriši profil
-                </S.ProfileButton>
-                <Dialog open={modalOpen} onClose={handleModalClose}>
-                  <S.ProfileDialog>
-                    <DialogTitle>Jeste li sigurni da želite izbrisate profil?</DialogTitle>
-                    <S.ProfileButton variant='outlined' color='primary' onClick={handleModalClose}>
-                      Odustani
-                    </S.ProfileButton>
-                    <S.ProfileButton variant='outlined' color='error' onClick={handleDeleteClick}>
-                      Izbriši profil
-                    </S.ProfileButton>
-                  </S.ProfileDialog>
-                </Dialog>
-              </>
-            )}
-          </S.ProfileCard>
-        </S.ProfileContainer>
-      )}
-      {
-        otherUserArticles && !isEditing && !isCurrentUserOwner && <S.ProfileContainer>
-          <S.ProfileCard>
-            <>
-              <S.ProfilePostTitleInfo>
-                Korisnički članci:
-              </S.ProfilePostTitleInfo>
-              {otherUserArticles.length > 0 ?
-                otherUserArticles.map((post) => (
-                  <S.ProfilePost key={"saved" + post.id} id={"saved" + post.id}>
-                    <S.ProfilePostData>
-                      <S.ProfilePostTitle>
-                        <S.ProfilePostTitleLink to={`/post/${post.id}`}>
-                          {post.title}
-                        </S.ProfilePostTitleLink>
-                      </S.ProfilePostTitle>
-                      <S.ProfilePostSubtitle>
-                        {/*<div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>*/}
-                        <div>{`by ${user.firstname + " " + user.lastname}`}</div>
-                      </S.ProfilePostSubtitle>
-                    </S.ProfilePostData>
-                  </S.ProfilePost>
-                ))
-                :
-                <S.ProfileNoPosts />}
-            </>
-          </S.ProfileCard>
-        </S.ProfileContainer>
-      }
-      {
-        savedPosts && !isEditing && isCurrentUserOwner && <S.ProfileContainer>
-          <S.ProfileCard>
-            {token && isCurrentUserOwner && (
+                    default:
+                      return <Typography variant='body1' color="orange">A i ulogu...</Typography>;
+                  }
+                })()}
+              </S.ProfileSubtitle>
+              {isCurrentUserOwner && (
+                <>
+                  <S.ProfileButton variant='outlined' color='primary' onClick={handleEditClick}>
+                    Uredi profil
+                  </S.ProfileButton>
+                  <S.ProfileButton variant='outlined' color='error' onClick={handleModalOpen}>
+                    Izbriši profil
+                  </S.ProfileButton>
+                  <Dialog open={modalOpen} onClose={handleModalClose}>
+                    <S.ProfileDialog>
+                      <DialogTitle>Jeste li sigurni da želite izbrisate profil?</DialogTitle>
+                      <S.ProfileButton variant='outlined' color='primary' onClick={handleModalClose}>
+                        Odustani
+                      </S.ProfileButton>
+                      <S.ProfileButton variant='outlined' color='error' onClick={handleDeleteClick}>
+                        Izbriši profil
+                      </S.ProfileButton>
+                    </S.ProfileDialog>
+                  </Dialog>
+                </>
+              )}
+            </S.ProfileCard>
+          </S.ProfileContainer>
+        )}
+        {
+          otherUserArticles && !isEditing && !isCurrentUserOwner &&
+          <S.ProfileContainer>
+            <S.ProfileCard>
               <>
                 <S.ProfilePostTitleInfo>
-                  Vaše spremljene članke:
+                  Korisnički članci:
                 </S.ProfilePostTitleInfo>
-                {savedPosts.length > 0 ?
-                  savedPosts.map((post) => (
+                {otherUserArticles.length > 0 ?
+                  otherUserArticles.map((post) => (
                     <S.ProfilePost key={"saved" + post.id} id={"saved" + post.id}>
-                      <S.ProfilePostData>
-                        <S.ProfilePostTitle>
-                          <S.ProfilePostTitleLink to={`/editor/${post.id}`}>
-                            {post.title}
-                          </S.ProfilePostTitleLink>
-                        </S.ProfilePostTitle>
-                        <S.ProfilePostSubtitle>
-                          <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
-                          <div>{`by ${user.firstname + " " + user.lastname}`}</div>
-                        </S.ProfilePostSubtitle>
-                      </S.ProfilePostData>
-                    </S.ProfilePost>
-                  ))
-                  :
-                  <S.ProfileNoPosts />}
-              </>
-            )}
-          </S.ProfileCard>
-        </S.ProfileContainer>
-      }
-      {
-        postedPosts && !isEditing && isCurrentUserOwner && <S.ProfileContainer>
-          <S.ProfileCard>
-            {token && isCurrentUserOwner && (
-              <>
-                <S.ProfilePostTitleInfo>
-                  Vaše objavljene članke:
-                </S.ProfilePostTitleInfo>
-                {postedPosts.length > 0 ?
-                  postedPosts.map((post) => (
-                    <S.ProfilePost key={"posted" + post.id} id={"posted" + post.id}>
                       <S.ProfilePostData>
                         <S.ProfilePostTitle>
                           <S.ProfilePostTitleLink to={`/post/${post.id}`}>
@@ -339,28 +282,92 @@ const Profile = () => {
                           </S.ProfilePostTitleLink>
                         </S.ProfilePostTitle>
                         <S.ProfilePostSubtitle>
-                          <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
+                          {/*<div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>*/}
                           <div>{`by ${user.firstname + " " + user.lastname}`}</div>
                         </S.ProfilePostSubtitle>
                       </S.ProfilePostData>
                     </S.ProfilePost>
                   ))
                   :
-                  <S.ProfileNoPosts />}
+                  <S.ProfileNoPosts>Ovjde još nema ništa</S.ProfileNoPosts>}
               </>
-            )}
-          </S.ProfileCard>
-        </S.ProfileContainer>
-      }
-      <S.ProfileSnackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-      >
-        <S.ProfileAlert onClose={handleSnackbarClose} severity="error">
-          {snackbarMessage}
-        </S.ProfileAlert>
-      </S.ProfileSnackbar>
+            </S.ProfileCard>
+          </S.ProfileContainer>
+        }
+        {
+          savedPosts && !isEditing && isCurrentUserOwner &&
+          <S.ProfileContainerSaved>
+            <S.ProfileCard>
+              {token && isCurrentUserOwner && (
+                <>
+                  <S.ProfilePostTitleInfo>
+                    Vaši spremljeni članci:
+                  </S.ProfilePostTitleInfo>
+                  {savedPosts.length > 0 ?
+                    savedPosts.map((post) => (
+                      <S.ProfilePost key={"saved" + post.id} id={"saved" + post.id}>
+                        <S.ProfilePostData>
+                          <S.ProfilePostTitle>
+                            <S.ProfilePostTitleLink to={`/editor/${post.id}`}>
+                              {post.title}
+                            </S.ProfilePostTitleLink>
+                          </S.ProfilePostTitle>
+                          <S.ProfilePostSubtitle>
+                            <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
+                            <div>{`by ${user.firstname + " " + user.lastname}`}</div>
+                          </S.ProfilePostSubtitle>
+                        </S.ProfilePostData>
+                      </S.ProfilePost>
+                    ))
+                    :
+                    <S.ProfileNoPosts>Ovdje još nema ništa</S.ProfileNoPosts>}
+                </>
+              )}
+            </S.ProfileCard>
+          </S.ProfileContainerSaved>
+        }
+        {
+          postedPosts && !isEditing && isCurrentUserOwner &&
+          <S.ProfileContainerPosted>
+            <S.ProfileCard>
+              {token && isCurrentUserOwner && (
+                <>
+                  <S.ProfilePostTitleInfo>
+                    Vaši objavljeni članci:
+                  </S.ProfilePostTitleInfo>
+                  {postedPosts.length > 0 ?
+                    postedPosts.map((post) => (
+                      <S.ProfilePost key={"posted" + post.id} id={"posted" + post.id}>
+                        <S.ProfilePostData>
+                          <S.ProfilePostTitle>
+                            <S.ProfilePostTitleLink to={`/post/${post.id}`}>
+                              {post.title}
+                            </S.ProfilePostTitleLink>
+                          </S.ProfilePostTitle>
+                          <S.ProfilePostSubtitle>
+                            <div>{new Date(post.datePublished).toLocaleString('en-UK')}</div>
+                            <div>{`by ${user.firstname + " " + user.lastname}`}</div>
+                          </S.ProfilePostSubtitle>
+                        </S.ProfilePostData>
+                      </S.ProfilePost>
+                    ))
+                    :
+                    <S.ProfileNoPosts>Ovdje još nema ništa</S.ProfileNoPosts>}
+                </>
+              )}
+            </S.ProfileCard>
+          </S.ProfileContainerPosted>
+        }
+        <S.ProfileSnackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleSnackbarClose}
+        >
+          <S.ProfileAlert onClose={handleSnackbarClose} severity="error">
+            {snackbarMessage}
+          </S.ProfileAlert>
+        </S.ProfileSnackbar>
+      </S.ProfileLayoutContainer>
     </>
   );
 };

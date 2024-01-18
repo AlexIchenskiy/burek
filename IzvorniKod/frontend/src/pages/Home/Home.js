@@ -114,6 +114,13 @@ const Home = () => {
                       <div>{`by `}<Link to={`/profile/${post.authorid}`}>{post.author}</Link></div>
                     </S.HomeDataPostSubtitle>
                   </S.HomeDataPostData>
+                  <S.HomeDataPostCategory
+                    variant='body1'
+                    color={getHueRotatedColor(colors['hue-start'], (categories.map((c) => c.name).indexOf(post.categoryName)) * 30)}
+                    sx={{ borderColor: getHueRotatedColor(colors['hue-start'], (categories.map((c) => c.name).indexOf(post.categoryName)) * 30) }}
+                  >
+                    {post.categoryName.charAt(0).toUpperCase() + post.categoryName.slice(1)}
+                  </S.HomeDataPostCategory>
                 </S.HomeDataPost>
               ))}
           </S.HomeDataPosts>

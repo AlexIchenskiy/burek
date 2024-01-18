@@ -44,6 +44,7 @@ export const HomeDataPost = styled(Container)`
   min-width: 240px;
   margin: 16px;
   padding: 16px;
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -77,6 +78,17 @@ export const HomeDataPostSubtitle = styled(Typography)`
   font-size: 14px;
   font-weight: 600;
   color: ${colors["secondary-dark"]};
+`;
+
+export const HomeDataPostCategory = styled(Typography)`
+  position: absolute;
+  right: 16px;
+  top: -16px;
+  padding: 4px 16px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
 `;
 
 export const HomeDataPaginationContainer = styled(Container)`
