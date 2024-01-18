@@ -14,5 +14,7 @@ public interface UserProfileService {
     ResponseEntity<?> edit(String authorizationHeader, @Valid UserEditDTO userDetails);
 
     ResponseEntity<?> chackUser(String mail);
+    
+    ResponseEntity<?> getAll(String authorizationHeader);
 
 }
