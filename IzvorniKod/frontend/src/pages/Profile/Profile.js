@@ -21,6 +21,7 @@ const Profile = () => {
     lastname: '',
     email: 'I email...',
   });
+  const [currentUser, setCurrentUser] = useState(null);
 
   const [savedPosts, setSavedPosts] = useState(null);
   const [postedPosts, setPostedPosts] = useState(null);
@@ -35,6 +36,7 @@ const Profile = () => {
   const [emailError, setEmailError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [otherUserArticles, setOtherUserArticles] = useState(null);
+  const [banLoading, setBanLoading] = useState(false);
 
   const handleModalOpen = () => {
     setModalOpen(true);
@@ -158,6 +160,55 @@ const Profile = () => {
     }
   }
 
+  const handleBanUser = () => {
+    setBanLoading(true);
+
+    if (token) {
+      axios
+        .post(`${API_URL}/user/ban/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(() => {
+          setUser({ ...user, banned: true })
+        })
+        .catch((err) => {
+          console.log(err);
+
+          handleSnackbarOpen('Dogodila se greška tijekom bannanja korisnika.');
+        })
+        .finally(() => setBanLoading(false));;
+    }
+  }
+
+  const handlePardonUser = () => {
+    setBanLoading(true);
+
+    if (token) {
+      axios
+        .post(`${API_URL}/user/unban/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(() => {
+          setUser({ ...user, banned: false })
+        })
+        .catch((err) => {
+          console.log(err);
+
+          handleSnackbarOpen('Dogodila se greška tijekom ne-bannanja korisnika.')
+        })
+        .finally(() => setBanLoading(false));
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+        .then((res) => {
+          console.log(res);
+
+          setCurrentUser(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
+
   return (
     <>
       <Header isSearchVisible={false} />
@@ -240,6 +291,11 @@ const Profile = () => {
                   }
                 })()}
               </S.ProfileSubtitle>
+              {user.banned &&
+                <S.ProfileSubtitle>
+                  Korisnik je bannan
+                </S.ProfileSubtitle>
+              }
               {isCurrentUserOwner && (
                 <>
                   <S.ProfileButton variant='outlined' color='primary' onClick={handleEditClick}>
@@ -261,6 +317,17 @@ const Profile = () => {
                   </Dialog>
                 </>
               )}
+              {console.log(user)}
+              {!isCurrentUserOwner && !user.banned && currentUser && (currentUser.role === 'MODERATOR' || currentUser.role === 'ADMIN') &&
+                <S.ProfileButton variant='outlined' color='error' onClick={handleBanUser} disabled={banLoading}>
+                  Ban
+                </S.ProfileButton>
+              }
+              {!isCurrentUserOwner && user.banned && currentUser && (currentUser.role === 'MODERATOR' || currentUser.role === 'ADMIN') &&
+                <S.ProfileButton variant='outlined' color='success' onClick={handlePardonUser} disabled={banLoading}>
+                  Ne-Ban
+                </S.ProfileButton>
+              }
             </S.ProfileCard>
           </S.ProfileContainer>
         )}

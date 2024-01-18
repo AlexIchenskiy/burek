@@ -91,7 +91,11 @@ const Editor = () => {
         .then(() => navigate("/home", { replace: true }))
         .catch((err) => {
           console.log(err);
-          handleSnackbarOpen('Dogodila se pogreška prilikom objavljivanja članka.');
+          if (err.response && err.response.status === 418) {
+            handleSnackbarOpen('Bannani ste na platformi InterFER te ne možete objavljivati članke.');
+          } else {
+            handleSnackbarOpen('Dogodila se greška tijekom objavljivanja članka.');
+          }
           setLoading(false)
         });
     } else {
@@ -150,7 +154,12 @@ const Editor = () => {
       })
       .catch((err) => {
         console.log(err);
-        handleSnackbarOpen('Dogodila se pogreška prilikom spremanja članka.');
+
+        if (err.response && err.response.status === 418) {
+          handleSnackbarOpen('Bannani ste na platformi InterFER te ne možete stvarati članke.');
+        } else {
+          handleSnackbarOpen('Dogodila se greška tijekom spremanja članka.');
+        }
       })
       .finally(() => setIsSaving(false));
   }

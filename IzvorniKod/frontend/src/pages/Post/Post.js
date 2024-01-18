@@ -251,7 +251,12 @@ const Post = () => {
         .then(() => setComment(''))
         .catch((err) => {
           console.log(err);
-          handleSnackbarOpen('Dogodila se greška tijekom spremanja komentara.')
+
+          if (err.response && err.response.status === 418) {
+            handleSnackbarOpen('Bannani ste na platformi InterFER te ne možete ostavljati komentare.');
+          } else {
+            handleSnackbarOpen('Dogodila se greška tijekom spremanja komentara.');
+          }
         });
 
       setTimeout(() => {
