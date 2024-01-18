@@ -9,6 +9,8 @@ import { API_URL } from '../../assets/constants';
 
 const DEFAULT_SETTINGS = { login: 'Prijava', register: 'Novi korisnik' };
 const USER_SETTINGS = { home: 'Početna', profile: 'Profil', editor: 'Nova objava', logout: 'Odjava' };
+const MODERATOR_SETTINGS = { home: 'Početna', profile: 'Profil', adminpanel: 'Moderatorski kutak', editor: 'Nova objava', logout: 'Odjava' };
+const ADMIN_SETTINGS = { home: 'Početna', profile: 'Profil', adminpanel: 'Admin panel', editor: 'Nova objava', logout: 'Odjava' };
 
 const Header = ({ isSearchVisible = true, onSearch }) => {
   const { token } = useAuth();
@@ -18,6 +20,7 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [searchText, setSearchText] = useState('');
   const [notifications, setNotifications] = useState([]);
+  const [user, setUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -105,12 +108,39 @@ const Header = ({ isSearchVisible = true, onSearch }) => {
 
   useEffect(() => {
     if (token) {
-      setSettings(USER_SETTINGS);
+      if (user !== null) {
+        switch (user.role) {
+          case 'MODERATOR': {
+            setSettings(MODERATOR_SETTINGS);
+            return;
+          }
+          case 'ADMIN': {
+            setSettings(ADMIN_SETTINGS);
+            return;
+          }
+          default:
+            setSettings(USER_SETTINGS)
+        }
+      } else {
+        setSettings(USER_SETTINGS);
+      }
+
       handleGetNotifications();
     } else {
       setSettings(DEFAULT_SETTINGS);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, user]);
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => {
+        console.log(res);
+
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
   }, [token]);
 
   return (

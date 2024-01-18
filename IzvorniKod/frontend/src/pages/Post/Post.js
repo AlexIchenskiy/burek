@@ -25,6 +25,7 @@ const Post = () => {
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState('');
+  const [authorid, setAuthorid] = useState(-1);
   const { id } = useParams();
   const [shareText, setShareText] = useState(`Pročitajte članak na ovom linku:\n${PAGE_URL}/post/${id}`);
   const [contentLoading, setContentLoading] = useState(true);
@@ -37,11 +38,13 @@ const Post = () => {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [sending, setSending] = useState(false);
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openSnackbarInfo, setOpenSnackbarInfo] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarInfoMessage, setSnackbarInfoMessage] = useState("");
   const [isCommentModalOpened, setIsCommentModalOpened] = useState(false);
+
   const [isArticleModalOpened, setIsArticleModalOpened] = useState(false);
   const [reportedCommentId, setReportedCommentId] = useState(null);
   const [reportCommentValue, setReportCommentValue] = useState('');
@@ -379,6 +382,7 @@ const Post = () => {
 
         setTitle(res.data.title || '');
         setShareText(`Pročitajte ${res.data.title} na ovom linku:\n${PAGE_URL}/post/${id}`);
+        setAuthorid(res.data.authorid);
 
         if (res.data.content) {
           try {
@@ -466,6 +470,9 @@ const Post = () => {
               <MenuItem onClick={() => handleArticleModalOpen()}>Prijavi članak</MenuItem>
               {(user && (user.role === "MODERATOR" || user.role === "ADMIN")) &&
                 <MenuItem onClick={() => handleArticleSuggestModalOpen()}>Predloži izmjene</MenuItem>
+              }
+              {((user && (user.role === "MODERATOR" || user.role === "ADMIN")) || (user && user.id === authorid)) &&
+                <MenuItem onClick={() => navigate(`/editor/${id}`)}>Uredi članak</MenuItem>
               }
             </Menu>
           </S.PostTitleContainer>
