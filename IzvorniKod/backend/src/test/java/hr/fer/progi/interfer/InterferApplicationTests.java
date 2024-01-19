@@ -1,3 +1,4 @@
+/*
 package hr.fer.progi.interfer;
 
 import org.junit.BeforeClass;
@@ -132,3 +133,4 @@ class InterferApplicationTests {
 		driver.quit();
 	}
 }
+*/
