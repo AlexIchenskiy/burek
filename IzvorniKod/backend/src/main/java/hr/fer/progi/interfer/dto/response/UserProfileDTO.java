@@ -16,18 +16,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class UserProfileDTO {
-	
-	@Getter
-	@Setter
-	@AllArgsConstructor
-	public static class ArticleDTO {
-		private Long id;
-		private String title;
-	    private String tags;
-		private String content;
-	    private String categoryName;
-		private Timestamp datePublished;
-	}
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class ArticleDTO {
+        private Long id;
+        private String title;
+        private String tags;
+        private String content;
+        private String categoryName;
+        private Timestamp datePublished;
+    }
+
+    private Long id;
 
     private String firstname;
 
@@ -36,10 +38,9 @@ public class UserProfileDTO {
     private String email;
 
     private UserRole role;
-    
+
     private List<ArticleDTO> savedArticles;
-    
+
     private List<ArticleDTO> publishedArticles;
 
 }
-

@@ -15,17 +15,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class UserDetailsDTO {
-	
-	@Getter
-	@Setter
-	@AllArgsConstructor
-	public static class ArticleDTO {
-		private Long id;
-		private String title;
-	    private String tags;
-		private String content;
-	    private String category;
-	}
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class ArticleDTO {
+        private Long id;
+        private String title;
+        private String tags;
+        private String content;
+        private String category;
+    }
 
     private String firstname;
 
@@ -34,7 +34,9 @@ public class UserDetailsDTO {
     private String email;
 
     private UserRole role;
-    
+
     private List<ArticleDTO> articles;
-    
+
+    private boolean banned;
+
 }
