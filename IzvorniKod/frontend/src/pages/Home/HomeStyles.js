@@ -6,8 +6,6 @@ export const HomeDataContainer = styled(Container)`
   height: 85%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const HomeDataButton = styled(Button)`
@@ -15,14 +13,25 @@ export const HomeDataButton = styled(Button)`
   margin: 16px;
 `;
 
+export const HomeDataPostsContainer = styled(Container)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+`;
+
 export const HomeDataPosts = styled(Container)`
   height: 100%;
+  min-height: 320px;
   padding: 16px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 export const HomeDataNoPosts = styled(Typography)`
@@ -33,9 +42,9 @@ export const HomeDataNoPosts = styled(Typography)`
 export const HomeDataPost = styled(Container)`
   width: 65%;
   min-width: 240px;
-  min-height: 96px;
   margin: 16px;
   padding: 16px;
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -56,6 +65,7 @@ export const HomeDataPostTitle = styled(Typography)`
 `;
 
 export const HomeDataPostTitleLink = styled(Link)`
+  word-break: break-word;
   text-decoration: none;
   color: black;
   transition: 0.3s all;
@@ -69,4 +79,60 @@ export const HomeDataPostSubtitle = styled(Typography)`
   font-size: 14px;
   font-weight: 600;
   color: ${colors["secondary-dark"]};
+`;
+
+export const HomeDataPostCategory = styled(Typography)`
+  position: absolute;
+  right: 16px;
+  top: -16px;
+  padding: 4px 16px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+`;
+
+export const HomeDataPaginationContainer = styled(Container)`
+  padding: 0!important;
+  margin: 0!important;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const HomeDataPaginationButton = styled(Button)`
+  width: 30%;
+  min-width: 90px;
+`;
+
+export const HomeDataPaginationText = styled(Typography)`
+  text-align: center;
+  min-width: 30px;
+`;
+
+export const HomeDataCategories = styled(Container)`
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 0!important;
+  margin: 0!important;
+`;
+
+export const HomeDataCategory = styled(Typography)`
+  padding: 4px 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s transform;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;

@@ -1,11 +1,13 @@
-import { AppBar, Avatar, Box, MenuItem, TextField, Toolbar, styled } from "@mui/material";
+import { AppBar, Avatar, Box, Container, MenuItem, TextField, Toolbar, Typography, styled } from "@mui/material";
 import { HistoryEdu, Notifications, Search } from '@mui/icons-material';
 
 import colors from '../../assets/colors';
 import { Link } from "react-router-dom";
 
 export const HeaderAppBar = styled(AppBar)`
+  padding: 0!important;
   box-shadow: none;
+  background-color: white;
   position: relative;
 `;
 
@@ -36,6 +38,7 @@ export const HeaderSearch = styled(Search)`
   height: 32px;
   margin-right: 8px;
   color: ${colors.primary};
+  cursor: pointer;
 `;
 
 export const HeaderSearchBarContainer = styled(Box)`
@@ -71,6 +74,7 @@ export const HeaderNotifications = styled(Notifications)`
   height: 32px;
   margin-right: 8px;
   color: ${colors.primary};
+  cursor: pointer;
 `;
 
 export const HeaderAvatar = styled(Avatar)`
@@ -85,6 +89,27 @@ export const HeaderMenuItem = styled(MenuItem)`
 
 export const HeaderNotificationsMenuItem = styled(MenuItem)`
   padding: 0 8px;
+`;
+
+export const HeaderNotificationContainer = styled(Container)`
+  margin: 16px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const HeaderNotificationTitle = styled(Typography)`
+  transition: 0.2s transform;
+  cursor: ${(props) => props.seen ? "default" : "pointer"};;
+
+  &:hover {
+    transform: ${(props) => props.seen ? "" : "scale(1.02)"};
+  }
+
+  &:active {
+    transform: ${(props) => props.seen ? "" : "scale(0.98)"};;
+  }
 `;
 
 export const HeaderLink = styled(Link)`
