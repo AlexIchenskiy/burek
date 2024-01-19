@@ -29,7 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 class InterferApplicationTests {
 	private WebDriver driver;
 	SeleniumConfig seleniumConfig;
-    private String url = "http://localhost:3000/login";
+    public String url = "https://interfer-frontend.onrender.com/login";
 
 	public void setUp() {
  
@@ -52,7 +52,7 @@ class InterferApplicationTests {
 
 		driver.findElement(By.cssSelector("button")).click();
 
-		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1pxa9xg-MuiAlert-message'")).getText().equals("Molimo vas da koristite svoj sveučilišni email!"));
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Molimo vas da koristite svoj sveučilišni email!"));
 		driver.quit();
 	}
 
@@ -70,7 +70,7 @@ class InterferApplicationTests {
 
 		driver.findElement(By.cssSelector("button")).click();
 
-		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1pxa9xg-MuiAlert-message'")).getText().equals("Lozinka mora sadržavati barem jednu znamenku i barem jedno slovo!"));
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Lozinka mora sadržavati barem jednu znamenku i barem jedno slovo!"));
 		driver.quit();
 	}
 
@@ -88,7 +88,7 @@ class InterferApplicationTests {
 
 		driver.findElement(By.cssSelector("button")).click();
 
-		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1pxa9xg-MuiAlert-message'")).getText().equals("Pogrešni podatci."));
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Pogrešni podatci."));
 		driver.quit();
 	}
 
@@ -106,7 +106,7 @@ class InterferApplicationTests {
 
 		driver.findElement(By.cssSelector("button")).click();
 
-		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1pxa9xg-MuiAlert-message'")).getText().equals("Pogrešni podatci."));
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Pogrešni podatci."));
 		driver.quit();
 	}
 
