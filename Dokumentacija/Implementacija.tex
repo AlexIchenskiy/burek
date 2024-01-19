@@ -67,7 +67,9 @@ fokusom na ACID principe, i pridržavanje SQL standarda.
 	
 		\section{Ispitivanje programskog rješenja}
 		
-Za ispitivanje programskog rješenja, koristili smo JUnit. Svi testovi su 
+		\subsection{Ispitivanje komponenti}
+
+Za ispitivanje komponenti, koristili smo JUnit. Svi testovi su 
 napravljeni za UserRepository klasu, koja je zadužena za sučelje s bazom 
 podataka.
 
@@ -158,25 +160,132 @@ postoji u bazi podataka.
 Test počinje stvaranjem korisnika, i spremanjem istog u bazu podataka. Nakon 
 toga pomoću vlastite metode provjeravamo je dohvaćen korisnik sa tom ulogom.
 			
-			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
-			
+					
 			
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
-			
-			\eject 
+Ispitivanje sustava provedeno je koristeći Selenium WebDriver \footnote{\url{https://www.selenium.dev/documentation/webdriver/}} unutar JUnit testova. Testovima se ispituje funkcionalnost prijave u sustav. U svakom testu se u formu za prijavu unose e-mail i lozinka.
+
+Ispitni slučaj 1: Pokušaj prijave u sustav s neispravnom e-mail adresom	
+Test u formu za prijavu unosi e-mail adresu koja nije iz akademske zajednice (npr. @fer.hr).   
+
+\begin{verbatim}Kod 5.1
+	@Test
+	public void loginTest_neispravan_mail() {
+
+		setUp();
+		driver.get(url);
+
+		WebElement element = driver.findElement(By.cssSelector("input[type='email']")); 
+		element.sendKeys("krivimail@gmail.com");
+
+		element= driver.findElement(By.cssSelector("input[type='password']")); 
+		element.sendKeys("password");
+
+		driver.findElement(By.cssSelector("button")).click();
+
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Molimo vas da koristite svoj sveučilišni email!"));
+		driver.quit();
+	}
+\end{verbatim}
+
+Ispitni slučaj 2: Pokušaj prijave u sustav s lozinkom koja ne sadrži barem 1 numerički znak
+\begin{verbatim}Kod 5.2
+	@Test
+	public void loginTest_neispravna_lozinka() {
+
+		setUp();
+		driver.get(url);
+
+		WebElement element = driver.findElement(By.cssSelector("input[type='email']")); 
+		element.sendKeys("krivimail@fer.hr");
+
+		element= driver.findElement(By.cssSelector("input[type='password']")); 
+		element.sendKeys("password");
+
+		driver.findElement(By.cssSelector("button")).click();
+
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Lozinka mora sadržavati barem jednu znamenku i barem jedno slovo!"));
+		driver.quit();
+	}
+\end{verbatim}
+
+Ispitni slučaj 3: Pokušaj prijave u sustav s e-mail adresom koja nije registrirana u sustavu
+\begin{verbatim}Kod 5.3
+	@Test
+	public void loginTest_nepostojeci_korisnik() {
+
+		setUp();
+		driver.get(url);
+
+		WebElement element = driver.findElement(By.cssSelector("input[type='email']")); 
+		element.sendKeys("nepostojeci@fer.hr");
+
+		element= driver.findElement(By.cssSelector("input[type='password']")); 
+		element.sendKeys("password123");
+
+		driver.findElement(By.cssSelector("button")).click();
+
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Pogrešni podatci."));
+		driver.quit();
+	}
+
+\end{verbatim}
+
+Ispitni slučaj 4: Pokušaj prijave u sustav s krivom lozinkom
+Test u formu za prijavu unosi e-mail adresu korisnika koji je registriran u sustavu i krivu lozinku.
+\begin{verbatim}Kod 5.4
+	@Test
+	public void loginTest_kriva_lozinka() {
+
+		setUp();
+		driver.get(url);
+
+		WebElement element = driver.findElement(By.cssSelector("input[type='email']")); 
+		element.sendKeys("ld@fer.hr");
+
+		element= driver.findElement(By.cssSelector("input[type='password']")); 
+		element.sendKeys("krivalozinka123");
+
+		driver.findElement(By.cssSelector("button")).click();
+
+		assertEquals(true, driver.findElement(By.cssSelector("div[class='MuiAlert-message css-1xsto0d'")).getText().equals("Pogrešni podatci."));
+		driver.quit();
+	}
+\end{verbatim}
+
+Ispitni slučaj 5: Pokušaj prijave u sustav s ispravnim podacima
+\begin{verbatim}Kod 5.5
+	@Test
+	public void loginTest_ispravan() {
+
+		setUp();
+		driver.get(url);
+
+		WebElement element = driver.findElement(By.cssSelector("input[type='email']")); 
+		element.sendKeys("ld@fer.hr");
+
+		element= driver.findElement(By.cssSelector("input[type='password']")); 
+		element.sendKeys("Lozinka123");
+
+		driver.findElement(By.cssSelector("button")).click();
 		
-		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // seconds
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("svg")));
+		String redirURL = driver.getCurrentUrl();
+   
+		assertEquals(true, !redirURL.contains("login"));
+		driver.quit();
+	}
+\end{verbatim}
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_prolaz.png}
+	\centering
+	\caption{Prikaz uspješnog izvršenja testova}
+\end{figure}
+
 		\section{Dijagram razmještaja}
 			
 \begin{figure}[H]
