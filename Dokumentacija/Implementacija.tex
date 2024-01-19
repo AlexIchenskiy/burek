@@ -61,12 +61,22 @@ Potrebno je otići na dashboard.render.com/new/database te popuniti formu.
 Potrebno je navesti jedinstveno ime instance PosrgreSQL-a, ime baze te ime 
 korisnika kao npr:
 
-% TODO: slika
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{slike/render_db.png}
+	\centering
+	\caption{Render - Nova PostgreSQL baza podataka}
+	\label{fig:render_db1}
+\end{figure}
 
 Render će stvoriti bazu podataka a podacima ju popunjava sama aplikacija. 
 Podatke za spajanje s bazom moguće je pronaći na dashboard-u.
 
-% TODO: slika
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{slike/render_db1.png}
+	\centering
+	\caption{Render - Baza podataka}
+	\label{fig:render_db2}
+\end{figure}
 
 \subsection{Konfiguriranje backenda}
 
@@ -90,13 +100,23 @@ spring.jpa.hibernate.ddl-auto=update
 Potrebno je na Renderu napraviti instancu web servisa. Render za to nudi dvije 
 mogućnosti:
 
-% TODO: slika render_backend
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{slike/render_backend.png}
+	\centering
+	\caption{Render - Stvaranje web servisa}
+	\label{fig:render_backend1}
+\end{figure}
 
 U ovim uputama opisat ćemo kako stvoriti servis iz git repozitorija (za to je 
 potrebna prijava putem gitHub računa). U sljedećem koraku potrebno je odabrati 
 repozitorij te postaviti konfiguracije:
 
-% TODO: slika render_backend1
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{slike/render_backend1.png}
+	\centering
+	\caption{Render - konfiguriranje web servisa}
+	\label{fig:render_backend2}
+\end{figure}
 
 Poslužitelj gradi Docker sliku iz Dockerfile-a u navedenom direktoriju te ju 
 poslužuje.
