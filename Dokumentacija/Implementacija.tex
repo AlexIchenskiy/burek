@@ -66,11 +66,97 @@ fokusom na ACID principe, i pridržavanje SQL standarda.
 		
 	
 		\section{Ispitivanje programskog rješenja}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
-	
+		
+Za ispitivanje programskog rješenja, koristili smo JUnit. Svi testovi su 
+napravljeni za UserRepository klasu, koja je zadužena za sučelje s bazom 
+podataka.
+
+Testovi su napravljeni po AAA (Arrange, Act, Assert) uzorku, čiji je princip 
+vrlo jednostavan. Prvo treba napraviti pripreme (kao što su varijable koje 
+ćemo koristiti), nakon čega pozivamo kod čiju funkcionalnost želimo testirati. 
+Na posljetku provjeravamo je li nam taj kod vratio očekivan 
+rezultat.
+
+Zbog mogućnosti reproduciranja testova, u razredu u kojem se nalaze testovi se 
+koristi in-memory baza podataka, te test neće smetati podacima u "stvarnom 
+svijetu", i obrnuto.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_1.png}
+	\centering
+	\caption{Ispitivanje spremanja korisnika u bazu podataka}
+	\label{fig:test_1}
+
+\end{figure}
+
+Test počinje stvaranjem korisnika, koji se potom sprema ugrađenom metodom u 
+klasi JPARepository.
+
+Nakon toga provjerava da korisnik nije null, te da je njegov id veći od 0, što 
+nam potvrđuje da je korisnik spremljen u bazu podataka.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_2.png}
+	\centering
+	\caption{Ispitivanje spremanja dva korisnika u bazu podataka}
+	\label{fig:test_2}
+\end{figure}
+
+Test počinje stvaranjem dva korisnika, koje spremamo u bazu podataka. Nakon 
+toga dohvaćamo sve korisnike iz baze podataka.
+
+Za dohvaćene podatke provjeravamo da je lista dohvaćenih korisnika duljine 2, 
+što odgovara broju korisnika koji smo spremili u prošlom koraku.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_3.png}
+	\centering
+	\caption{Ispitivanje jedinstvenosti email adrese}
+	\label{fig:test_3}
+\end{figure}
+
+Test, kao i zadnji počinje stvaranjem i spremanjem dva korisnika, međutim, 
+korisnici imaju identičnu email adresu.
+
+Ovdje bi kod trebao baciti iznimku, na osnovu greške u integritetu baze 
+podataka, te za to koristimo try-catch blok, koji, u slučaju da je iznimka 
+uhvaćena, namješta varijablu thrown na true, što kasnije provjeravamo u 
+assertTrue metodi.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_4.png}
+	\centering
+	\caption{Ispitivanje dohvaćanja korisnika po id-u}
+	\label{fig:test_4}
+\end{figure}
+
+Test počinje stvaranjem korisnika, i spremanjem istog u bazu podataka. Nakon 
+toga dohvaćamo korisnika iz baze podataka na osnovu id-a upravo spremljenog 
+korisnika.
+
+Kod bi trebao dohvatiti korisnika, jer znamo da je taj korisnik upravo 
+spremljen.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_5.png}
+	\centering
+	\caption{Ispitivanje postojanja korisnika po email adresi}
+	\label{fig:test_5}
+\end{figure}
+
+Test počinje stvaranjem korisnika, i spremanjem istog u bazu podataka. Nakon 
+toga pomoću vlastite metode provjeravamo je li korisnik sa tom email adresom 
+postoji u bazi podataka.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6]{slike/test_6.png}
+	\centering
+	\caption{Ispitivanje dohvaćanja korisnika po ulozi}
+	\label{fig:test_6}
+\end{figure}
+
+Test počinje stvaranjem korisnika, i spremanjem istog u bazu podataka. Nakon 
+toga pomoću vlastite metode provjeravamo je dohvaćen korisnik sa tom ulogom.
 			
 			\subsection{Ispitivanje komponenti}
 			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
