@@ -116,8 +116,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 
         User user = userRepository.findByEmail(jwtUtil.getEmailFromToken(authorizationHeader.substring(7)));
 
-        if (user.getRole() != UserRole.ADMIN)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied, not admin");
+        if (user.getRole() == UserRole.STUDENT)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User must be a moderator or admin");
 
         List<UserDTO> list = userRepository.findAll().stream().map(u -> new UserDTO(
                 u.getId(), u.getFirstName(), u.getLastName(), u.getEmail(), u.getRole()))
