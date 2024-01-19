@@ -47,12 +47,69 @@
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-			
-			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
-			
-			\eject 
+U nastavku su navedeni koraci za puštanje u pogon web aplikacije koja uključuje
+: PostgreSQL bazu podataka, Java Spring backend, i React.js frontend na javni 
+poslužitelj Render. (https://render.com)
+
+Render omogućuje besplatno posluživanje PostgreSQL baze podataka i web servisa 
+koji će se koristiti u nastavku. Osim toga spajanjem na gitHub nudi mogućnost 
+CI/CD modela posluživanja.
+
+\subsection{Stvaranje baze na javnom poslužitelju}
+
+Potrebno je otići na dashboard.render.com/new/database te popuniti formu. 
+Potrebno je navesti jedinstveno ime instance PosrgreSQL-a, ime baze te ime 
+korisnika kao npr:
+
+% TODO: slika
+
+Render će stvoriti bazu podataka a podacima ju popunjava sama aplikacija. 
+Podatke za spajanje s bazom moguće je pronaći na dashboard-u.
+
+% TODO: slika
+
+\subsection{Konfiguriranje backenda}
+
+Kako bi se spring aplikacija mogla spojiti na bazu potrebno je dodati 
+dependency org.postgresql.postgresql u pom.xml, te zadati podatke za spajanje 
+na bazu u IzvorniKod/backend/src/main/resources/aplication.properties. Za 
+navedeni primjer potrebno je zadati:
+
+spring.datasource.url=jdbc:postgresql://dpg-cm9ug1vqd2ns73drl820-a.frankfurt-postgres.render.com/springdb_yrwe
+
+spring.datasource.username=root
+
+spring.datasource.password=<zaporka>
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+spring.jpa.hibernate.ddl-auto=update
+
+\subsection{Posluživanje backenda}
+
+Potrebno je na Renderu napraviti instancu web servisa. Render za to nudi dvije 
+mogućnosti:
+
+% TODO: slika render_backend
+
+U ovim uputama opisat ćemo kako stvoriti servis iz git repozitorija (za to je 
+potrebna prijava putem gitHub računa). U sljedećem koraku potrebno je odabrati 
+repozitorij te postaviti konfiguracije:
+
+% TODO: slika render_backend1
+
+Poslužitelj gradi Docker sliku iz Dockerfile-a u navedenom direktoriju te ju 
+poslužuje.
+
+\subsection{Konfiguriranje frontenda}
+
+Potrebno je u IzvorniKod/frontend/src/assets/constants.js zadati API_URL na 
+kojemu je poslužen backend.
+
+\subsection{Posluživanje frontenda}
+
+Frontend se poslužuje na isti način kao backend, jedino je u postavkama 
+umjesto IzvorniKod/backend potrebno za root directory zadati IzvorniKod/
+frontend.
+
+\eject 
