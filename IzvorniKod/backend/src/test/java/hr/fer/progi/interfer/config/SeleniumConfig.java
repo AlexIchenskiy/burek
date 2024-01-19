@@ -1,3 +1,4 @@
+/*
 package hr.fer.progi.interfer.config;
 import java.util.concurrent.TimeUnit;
 
@@ -24,3 +25,4 @@ public class SeleniumConfig {
  
 
 }
+*/
