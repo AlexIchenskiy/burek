@@ -7,6 +7,9 @@ import { Button, Grid, MenuItem, TableBody, TextField, Snackbar, Alert, Typograp
 import * as S from './AdminStyles';
 import { useNavigate } from 'react-router-dom';
 import { Close } from '@mui/icons-material';
+import { PieChart } from 'react-minimal-pie-chart';
+import { getHueRotatedColor } from '../../util/colorUtil';
+import colors from '../../assets/colors';
 
 const AdminPanel = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -18,6 +21,7 @@ const AdminPanel = () => {
   const [notification, setNotification] = useState('');
   const [sending, setSending] = useState(false);
   const [postStats, setPostStats] = useState(null);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   const { token } = useAuth();
   const navigate = useNavigate();
@@ -193,7 +197,19 @@ const AdminPanel = () => {
         .then((res) => {
           console.log(res);
 
-          setPostStats(res.data);
+          const temp = res.data.byCategory.map((item, index) => {
+            return {
+              title: item.name.toUpperCase(),
+              value: item.numberOfarticles,
+              color: getHueRotatedColor(colors['hue-start'], index * 30),
+            }
+          });
+
+          console.log(temp);
+
+          setPostStats(temp);
+
+          setTotalPosts(res.data.totalArticles);
         })
         .catch((err) => console.log(err));
     }
@@ -293,6 +309,25 @@ const AdminPanel = () => {
               />
               <S.AdminButton color='success' onClick={handleSend} disabled={sending}>Pošalji</S.AdminButton>
             </S.AdminControls>
+          </>
+        }
+        {currentUser && currentUser.role === 'ADMIN' && postStats &&
+          <>
+            <S.AdminTypography sx={{ padding: '16px' }} variant='h5'>Pregled članaka po kategorijama</S.AdminTypography>
+            <S.AdminCategoriesContainer>
+              {postStats.map((item, index) => {
+                return (
+                  <S.AdminDataCategory
+                    sx={{ color: getHueRotatedColor(colors['hue-start'], index * 30), borderColor: getHueRotatedColor(colors['hue-start'], index * 30) }}
+                  >
+                    {item.title.toUpperCase()}
+                  </S.AdminDataCategory>
+                );
+              })}
+            </S.AdminCategoriesContainer>
+            <S.AdminChartContainer>
+              <PieChart label={({ dataEntry }) => `${totalPosts > 0 ? Math.round(100 * dataEntry.value / totalPosts) + "%" : 0}`} labelStyle={(i) => ({ fontSize: '8px', fill: 'white' })} data={postStats} />
+            </S.AdminChartContainer>
           </>
         }
         {currentUser && currentUser.role === 'ADMIN' &&

@@ -33,7 +33,7 @@ export const AdminInputLabel = styled(InputLabel)`
 
 export const AdminButton = styled(Button)`
   margin: 16px;
-  width: 30%
+  width: 30%;
 `;
 
 export const AdminSelect = styled(Select)`
@@ -78,6 +78,29 @@ export const AdminDashboardColumn = styled(Grid)`
   flex-direction: column;
   align-items: center;
   padding: 8px;
+`;
+
+export const AdminCategoriesContainer = styled(Container)`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+export const AdminDataCategory = styled(Typography)`
+  padding: 4px 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+`;
+
+export const AdminChartContainer = styled(Container)`
+  min-width: 240px;
+  width: auto;
+  max-width: 480px!important;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ModUserListContainer = styled(Container)`
