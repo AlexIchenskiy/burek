@@ -20,6 +20,7 @@ export const AdminDashboardText = styled(Typography)`
 export const AdminControls = styled('div')`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 5px;
 `;
 
@@ -66,7 +67,6 @@ export const AdminTypography = styled(Typography)`
   text-align: center;
 `;
 
-// Dodane nove stilove za AdminDashboard
 export const AdminDashboardContainer = styled(Grid)`
   display: flex;
   justify-content: center;
@@ -80,3 +80,26 @@ export const AdminDashboardColumn = styled(Grid)`
   padding: 8px;
 `;
 
+export const ModUserListContainer = styled(Container)`
+  min-height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+export const ModUserContainer = styled(Container)`
+  width: auto;
+  margin: 16px;
+  padding: 16px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid ${colors.primary};
+  border-radius: 8px;
+
+  & > * {
+    margin: 0 8px;
+  }
+`;
