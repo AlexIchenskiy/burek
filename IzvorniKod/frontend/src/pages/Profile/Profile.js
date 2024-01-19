@@ -291,7 +291,7 @@ const Profile = () => {
                   }
                 })()}
               </S.ProfileSubtitle>
-              {user.banned &&
+              {user && user.banned &&
                 <S.ProfileSubtitle>
                   Korisnik je bannan
                 </S.ProfileSubtitle>
@@ -317,7 +317,6 @@ const Profile = () => {
                   </Dialog>
                 </>
               )}
-              {console.log(user)}
               {!isCurrentUserOwner && !user.banned && currentUser && (currentUser.role === 'MODERATOR' || currentUser.role === 'ADMIN') &&
                 <S.ProfileButton variant='outlined' color='error' onClick={handleBanUser} disabled={banLoading}>
                   Ban
