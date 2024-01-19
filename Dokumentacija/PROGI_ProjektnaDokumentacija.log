@@ -1,0 +1,3198 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/CVE-2023-32700 patched) (preloaded format=pdflatex 2023.11.17)  19 JAN 2024 23:54
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**PROGI_ProjektnaDokumentacija.tex
+(./PROGI_ProjektnaDokumentacija.tex
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-12-17>
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2021/10/04 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@chapter=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\c@figure=\count192
+\c@table=\count193
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2022/12/26 3.84 The Babel package
+\babel@savecnt=\count194
+\U@D=\dimen141
+\l@unhyphenated=\language4
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count195
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-croatian/croatian.ldf
+Language: croatian 2014/03/31 v1.3m Croatian support from the babel system
+))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/locale/hr/babel-croatian.tex
+Package babel Info: Importing font and identification data for croatian
+(babel)             from babel-hr.ini. Reported on input line 11.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen142
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen143
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count196
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count197
+\leftroot@=\count198
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count199
+\DOTSCASE@=\count266
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen144
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count267
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count268
+\dotsspace@=\muskip16
+\c@parentequation=\count269
+\dspbrk@lvl=\count270
+\tag@help=\toks18
+\row@=\count271
+\column@=\count272
+\maxfields@=\count273
+\andhelp@=\toks19
+\eqnshift@=\dimen145
+\alignsep@=\dimen146
+\tagshift@=\dimen147
+\tagwidth@=\dimen148
+\totwidth@=\dimen149
+\lineht@=\dimen150
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/txfonts/txfonts.sty
+Package: txfonts 2008/01/22 v3.2.1
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/txr/m/n on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/m/n on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/txr/m/n --> OT1/txr/bx/n on input line 22.
+\symitalic=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `italic' in version `bold'
+(Font)                  OT1/txr/m/it --> OT1/txr/bx/it on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/bx/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/bx/n on input line 29.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/txr/m/it on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/txr/m/it on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/txr/m/it --> OT1/txr/bx/it on input line 31.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/txss/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/txss/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/txss/m/n --> OT1/txss/b/n on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/txtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/txtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/txtt/m/n --> OT1/txtt/b/n on input line 51.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/txmi/m/it on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/txmi/m/it on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/txmi/m/it --> OML/txmi/bx/it on input line 59.
+\symlettersA=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/txmia/m/it --> U/txmia/bx/it on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 70.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/txsy/m/n on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/txsy/m/n on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/txsy/m/n --> OMS/txsy/bx/n on input line 78.
+LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
+(Font)                  U/msa/m/n --> U/txsya/m/n on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/msa/m/n --> U/txsya/m/n on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/txsya/m/n --> U/txsya/bx/n on input line 94.
+LaTeX Font Info:    Redeclaring symbol font `AMSb' on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `normal'
+(Font)                  U/msb/m/n --> U/txsyb/m/n on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/msb/m/n --> U/txsyb/m/n on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/txsyb/m/n --> U/txsyb/bx/n on input line 103.
+\symsymbolsC=\mathgroup8
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/txsyc/m/n --> U/txsyc/bx/n on input line 113.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/txex/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/txex/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/txex/m/n --> OMX/txex/bx/n on input line 121.
+\symlargesymbolsA=\mathgroup9
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
+(Font)                  U/txexa/m/n --> U/txexa/bx/n on input line 129.
+LaTeX Font Info:    Redeclaring math symbol \mathsterling on input line 164.
+LaTeX Info: Redefining \not on input line 1043.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/mathdots/mathdots.sty
+Package: mathdots 2014/06/11 v0.9 Improve and add various macros for dots in ma
+th.
+\MDo@unit=\dimen151
+\MDo@dotsbox=\box53
+\MDoprekern=\muskip17
+\MDopostkern=\muskip18
+\MDodotkern=\muskip19
+)
+(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2021/07/05 v2.14 Sectioning titles
+\ttl@box=\box54
+\beforetitleunit=\skip52
+\aftertitleunit=\skip53
+\ttl@plus=\dimen152
+\ttl@minus=\dimen153
+\ttl@toksa=\toks22
+\titlewidth=\dimen154
+\titlewidthlast=\dimen155
+\titlewidthfirst=\dimen156
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen157
+\ar@mcellbox=\box55
+\extrarowheight=\dimen158
+\NC@list=\toks23
+\extratabsurround=\skip54
+\backup@length=\skip55
+\ar@cellbox=\box56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
+Package: lastpage 2021/09/03 v1.2n Refers to last page's name (HMM; JPG)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count274
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tabularray/tabularray.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2022-12-17 L3 programming layer (loader) 
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count275
+\l__pdf_internal_box=\box57
+))
+Package: tabularray 2022-11-01 v2022D Typeset tabulars and arrays with LaTeX3
+\l__tblr_a_int=\count276
+\l__tblr_c_int=\count277
+\l__tblr_r_int=\count278
+\l__tblr_d_dim=\dimen159
+\l__tblr_h_dim=\dimen160
+\l__tblr_o_dim=\dimen161
+\l__tblr_p_dim=\dimen162
+\l__tblr_q_dim=\dimen163
+\l__tblr_r_dim=\dimen164
+\l__tblr_s_dim=\dimen165
+\l__tblr_t_dim=\dimen166
+\l__tblr_v_dim=\dimen167
+\l__tblr_w_dim=\dimen168
+\l__tblr_a_box=\box58
+\l__tblr_b_box=\box59
+\l__tblr_c_box=\box60
+\l__tblr_d_box=\box61
+\g__tblr_table_count_int=\count279
+\c@rownum=\count280
+\c@colnum=\count281
+\c@rowcount=\count282
+\c@colcount=\count283
+\abovesep=\dimen169
+\belowsep=\dimen170
+\leftsep=\dimen171
+\rightsep=\dimen172
+\g_tblr_level_int=\count284
+\g__tblr_data_row_key_count_int=\count285
+\g__tblr_data_column_key_count_int=\count286
+\g__tblr_data_cell_key_count_int=\count287
+\g__tblr_array_int=\count288
+\l__tblr_key_count_int=\count289
+\l__tblr_key_quotient_int=\count290
+\l__tblr_key_quotient_two_int=\count291
+\l__tblr_key_remainder_int=\count292
+\g__tblr_data_str_value_count_int=\count293
+\rulewidth=\dimen173
+\l__tblr_strut_dp_dim=\dimen174
+\l__tblr_strut_ht_dim=\dimen175
+\g__tblr_cell_wd_dim=\dimen176
+\g__tblr_cell_ht_dim=\dimen177
+\g__tblr_cell_head_dim=\dimen178
+\g__tblr_cell_foot_dim=\dimen179
+\l__column_target_dim=\dimen180
+\l__tblr_caption_box=\box62
+\l__tblr_caption_left_box=\box63
+\l__tblr_row_head_box=\box64
+\l__tblr_row_foot_box=\box65
+\l__tblr_row_head_foot_dim=\dimen181
+\tablewidth=\dimen182
+\l__tblr_table_firsthead_box=\box66
+\l__tblr_table_middlehead_box=\box67
+\l__tblr_table_lasthead_box=\box68
+\l__tblr_table_firstfoot_box=\box69
+\l__tblr_table_middlefoot_box=\box70
+\l__tblr_table_lastfoot_box=\box71
+\l__tblr_remain_height_dim=\dimen183
+\l__tblr_long_from_int=\count294
+\l__tblr_long_to_int=\count295
+\l__tblr_curr_i_int=\count296
+\l__tblr_prev_i_int=\count297
+\l__tblr_table_page_int=\count298
+\l__tblr_table_head_box=\box72
+\l__tblr_table_foot_box=\box73
+\l__tblr_table_head_foot_dim=\dimen184
+\l__tblr_table_head_body_foot_dim=\dimen185
+\l__tblr_table_box=\box74
+\l__tblr_table_hlines_box=\box75
+\l__tblr_hline_box=\box76
+\l__tblr_row_box=\box77
+\l__tblr_col_o_wd_dim=\dimen186
+\l__tblr_col_b_wd_dim=\dimen187
+\l__tblr_hline_leftskip_dim=\dimen188
+\l__tblr_hline_rightskip_dim=\dimen189
+\l__tblr_row_ht_dim=\dimen190
+\l__tblr_row_dp_dim=\dimen191
+\l__tblr_row_abovesep_dim=\dimen192
+\l__tblr_row_belowsep_dim=\dimen193
+\l__tblr_row_vlines_box=\box78
+\l__tblr_vline_box=\box79
+\l__tblr_cell_box=\box80
+\l__row_upper_dim=\dimen194
+\l__row_lower_dim=\dimen195
+\l__row_vpace_dim=\dimen196
+\l__tblr_vline_aboveskip_dim=\dimen197
+\l__tblr_vline_belowskip_dim=\dimen198
+\l__tblr_cell_wd_dim=\dimen199
+\l__tblr_cell_ht_dim=\dimen256
+\l__tblr_diag_box=\box81
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
+\everycr=\toks24
+\minrowclearance=\skip56
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2022/10/17 v1.3a Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks25
+\XKV@tempa@toks=\toks26
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex))
+\XKV@depth=\count299
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen257
+\Gin@req@width=\dimen258
+)
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box82
+)
+\tc@llx=\dimen259
+\tc@lly=\dimen260
+\tc@urx=\dimen261
+\tc@ury=\dimen262
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen263
+\adjbox@Height=\dimen264
+\adjbox@Depth=\dimen265
+\adjbox@Totalheight=\dimen266
+\adjbox@pwidth=\dimen267
+\adjbox@pheight=\dimen268
+\adjbox@pdepth=\dimen269
+\adjbox@ptotalheight=\dimen270
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count300
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box83
+\sift@deathcycles=\count301
+\@vwid@loff=\dimen271
+\@vwid@roff=\dimen272
+))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count302
+\Gm@cntv=\count303
+\c@Gm@tempcnt=\count304
+\Gm@bindingoffset=\dimen273
+\Gm@wd@mp=\dimen274
+\Gm@odd@mp=\dimen275
+\Gm@even@mp=\dimen276
+\Gm@layoutwidth=\dimen277
+\Gm@layoutheight=\dimen278
+\Gm@layouthoffset=\dimen279
+\Gm@layoutvoffset=\dimen280
+\Gm@dimlist=\toks27
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/kpfonts.sty
+Package: kpfonts  2022/09/19 v3.34
+\c@mv@rm=\count305
+\c@mv@boldrm=\count306
+\c@mv@sf=\count307
+\c@mv@boldsf=\count308
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/txr/m/n --> OT1/jkp/m/n on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/txr/bx/n --> OT1/jkp/m/n on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `rm'
+(Font)                  OT1/txr/m/n --> OT1/jkp/m/n on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `boldrm'
+(Font)                  OT1/txr/m/n --> OT1/jkp/m/n on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `sf'
+(Font)                  OT1/txr/m/n --> OT1/jkp/m/n on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `boldsf'
+(Font)                  OT1/txr/m/n --> OT1/jkp/m/n on input line 374.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/b/n on input line 375.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `rm'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/m/n on input line 377.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `boldrm'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/b/n on input line 378.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `sf'
+(Font)                  OT1/jkp/m/n --> OT1/jkpss/m/n on input line 379.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `boldsf'
+(Font)                  OT1/jkp/m/n --> OT1/jkpss/b/n on input line 380.
+LaTeX Font Info:    Redeclaring math alphabet \mathrm on input line 384.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/b/n on input line 385.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `rm'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/m/n on input line 386.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `boldrm'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/b/n on input line 387.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `sf'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/m/n on input line 388.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `boldsf'
+(Font)                  OT1/jkp/m/n --> OT1/jkp/b/n on input line 389.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/txr/bx/n --> OT1/jkp/b/n on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/txr/bx/n --> OT1/jkp/b/n on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `rm'
+(Font)                  OT1/cmr/bx/n --> OT1/jkp/b/n on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `boldrm'
+(Font)                  OT1/cmr/bx/n --> OT1/jkp/b/n on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `sf'
+(Font)                  OT1/cmr/bx/n --> OT1/jkp/b/n on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `boldsf'
+(Font)                  OT1/cmr/bx/n --> OT1/jkp/b/n on input line 398.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/jkp/b/n --> OT1/jkp/b/n on input line 399.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `rm'
+(Font)                  OT1/jkp/b/n --> OT1/jkp/b/n on input line 401.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `boldrm'
+(Font)                  OT1/jkp/b/n --> OT1/jkp/b/n on input line 402.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `sf'
+(Font)                  OT1/jkp/b/n --> OT1/jkpss/b/n on input line 403.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `boldsf'
+(Font)                  OT1/jkp/b/n --> OT1/jkpss/b/n on input line 404.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/txr/m/it --> OT1/jkp/m/it on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/txr/bx/it --> OT1/jkp/m/it on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `rm'
+(Font)                  OT1/cmr/m/it --> OT1/jkp/m/it on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `boldrm'
+(Font)                  OT1/cmr/m/it --> OT1/jkp/m/it on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `sf'
+(Font)                  OT1/cmr/m/it --> OT1/jkp/m/it on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `boldsf'
+(Font)                  OT1/cmr/m/it --> OT1/jkp/m/it on input line 410.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/jkp/m/it --> OT1/jkp/b/it on input line 411.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `rm'
+(Font)                  OT1/jkp/m/it --> OT1/jkp/m/it on input line 413.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `boldrm'
+(Font)                  OT1/jkp/m/it --> OT1/jkp/b/it on input line 414.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `sf'
+(Font)                  OT1/jkp/m/it --> OT1/jkpss/m/it on input line 415.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `boldsf'
+(Font)                  OT1/jkp/m/it --> OT1/jkpss/b/it on input line 416.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/txss/m/n --> OT1/jkpss/m/n on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/txss/b/n --> OT1/jkpss/m/n on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `rm'
+(Font)                  OT1/cmss/m/n --> OT1/jkpss/m/n on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `boldrm'
+(Font)                  OT1/cmss/m/n --> OT1/jkpss/m/n on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `sf'
+(Font)                  OT1/cmss/m/n --> OT1/jkpss/m/n on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `boldsf'
+(Font)                  OT1/cmss/m/n --> OT1/jkpss/m/n on input line 421.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/jkpss/m/n --> OT1/jkpss/b/n on input line 422.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `rm'
+(Font)                  OT1/jkpss/m/n --> OT1/jkpss/m/n on input line 423.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `boldrm'
+(Font)                  OT1/jkpss/m/n --> OT1/jkpss/b/n on input line 424.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `sf'
+(Font)                  OT1/jkpss/m/n --> OT1/jkpss/m/n on input line 425.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `boldsf'
+(Font)                  OT1/jkpss/m/n --> OT1/jkpss/b/n on input line 426.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/txtt/m/n --> OT1/jkptt/m/n on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/txtt/b/n --> OT1/jkptt/m/n on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `rm'
+(Font)                  OT1/cmtt/m/n --> OT1/jkptt/m/n on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `boldrm'
+(Font)                  OT1/cmtt/m/n --> OT1/jkptt/m/n on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `sf'
+(Font)                  OT1/cmtt/m/n --> OT1/jkptt/m/n on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `boldsf'
+(Font)                  OT1/cmtt/m/n --> OT1/jkptt/m/n on input line 430.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/jkptt/m/n --> OT1/jkptt/b/n on input line 431.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `rm'
+(Font)                  OT1/jkptt/m/n --> OT1/jkptt/m/n on input line 432.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `boldrm'
+(Font)                  OT1/jkptt/m/n --> OT1/jkptt/b/n on input line 433.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `sf'
+(Font)                  OT1/jkptt/m/n --> OT1/jkptt/m/n on input line 434.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `boldsf'
+(Font)                  OT1/jkptt/m/n --> OT1/jkptt/b/n on input line 435.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/txmi/m/it --> OML/jkp/m/it on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/txmi/bx/it --> OML/jkp/m/it on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `rm'
+(Font)                  OML/txmi/m/it --> OML/jkp/m/it on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `boldrm'
+(Font)                  OML/txmi/m/it --> OML/jkp/m/it on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `sf'
+(Font)                  OML/txmi/m/it --> OML/jkp/m/it on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `boldsf'
+(Font)                  OML/txmi/m/it --> OML/jkp/m/it on input line 443.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/jkp/m/it --> OML/jkp/bx/it on input line 444.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `rm'
+(Font)                  OML/jkp/m/it --> OML/jkp/m/it on input line 446.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `boldrm'
+(Font)                  OML/jkp/m/it --> OML/jkp/bx/it on input line 447.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `sf'
+(Font)                  OML/jkp/m/it --> OML/jkpss/m/it on input line 448.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `boldsf'
+(Font)                  OML/jkp/m/it --> OML/jkpss/bx/it on input line 449.
+LaTeX Font Info:    Redeclaring symbol font `lettersA' on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `normal'
+(Font)                  U/txmia/m/it --> U/jkpmia/m/it on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/txmia/bx/it --> U/jkpmia/m/it on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `rm'
+(Font)                  U/txmia/m/it --> U/jkpmia/m/it on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `boldrm'
+(Font)                  U/txmia/m/it --> U/jkpmia/m/it on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `sf'
+(Font)                  U/txmia/m/it --> U/jkpmia/m/it on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `boldsf'
+(Font)                  U/txmia/m/it --> U/jkpmia/m/it on input line 458.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/jkpmia/m/it --> U/jkpmia/bx/it on input line 459.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `rm'
+(Font)                  U/jkpmia/m/it --> U/jkpmia/m/it on input line 461.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `boldrm'
+(Font)                  U/jkpmia/m/it --> U/jkpmia/bx/it on input line 462.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `sf'
+(Font)                  U/jkpmia/m/it --> U/jkpssmia/m/it on input line 463.
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `boldsf'
+(Font)                  U/jkpmia/m/it --> U/jkpssmia/bx/it on input line 464.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/txsy/m/n --> OMS/jkp/m/n on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/txsy/bx/n --> OMS/jkp/m/n on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `rm'
+(Font)                  OMS/txsy/m/n --> OMS/jkp/m/n on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `boldrm'
+(Font)                  OMS/txsy/m/n --> OMS/jkp/m/n on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `sf'
+(Font)                  OMS/txsy/m/n --> OMS/jkp/m/n on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `boldsf'
+(Font)                  OMS/txsy/m/n --> OMS/jkp/m/n on input line 476.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/jkp/m/n --> OMS/jkp/bx/n on input line 477.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `rm'
+(Font)                  OMS/jkp/m/n --> OMS/jkp/m/n on input line 479.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `boldrm'
+(Font)                  OMS/jkp/m/n --> OMS/jkp/bx/n on input line 480.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `sf'
+(Font)                  OMS/jkp/m/n --> OMS/jkp/m/n on input line 481.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `boldsf'
+(Font)                  OMS/jkp/m/n --> OMS/jkp/bx/n on input line 482.
+LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
+(Font)                  U/txsya/m/n --> U/jkpsya/m/n on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/txsya/bx/n --> U/jkpsya/m/n on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `rm'
+(Font)                  U/txsya/m/n --> U/jkpsya/m/n on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldrm'
+(Font)                  U/txsya/m/n --> U/jkpsya/m/n on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `sf'
+(Font)                  U/txsya/m/n --> U/jkpsya/m/n on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldsf'
+(Font)                  U/txsya/m/n --> U/jkpsya/m/n on input line 495.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/jkpsya/m/n --> U/jkpsya/bx/n on input line 496.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `rm'
+(Font)                  U/jkpsya/m/n --> U/jkpsya/m/n on input line 497.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldrm'
+(Font)                  U/jkpsya/m/n --> U/jkpsya/bx/n on input line 498.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `sf'
+(Font)                  U/jkpsya/m/n --> U/jkpsya/m/n on input line 499.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `boldsf'
+(Font)                  U/jkpsya/m/n --> U/jkpsya/bx/n on input line 500.
+LaTeX Font Info:    Redeclaring symbol font `AMSb' on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `normal'
+(Font)                  U/txsyb/m/n --> U/jkpsyb/m/n on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/txsyb/bx/n --> U/jkpsyb/m/n on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `rm'
+(Font)                  U/txsyb/m/n --> U/jkpsyb/m/n on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `boldrm'
+(Font)                  U/txsyb/m/n --> U/jkpsyb/m/n on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `sf'
+(Font)                  U/txsyb/m/n --> U/jkpsyb/m/n on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `boldsf'
+(Font)                  U/txsyb/m/n --> U/jkpsyb/m/n on input line 548.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/jkpsyb/m/n --> U/jkpsyb/bx/n on input line 549.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `rm'
+(Font)                  U/jkpsyb/m/n --> U/jkpsyb/m/n on input line 550.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `boldrm'
+(Font)                  U/jkpsyb/m/n --> U/jkpsyb/bx/n on input line 551.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `sf'
+(Font)                  U/jkpsyb/m/n --> U/jkpsssyb/m/n on input line 552.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `boldsf'
+(Font)                  U/jkpsyb/m/n --> U/jkpsssyb/bx/n on input line 553.
+LaTeX Font Info:    Redeclaring symbol font `symbolsC' on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `normal'
+(Font)                  U/txsyc/m/n --> U/jkpsyc/m/n on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/txsyc/bx/n --> U/jkpsyc/m/n on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `rm'
+(Font)                  U/txsyc/m/n --> U/jkpsyc/m/n on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `boldrm'
+(Font)                  U/txsyc/m/n --> U/jkpsyc/m/n on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `sf'
+(Font)                  U/txsyc/m/n --> U/jkpsyc/m/n on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `boldsf'
+(Font)                  U/txsyc/m/n --> U/jkpsyc/m/n on input line 568.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/jkpsyc/m/n --> U/jkpsyc/bx/n on input line 569.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `rm'
+(Font)                  U/jkpsyc/m/n --> U/jkpsyc/m/n on input line 571.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `boldrm'
+(Font)                  U/jkpsyc/m/n --> U/jkpsyc/bx/n on input line 572.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `sf'
+(Font)                  U/jkpsyc/m/n --> U/jkpsyc/m/n on input line 573.
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `boldsf'
+(Font)                  U/jkpsyc/m/n --> U/jkpsyc/bx/n on input line 574.
+LaTeX Font Info:    Overwriting math alphabet `\mathscr' in version `bold'
+(Font)                  U/jkpsyd/m/n --> U/jkpsyd/bx/n on input line 603.
+LaTeX Font Info:    Overwriting math alphabet `\mathscr' in version `rm'
+(Font)                  U/jkpsyd/m/n --> U/jkpsyd/m/n on input line 605.
+LaTeX Font Info:    Overwriting math alphabet `\mathscr' in version `boldrm'
+(Font)                  U/jkpsyd/m/n --> U/jkpsyd/bx/n on input line 606.
+LaTeX Font Info:    Overwriting math alphabet `\mathscr' in version `sf'
+(Font)                  U/jkpsyd/m/n --> U/jkpsyd/m/n on input line 607.
+LaTeX Font Info:    Overwriting math alphabet `\mathscr' in version `boldsf'
+(Font)                  U/jkpsyd/m/n --> U/jkpsyd/bx/n on input line 608.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/txex/m/n --> OMX/jkp/m/n on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/txex/bx/n --> OMX/jkp/m/n on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `rm'
+(Font)                  OMX/txex/m/n --> OMX/jkp/m/n on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `boldrm'
+(Font)                  OMX/txex/m/n --> OMX/jkp/m/n on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `sf'
+(Font)                  OMX/txex/m/n --> OMX/jkp/m/n on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `boldsf'
+(Font)                  OMX/txex/m/n --> OMX/jkp/m/n on input line 618.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/jkp/m/n --> OMX/jkp/bx/n on input line 619.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `rm'
+(Font)                  OMX/jkp/m/n --> OMX/jkp/m/n on input line 621.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `boldrm'
+(Font)                  OMX/jkp/m/n --> OMX/jkp/bx/n on input line 622.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `sf'
+(Font)                  OMX/jkp/m/n --> OMX/jkpss/m/n on input line 623.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `boldsf'
+(Font)                  OMX/jkp/m/n --> OMX/jkpss/bx/n on input line 624.
+LaTeX Font Info:    Redeclaring symbol font `largesymbolsA' on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `normal'
+
+(Font)                  U/txexa/m/n --> U/jkpexa/m/n on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
+(Font)                  U/txexa/bx/n --> U/jkpexa/m/n on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `rm'
+(Font)                  U/txexa/m/n --> U/jkpexa/m/n on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `boldrm'
+
+(Font)                  U/txexa/m/n --> U/jkpexa/m/n on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `sf'
+(Font)                  U/txexa/m/n --> U/jkpexa/m/n on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `boldsf'
+
+(Font)                  U/txexa/m/n --> U/jkpexa/m/n on input line 634.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
+(Font)                  U/jkpexa/m/n --> U/jkpexa/bx/n on input line 635.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `rm'
+(Font)                  U/jkpexa/m/n --> U/jkpexa/m/n on input line 637.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `boldrm'
+
+(Font)                  U/jkpexa/m/n --> U/jkpexa/bx/n on input line 638.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `sf'
+(Font)                  U/jkpexa/m/n --> U/jkpexa/m/n on input line 639.
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `boldsf'
+
+(Font)                  U/jkpexa/m/n --> U/jkpexa/bx/n on input line 640.
+LaTeX Font Info:    Redeclaring math symbol \n@tch@r on input line 1598.
+LaTeX Info: Redefining \not on input line 1600.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2022-11-13 v7.00u Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count309
+)
+\@linkdim=\dimen281
+\Hy@linkcounter=\count310
+\Hy@pagecounter=\count311
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2022-11-13 v7.00u Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count312
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2022-11-13 v7.00u Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4162.
+Package hyperref Info: Link nesting OFF on input line 4167.
+Package hyperref Info: Hyper index ON on input line 4170.
+Package hyperref Info: Plain pages OFF on input line 4177.
+Package hyperref Info: Backreferencing OFF on input line 4182.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4410.
+\c@Hy@tempcnt=\count313
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip20
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4748.
+\XeTeXLinkMargin=\dimen282
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count314
+\Field@Width=\dimen283
+\Fld@charsize=\dimen284
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count315
+\c@Item=\count316
+\c@Hfootnote=\count317
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2022-11-13 v7.00u Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count318
+\c@bookmark@seq@number=\count319
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip57
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip58
+\f@nch@O@elh=\skip59
+\f@nch@O@erh=\skip60
+\f@nch@O@olh=\skip61
+\f@nch@O@orh=\skip62
+\f@nch@O@elf=\skip63
+\f@nch@O@erf=\skip64
+\f@nch@O@olf=\skip65
+\f@nch@O@orf=\skip66
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count320
+\float@exts=\toks28
+\float@box=\box84
+\@float@everytoks=\toks29
+\@floatcapt=\box85
+)
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
+\@float@every@table=\toks30
+Package hyperref Info: Option `colorlinks' set `true' on input line 40.
+LaTeX Font Info:    Trying to load font information for OT1+jkp on input line 8
+5.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
+File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
+)
+(./PROGI_ProjektnaDokumentacija.aux (./Dnevnik_promjena_dokumentacije.aux)
+(./Opis_projektnog_zadatka.aux) (./Specifikacija_programske_potpore.aux)
+(./Arhitektura.aux
+
+LaTeX Warning: Label `fig:class_diagram_service' multiply defined.
+
+) (./Implementacija.aux) (./Zakljucak.aux) (./Literatura.aux) (./Dodatak.aux))
+\openout1 = `PROGI_ProjektnaDokumentacija.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 85.
+LaTeX Font Info:    Trying to load font information for OML+jkp on input line 8
+5.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omljkp.fd
+File: omljkp.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 85.
+LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 8
+5.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omsjkp.fd
+File: omsjkp.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 85.
+LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 8
+5.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omxjkp.fd
+File: omxjkp.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 85.
+LaTeX Font Info:    Trying to load font information for U+jkpexa on input line 
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
+File: ujkpexa.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 85.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count321
+\scratchdimen=\dimen285
+\scratchbox=\box86
+\nofMPsegments=\count322
+\nofMParguments=\count323
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count324
+\MPscratchDim=\dimen286
+\MPnumerator=\count325
+\makeMPintoPDFobject=\count326
+\everyMPtoPDFconversion=\toks32
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 435.6108pt, 89.62709pt)
+* v-part:(T,H,B)=(72.26999pt, 671.37021pt, 101.40665pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=435.6108pt
+* \textheight=671.37021pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring ON on input line 85.
+(./PROGI_ProjektnaDokumentacija.out) (./PROGI_ProjektnaDokumentacija.out)
+\@outlinefile=\write3
+\openout3 = `PROGI_ProjektnaDokumentacija.out'.
+
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(./PROGI_ProjektnaDokumentacija.toc
+LaTeX Font Info:    Trying to load font information for U+jkpsya on input line 
+14.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
+File: ujkpsya.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Trying to load font information for U+jkpsyb on input line 
+14.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
+File: ujkpsyb.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Trying to load font information for OT1+txr on input line 1
+4.
+
+(/usr/share/texlive/texmf-dist/tex/latex/txfonts/ot1txr.fd
+File: ot1txr.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Trying to load font information for U+jkpmia on input line 
+14.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
+File: ujkpmia.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Trying to load font information for U+jkpsyc on input line 
+14.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
+File: ujkpsyc.fd 2006/08/15 v1.0
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.58 ...luživanje backenda}{66}{subsection.5.4.3}
+                                                  % [1
+
+])
+\tf@toc=\write4
+\openout4 = `PROGI_ProjektnaDokumentacija.toc'.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[2]
+\openout2 = `Dnevnik_promjena_dokumentacije.aux'.
+
+ (./Dnevnik_promjena_dokumentacije.tex
+Poglavlje 1.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 10.11.2023. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 13.11.2023. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 14.11.2023. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 15.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Nikola
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 16.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Antonia
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 16.11.2023. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 17.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Antonia
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 17.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Karlo
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 17.11.2023. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 11.09.2033. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Anton
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 La-dan,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 Olek-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 sandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Antonia
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Nikola
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Nikola
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 An-to-lovi[]c,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 An-ton
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Karlo
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+> Step: build the whole table.
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 10.11.2023. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 13.11.2023. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 14.11.2023. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 15.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Nikola
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 16.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Antonia
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 16.11.2023. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 17.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Antonia
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 17.11.2023. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Karlo
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 17.11.2023. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 11.09.2033. 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[3
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Anton
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 La-dan,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 Olek-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 sandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (0.52066pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Oleksandr
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Antonia
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Nikola
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Nikola
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 An-to-lovi[]c,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/jkp/m/n/12 An-ton
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 Karlo
+ []
+
+
+Overfull \hbox (6.59267pt too wide) in paragraph at lines 38--38
+[]\OT1/jkp/m/n/12 19.01.2024. 
+ []
+
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[4]
+\openout2 = `Opis_projektnog_zadatka.aux'.
+
+ (./Opis_projektnog_zadatka.tex
+Poglavlje 2.
+
+Overfull \hbox (23.1267pt too wide) in paragraph at lines 47--48
+[] [][] \OT1/jkp/m/n/12 Ko-ris-ni-cima []ce biti omogu[]ceno stva-ra-nje no-vih
+ []clanaka pomo[]cu ugra[]denog ure[]diva[]ca
+ []
+
+
+Overfull \hbox (9.98318pt too wide) in paragraph at lines 47--48
+\OT1/jkp/m/n/12 tek-sta. Ovaj ure[]diva[]c []ce podr[]zavati razli[]cite oblike
+ for-ma-ti-ra-nja sadr[]zaja, uklju[]cuju[]ci
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[5
+
+
+
+
+]
+Overfull \hbox (1.22322pt too wide) in paragraph at lines 54--55
+\OT1/jkp/m/n/12 forme. Osim pre-gleda, ko-ris-ni-cima []ce biti omogu[]ceno di-
+je-lje-nje objav-lje-nih []clanaka
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[6]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[7]
+Overfull \hbox (26.39546pt too wide) in paragraph at lines 131--137
+[] [][] \OT1/jkp/m/n/12 Iden-ti-fi-ci-rani di-onici, po-put pro-fe-sora i asis-
+te-nata, imat []ce klju[]cnu ulogu u odr[]zavanju
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[8]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[9])
+\openout2 = `Specifikacija_programske_potpore.aux'.
+
+ (./Specifikacija_programske_potpore.tex
+Poglavlje 3.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10
+
+
+
+
+]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[11]
+LaTeX Font Info:    Trying to load font information for TS1+jkp on input line 1
+14.
+ (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
+File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[13]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[14]
+Overfull \hbox (15.93742pt too wide) in paragraph at lines 415--416
+[]\OT1/jkp/m/n/12 Sustav do-jav-ljuje ko-ris-niku da tekst ne smije biti pra-za
+n/nepromijenjen 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[17]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[18]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[19]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[20]
+Overfull \hbox (6.50528pt too wide) in paragraph at lines 824--825
+[]\OT1/jkp/m/n/12 Baza po-da-taka bri[]se za-pis []clanka i stvara za-pis oba-v
+i-jesti o bri-sa-nju []clanka
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[21]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[22]
+<slike/DijagramObrazacaUporabe1.PNG, id=501, 1009.52156pt x 1066.7353pt>
+File: slike/DijagramObrazacaUporabe1.PNG Graphic file (type png)
+<use slike/DijagramObrazacaUporabe1.PNG>
+Package pdftex.def Info: slike/DijagramObrazacaUporabe1.PNG  used on input line
+ 1041.
+(pdftex.def)             Requested size: 403.80147pt x 426.68655pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[23]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1047 \eject
+             		 <./slike/DijagramObrazacaUporabe1.png>]
+<slike/DijagramObrazacaUporabe2.PNG, id=528, 835.62187pt x 578.16pt>
+File: slike/DijagramObrazacaUporabe2.PNG Graphic file (type png)
+<use slike/DijagramObrazacaUporabe2.PNG>
+Package pdftex.def Info: slike/DijagramObrazacaUporabe2.PNG  used on input line
+ 1050.
+(pdftex.def)             Requested size: 334.24283pt x 231.2599pt.
+<slike/DijagramObrazacaUporabe3.PNG, id=529, 743.77875pt x 464.4853pt>
+File: slike/DijagramObrazacaUporabe3.PNG Graphic file (type png)
+<use slike/DijagramObrazacaUporabe3.PNG>
+Package pdftex.def Info: slike/DijagramObrazacaUporabe3.PNG  used on input line
+ 1057.
+(pdftex.def)             Requested size: 297.50623pt x 185.79083pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[25
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1063 \eject
+             	
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1063 \eject
+             	 <./slike/DijagramObrazacaUporabe2.png> <./slike/DijagramObrazaca
+Uporabe3.png>]
+<slike/SekvencijskiDijagramUC3.jpg, id=539, 785.93625pt x 516.42938pt>
+File: slike/SekvencijskiDijagramUC3.jpg Graphic file (type jpg)
+<use slike/SekvencijskiDijagramUC3.jpg>
+Package pdftex.def Info: slike/SekvencijskiDijagramUC3.jpg  used on input line 
+1073.
+(pdftex.def)             Requested size: 471.56538pt x 309.86002pt.
+
+Overfull \hbox (35.95459pt too wide) in paragraph at lines 1073--1075
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[26
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1079 \eject
+              <./slike/SekvencijskiDijagramUC3.jpg>]
+Overfull \hbox (9.34166pt too wide) in paragraph at lines 1083--1086
+[]\OT1/jkp/m/n/12 Korisnik za-tra[]zi od apli-ka-cije stva-ra-nje no-vog []clan
+ka. Apli-ka-cija prika[]ze ure[]diva[]c
+ []
+
+<slike/SekvencijskiDijagramUC9.jpg, id=546, 733.23938pt x 627.09282pt>
+File: slike/SekvencijskiDijagramUC9.jpg Graphic file (type jpg)
+<use slike/SekvencijskiDijagramUC9.jpg>
+Package pdftex.def Info: slike/SekvencijskiDijagramUC9.jpg  used on input line 
+1088.
+(pdftex.def)             Requested size: 439.94702pt x 376.25859pt.
+
+Overfull \hbox (4.33623pt too wide) in paragraph at lines 1088--1090
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[27
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1094 \eject
+              <./slike/SekvencijskiDijagramUC9.jpg>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[28]
+<slike/SekvencijskiDijagramUC14.jpg, id=558, 700.11563pt x 922.94812pt>
+File: slike/SekvencijskiDijagramUC14.jpg Graphic file (type jpg)
+<use slike/SekvencijskiDijagramUC14.jpg>
+Package pdftex.def Info: slike/SekvencijskiDijagramUC14.jpg  used on input line
+ 1107.
+(pdftex.def)             Requested size: 420.07262pt x 553.77315pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[29
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1113 \eject
+              <./slike/SekvencijskiDijagramUC14.jpg>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[30]
+<slike/SekvencijskiDijagramUC26.jpg, id=571, 739.26187pt x 993.7125pt>
+File: slike/SekvencijskiDijagramUC26.jpg Graphic file (type jpg)
+<use slike/SekvencijskiDijagramUC26.jpg>
+Package pdftex.def Info: slike/SekvencijskiDijagramUC26.jpg  used on input line
+ 1127.
+(pdftex.def)             Requested size: 443.56053pt x 596.2321pt.
+
+Overfull \hbox (7.94974pt too wide) in paragraph at lines 1127--1129
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[31
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.7}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1133 \eject
+              <./slike/SekvencijskiDijagramUC26.jpg>])
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[32]
+\openout2 = `Arhitektura.aux'.
+
+ (./Arhitektura.tex
+Poglavlje 4.
+<slike/ArhitekturniPodsustavi.PNG, id=590, 139.52126pt x 242.9075pt>
+File: slike/ArhitekturniPodsustavi.PNG Graphic file (type png)
+<use slike/ArhitekturniPodsustavi.PNG>
+Package pdftex.def Info: slike/ArhitekturniPodsustavi.PNG  used on input line 1
+1.
+(pdftex.def)             Requested size: 83.7134pt x 145.7456pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[33
+
+
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.25 
+      <./slike/ArhitekturniPodsustavi.png>]
+Overfull \hbox (2.62563pt too wide) in paragraph at lines 26--29
+[]\OT1/jkp/m/n/12 Za iz-radu kli-jent-ske apli-ka-cije iz-a-brali smo je-zik Ja
+-vaS-cript za-jedno s knji[]znicom
+ []
+
+
+Overfull \hbox (5.12077pt too wide) in paragraph at lines 26--29
+\OT1/jkp/m/n/12 vane na doga[]dajima u kli-jent-skom di-jelu web apli-ka-cije. 
+Ova-kav pris-tup omogu[]cava
+ []
+
+
+Overfull \hbox (2.36714pt too wide) in paragraph at lines 26--29
+\OT1/jkp/m/n/12 pre-gled-niku, ko-risti se skup-lja[]c mo-dula Web-pack koji ge
+-ne-rira sve po-trebne HTML,
+ []
+
+
+Overfull \hbox (16.22595pt too wide) in paragraph at lines 37--38
+\OT1/jkp/m/n/12 ali-za-ciju svih po-da-taka unu-tar apli-ka-cije, pri-marno do-
+bi-ve-nih s web poslu[]zitelja. 
+ []
+
+<slike/MVCObrazac.PNG, id=598, 903.375pt x 993.7125pt>
+File: slike/MVCObrazac.PNG Graphic file (type png)
+<use slike/MVCObrazac.PNG>
+Package pdftex.def Info: slike/MVCObrazac.PNG  used on input line 42.
+(pdftex.def)             Requested size: 180.6718pt x 198.73897pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[34]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[35
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.48 \eject
+            <./slike/MVCObrazac.png>]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[36]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[37]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[38]
+<slike/baza.png, id=627, 713.66624pt x 583.17876pt>
+File: slike/baza.png Graphic file (type png)
+<use slike/baza.png>
+Package pdftex.def Info: slike/baza.png  used on input line 188.
+(pdftex.def)             Requested size: 356.83224pt x 291.58867pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[39
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.194 \eject
+             <./slike/baza.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[40]
+<slike/Class Diagram Controller1.png, id=641, 868.74562pt x 998.22937pt>
+File: slike/Class Diagram Controller1.png Graphic file (type png)
+<use slike/Class Diagram Controller1.png>
+Package pdftex.def Info: slike/Class Diagram Controller1.png  used on input lin
+e 209.
+(pdftex.def)             Requested size: 347.4921pt x 399.28467pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[41
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.215 \eject
+             <./slike/Class Diagram Controller1.png>]
+<slike/Class Diagram DTO.png, id=649, 1211.27531pt x 1442.38875pt>
+File: slike/Class Diagram DTO.png Graphic file (type png)
+<use slike/Class Diagram DTO.png>
+Package pdftex.def Info: slike/Class Diagram DTO.png  used on input line 218.
+(pdftex.def)             Requested size: 484.50154pt x 576.94528pt.
+
+Overfull \hbox (48.89075pt too wide) in paragraph at lines 218--220
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[42
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.224 \eject
+             <./slike/Class Diagram DTO.png>]
+<slike/Class Diagram Service1.png, id=658, 1424.32124pt x 1135.99406pt>
+File: slike/Class Diagram Service1.png Graphic file (type png)
+<use slike/Class Diagram Service1.png>
+Package pdftex.def Info: slike/Class Diagram Service1.png  used on input line 2
+27.
+(pdftex.def)             Requested size: 498.51991pt x 397.60388pt.
+
+Overfull \hbox (62.90912pt too wide) in paragraph at lines 227--229
+ [][] 
+ []
+
+<slike/Class Diagram Service2.png, id=659, 1424.32124pt x 1307.63531pt>
+File: slike/Class Diagram Service2.png Graphic file (type png)
+<use slike/Class Diagram Service2.png>
+Package pdftex.def Info: slike/Class Diagram Service2.png  used on input line 2
+34.
+(pdftex.def)             Requested size: 498.51991pt x 457.67923pt.
+
+Overfull \hbox (62.90912pt too wide) in paragraph at lines 234--236
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[43
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.239 
+       <./slike/Class Diagram Service1.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[44
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.240 \eject
+             <./slike/Class Diagram Service2.png>]
+<slike/Class Diagram Repository.png, id=674, 966.61125pt x 1088.56688pt>
+File: slike/Class Diagram Repository.png Graphic file (type png)
+<use slike/Class Diagram Repository.png>
+Package pdftex.def Info: slike/Class Diagram Repository.png  used on input line
+ 243.
+(pdftex.def)             Requested size: 386.63765pt x 435.41904pt.
+<slike/Class Diagram Entity.png, id=675, 838.63312pt x 1023.825pt>
+File: slike/Class Diagram Entity.png Graphic file (type png)
+<use slike/Class Diagram Entity.png>
+Package pdftex.def Info: slike/Class Diagram Entity.png  used on input line 250
+.
+(pdftex.def)             Requested size: 335.4473pt x 409.52274pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[45
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.8}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.255 
+       <./slike/Class Diagram Repository.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[46
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.256 \eject
+             <./slike/Class Diagram Entity.png>]
+<slike/Class Diagram jwt.png, id=690, 967.36406pt x 757.32938pt>
+File: slike/Class Diagram jwt.png Graphic file (type png)
+<use slike/Class Diagram jwt.png>
+Package pdftex.def Info: slike/Class Diagram jwt.png  used on input line 259.
+(pdftex.def)             Requested size: 386.93877pt x 302.92638pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[47
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.10})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.265 \eject
+             <./slike/Class Diagram jwt.png>]
+<slike/dijagrami-stanja/pocetna-stranica.png, id=698, 1410.77063pt x 642.14906p
+t>
+File: slike/dijagrami-stanja/pocetna-stranica.png Graphic file (type png)
+<use slike/dijagrami-stanja/pocetna-stranica.png>
+Package pdftex.def Info: slike/dijagrami-stanja/pocetna-stranica.png  used on i
+nput line 271.
+(pdftex.def)             Requested size: 564.29826pt x 256.85507pt.
+
+Overfull \hbox (128.68747pt too wide) in paragraph at lines 271--273
+ [][] 
+ []
+
+<slike/dijagrami-stanja/uredivac-clanka.png, id=699, 341.02406pt x 308.65312pt>
+
+File: slike/dijagrami-stanja/uredivac-clanka.png Graphic file (type png)
+<use slike/dijagrami-stanja/uredivac-clanka.png>
+Package pdftex.def Info: slike/dijagrami-stanja/uredivac-clanka.png  used on in
+put line 278.
+(pdftex.def)             Requested size: 136.4072pt x 123.45905pt.
+<slike/dijagrami-stanja/korisnicki-profil.png, id=700, 886.06032pt x 499.8675pt
+>
+File: slike/dijagrami-stanja/korisnicki-profil.png Graphic file (type png)
+<use slike/dijagrami-stanja/korisnicki-profil.png>
+Package pdftex.def Info: slike/dijagrami-stanja/korisnicki-profil.png  used on 
+input line 285.
+(pdftex.def)             Requested size: 354.41785pt x 199.94345pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[48
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.11})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.290 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.12})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.290 
+       <./slike/dijagrami-stanja/pocetna-stranica.png> <./slike/dijagrami-stanj
+a/uredivac-clanka.png>]
+<slike/dijagrami-stanja/admin-panel.png, id=711, 557.08125pt x 344.03531pt>
+File: slike/dijagrami-stanja/admin-panel.png Graphic file (type png)
+<use slike/dijagrami-stanja/admin-panel.png>
+Package pdftex.def Info: slike/dijagrami-stanja/admin-panel.png  used on input 
+line 292.
+(pdftex.def)             Requested size: 222.82855pt x 137.61168pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[49
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.13})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.298 \eject
+            
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.14})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.298 \eject
+             <./slike/dijagrami-stanja/korisnicki-profil.png> <./slike/dijagram
+i-stanja/admin-panel.png>]
+<slike/dijagram-aktivnosti.jpeg, id=721, 1208.515pt x 1579.9025pt>
+File: slike/dijagram-aktivnosti.jpeg Graphic file (type jpg)
+<use slike/dijagram-aktivnosti.jpeg>
+Package pdftex.def Info: slike/dijagram-aktivnosti.jpeg  used on input line 304
+.
+(pdftex.def)             Requested size: 483.39743pt x 631.94981pt.
+
+Overfull \hbox (47.78664pt too wide) in paragraph at lines 304--306
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[50]
+Overfull \vbox (54.207pt too high) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[51
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.15})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.309 
+       <./slike/dijagram-aktivnosti.jpeg>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[52]
+<slike/dijagram_komponenti.jpeg, id=738, 1236.62pt x 779.91376pt>
+File: slike/dijagram_komponenti.jpeg Graphic file (type jpg)
+<use slike/dijagram_komponenti.jpeg>
+Package pdftex.def Info: slike/dijagram_komponenti.jpeg  used on input line 329
+.
+(pdftex.def)             Requested size: 494.63924pt x 311.95998pt.
+
+Overfull \hbox (59.02844pt too wide) in paragraph at lines 329--331
+ [][] 
+ []
+
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[53
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.16})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.125 \include{Arhitektura}
+                            <./slike/dijagram_komponenti.jpeg>]
+\openout2 = `Implementacija.aux'.
+
+
+(./Implementacija.tex
+Poglavlje 5.
+
+Overfull \hbox (10.38434pt too wide) in paragraph at lines 1--1
+|[]\OT1/jkp/b/n/24.88 Implementacija i ko-risni[]cko su[]celje| 
+ []
+
+
+Overfull \hbox (19.04485pt too wide) in paragraph at lines 8--10
+\OT1/jkp/m/n/12 Tim je os-tva-ri-vao ko-mu-ni-ka-ciju pu-tem razli[]citih plat-
+formi kako bi osi-gu-rao u[]cinkovitu
+ []
+
+
+Overfull \hbox (4.13118pt too wide) in paragraph at lines 31--35
+\OT1/jkp/m/n/12 mogu[]cnosti ure[]divanja tek-sta, podr[]sku za razli[]cite pro
+-gra-mer-ske je-zike i pro[]sirivost
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[54
+
+
+
+
+]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[55]
+<slike/test_1.png, id=764, 397.485pt x 322.20375pt>
+File: slike/test_1.png Graphic file (type png)
+<use slike/test_1.png>
+Package pdftex.def Info: slike/test_1.png  used on input line 87.
+(pdftex.def)             Requested size: 238.49283pt x 193.32373pt.
+<slike/test_2.png, id=765, 438.13687pt x 539.76656pt>
+File: slike/test_2.png Graphic file (type png)
+<use slike/test_2.png>
+Package pdftex.def Info: slike/test_2.png  used on input line 101.
+(pdftex.def)             Requested size: 262.88414pt x 323.86243pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[56
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.106 
+       <./slike/test_1.png>]
+<slike/test_3.png, id=774, 438.13687pt x 612.03656pt>
+File: slike/test_3.png Graphic file (type png)
+<use slike/test_3.png>
+Package pdftex.def Info: slike/test_3.png  used on input line 114.
+(pdftex.def)             Requested size: 262.88414pt x 367.22476pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[57
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.119 
+       <./slike/test_2.png>]
+<slike/test_4.png, id=782, 438.13687pt x 341.02406pt>
+File: slike/test_4.png Graphic file (type png)
+<use slike/test_4.png>
+Package pdftex.def Info: slike/test_4.png  used on input line 129.
+(pdftex.def)             Requested size: 262.88414pt x 204.61601pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[58
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.134 
+       <./slike/test_3.png>]
+<slike/test_5.png, id=790, 453.94594pt x 348.55219pt>
+File: slike/test_5.png Graphic file (type png)
+<use slike/test_5.png>
+Package pdftex.def Info: slike/test_5.png  used on input line 143.
+(pdftex.def)             Requested size: 272.36966pt x 209.1329pt.
+<slike/test_6.png, id=791, 453.94594pt x 385.44pt>
+File: slike/test_6.png Graphic file (type png)
+<use slike/test_6.png>
+Package pdftex.def Info: slike/test_6.png  used on input line 154.
+(pdftex.def)             Requested size: 272.36966pt x 231.26578pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[59
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.159 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.159 
+       <./slike/test_4.png> <./slike/test_5.png>]
+LaTeX Font Info:    Trying to load font information for OT1+jkptt on input line
+ 168.
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
+File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
+)
+Overfull \hbox (66.82805pt too wide) in paragraph at lines 191--191
+[]\OT1/jkptt/m/n/12 WebElement element = driver.findElement(By.cssSelector("inp
+ut[type='email']"));[] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[60
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.191 \end{verbatim}
+                     <./slike/test_6.png>]
+Overfull \hbox (9.58818pt too wide) in paragraph at lines 191--191
+[]\OT1/jkptt/m/n/12 element= driver.findElement(By.cssSelector("input[type='pas
+sword']"));[] 
+ []
+
+
+Overfull \hbox (35.02812pt too wide) in paragraph at lines 191--191
+[]\OT1/jkptt/m/n/12 assertEquals(true, driver.findElement(By.cssSelector("div[c
+lass='MuiAlert-
+ []
+
+
+Overfull \hbox (155.86784pt too wide) in paragraph at lines 191--191
+\OT1/jkptt/m/n/12 message css-1xsto0d'")).getText().equals("Molimo vas da koris
+tite svoj sveu[]cili[]sni email!"));[] 
+ []
+
+
+Overfull \hbox (66.82805pt too wide) in paragraph at lines 212--212
+[]\OT1/jkptt/m/n/12 WebElement element = driver.findElement(By.cssSelector("inp
+ut[type='email']"));[] 
+ []
+
+
+Overfull \hbox (9.58818pt too wide) in paragraph at lines 212--212
+[]\OT1/jkptt/m/n/12 element= driver.findElement(By.cssSelector("input[type='pas
+sword']"));[] 
+ []
+
+
+Overfull \hbox (35.02812pt too wide) in paragraph at lines 212--212
+[]\OT1/jkptt/m/n/12 assertEquals(true, driver.findElement(By.cssSelector("div[c
+lass='MuiAlert-
+ []
+
+
+Overfull \hbox (270.34758pt too wide) in paragraph at lines 212--212
+\OT1/jkptt/m/n/12 message css-1xsto0d'")).getText().equals("Lozinka mora sadr[]
+zavati barem jednu znamenku i barem jedno slovo!"));[] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[61]
+Overfull \hbox (66.82805pt too wide) in paragraph at lines 234--234
+[]\OT1/jkptt/m/n/12 WebElement element = driver.findElement(By.cssSelector("inp
+ut[type='email']"));[] 
+ []
+
+
+Overfull \hbox (9.58818pt too wide) in paragraph at lines 234--234
+[]\OT1/jkptt/m/n/12 element= driver.findElement(By.cssSelector("input[type='pas
+sword']"));[] 
+ []
+
+
+Overfull \hbox (35.02812pt too wide) in paragraph at lines 234--234
+[]\OT1/jkptt/m/n/12 assertEquals(true, driver.findElement(By.cssSelector("div[c
+lass='MuiAlert-
+ []
+
+
+Overfull \hbox (66.82805pt too wide) in paragraph at lines 256--256
+[]\OT1/jkptt/m/n/12 WebElement element = driver.findElement(By.cssSelector("inp
+ut[type='email']"));[] 
+ []
+
+
+Overfull \hbox (9.58818pt too wide) in paragraph at lines 256--256
+[]\OT1/jkptt/m/n/12 element= driver.findElement(By.cssSelector("input[type='pas
+sword']"));[] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[62]
+Overfull \hbox (35.02812pt too wide) in paragraph at lines 256--256
+[]\OT1/jkptt/m/n/12 assertEquals(true, driver.findElement(By.cssSelector("div[c
+lass='MuiAlert-
+ []
+
+
+Overfull \hbox (66.82805pt too wide) in paragraph at lines 281--281
+[]\OT1/jkptt/m/n/12 WebElement element = driver.findElement(By.cssSelector("inp
+ut[type='email']"));[] 
+ []
+
+
+Overfull \hbox (9.58818pt too wide) in paragraph at lines 281--281
+[]\OT1/jkptt/m/n/12 element= driver.findElement(By.cssSelector("input[type='pas
+sword']"));[] 
+ []
+
+
+Overfull \hbox (85.908pt too wide) in paragraph at lines 281--281
+[]\OT1/jkptt/m/n/12 WebDriverWait wait = new WebDriverWait(driver, Duration.ofS
+econds(10)); // seconds[] 
+ []
+
+
+Overfull \hbox (79.54802pt too wide) in paragraph at lines 281--281
+[]\OT1/jkptt/m/n/12 wait.until(ExpectedConditions.visibilityOfElementLocated(By
+.cssSelector("svg")));[] 
+ []
+
+<slike/test_prolaz.png, id=823, 480.79625pt x 183.68625pt>
+File: slike/test_prolaz.png Graphic file (type png)
+<use slike/test_prolaz.png>
+Package pdftex.def Info: slike/test_prolaz.png  used on input line 284.
+(pdftex.def)             Requested size: 288.47997pt x 110.21259pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[63]
+<slike/dijagram_razmjestaja.jpeg, id=829, 1606.0pt x 1173.38374pt>
+File: slike/dijagram_razmjestaja.jpeg Graphic file (type jpg)
+<use slike/dijagram_razmjestaja.jpeg>
+Package pdftex.def Info: slike/dijagram_razmjestaja.jpeg  used on input line 29
+2.
+(pdftex.def)             Requested size: 481.80373pt x 352.01784pt.
+
+Overfull \hbox (46.19293pt too wide) in paragraph at lines 292--294
+ [][] 
+ []
+
+
+Overfull \hbox (0.96007pt too wide) in paragraph at lines 298--303
+\OT1/jkp/m/n/12 Opis UML di-ja-grama raz-mje[]staja za sus-tav ko-mu-ni-ka-cije
+ izme[]du dva poslu[]ziteljska
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[64
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.7}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.303 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.8}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.303 
+       <./slike/test_prolaz.png> <./slike/dijagram_razmjestaja.jpeg>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[65]
+<slike/render_db.png, id=843, 469.755pt x 450.9347pt>
+File: slike/render_db.png Graphic file (type png)
+<use slike/render_db.png>
+Package pdftex.def Info: slike/render_db.png  used on input line 350.
+(pdftex.def)             Requested size: 187.89867pt x 180.37068pt.
+<slike/render_db1.png, id=844, 469.755pt x 245.41687pt>
+File: slike/render_db1.png Graphic file (type png)
+<use slike/render_db1.png>
+Package pdftex.def Info: slike/render_db1.png  used on input line 360.
+(pdftex.def)             Requested size: 187.89867pt x 98.165pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[66
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.9}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.372 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.10})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.372 
+       <./slike/render_db.png> <./slike/render_db1.png>]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.373 ...a.frankfurt-postgres.render.com/springdb_
+                                                  yrwe
+? H
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+? H
+Sorry, I already gave what help I could...
+Maybe you should try asking a human?
+An error might have occurred before I noticed any problems.
+``If all else fails, read the instructions.''
+
+? Y
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or ... or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.374 
+      
+? 
+
+Overfull \hbox (19.83348pt too wide) in paragraph at lines 373--374
+[]\OT1/jkp/m/n/12 spring.datasource.url=jdbc:postgresql://dpg-cm9ug1vqd2ns73drl
+820-a.frankfurt-
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.379 ...ng.jpa.properties.hibernate.jdbc.lob.non_
+                                                  contextual_creation=true
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.380 
+      
+? 
+<slike/render_backend.png, id=855, 469.755pt x 222.8325pt>
+File: slike/render_backend.png Graphic file (type png)
+<use slike/render_backend.png>
+Package pdftex.def Info: slike/render_backend.png  used on input line 389.
+(pdftex.def)             Requested size: 187.89867pt x 89.13141pt.
+<slike/render_backend1.png, id=856, 469.755pt x 237.88875pt>
+File: slike/render_backend1.png Graphic file (type png)
+<use slike/render_backend1.png>
+Package pdftex.def Info: slike/render_backend1.png  used on input line 400.
+(pdftex.def)             Requested size: 187.89867pt x 95.15381pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[67
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.11})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.409 \subsection{Konfiguriranje frontenda}
+                                           
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.12})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.409 \subsection{Konfiguriranje frontenda}
+                                            <./slike/render_backend.png> <./sli
+ke/render_backend1.png>]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.411 ...ntend/src/assets/constants.js zadati API_
+                                                  URL na
+? 
+
+LaTeX Warning: Command \v invalid in math mode on input line 412.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \ifmmode \els...
+l.412 kojemu je posluž
+                       en backend.
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.413 
+      
+? 
+
+Overfull \hbox (108.06567pt too wide) in paragraph at lines 411--413
+\OT1/jkp/m/n/12 Potrebno je u Iz-vor-ni-Kod/frontend/src/assets/constants.js za
+-dati API$[]\OML/jkp/m/it/12 RLnakojemujeposlu[]enbackend:$ 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[68])
+\openout2 = `Zakljucak.aux'.
+
+ (./Zakljucak.tex
+Poglavlje 6.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[69
+
+
+
+
+]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[70])
+\openout2 = `Literatura.aux'.
+
+ (./Literatura.tex
+Overfull \hbox (8.89293pt too wide) in paragraph at lines 7--8
+[]\OT1/jkp/m/n/12 Programsko in[]zenjerstvo, FER ZE-MRIS, [][]$\OT1/jkptt/m/n/1
+2 http : / / www . fer . hr / predmet / proinz$[][] 
+ []
+
+
+Overfull \hbox (7.06pt too wide) in paragraph at lines 13--14
+\OT1/jkp/m/n/12 ter En-gi-ne-ering, Rut-gers Uni-ver-sity, [][]$\OT1/jkptt/m/n/
+12 http : / / www . ece . rutgers . edu / []marsic /
+ []
+
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[71
+
+
+
+
+] (./PROGI_ProjektnaDokumentacija.lof
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[72
+
+
+
+])
+\tf@lof=\write5
+\openout5 = `PROGI_ProjektnaDokumentacija.lof'.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[73]
+\openout2 = `Dodatak.aux'.
+
+ (./Dodatak.tex
+Overfull \hbox (8.5704pt too wide) in paragraph at lines 17--18
+[]\OT1/jkp/m/n/12 Prisustvovali: Olek-sandr Ic-hen-skyi, An-ton La-dan, An-to-n
+ia []Sar[]cevi[]c, Karlo
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[74
+
+
+]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[75]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[76]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[77]
+<slike/Contributors.png, id=982, 692.5875pt x 691.08188pt>
+File: slike/Contributors.png Graphic file (type png)
+<use slike/Contributors.png>
+Package pdftex.def Info: slike/Contributors.png  used on input line 141.
+(pdftex.def)             Requested size: 415.5557pt x 414.65233pt.
+<slike/Contributors_Karlo.png, id=983, 692.5875pt x 217.5628pt>
+File: slike/Contributors_Karlo.png Graphic file (type png)
+<use slike/Contributors_Karlo.png>
+Package pdftex.def Info: slike/Contributors_Karlo.png  used on input line 148.
+(pdftex.def)             Requested size: 415.5557pt x 130.53868pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[78
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.153 
+       <./slike/Contributors.png>])
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[79
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.145 \include{Dodatak}
+                        <./slike/Contributors_Karlo.png>]
+
+AED: lastpage setting LastPage
+(./PROGI_ProjektnaDokumentacija.aux (./Dnevnik_promjena_dokumentacije.aux)
+(./Opis_projektnog_zadatka.aux) (./Specifikacija_programske_potpore.aux)
+(./Arhitektura.aux) (./Implementacija.aux) (./Zakljucak.aux) (./Literatura.aux)
+(./Dodatak.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `PROGI_ProjektnaDokumentacija.out' has not ch
+anged.
+(rerunfilecheck)             Checksum: 5E3C6EF50769C70450F3D8E2FFE14EF0;6029.
+ ) 
+Here is how much of TeX's memory you used:
+ 18024 strings out of 478111
+ 317311 string characters out of 5842073
+ 1980793 words of memory out of 6000000
+ 37308 multiletter control sequences out of 15000+600000
+ 570349 words of font info for 155 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 84i,13n,116p,709b,1074s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
+texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/kpfonts/jkpmi.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/kpfonts/jkpmit8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/kpfonts/jkpmn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts
+/jkpttmn8a.pfb>
+Output written on PROGI_ProjektnaDokumentacija.pdf (80 pages, 4847799 bytes).
+PDF statistics:
+ 1108 PDF objects out of 1200 (max. 8388607)
+ 939 compressed objects within 10 object streams
+ 392 named destinations out of 1000 (max. 500000)
+ 466 words of extra memory for PDF output out of 10000 (max. 10000000)
+

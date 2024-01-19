@@ -1,0 +1,44 @@
+\babel@toc {croatian}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Dijagram obrasca uporabe, funkcionalnost anonimnog i prijavljenog korisnika}}{24}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dijagram obrasca uporabe, funkcionalnost moderatora sustava}}{25}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Dijagram obrasca uporabe, funkcionalnost administratora sustava}}{25}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Sekvencijski dijagram za UC3}}{26}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Sekvencijski dijagram za UC9}}{27}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Sekvencijski dijagram za UC14}}{29}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Sekvencijski dijagram za UC26}}{31}{figure.3.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Arhitektura sustava}}{33}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces MVC Obrazac}}{35}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces E-R dijagram baze podataka}}{39}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Dijagram razreda - dio Controllers}}{41}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Dijagram razreda - dio DTO}}{42}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Dijagram razreda - Service dio 1}}{43}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Dijagram razreda - Service dio 2}}{44}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Dijagram razreda - dio Repository}}{45}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Dijagram razreda - dio Entity}}{46}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Dijagram razreda - dio JWT}}{47}{figure.4.10}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Dijagram stanja - Početna stranica}}{48}{figure.4.11}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Dijagram stanja - Uređivač članka}}{48}{figure.4.12}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Dijagram stanja - Korisnički profil}}{49}{figure.4.13}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Dijagram stanja - Admin panel}}{49}{figure.4.14}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Dijagram stanja - Admin panel}}{51}{figure.4.15}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Dijagram komponenti}}{53}{figure.4.16}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Ispitivanje spremanja korisnika u bazu podataka}}{56}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Ispitivanje spremanja dva korisnika u bazu podataka}}{57}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Ispitivanje jedinstvenosti email adrese}}{58}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Ispitivanje dohvaćanja korisnika po id-u}}{59}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Ispitivanje postojanja korisnika po email adresi}}{59}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Ispitivanje dohvaćanja korisnika po ulozi}}{60}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Prikaz uspješnog izvršenja testova}}{64}{figure.5.7}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Dijagram Razmještaja}}{64}{figure.5.8}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Render - Nova PostgreSQL baza podataka}}{66}{figure.5.9}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Render - Baza podataka}}{66}{figure.5.10}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Render - Stvaranje web servisa}}{67}{figure.5.11}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Render - konfiguriranje web servisa}}{67}{figure.5.12}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Prikaz aktivnosti na repozitoriju - 1. dio}}{78}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Prikaz aktivnosti na repozitoriju - 2. dio}}{79}{figure.6.2}%
