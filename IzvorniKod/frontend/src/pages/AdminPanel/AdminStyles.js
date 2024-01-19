@@ -1,6 +1,5 @@
 import { Button, Container, Select, InputLabel, styled, Typography, Table, TableCell, TableHead, TableRow, Grid, Autocomplete } from "@mui/material";
 import colors from "../../assets/colors";
-import { Link } from "react-router-dom";
 
 export const AdminContainer = styled(Container)`
   max-width: 70%;
@@ -24,7 +23,7 @@ export const AdminControls = styled('div')`
   gap: 5px;
 `;
 
-export const AdminAutocomplete= styled(Autocomplete)`
+export const AdminAutocomplete = styled(Autocomplete)`
   width: 60%;
 `;
 export const AdminInputLabel = styled(InputLabel)`
@@ -47,6 +46,10 @@ export const AdminTable = styled(Table)`
 
 export const AdminTableHead = styled(TableHead)`
   background-color: ${colors.primary};
+  color: white;
+  & * {
+    color: white;
+  }
 `;
 
 export const AdminTableRow = styled(TableRow)`
@@ -56,7 +59,6 @@ export const AdminTableRow = styled(TableRow)`
 `;
 
 export const AdminTableCell = styled(TableCell)`
-  color: white;
 `;
 
 export const AdminTypography = styled(Typography)`

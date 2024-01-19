@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../assets/constants';
-import { useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Header from '../../components/Header/Header';
-import { Button, Select, Grid, InputLabel, MenuItem, Tab, Tabs, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField } from '@mui/material';
-import * as S from './AdminStyles'; // Uključivanje novih stilova
+import { Button, Grid, MenuItem, TableBody, TextField, Snackbar, Alert, Typography } from '@mui/material';
+import * as S from './AdminStyles';
+import { useNavigate } from 'react-router-dom';
 
 const AdminPanel = () => {
-  const [value, setValue] = useState(0);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [user, setUser] = useState([]);
+  const [userId, setUserId] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
+
   const { token } = useAuth();
-  const { id } = useParams();
-  const [notifications, setNotifications] = useState([]);
+  const navigate = useNavigate();
+
   const [allUsers, setAllUsers] = useState([]);
-  const [allArticles, setAllArticles] = useState([]);
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [totalArticles, setTotalArticles] = useState(0);
 
 
   const handleSnackbarOpen = (message) => {
@@ -26,135 +24,120 @@ const AdminPanel = () => {
     setOpenSnackbar(true);
   };
 
-//  const fetchUserData = () => {
-//    if (id) {
-//      axios
-//        .get(`${API_URL}/user/get/${id}`, { headers: { Authorization: `Bearer ${token}` } })
-//        .then((res) => {
-//          console.log(res);
-//          axios
-//            .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
-//            .then((res1) => {
-//              console.log(res1);
-//            })
-//            .catch((err) => console.log(err));
-//        })
-//        .catch((err) => console.log(err));
-//    } else if (token) {
-//      axios
-//        .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
-//        .then((res) => {
-//          console.log(res);
-//        })
-//        .catch((err) => console.log(err));
-//    };
-//  }
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleSnackbarClose = () => {
+    setOpenSnackbar(false);
   };
 
-  const [newUserRole, setNewUserRole] = useState('');
- 
+  const [newUserRole, setNewUserRole] = useState(null);
+
   const handleChangeUserRole = () => {
-    if (!newUserRole) {
+    if (!userId) {
+      handleSnackbarOpen('Molimo unesite id korisnika.');
+      return;
+    }
+
+    if (newUserRole === null) {
       handleSnackbarOpen('Molimo odaberite novu ulogu.');
       return;
     }
-  
-    // Provjerite je li korisnik admin prije nego što mu se promijeni uloga
-    if (newUserRole === 'ADMIN' && user.role !== 'ADMIN') {
+
+    if (newUserRole === 'ADMIN' && currentUser && currentUser.role !== 'ADMIN') {
       handleSnackbarOpen('Samo admin može dodijeliti ulogu admina.');
       return;
     }
-  
+
+    let data = {
+      id: parseInt(userId),
+      role: newUserRole.toUpperCase()
+    }
+
     axios.post(
-      `${API_URL}/admin/changeUserRole`,
-      { userId: user.id, newRole: newUserRole },
+      `${API_URL}/user/promote`, data,
       {
         headers: {
-          'authorization': `bearer ${token}`
+          'Authorization': `Bearer ${token}`
         }
       }
     )
       .then(() => {
-        handleSnackbarOpen('Uloga korisnika uspješno promijenjena.');
+        const tempUsers = [...allUsers];
+        tempUsers.find((u) => u.id === userId).role = newUserRole.toUpperCase();
+        setAllUsers(tempUsers);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
+
         handleSnackbarOpen('Došlo je do greške prilikom promjene uloge korisnika.');
       });
   };
 
-   useEffect(() => {
-    // Dohvati sve notifikacije
-    axios.get(`${API_URL}/notification/getAll`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then((res) => {
-        setNotifications(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const handleRetire = () => {
+    let data = {
+      id: parseInt(currentUser.id),
+      role: 'STUDENT'
+    }
 
-    // Dohvati sve korisnike
-    axios.get(`${API_URL}/user/getAll`, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    axios.post(
+      `${API_URL}/user/promote`, data,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       }
-    })
-      .then((res) => {
-        setAllUsers(res.data);
-        setTotalUsers(res.data.length);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    // Dohvati sve članke
-    axios.get(`${API_URL}/articles/getAll`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then((res) => {
-        setTotalArticles(res.data.length);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [token, id]);
-
-  const handleGetNotifications = () => {
-    axios.get(`${API_URL}/notification/getAll`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then((res) => {
-        console.log(res);
-
-        setNotifications(res.data);
+    )
+      .then(() => {
+        navigate('/home');
       })
       .catch((err) => {
         console.log(err);
+
+        handleSnackbarOpen('Došlo je do greške prilikom odstupanja s uloge administratora.');
       });
   }
+
+  useEffect(() => {
+    if (token) {
+      axios.get(`${API_URL}/user/getAll`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then((res) => {
+          console.log(res);
+
+          setAllUsers(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`${API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+        .then((res) => {
+          console.log(res);
+
+          setCurrentUser(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
 
   return (
     <>
       <Header isSearchVisible={false} />
       <S.AdminContainer>
-        <h1>Admin Panel</h1>
+        <h1>{currentUser && currentUser.role === 'ADMIN' ? 'Admin Panel' : 'Moderatorski kutak'}</h1>
         <S.AdminDashboard container spacing={3} alignItems="center">
-          {/* Prvi stupac */}
           <Grid item xs={6}>
-            <S.AdminDashboardText variant="h6" >
-              Ukupan broj korisnika: {totalUsers}
-            </S.AdminDashboardText>
+            {currentUser && currentUser.role === "ADMIN" &&
+              <S.AdminDashboardText variant="h6" >
+                Ukupan broj korisnika: {allUsers.length}
+              </S.AdminDashboardText>
+            }
             {/* 
             <S.AdminDashboardText variant="h6" >
               Ukupan broj članaka: {totalArticles}
@@ -165,8 +148,8 @@ const AdminPanel = () => {
         <S.AdminControls>
           <TextField
             label="Unesite userId"
-            value={user ? user.id : ''}
-            onChange={(e) => setUser({ id: e.target.value })}
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
           />
           <S.AdminSelect
             id="newUserRole"
@@ -180,36 +163,43 @@ const AdminPanel = () => {
           </S.AdminSelect>
           <S.AdminButton onClick={handleChangeUserRole}>Promijeni ulogu</S.AdminButton>
         </S.AdminControls>
+        <Typography color='lightgray' variant='body2' sx={{ marginBottom: '16px' }}>Ili promjenite id klikom na redak tablice</Typography>
 
-          <S.AdminTable>
-            <S.AdminTableHead>
-              <S.AdminTableRow>
-                <S.AdminTableCell>ID</S.AdminTableCell>
-                <S.AdminTableCell>Autor</S.AdminTableCell>
-                <S.AdminTableCell>Naslov</S.AdminTableCell>
-                <S.AdminTableCell>Link</S.AdminTableCell>
-                <S.AdminTableCell>Moderated</S.AdminTableCell>
-                {/* Dodajte druge stupce prema potrebi */}
-              </S.AdminTableRow>
-            </S.AdminTableHead>
-            <TableBody>
-              {notifications.map((notification) => (
-              <S.AdminTableRow key={notification.id}>
-                <S.AdminTableCell>{notification.id}</S.AdminTableCell>
-                <S.AdminTableCell>{notification.from}</S.AdminTableCell>
-                <S.AdminTableCell>{notification.subject}</S.AdminTableCell>
-                <S.AdminTableCell>
-                  <a href={`/post/${notification.articleId}`} target="_blank" rel="noopener noreferrer">
-                    {notification.articleId}
-                  </a>
-                </S.AdminTableCell>
-                <S.AdminTableCell>{notification.seen.toString()}</S.AdminTableCell>
-                {/* Dodajte druge ćelije prema potrebi */}
+        <S.AdminTable>
+          <S.AdminTableHead>
+            <S.AdminTableRow>
+              <S.AdminTableCell>ID</S.AdminTableCell>
+              <S.AdminTableCell>Ime</S.AdminTableCell>
+              <S.AdminTableCell>Prezime</S.AdminTableCell>
+              <S.AdminTableCell>Email</S.AdminTableCell>
+              <S.AdminTableCell>Uloga</S.AdminTableCell>
+            </S.AdminTableRow>
+          </S.AdminTableHead>
+          <TableBody>
+            {allUsers.map((u) => (
+              <S.AdminTableRow key={u.id} onClick={() => setUserId(u.id)} sx={{ cursor: 'pointer' }}>
+                <S.AdminTableCell>{u.id}</S.AdminTableCell>
+                <S.AdminTableCell>{u.firstname}</S.AdminTableCell>
+                <S.AdminTableCell>{u.lastname}</S.AdminTableCell>
+                <S.AdminTableCell>{u.email}</S.AdminTableCell>
+                <S.AdminTableCell sx={{ color: `${u.role === 'ADMIN' ? 'red' : u.role === 'MODERATOR' ? 'green' : 'orange'}` }}>{u.role}</S.AdminTableCell>
               </S.AdminTableRow>
             ))}
-            </TableBody>
-          </S.AdminTable>
+          </TableBody>
+        </S.AdminTable>
+        {currentUser && currentUser.role === 'ADMIN' &&
+          <Button color='error' variant='outlined' onClick={handleRetire}>Odstupi s uloge administratora</Button>
+        }
       </S.AdminContainer>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert onClose={handleSnackbarClose} severity="error">
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
