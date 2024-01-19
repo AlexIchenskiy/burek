@@ -39,9 +39,45 @@
 		
 		\section{Dijagram razmještaja}
 			
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+\begin{figure}[H]
+	\includegraphics[scale=0.3]{slike/dijagram_razmjestaja.jpeg}
+	\centering
+	\caption{Dijagram Razmještaja}
+	\label{fig:dijagram_razmjestaja}
+\end{figure}
+
+Opis UML dijagrama razmještaja za sustav komunikacije između dva 
+poslužiteljska računala, jednog s Spring Boot 3.0.0. poslužiteljem i drugog s 
+poslužiteljem baze podataka, pruža uvid u organizaciju elemenata sustava. Ovaj 
+dijagram naglašava strukturu i komunikacijske veze u arhitekturi "klijent - 
+poslužitelj".
+
+Na prvom poslužiteljskom računalu smješten je Spring Boot 3.0.0. poslužitelj, 
+čija je uloga centralna u obradi i upravljanju poslovnim logikama sustava. 
+Ovaj poslužitelj komunicira s drugim poslužiteljem, gdje se nalazi baza 
+podataka Postgres, čime se uspostavlja stabilna veza za pohranu i dohvaćanje 
+podataka. Ova jasna podjela omogućuje učinkovito upravljanje podacima unutar 
+sustava.
+
+Klijenti, bilo da su korisnici, zaposlenici, vlasnici ili administratori, 
+pristupaju sustavu putem web preglednika. U arhitekturi "klijent - poslužitelj
+", komunikacija između računala korisnika i poslužitelja odvija se putem HTTP 
+veze. Ova veza osigurava siguran prijenos podataka, omogućujući interakciju s 
+web aplikacijom na intuitivan način. Kroz korištenje HTTP veze, pruža se 
+skalabilnost i pristupačnost sustava, što je ključno za korisničko 
+iskustvo.
+
+Dijagram razmještaja također naglašava važnost organizacije komponenti sustava
+, pružajući uvid u strukturu i međusobne veze poslužitelja, baze podataka i 
+klijentskih računala. Ova organizacija ključna je za održavanje performansi i 
+dostupnosti sustava, pridonoseći time ukupnoj stabilnosti i 
+funkcionalnosti.
+
+Sustav temeljen na ovakvoj arhitekturi omogućuje učinkovitu komunikaciju 
+između svih elemenata, pridonošenje sigurnosti podataka putem HTTP veze, te 
+osigurava optimalnu izvedbu sustava. Osim toga, organizacija elemenata na 
+razmještajnom dijagramu omogućuje lako praćenje i upravljanje svim dijelovima 
+sustava, čime se olakšava održavanje i daljnji razvoj.
 			
 			\eject 
 		
